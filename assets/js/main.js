@@ -248,8 +248,8 @@
   $$('[data-share]').forEach((button) => {
     button.addEventListener('click', async () => {
       const payload = {
-        title: 'Summer Avenue — Rubar',
-        text: 'Eleven city-pop songs for the long way home.',
+        title: 'Summer Avenue — Project Hamamatsu',
+        text: 'The 2026 album from Project Hamamatsu. Eleven city-pop songs for the long way home.',
         url: window.location.href
       };
       if (navigator.share) {
@@ -346,7 +346,7 @@
       try {
         navigator.mediaSession.metadata = new window.MediaMetadata({
           title: track.ja,
-          artist: 'Rubar',
+          artist: 'Project Hamamatsu',
           album: 'Summer Avenue',
           artwork: [
             { src: 'assets/img/cover-summer-avenue-200.jpg', sizes: '200x200', type: 'image/jpeg' },
@@ -383,7 +383,7 @@
       if (playerToggle) playerToggle.setAttribute('aria-label', playing ? 'Pause' : 'Play');
 
       const track = tracks[state.index];
-      document.title = playing && track ? '▶ ' + track.en + ' — Rubar' : 'Summer Avenue — Rubar';
+      document.title = playing && track ? '▶ ' + track.en + ' — Project Hamamatsu' : 'Summer Avenue — Project Hamamatsu';
 
       if ('mediaSession' in navigator) {
         try { navigator.mediaSession.playbackState = playing ? 'playing' : 'paused'; } catch (error) { /* ignore */ }
@@ -408,7 +408,7 @@
 
       if (!track) return;
       if (playerTitle) playerTitle.textContent = track.ja;
-      if (playerSub) playerSub.textContent = 'Rubar · ' + track.en;
+      if (playerSub) playerSub.textContent = 'Project Hamamatsu · ' + track.en;
       if (playerStatus) playerStatus.textContent = 'Now playing: ' + track.ja + ' — ' + track.en;
       if (totalEl) totalEl.textContent = formatDuration(track.duration);
       if (playerSeek) playerSeek.setAttribute('aria-valuetext', '0:00 of ' + formatDuration(track.duration));

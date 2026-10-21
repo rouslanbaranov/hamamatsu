@@ -2,7 +2,7 @@
 
 # SUMMER AVENUE
 
-**The 2026 album by Rubar**
+**The 2026 album from Project Hamamatsu**
 
 サマー・アベニュー · 11 tracks · 46:05 · Japanese / English
 
@@ -61,9 +61,9 @@ The palette is documented in `assets/css/styles.css`:
 
 ![Summer Avenue — the interlude](docs/interlude-desktop.jpg)
 
-The first screen is an all-yellow Japanese-release poster. It uses the supplied **black Hamamatsu hero portrait** (1024×1536) at full height, fully contained against the yellow with no crop, card, sleeve, vinyl, or frame. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level; the portrait, title, and **Play the album** action share the first screen.
+The first screen is a split Japanese-release poster: saturated yellow behind the full-height portrait on the left, and a warm white-pink field with one large powder-pink circle behind the type on the right, joined by a subtle 7–10° diagonal. The supplied **black Hamamatsu hero portrait** (1024×1536) is fully contained and uncropped, with no card, sleeve, vinyl, or frame. The header uses the new geometric **H** mark and the supplied “Hamamatsu” wordmark in Helvetica Neue/Arial Bold, matching the tight neo-grotesque print on the shirt. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level.
 
-The Record shows the new official cover flat — the 1254×1254 artwork has no Rubar wordmark; a hairline border and plain metadata are the only framing. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and the top-left front face from the new **4-face Hamamatsu sheet**, cropped and converted to B&W, captioned `RUBAR / 2026`. The Notes portrait remains the yellow-shirt portrait, with its `Hamamatsu` mark locally reduced.
+The Record shows the new official cover flat — the 1254×1254 artwork has no artist wordmark; a hairline border and plain metadata are the only framing. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and the top-left front face from the new **4-face Hamamatsu sheet**, cropped and converted to B&W, captioned `Hamamatsu / 2026`. The Notes portrait remains the yellow-shirt portrait, with its `Hamamatsu` mark locally reduced.
 
 ## Project structure
 
@@ -110,7 +110,7 @@ open http://127.0.0.1:8765/tools/og.html
 - **Copy and sections:** `index.html`.
 - **Palette, type, layout:** `assets/css/styles.css`.
 - **Player behaviour:** `assets/js/main.js`.
-- **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-rubar-black-full.png` with a `hero-rubar-black-full.webp` source and no crop; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
+- **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-portrait-black-full.png` with a `hero-portrait-black-full.webp` source and no crop; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
 - **Film:** `assets/video/summer-avenue-film.mp4`, with `assets/img/film-poster.jpg`.
 - **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
 - **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
@@ -136,6 +136,6 @@ Live URL: **https://rouslanbaranov.github.io/summer-avenue/**
 
 ## Credits & rights
 
-Music, artwork, film, and character sheets: **Rubar**, 2026. The hero uses the supplied black Hamamatsu hero portrait; the interlude uses the top-left front of the new 4-face sheet; the Notes portrait remains the yellow-shirt version.
+Music, artwork, film, and character sheets: **Project Hamamatsu**, 2026. The hero uses the supplied black Hamamatsu hero portrait; the interlude uses the top-left front of the new 4-face sheet; the Notes portrait remains the yellow-shirt version.
 
-© 2026 Rubar. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.
+© 2026 Project Hamamatsu. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.

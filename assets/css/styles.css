@@ -1,5 +1,5 @@
 /* ============================================================
-   SUMMER AVENUE — RUBAR
+   SUMMER AVENUE — PROJECT HAMAMATSU
    A city-pop record sleeve for the long way home.
    ============================================================ */
 
@@ -21,6 +21,8 @@
   --red-deep: #bf2a1c;
   --blue: #1a4fbf;
   --yellow: #ffd23f;
+  --hero-rose: #fdf3f0;
+  --hero-blush: #f3d7d2;
 
   /* Semantic roles used by the refinement layer */
   --surface-ink: var(--ink);
@@ -237,31 +239,23 @@ h1, h2, h3 { text-wrap: balance; }
   place-items: center;
   width: 32px;
   height: 32px;
-  background: var(--ink);
-  color: var(--cream);
-  font-family: var(--font-display);
-  font-size: 17px;
+  flex: none;
   line-height: 1;
-  letter-spacing: -0.03em;
-  position: relative;
 }
 
-.brand__mark::after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--orange);
+.brand__mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .brand__name {
-  font-family: var(--font-display);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 19px;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1;
+  text-transform: none;
 }
 
 .brand__rule {
@@ -844,7 +838,7 @@ body.is-playing .btn__icon .icon-pause { display: block; }
 }
 
 .vinyl__label::before {
-  content: "RUBAR";
+  content: "PROJECT HAMAMATSU";
   font-family: var(--font-display);
   font-size: clamp(7px, 1.1vw, 14px);
   letter-spacing: -0.02em;
@@ -2157,15 +2151,13 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
 .brand__mark--footer {
   width: 38px;
   height: 38px;
-  background: var(--cream);
-  color: var(--ink);
-  font-size: 19px;
   flex: none;
 }
 
 .footer__name {
-  font-family: var(--font-display);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -3400,15 +3392,37 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   background: var(--blue);
 }
 
+.hero-poster__rose {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--hero-rose);
+  clip-path: polygon(49% 0, 100% 0, 100% 100%, 39% 100%);
+  pointer-events: none;
+}
+
+.hero-poster__rose::before {
+  content: "";
+  position: absolute;
+  top: 6%;
+  right: -12%;
+  width: 48vw;
+  max-width: 780px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 45%, rgba(243, 215, 210, 0.78) 0%, rgba(243, 215, 210, 0.28) 55%, transparent 72%);
+}
+
 .hero-poster__dots {
   position: absolute;
   top: 0;
   right: 0;
   width: 46%;
   height: 82%;
-  background-image: radial-gradient(rgba(18, 16, 31, 0.26) 1px, transparent 1.1px);
+  background-image: radial-gradient(rgba(18, 16, 31, 0.18) 1px, transparent 1.1px);
   background-size: 9px 9px;
-  opacity: 0.52;
+  opacity: 0.36;
   -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 82%);
   mask-image: linear-gradient(to left, #000 0%, transparent 82%);
 }
@@ -3459,7 +3473,7 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 
 .hero-poster__copy {
   grid-area: copy;
-  align-self: center;
+  align-self: end;
   max-width: 720px;
   min-width: 0;
 }
@@ -3491,7 +3505,7 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: clamp(14px, 2.4vh, 26px) 0 0;
+  margin: 0;
   font-weight: 400;
   text-transform: none;
 }
@@ -3705,6 +3719,20 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   .hero-poster__portrait img {
     max-height: calc(100svh - var(--header-h) - 74px);
   }
+
+  .hero-poster__inner {
+    grid-template-rows: auto auto;
+    align-content: center;
+  }
+
+  .hero-poster__copy {
+    align-self: start;
+  }
+
+  .hero-poster__actions {
+    align-self: start;
+    margin-top: -92px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -3725,6 +3753,17 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   .hero-poster__copy {
     align-self: start;
     max-width: none;
+  }
+
+  .hero-poster__rose {
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 36%);
+  }
+
+  .hero-poster__rose::before {
+    top: -2%;
+    right: -18%;
+    width: 66vw;
+    max-width: 520px;
   }
 
   .hero-poster__portrait {
@@ -3755,6 +3794,12 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   .hero-poster__foot { display: none; }
   .hero-poster__blue { width: 7px; }
   .hero-poster__dots { width: 55%; height: 60%; }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .hero-poster__rose {
+    clip-path: polygon(0 0, 100% 0, 100% 28%, 0 30%);
+  }
 }
 
 @media (max-width: 600px) {
