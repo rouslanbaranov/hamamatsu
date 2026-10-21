@@ -6,11 +6,11 @@
 
 サマー・アベニュー · 11 tracks · 46:05 · Japanese / English
 
-**[▶ Listen to the album](https://rouslanbaranov.github.io/summer-avenue/)**
+**[▶ Listen to the album](https://rbaranov.ch/hamamatsu)**
 
 </div>
 
-[![Summer Avenue — the yellow hero poster](docs/preview-desktop.jpg)](https://rouslanbaranov.github.io/summer-avenue/)
+[![Summer Avenue — the yellow hero poster](docs/preview-desktop.jpg)](https://rbaranov.ch/hamamatsu)
 
 [Desktop](docs/preview-desktop.jpg) · [Mobile](docs/preview-mobile.jpg) · [Tablet](docs/hero-tablet.jpg)
 
@@ -44,7 +44,7 @@ A deliberately simple static site — no framework, no bundler, no build step.
 - **Audio:** native `HTMLAudioElement` + **Media Session API**; full-album stream, seek, next/previous, volume, auto-advance.
 - **Video:** native HTML5 video with custom controls and a poster.
 - **Fonts:** Archivo Black, Dela Gothic One, Space Grotesk, Noto Sans JP (Google Fonts).
-- **Hosting:** GitHub Pages, deployed with GitHub Actions.
+- **Hosting:** Vercel, deployed from the `main` branch of `rouslanbaranov/hamamatsu`.
 - **QA:** Playwright + Chromium; axe-core reports **0 WCAG A/AA violations** at desktop, mobile, playing, and open-menu states. The two remaining incomplete checks are the contrast-over-grain/media heuristic and the approved film having no separate captions track.
 
 No analytics, no cookies, no tracking. The only third-party request is Google Fonts.
@@ -78,7 +78,8 @@ The Record shows the new official cover flat — the 1254×1254 artwork has no a
 │   └── video/              # 15s film, 720×1280 H.264
 ├── docs/                   # README previews + section screenshots
 ├── tools/og.html           # source for the social preview
-├── .github/workflows/pages.yml
+├── vercel.json
+├── scripts/build.mjs
 ├── site.webmanifest
 ├── robots.txt
 ├── sitemap.xml
@@ -121,7 +122,7 @@ Every push to `main` deploys the site through **GitHub Actions → GitHub Pages*
 
 In the repository settings, **Pages → Build and deployment → Source** must be **GitHub Actions**. The workflow uploads the repository root as the Pages artifact, then deploys it.
 
-Live URL: **https://rouslanbaranov.github.io/summer-avenue/**
+Live URL: **https://rbaranov.ch/hamamatsu**
 
 ## Accessibility
 
@@ -139,3 +140,16 @@ Live URL: **https://rouslanbaranov.github.io/summer-avenue/**
 Music, artwork, film, and character sheets: **Project Hamamatsu**, 2026. The hero uses the supplied black Hamamatsu hero portrait; the interlude uses the top-left front of the new 4-face sheet; the Notes portrait remains the yellow-shirt version.
 
 © 2026 Project Hamamatsu. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.
+
+
+## Vercel and portfolio routing
+
+Production URL: https://rbaranov.ch/hamamatsu
+
+This repository is an independent copy of `rouslanbaranov/summer-avenue`, including its Git history. The original GitHub Pages site is unchanged.
+
+Vercel runs `node scripts/build.mjs` and publishes only `dist/`. No framework migration or dependency installation is required. Assets use the `/hamamatsu/` namespace so the page works with or without a trailing slash and cannot collide with the portfolio assets. The child Vercel project also maps `/hamamatsu/*` to its static output for direct preview testing.
+
+The portfolio Next.js project owns `rbaranov.ch` and rewrites `/hamamatsu` and `/hamamatsu/*` to this project's stable production origin. Keep that origin public and use the stable production alias, never a per-commit preview URL. The domain remains attached to portfolio; DNS changes are not needed.
+
+Deploy and verify the child project before changing the portfolio rewrite. Roll back by restoring the previous portfolio configuration; both projects can be rolled back independently. Audio/video range requests must return 206 through the public path.

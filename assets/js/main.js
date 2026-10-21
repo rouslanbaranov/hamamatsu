@@ -250,7 +250,7 @@
       const payload = {
         title: 'Summer Avenue — Project Hamamatsu',
         text: 'The 2026 album from Project Hamamatsu. Eleven city-pop songs for the long way home.',
-        url: window.location.href
+        url: document.querySelector('link[rel="canonical"]').href
       };
       if (navigator.share) {
         try {
@@ -349,9 +349,9 @@
           artist: 'Project Hamamatsu',
           album: 'Summer Avenue',
           artwork: [
-            { src: 'assets/img/cover-summer-avenue-200.jpg', sizes: '200x200', type: 'image/jpeg' },
-            { src: 'assets/img/cover-summer-avenue-800.jpg', sizes: '800x800', type: 'image/jpeg' },
-            { src: 'assets/img/cover-summer-avenue-1254.jpg', sizes: '1254x1254', type: 'image/jpeg' }
+            { src: '/hamamatsu/assets/img/cover-summer-avenue-200.jpg', sizes: '200x200', type: 'image/jpeg' },
+            { src: '/hamamatsu/assets/img/cover-summer-avenue-800.jpg', sizes: '800x800', type: 'image/jpeg' },
+            { src: '/hamamatsu/assets/img/cover-summer-avenue-1254.jpg', sizes: '1254x1254', type: 'image/jpeg' }
           ]
         });
       } catch (error) {

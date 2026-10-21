@@ -1,23 +1,24 @@
 {
-  "name": "Summer Avenue — Project Hamamatsu",
+  "name": "Summer Avenue \u2014 Project Hamamatsu",
   "short_name": "Project Hamamatsu",
   "description": "The 2026 album from Project Hamamatsu: eleven city-pop songs in Japanese and English.",
-  "start_url": "./",
+  "start_url": "/hamamatsu",
   "display": "standalone",
   "background_color": "#12101f",
   "theme_color": "#ffd23f",
   "icons": [
     {
-      "src": "assets/img/icon-192-hamamatsu.png",
+      "src": "/hamamatsu/assets/img/icon-192-hamamatsu.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/img/icon-512-hamamatsu.png",
+      "src": "/hamamatsu/assets/img/icon-512-hamamatsu.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "scope": "/hamamatsu"
 }

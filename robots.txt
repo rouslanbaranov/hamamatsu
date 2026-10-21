@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rouslanbaranov.github.io/summer-avenue/sitemap.xml
+Sitemap: https://rbaranov.ch/hamamatsu/sitemap.xml
