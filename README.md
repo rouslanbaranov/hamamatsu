@@ -63,7 +63,7 @@ The palette is documented in `assets/css/styles.css`:
 
 The first screen is a split Japanese-release poster: saturated yellow behind the full-height portrait on the left, and a warm white-pink field with one large powder-pink circle behind the type on the right, joined by a subtle 7–10° diagonal. The supplied **black Hamamatsu hero portrait** (1024×1536) is fully contained and uncropped, with no card, sleeve, vinyl, or frame. The header uses the new geometric **H** mark and the supplied “Hamamatsu” wordmark in Helvetica Neue/Arial Bold, matching the tight neo-grotesque print on the shirt. A 24–32px desktop gutter keeps the Japanese title entirely on the rose field, and a live **City Pop** accent in Sedgwick Ave Display sits immediately right of the English title, vertically centred on the two-line block with a 20–26px gutter, and wraps beneath it only when space is tight. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level. The film player returns to its poster and **PLAY THE FILM** after a natural ending; a mid-film pause keeps its frame and position.
 
-The Record shows the new official cover flat — the 1254×1254 artwork has no artist wordmark; a hairline border and plain metadata are the only framing. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and the top-left front face from the new **4-face Hamamatsu sheet**, cropped and converted to B&W, captioned `Hamamatsu / 2026`. The Notes portrait remains the yellow-shirt portrait, with its `Hamamatsu` mark locally reduced.
+The Record shows the new official cover flat — the 1254×1254 artwork has no artist wordmark; a hairline border and plain metadata are the only framing. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and the top-left front face from the new **4-face Hamamatsu sheet**, cropped and converted to B&W, captioned `Hamamatsu / 2026`. The Notes media is now an original anime-style city avenue at dusk — a huge setting sun, overhead wires, neon shop signs, and no portrait.
 
 ## Project structure
 
@@ -137,7 +137,7 @@ Live URL: **https://rbaranov.ch/hamamatsu**
 
 ## Credits & rights
 
-Music, artwork, film, and character sheets: **Project Hamamatsu**, 2026. The hero uses the supplied black Hamamatsu hero portrait; the interlude uses the top-left front of the new 4-face sheet; the Notes portrait remains the yellow-shirt version.
+Music, artwork, film, and character sheets: **Project Hamamatsu**, 2026. The hero uses the supplied black Hamamatsu hero portrait; the interlude uses the top-left front of the new 4-face sheet; the Notes section uses an original city-avenue illustration.
 
 © 2026 Project Hamamatsu. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.
 

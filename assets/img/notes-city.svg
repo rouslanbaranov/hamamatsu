@@ -1,0 +1,330 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" width="1000" height="1250" role="img" aria-labelledby="title desc">
+  <title id="title">Neon city avenue at dusk</title>
+  <desc id="desc">An anime-style illustration of a wide city avenue at dusk: a huge setting sun, utility wires, glowing signs, and buildings receding toward the horizon.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#110c22"/>
+      <stop offset=".30" stop-color="#24163d"/>
+      <stop offset=".46" stop-color="#4b2350"/>
+      <stop offset=".58" stop-color="#963b57"/>
+      <stop offset=".68" stop-color="#e8654f"/>
+      <stop offset=".78" stop-color="#ffb36b"/>
+      <stop offset="1" stop-color="#ffcf8a"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="46%" r="58%">
+      <stop offset="0" stop-color="#fff3c2"/>
+      <stop offset=".55" stop-color="#ffd27a"/>
+      <stop offset="1" stop-color="#ff9a5a"/>
+    </radialGradient>
+    <radialGradient id="sunGlow">
+      <stop offset="0" stop-color="#ffcf82" stop-opacity=".55"/>
+      <stop offset=".5" stop-color="#ff8a5c" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#ff8a5c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lampGlow">
+      <stop offset="0" stop-color="#ffe9ad" stop-opacity=".95"/>
+      <stop offset=".28" stop-color="#ffb45f" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ff7a42" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#38243c"/>
+      <stop offset=".35" stop-color="#241730"/>
+      <stop offset="1" stop-color="#120d1d"/>
+    </linearGradient>
+    <linearGradient id="walk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b2841"/>
+      <stop offset="1" stop-color="#1c1328"/>
+    </linearGradient>
+    <linearGradient id="shadeLeft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080510" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#080510" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#ff8a5c" stop-opacity=".14"/>
+    </linearGradient>
+    <linearGradient id="shadeRight" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#080510" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#080510" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#ff8a5c" stop-opacity=".12"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="44%" r="76%">
+      <stop offset=".5" stop-color="#09060f" stop-opacity="0"/>
+      <stop offset="1" stop-color="#09060f" stop-opacity=".5"/>
+    </radialGradient>
+    <pattern id="winA" width="46" height="58" patternUnits="userSpaceOnUse">
+      <rect width="46" height="58" fill="#1d132b"/>
+      <rect x="9" y="12" width="20" height="26" fill="#ffcb70" opacity=".78"/>
+      <rect x="9" y="12" width="20" height="8" fill="#fff0ba" opacity=".35"/>
+    </pattern>
+    <pattern id="winB" width="38" height="52" patternUnits="userSpaceOnUse">
+      <rect width="38" height="52" fill="#241735"/>
+      <rect x="7" y="11" width="16" height="22" fill="#ffb765" opacity=".62"/>
+      <rect x="7" y="11" width="16" height="6" fill="#ffe6ac" opacity=".25"/>
+    </pattern>
+    <pattern id="winC" width="52" height="64" patternUnits="userSpaceOnUse">
+      <rect width="52" height="64" fill="#1b1228"/>
+      <rect x="10" y="14" width="24" height="28" fill="#ffd27a" opacity=".64"/>
+      <rect x="10" y="14" width="24" height="9" fill="#fff0b8" opacity=".3"/>
+    </pattern>
+    <pattern id="winFar" width="18" height="24" patternUnits="userSpaceOnUse">
+      <rect width="18" height="24" fill="#2a1b3e"/>
+      <rect x="5" y="7" width="7" height="9" fill="#ffcb70" opacity=".5"/>
+    </pattern>
+    <filter id="glowPink" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="glowTeal" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <clipPath id="sunClip"><circle cx="500" cy="640" r="176"/></clipPath>
+    <clipPath id="clipA"><polygon points="0,300 290,392 290,1000 0,1110"/></clipPath>
+    <clipPath id="clipB"><polygon points="246,548 430,620 430,854 246,940"/></clipPath>
+    <clipPath id="clipC"><polygon points="1000,316 710,392 710,1000 1000,1120"/></clipPath>
+    <clipPath id="clipD"><polygon points="754,548 570,620 570,854 754,940"/></clipPath>
+  </defs>
+
+  <!-- sky and sun -->
+  <rect width="1000" height="1250" fill="url(#sky)"/>
+  <g fill="#f3ead8" opacity=".7">
+    <circle cx="92" cy="112" r="2"/><circle cx="172" cy="74" r="1.4"/>
+    <circle cx="252" cy="146" r="1.7"/><circle cx="342" cy="86" r="1.2"/>
+    <circle cx="690" cy="110" r="1.8"/><circle cx="772" cy="64" r="1.3"/>
+    <circle cx="862" cy="142" r="2"/><circle cx="922" cy="92" r="1.3"/>
+    <circle cx="432" cy="184" r="1.2"/><circle cx="602" cy="196" r="1.1"/>
+    <path d="M124 246l4 0m-2-2 0 4M804 228l4 0m-2-2 0 4" stroke="#f3ead8" stroke-width="1.2"/>
+  </g>
+  <circle cx="500" cy="640" r="286" fill="url(#sunGlow)"/>
+  <circle cx="500" cy="640" r="176" fill="url(#sun)"/>
+  <g clip-path="url(#sunClip)" opacity=".68">
+    <rect x="312" y="596" width="376" height="10" fill="#f6a06b"/>
+    <rect x="312" y="626" width="376" height="15" fill="#f28662"/>
+    <rect x="312" y="664" width="376" height="8" fill="#f6a06b"/>
+    <rect x="312" y="700" width="376" height="18" fill="#ed775d"/>
+    <rect x="312" y="740" width="376" height="9" fill="#f6a06b"/>
+  </g>
+
+  <!-- clouds -->
+  <g opacity=".9">
+    <path d="M64 466c86-34 152-10 236-28 52-11 106-13 160 2 58 16 104-14 168-2 62 12 92 2 148-7 66-10 84 8 160-3v48c-74 24-120 8-186 21-60 12-92-6-156-13-62-7-110 16-170 4-64-13-112-2-176 12-60 13-132 8-184 25z" fill="#5c2a54"/>
+    <path d="M80 492c70 12 120-5 190 2 72 8 112 24 184 14 64-9 110-18 176-10 68 8 106 18 170 8 48-7 90-4 120 3v20c-68 16-114 8-184 18-62 9-108-12-172-17-70-5-114 14-184 10-68-4-102-12-170-7-58 4-98 9-130 14z" fill="#3d2146" opacity=".7"/>
+    <path d="M140 348c64-18 118-8 174-14 66-7 112-18 178-8 60 9 100 8 162-2 58-9 96-2 148 9v26c-56 2-98 15-158 20-68 6-112-7-176-11-68-4-114 7-180 12-64 5-108-4-148-1z" fill="#472349" opacity=".55"/>
+    <path d="M356 548c54-9 90 2 144-3 56-5 98-8 154 1 52 8 92 1 146 0v18c-54 15-96 4-154 8-56 4-98-3-152-2-58 1-94 3-138 5z" fill="#2b183b" opacity=".7"/>
+  </g>
+  <g fill="#1b1229" opacity=".85">
+    <path d="M330 420l26-12 6 12-26 12zM392 398l20-9 5 10-20 9zM642 412l24-10 5 11-24 10zM704 392l18-8 4 9-18 8z"/>
+  </g>
+  <g stroke="#f3ead8" stroke-width="2" fill="none" opacity=".5">
+    <path d="M286 330l7-7 7 7M310 346l6-6 6 6M678 318l7-7 7 7M706 336l6-6 6 6"/>
+  </g>
+
+  <!-- distant skyline -->
+  <g opacity=".9">
+    <rect x="300" y="630" width="34" height="170" fill="#3a254d"/>
+    <rect x="338" y="590" width="44" height="210" fill="#2c1b3e"/>
+    <rect x="386" y="650" width="28" height="150" fill="#3b254b"/>
+    <rect x="416" y="612" width="42" height="188" fill="#29193a"/>
+    <rect x="462" y="700" width="22" height="100" fill="#3b264e"/>
+    <rect x="486" y="700" width="30" height="100" fill="#2b1b3d"/>
+    <rect x="520" y="712" width="38" height="88" fill="#27183a"/>
+    <rect x="562" y="690" width="26" height="110" fill="#3a254d"/>
+    <rect x="592" y="614" width="46" height="186" fill="#261638"/>
+    <rect x="642" y="586" width="38" height="214" fill="#311d44"/>
+    <rect x="686" y="642" width="30" height="158" fill="#3a254d"/>
+    <rect x="720" y="674" width="24" height="126" fill="#27193a"/>
+    <g fill="url(#winFar)" opacity=".8">
+      <rect x="302" y="642" width="30" height="150"/>
+      <rect x="340" y="604" width="40" height="190"/>
+      <rect x="418" y="624" width="38" height="170"/>
+      <rect x="522" y="724" width="34" height="64"/>
+      <rect x="594" y="628" width="42" height="166"/>
+      <rect x="644" y="600" width="34" height="194"/>
+    </g>
+    <rect x="420" y="560" width="8" height="32" fill="#1a1129"/>
+    <rect x="700" y="570" width="6" height="28" fill="#1a1129"/>
+  </g>
+  <rect x="0" y="640" width="1000" height="190" fill="#ff8a5c" opacity=".12"/>
+
+  <!-- midground buildings -->
+  <g>
+    <polygon points="246,548 430,620 430,854 246,940" fill="url(#winB)" opacity=".9"/>
+    <g clip-path="url(#clipB)">
+      <rect x="246" y="548" width="184" height="392" fill="url(#shadeLeft)" opacity=".7"/>
+      <rect x="264" y="700" width="70" height="26" rx="2" fill="#0f0a18" opacity=".9"/>
+      <text x="275" y="719" fill="#ffd27a" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="2">CITY</text>
+      <rect x="345" y="590" width="34" height="82" fill="#0f0a18" opacity=".9"/>
+      <text x="362" y="620" fill="#ff8dbb" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="24" font-weight="700" text-anchor="middle">喫</text>
+      <text x="362" y="652" fill="#ff8dbb" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="24" font-weight="700" text-anchor="middle">茶</text>
+      <rect x="256" y="866" width="120" height="40" fill="#ffcb70" opacity=".8"/>
+      <rect x="264" y="874" width="48" height="6" fill="#6c3d2a" opacity=".7"/>
+    </g>
+    <polygon points="754,548 570,620 570,854 754,940" fill="url(#winB)" opacity=".9"/>
+    <g clip-path="url(#clipD)">
+      <rect x="570" y="548" width="184" height="392" fill="url(#shadeRight)" opacity=".7"/>
+      <rect x="650" y="710" width="80" height="30" rx="2" fill="#0f0a18" opacity=".9"/>
+      <text x="664" y="732" fill="#5be7d6" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="2">24H</text>
+      <rect x="676" y="860" width="58" height="54" fill="#ffcb70" opacity=".7"/>
+      <rect x="684" y="868" width="42" height="7" fill="#3b2342" opacity=".7"/>
+    </g>
+  </g>
+
+  <!-- foreground buildings -->
+  <g>
+    <polygon points="0,300 290,392 290,1000 0,1110" fill="url(#winA)"/>
+    <g clip-path="url(#clipA)">
+      <rect x="0" y="300" width="290" height="810" fill="url(#shadeLeft)" opacity=".7"/>
+      <rect x="16" y="520" width="178" height="112" fill="#0f0a18" stroke="#f3ead8" stroke-width="3"/>
+      <text x="28" y="558" fill="#f3ead8" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="26" font-weight="900" letter-spacing="1">SUMMER</text>
+      <text x="28" y="590" fill="#f3ead8" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="26" font-weight="900" letter-spacing="1">AVENUE</text>
+      <rect x="28" y="600" width="76" height="5" fill="#ffd23f"/>
+      <rect x="230" y="438" width="48" height="250" rx="2" fill="#2a0f1c" stroke="#e5402f" stroke-width="3"/>
+      <text x="254" y="500" fill="#f3ead8" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="44" font-weight="700" text-anchor="middle">夏</text>
+      <text x="254" y="552" fill="#ffd23f" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="2">CITY</text>
+      <text x="254" y="570" fill="#ffd23f" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="2">POP</text>
+      <rect x="24" y="736" width="150" height="72" fill="#10111d" stroke="#ffb34f" stroke-width="2"/>
+      <text x="42" y="766" fill="#ffd27a" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="26" font-weight="700">レコード</text>
+      <text x="42" y="794" fill="#ffb34f" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="3">RECORDS</text>
+      <rect x="228" y="790" width="50" height="120" fill="#0f0a18"/>
+      <text x="253" y="830" fill="#ff8dbb" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="20" font-weight="700" text-anchor="middle">酒</text>
+      <text x="253" y="858" fill="#ff8dbb" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="20" font-weight="700" text-anchor="middle">場</text>
+      <rect x="28" y="912" width="122" height="46" fill="#ffcb70" opacity=".8"/>
+      <rect x="42" y="922" width="72" height="8" fill="#6c3d2a" opacity=".55"/>
+      <g fill="#0f0a18" opacity=".8">
+        <rect x="170" y="640" width="44" height="44" rx="3"/>
+        <rect x="170" y="700" width="44" height="26" rx="2"/>
+        <rect x="24" y="1000" width="74" height="30" rx="2"/>
+      </g>
+    </g>
+    <polygon points="0,300 290,392 290,1000 0,1110" fill="none" stroke="#100b18" stroke-width="4"/>
+    <path d="M290 392v608" stroke="#ff9a5a" stroke-width="3" opacity=".5"/>
+
+    <polygon points="1000,316 710,392 710,1000 1000,1120" fill="url(#winC)"/>
+    <g clip-path="url(#clipC)">
+      <rect x="710" y="316" width="290" height="804" fill="url(#shadeRight)" opacity=".7"/>
+      <rect x="754" y="420" width="78" height="338" rx="3" fill="#260f1e" stroke="#ff4fa3" stroke-width="3"/>
+      <g fill="#ffc0df" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="48" font-weight="700" text-anchor="middle">
+        <text x="793" y="482">カ</text><text x="793" y="540">ラ</text><text x="793" y="598">オ</text><text x="793" y="656">ケ</text>
+      </g>
+      <rect x="866" y="502" width="66" height="194" rx="2" fill="#10222a" stroke="#4fe3d0" stroke-width="2"/>
+      <g fill="#9ff4e9" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="24" font-weight="700" text-anchor="middle">
+        <text x="899" y="552">ゲ</text><text x="899" y="590">ー</text><text x="899" y="628">ム</text>
+      </g>
+      <rect x="736" y="802" width="170" height="70" fill="#1b0d16" stroke="#e5402f" stroke-width="3"/>
+      <text x="754" y="834" fill="#f3ead8" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="22" font-weight="700">ラーメン</text>
+      <text x="754" y="856" fill="#ffd23f" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" letter-spacing="2">OPEN LATE</text>
+      <circle cx="924" cy="824" r="38" fill="url(#lampGlow)" opacity=".55"/>
+      <rect x="922" y="782" width="4" height="18" fill="#0f0a18"/>
+      <ellipse cx="924" cy="824" rx="15" ry="22" fill="#e5402f"/>
+      <text x="924" y="833" fill="#ffd23f" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="18" font-weight="700" text-anchor="middle">麺</text>
+      <g fill="#0f0a18" opacity=".8">
+        <rect x="908" y="420" width="40" height="38" rx="2"/>
+        <rect x="928" y="620" width="44" height="52" rx="2"/>
+        <rect x="736" y="960" width="70" height="40" rx="2"/>
+      </g>
+    </g>
+    <polygon points="1000,316 710,392 710,1000 1000,1120" fill="none" stroke="#100b18" stroke-width="4"/>
+    <path d="M710 392v608" stroke="#ff9a5a" stroke-width="3" opacity=".42"/>
+
+    <!-- rooftop silhouettes -->
+    <g fill="#120d1e">
+      <path d="M32 300h92v-42h30v42h44v16H32z"/>
+      <rect x="146" y="226" width="8" height="34"/>
+      <rect x="90" y="270" width="6" height="30"/>
+      <path d="M800 316h110v-36h24v36h66v18H800z"/>
+      <rect x="920" y="234" width="7" height="46"/>
+      <path d="M580 610l48-8v-28l16 0v28l34-5v13l-98 18z" opacity=".9"/>
+    </g>
+  </g>
+
+  <!-- road and sidewalks -->
+  <polygon points="130,1250 870,1250 560,800 440,800" fill="url(#road)"/>
+  <polygon points="0,1250 130,1250 440,800 330,800 0,1090" fill="url(#walk)"/>
+  <polygon points="1000,1250 870,1250 560,800 670,800 1000,1100" fill="url(#walk)"/>
+  <path d="M130 1250 440 800M870 1250 560 800" stroke="#e9d8b7" stroke-width="5" opacity=".6"/>
+  <path d="M0 1090 330 800M1000 1100 670 800" stroke="#100b18" stroke-width="5" opacity=".6"/>
+  <path d="M0 1088 330 800M1000 1098 670 800" stroke="#ffb36b" stroke-width="2" opacity=".32"/>
+
+  <!-- crosswalk -->
+  <g fill="#f3ead8" opacity=".88">
+    <polygon points="232,1088 768,1088 776,1110 224,1110"/>
+    <polygon points="220,1124 780,1124 790,1148 210,1148"/>
+    <polygon points="208,1162 792,1162 802,1188 198,1188"/>
+    <polygon points="194,1202 806,1202 818,1228 182,1228"/>
+  </g>
+  <g fill="none" stroke="#f3ead8" stroke-width="5" stroke-dasharray="26 24" opacity=".45">
+    <path d="M500 842 500 1048"/>
+  </g>
+  <path d="M262 1062h476" stroke="#f3ead8" stroke-width="6" opacity=".5"/>
+
+  <!-- road reflections -->
+  <g filter="url(#softBlur)" opacity=".25">
+    <rect x="742" y="900" width="34" height="260" fill="#ff4fa3"/>
+    <rect x="874" y="880" width="20" height="220" fill="#4fe3d0"/>
+    <rect x="214" y="890" width="24" height="240" fill="#ff8a5c"/>
+    <ellipse cx="340" cy="980" rx="56" ry="16" fill="#ffcb70"/>
+    <ellipse cx="660" cy="1000" rx="64" ry="18" fill="#ffcb70"/>
+  </g>
+
+  <!-- streetlights and poles -->
+  <g stroke="#100b18" stroke-linecap="round" fill="none">
+    <path d="M266 1018v-242q0-18 18-18h48" stroke-width="8"/>
+    <path d="M734 1018v-242q0-18-18-18h-48" stroke-width="8"/>
+    <path d="M358 880v-102q0-10 10-10h30" stroke-width="5"/>
+    <path d="M642 880v-102q0-10-10-10h-30" stroke-width="5"/>
+  </g>
+  <g>
+    <circle cx="332" cy="758" r="42" fill="url(#lampGlow)"/>
+    <circle cx="332" cy="758" r="8" fill="#fff3c2"/>
+    <circle cx="668" cy="758" r="42" fill="url(#lampGlow)"/>
+    <circle cx="668" cy="758" r="8" fill="#fff3c2"/>
+    <circle cx="398" cy="770" r="25" fill="url(#lampGlow)" opacity=".8"/>
+    <circle cx="398" cy="770" r="4.5" fill="#fff3c2"/>
+    <circle cx="602" cy="770" r="25" fill="url(#lampGlow)" opacity=".8"/>
+    <circle cx="602" cy="770" r="4.5" fill="#fff3c2"/>
+  </g>
+
+  <!-- utility poles and wires -->
+  <g fill="#100b18">
+    <rect x="860" y="214" width="13" height="960" rx="4"/>
+    <rect x="824" y="304" width="86" height="8" rx="3"/>
+    <rect x="840" y="360" width="70" height="7" rx="3"/>
+    <rect x="882" y="240" width="10" height="28" rx="3"/>
+    <rect x="900" y="290" width="7" height="16" rx="2"/>
+  </g>
+  <g fill="none" stroke="#100b18" stroke-width="3" opacity=".9">
+    <path d="M-20 370Q500 470 930 330"/>
+    <path d="M0 340Q500 430 916 302"/>
+    <path d="M10 410Q500 510 890 365"/>
+    <path d="M20 286Q500 376 870 274"/>
+    <path d="M30 450Q500 550 870 408" opacity=".55"/>
+  </g>
+  <g fill="#e9d8b7" opacity=".6">
+    <rect x="842" y="368" width="10" height="7"/><rect x="890" y="374" width="9" height="6"/>
+  </g>
+
+  <!-- neon glow for signs -->
+  <g opacity=".55">
+    <g filter="url(#glowPink)">
+      <rect x="754" y="420" width="78" height="338" fill="none" stroke="#ff4fa3" stroke-width="8"/>
+      <g fill="#ff4fa3" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="48" font-weight="700" text-anchor="middle">
+        <text x="793" y="482">カ</text><text x="793" y="540">ラ</text><text x="793" y="598">オ</text><text x="793" y="656">ケ</text>
+      </g>
+    </g>
+    <g filter="url(#glowTeal)">
+      <rect x="866" y="502" width="66" height="194" fill="none" stroke="#4fe3d0" stroke-width="5"/>
+      <g fill="#4fe3d0" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="24" font-weight="700" text-anchor="middle">
+        <text x="899" y="552">ゲ</text><text x="899" y="590">ー</text><text x="899" y="628">ム</text>
+      </g>
+    </g>
+    <g filter="url(#glowPink)">
+      <text x="247" y="500" fill="#e5402f" font-family="Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif" font-size="50" font-weight="700" text-anchor="middle">夏</text>
+    </g>
+  </g>
+
+  <!-- foreground light and atmosphere -->
+  <g opacity=".22">
+    <path d="M0 1110 330 800 440 800 130 1250 0 1250z" fill="#ffb36b"/>
+    <path d="M1000 1120 670 800 560 800 870 1250 1000 1250z" fill="#ff8a5c"/>
+  </g>
+  <rect width="1000" height="1250" fill="url(#vignette)"/>
+</svg>

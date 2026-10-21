@@ -1912,7 +1912,7 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   padding: 8px 0 18px;
 }
 
-.notes__portrait {
+.notes__art {
   position: relative;
   z-index: 2;
   margin: 0;
@@ -1923,13 +1923,13 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   transform: rotate(1.6deg);
 }
 
-.notes__portrait img {
+.notes__art img {
   width: 100%;
   border: 1px solid rgba(18, 16, 31, 0.18);
   filter: saturate(0.95) contrast(1.02);
 }
 
-.notes__portrait figcaption {
+.notes__art figcaption {
   display: flex;
   gap: 6px;
   padding-top: 10px;
@@ -1940,7 +1940,7 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   color: rgba(18, 16, 31, 0.66);
 }
 
-.notes__portrait figcaption span { color: var(--red); }
+.notes__art figcaption span { color: var(--red); }
 
 .notes__tape {
   position: absolute;
@@ -2786,7 +2786,7 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
 
   .notes { padding: 70px 0; }
   .notes__inner { gap: 50px; }
-  .notes__portrait { padding: 9px; box-shadow: 10px 10px 0 var(--red); }
+  .notes__art { padding: 9px; box-shadow: 10px 10px 0 var(--red); }
   .notes__tape { width: 104px; height: 25px; top: -11px; }
   .notes__kanji { right: -34px; bottom: -60px; }
   .notes__prose p { font-size: 0.95rem; }
@@ -3276,7 +3276,7 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 .film-player__caption { font-size: 9px; }
 .film-player__caption small { font-size: 7.5px; }
 .film-player__time { font-size: 8px; }
-.notes__portrait figcaption { font-size: 8.5px; }
+.notes__art figcaption { font-size: 8.5px; }
 .pullquote cite { font-size: 9px; }
 .credits dt { font-size: 8px; }
 .credits dd { font-size: 13px; }
@@ -3352,7 +3352,7 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   .film-player__caption { font-size: 8px; }
   .film-player__caption small { font-size: 6.5px; }
   .film-player__time { font-size: 7.5px; }
-  .notes__portrait figcaption { font-size: 7.5px; }
+  .notes__art figcaption { font-size: 7.5px; }
   .pullquote cite { font-size: 8px; }
   .credits dt { font-size: 7.5px; }
   .credits dd { font-size: 12px; }
