@@ -716,7 +716,7 @@
       video.muted = false;
       let dragging = false;
 
-      const getDuration = () => (Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 15.07);
+      const getDuration = () => (Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 30.13);
 
       function syncFilmControls() {
         const duration = getDuration();
@@ -736,7 +736,7 @@
         filmEl.classList.remove('is-playing');
         video.pause();
         if (caption) {
-          caption.innerHTML = 'PLAY THE FILM<br><small>00:15 · SOUND ON</small>';
+          caption.innerHTML = 'PLAY THE FILM<br><small>00:30 · SOUND ON</small>';
         }
         if (reset) {
           video.currentTime = 0;

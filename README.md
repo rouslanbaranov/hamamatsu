@@ -16,7 +16,7 @@
 
 ## The record
 
-The official album site streams the full record in order, with a custom player, a 15-second film, and the story behind the record. Eleven city-pop songs for the long way home.
+The official album site streams the full record in order, with a custom player, a 30-second film, and the story behind the record. Eleven city-pop songs for the long way home.
 
 | # | 日本語 | English | Time |
 |---:|---|---|---:|
@@ -75,7 +75,7 @@ The Record shows the new official cover flat — the 1254×1254 artwork has no a
 │   ├── css/styles.css
 │   ├── img/                # cover, black hero portrait, sheet crop, yellow portrait, poster, icons, og
 │   ├── js/main.js
-│   └── video/              # 15s film, 720×1280 H.264
+│   └── video/              # 30s film, 720×1280 H.264
 ├── docs/                   # README previews + section screenshots
 ├── tools/og.html           # source for the social preview
 ├── vercel.json
