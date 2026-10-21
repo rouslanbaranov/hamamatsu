@@ -549,7 +549,7 @@
     });
 
     audio.addEventListener('pause', () => {
-      if (audio.ended) return;
+      if (audio.ended || !audio.paused) return;
       setPlaying(false);
     });
 

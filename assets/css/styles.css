@@ -3,22 +3,34 @@
    A city-pop record sleeve for the long way home.
    ============================================================ */
 
+/* Color roles
+   ink + cream      base surfaces and text
+   orange           sunset, primary playback
+   red              editorial marks, active indicators
+   red-deep         text-safe red for small type on paper
+   yellow           paper labels, highlights, secondary CTA
+   blue             film chapter and editorial third color */
 :root {
   --ink: #12101f;
-  --ink-soft: #1b1730;
   --ink-line: rgba(243, 234, 216, 0.16);
   --cream: #f3ead8;
-  --cream-2: #e9ddc7;
-  --cream-muted: rgba(243, 234, 216, 0.64);
+  --cream-muted: rgba(243, 234, 216, 0.66);
   --orange: #ff7a42;
   --sun: #ffb057;
   --red: #e5402f;
   --red-deep: #bf2a1c;
   --blue: #1a4fbf;
-  --blue-deep: #0e2f73;
   --yellow: #ffd23f;
-  --pink: #ff4d6e;
-  --mint: #a8d8d0;
+
+  /* Semantic roles used by the refinement layer */
+  --surface-ink: var(--ink);
+  --surface-paper: var(--cream);
+  --surface-signal: var(--yellow);
+  --text-muted-dark: rgba(243, 234, 216, 0.68);
+  --text-muted-paper: rgba(18, 16, 31, 0.68);
+  --accent-editorial: var(--red);
+  --accent-label: var(--yellow);
+  --focus-ring: var(--yellow);
 
   --font-display: "Archivo Black", "Arial Black", "Helvetica Neue", sans-serif;
   --font-jp-display: "Dela Gothic One", "Hiragino Sans", "Yu Gothic", sans-serif;
@@ -2877,6 +2889,481 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
   .notes__prose p { color: var(--ink); }
 }
 
+/* ============================================================
+   REFINEMENT — 2026
+   Palette roles, character collage, label typography, legibility.
+   This layer tunes earlier components after the base design.
+   ============================================================ */
+
+:root {
+  --text-muted-film: rgba(243, 234, 216, 0.86);
+}
+
+/* --- keyboard focus: readable on ink, cream, yellow and blue ------ */
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--focus-ring);
+}
+
+.track__btn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -5px;
+  box-shadow: inset 0 0 0 4px var(--focus-ring);
+}
+
+/* --- record sleeve: printed yellow label -------------------------- */
+
+.record__frame-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -12px -12px 12px;
+  padding: 9px 12px 8px;
+  background: var(--accent-label);
+  border-bottom: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  line-height: 1.35;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.record__frame-label-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.record__frame-label-dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* --- interlude: one diagonal collage between record and tracklist -- */
+
+.interlude {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(26px, 3.4vw, 42px) 0;
+  background: var(--surface-signal);
+  color: var(--surface-ink);
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.interlude::before {
+  content: "";
+  position: absolute;
+  top: -28%;
+  bottom: -28%;
+  right: 8%;
+  z-index: 0;
+  width: 38%;
+  background: var(--red);
+  transform: skewX(-16deg);
+}
+
+.interlude::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 10px;
+  background: var(--blue);
+}
+
+.interlude__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(20px, 3.8vw, 54px);
+}
+
+.interlude__copy {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.interlude__label {
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(18, 16, 31, 0.68);
+}
+
+.interlude__jp {
+  font-family: var(--font-jp-display);
+  font-size: clamp(1.9rem, 3.4vw, 3.45rem);
+  line-height: 1.02;
+  letter-spacing: 0.015em;
+}
+
+.interlude__en {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.interlude__credits {
+  margin-top: 13px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(18, 16, 31, 0.7);
+}
+
+.interlude__credits span { color: var(--red-deep); }
+
+.interlude__photo {
+  position: relative;
+  z-index: 3;
+  width: clamp(108px, 10vw, 138px);
+  margin: 0;
+  padding: 6px;
+  background: var(--surface-paper);
+  border: 1.5px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--blue);
+  transform: rotate(-3deg);
+}
+
+.interlude__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.interlude__photo figcaption {
+  padding-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  color: rgba(18, 16, 31, 0.72);
+}
+
+.interlude__photo figcaption span { color: var(--red); }
+
+.interlude__tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 66px;
+  height: 22px;
+  background: rgba(255, 210, 63, 0.92);
+  border: 1px solid rgba(18, 16, 31, 0.14);
+  transform: translateX(-50%) rotate(-4deg);
+}
+
+.interlude__seal {
+  position: relative;
+  z-index: 3;
+  justify-self: end;
+  display: grid;
+  place-content: center;
+  width: clamp(76px, 6.8vw, 92px);
+  aspect-ratio: 1;
+  border: 2px solid var(--cream);
+  border-radius: 50%;
+  background: var(--red-deep);
+  box-shadow: 0 0 0 1.5px var(--ink);
+  color: var(--cream);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  transform: rotate(-7deg);
+}
+
+.interlude__seal span {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.interlude__seal em {
+  display: block;
+  font-style: normal;
+  font-size: 6px;
+  letter-spacing: 0.12em;
+}
+
+.interlude__seal::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1.5px dashed var(--ink);
+  border-radius: 50%;
+  opacity: 0.55;
+  animation: sealSpin 60s linear infinite;
+}
+
+@keyframes sealSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Record headline: a two-line editorial statement, not a wrapped four-line block. */
+.record .display {
+  font-size: clamp(2.15rem, 4.3vw, 4.4rem);
+}
+
+.interlude__photo figcaption {
+  font-size: 7.5px;
+}
+
+/* --- artist portrait: printed tape label + red quote mark ---------- */
+
+.notes__tape {
+  top: -18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 172px;
+  height: 38px;
+  padding: 4px 8px;
+  background: var(--accent-label);
+  border: 1px solid rgba(18, 16, 31, 0.22);
+  border-left: 4px solid var(--red);
+  box-shadow: 0 2px 8px rgba(18, 16, 31, 0.12);
+  mix-blend-mode: normal;
+  opacity: 1;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.notes__tape-jp {
+  font-family: var(--font-jp-display);
+  font-size: 11px;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+
+.notes__tape-en {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  line-height: 1.1;
+  letter-spacing: 0.14em;
+  color: rgba(18, 16, 31, 0.72);
+}
+
+.pullquote::before { color: var(--red); }
+
+/* --- secondary yellow playback CTA -------------------------------- */
+
+.btn--signal {
+  background: var(--accent-label);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn--signal:hover {
+  background: var(--red);
+  color: var(--ink);
+  border-color: var(--red);
+}
+
+/* --- active playback cues: red, not orange replacement -------------- */
+
+body.is-playing .play-pill__dot { background: var(--red); }
+body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
+
+.player__seek::-webkit-slider-runnable-track {
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--accent-editorial) 0,
+    var(--accent-editorial) var(--p, 0%),
+    rgba(243, 234, 216, 0.22) var(--p, 0%),
+    rgba(243, 234, 216, 0.22) 100%
+  );
+}
+
+.player__seek::-moz-range-progress {
+  height: 3px;
+  background: var(--accent-editorial);
+}
+
+.player__seek::-webkit-slider-thumb {
+  width: 11px;
+  height: 11px;
+  margin-top: -4px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+}
+
+.player__seek::-moz-range-thumb {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+}
+
+/* --- touch and control sizing ------------------------------------- */
+
+.play-pill { height: 44px; }
+.menu-btn { width: 44px; height: 44px; }
+.btn { min-height: 46px; }
+.player__btn { width: 38px; height: 38px; }
+.player__play { width: 46px; height: 46px; }
+.player__btn--volume { width: 34px; height: 34px; }
+.film-player__mini { width: 36px; height: 36px; }
+
+/* --- legibility: metadata scale ----------------------------------- */
+
+.eyebrow { font-size: 9.5px; }
+.hero__meta { font-size: 10px; color: var(--text-muted-dark); }
+.hero__bottom { font-size: 9px; color: var(--text-muted-dark); }
+.brand__album { font-size: 8.5px; }
+.nav a { font-size: 9.5px; }
+.play-pill { font-size: 9.5px; }
+.kicker { font-size: 9px; }
+.kicker__num { font-size: 8px; }
+.record__caption { font-size: 9px; color: var(--text-muted-paper); }
+.record__meta dt { font-size: 8.5px; }
+.record__meta dd { font-size: 13px; }
+.record__side { font-size: 8px; }
+.tracks__count { font-size: 9.5px; }
+.tracks__labels { font-size: 8.5px; }
+.track__sub { font-size: 9px; }
+.track__romaji { font-size: 10.5px; }
+.track__time { font-size: 11px; }
+.tracks__note { font-size: 8.5px; }
+.film__meta { font-size: 9px; color: var(--text-muted-film); }
+.film__hint { font-size: 9px; color: var(--text-muted-film); }
+.film__caption { font-size: 8px; color: var(--text-muted-film); }
+.film-player__caption { font-size: 9px; }
+.film-player__caption small { font-size: 7.5px; }
+.film-player__time { font-size: 8px; }
+.notes__portrait figcaption { font-size: 8.5px; }
+.pullquote cite { font-size: 9px; }
+.credits dt { font-size: 8px; }
+.credits dd { font-size: 13px; }
+.footer__name span { font-size: 8px; }
+.footer__nav { font-size: 9px; }
+.footer__meta { font-size: 8.5px; }
+.footer__top { font-size: 9px; }
+.player__title { font-size: 13px; }
+.player__sub { font-size: 8px; }
+.player__time { font-size: 9px; }
+.toast { font-size: 9px; }
+.mobile-menu__meta { font-size: 9px; }
+.mobile-menu__nav span { font-size: 10px; }
+
+/* --- mobile refinements ------------------------------------------- */
+
+@media (max-width: 720px) {
+  .record__frame-label {
+    margin: -9px -9px 9px;
+    padding: 8px 9px 7px;
+    font-size: 7.5px;
+  }
+
+  .interlude { padding: 25px 0 29px; }
+  .interlude::before { right: -24%; width: 62%; }
+  .interlude::after { width: 7px; }
+
+  .interlude__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .interlude__label { font-size: 8px; margin-bottom: 8px; }
+  .interlude__jp { font-size: clamp(1.35rem, 6vw, 1.9rem); }
+  .interlude__en { font-size: 0.85rem; }
+  .interlude__credits { margin-top: 10px; font-size: 6.5px; }
+  .interlude__photo { width: 92px; box-shadow: 6px 6px 0 var(--blue); }
+  .interlude__photo figcaption { font-size: 7px; }
+  .interlude__seal { display: none; }
+  .record .display { font-size: clamp(1.9rem, 8.8vw, 3.2rem); }
+
+  .notes__tape {
+    top: -15px;
+    width: 138px;
+    height: 33px;
+  }
+
+  .notes__tape-jp { font-size: 9px; }
+  .notes__tape-en { font-size: 6px; }
+
+  .play-pill { height: 44px; font-size: 9px; }
+  .menu-btn { width: 44px; height: 44px; }
+  .btn { min-height: 46px; }
+  .player__btn { width: 40px; height: 40px; }
+  .player__play { width: 42px; height: 42px; }
+  .film-player__mini { width: 40px; height: 40px; }
+
+  .eyebrow { font-size: 9px; }
+  .hero__meta { font-size: 8.5px; }
+  .hero__bottom { font-size: 8px; }
+  .record__caption { font-size: 8px; }
+  .record__meta dt { font-size: 8px; }
+  .record__meta dd { font-size: 12.5px; }
+  .tracks__count { font-size: 8.5px; }
+  .tracks__labels { font-size: 7.5px; }
+  .track__sub { font-size: 8.5px; }
+  .track__time { font-size: 10px; }
+  .tracks__note { font-size: 7.5px; }
+  .film__meta { font-size: 8px; }
+  .film__hint { font-size: 8.5px; }
+  .film__caption { font-size: 7px; }
+  .film-player__caption { font-size: 8px; }
+  .film-player__caption small { font-size: 6.5px; }
+  .film-player__time { font-size: 7.5px; }
+  .notes__portrait figcaption { font-size: 7.5px; }
+  .pullquote cite { font-size: 8px; }
+  .credits dt { font-size: 7.5px; }
+  .credits dd { font-size: 12px; }
+  .footer__name span { font-size: 7.5px; }
+  .footer__nav { font-size: 8.5px; }
+  .footer__meta { font-size: 7.5px; }
+  .footer__top { font-size: 8px; }
+  .player__title { font-size: 11px; }
+  .player__sub { font-size: 7px; }
+  .player__time { font-size: 8px; }
+  .toast { font-size: 8px; }
+  .mobile-menu__meta { font-size: 8px; }
+}
+
+@media (max-width: 380px) {
+  .interlude__jp { font-size: 1.3rem; }
+  .interlude__en { font-size: 0.78rem; }
+  .interlude__photo { width: 82px; }
+}
+
+/* --- reduced motion: stop the new seal ring ------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .interlude__seal::before { animation: none; }
+}
+
 @media print {
   .site-header,
   .player,
@@ -2884,6 +3371,7 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
   .grain,
   .marquee,
   .film-player,
+  .interlude,
   .mobile-menu { display: none !important; }
   body { background: #fff; color: #000; padding-bottom: 0; }
   .hero,

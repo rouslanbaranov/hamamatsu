@@ -14,7 +14,7 @@
 
 ## The record
 
-Eleven city-pop songs for the long way home — neon dusk, late trains, and the places we almost stayed. The official album site streams the full record in order, with a custom player, a 15-second film, and the story behind the sleeve.
+The official album site streams the full record in order, with a custom player, a 15-second film, and the story behind the sleeve. Eleven city-pop songs for the long way home.
 
 | # | 日本語 | English | Time |
 |---:|---|---|---:|
@@ -47,6 +47,20 @@ A deliberately simple static site — no framework, no bundler, no build step.
 
 No analytics, no cookies, no tracking. The only third-party request is Google Fonts.
 
+## Visual system
+
+The palette is documented in `assets/css/styles.css`:
+
+- **Ink + cream** — paper and night surfaces, primary text.
+- **Sunset orange** — the album's dusk and the primary playback action.
+- **Editorial red** — active indicators, stamps, the quote mark.
+- **Paper yellow** — printed labels, tape, and the secondary **Play all** action.
+- **Cobalt blue** — the film chapter and the interlude's offset shadow.
+
+![Summer Avenue — the interlude](docs/refine-interlude-desktop.jpg)
+
+The interlude is the single large collage accent: one diagonal red plane, a blue edge, the Japanese title in Dela Gothic One, and a character study cropped from the latest **black Hamamatsu sheet**. The liner-notes portrait follows the latest **yellow Hamamatsu sheet**: the shirt carries only the small `Hamamatsu` mark, and the album title is printed on the tape label instead.
+
 ## Project structure
 
 ```text
@@ -58,7 +72,7 @@ No analytics, no cookies, no tracking. The only third-party request is Google Fo
 │   ├── img/                # cover, portrait, poster, icons, og.jpg
 │   ├── js/main.js
 │   └── video/              # 15s film, 720×1280 H.264
-├── docs/                   # README previews
+├── docs/                   # README previews + refinement screenshots
 ├── tools/og.html           # source for the social preview
 ├── .github/workflows/pages.yml
 ├── site.webmanifest
@@ -112,9 +126,11 @@ Live URL: **https://rouslanbaranov.github.io/summer-avenue/**
 - `prefers-reduced-motion` disables the marquee, vinyl spin, reveals, and tilt.
 - Accessible track names include the visible number, Japanese title, English title, romanization, and duration.
 - Play/pause states are reflected with `aria-pressed`, and track changes are announced politely.
+- Metadata labels use a larger, higher-contrast scale; focus is a dual ink/yellow ring; primary touch targets are 44 px or larger.
+- The interlude's seal motion and all existing motion are disabled by `prefers-reduced-motion`.
 
 ## Credits & rights
 
-Music, artwork, and film: **Rubar**, 2026.
+Music, artwork, film, and character sheets: **Rubar**, 2026. The site portrait uses the latest yellow character sheet as the shirt reference; the interlude uses a crop from the latest black sheet.
 
 © 2026 Rubar. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.
