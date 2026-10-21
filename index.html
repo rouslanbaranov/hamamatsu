@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
-  <link rel="preload" as="image" href="assets/img/cover-800.webp" type="image/webp" imagesrcset="assets/img/cover-800.webp 800w, assets/img/cover-1600.webp 1600w" imagesizes="(max-width: 900px) 78vw, 440px">
+  <link rel="preload" as="image" href="assets/img/hero-rubar.webp" type="image/webp">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script>
     document.documentElement.classList.add('js');
@@ -139,130 +139,55 @@
   </noscript>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero__bg" aria-hidden="true">
-        <div class="hero__sun"></div>
-        <div class="hero__kanji">夏</div>
-        <div class="hero__grid"></div>
-        <svg class="skyline" viewBox="0 0 1600 380" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-          <defs>
-            <linearGradient id="bldgFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#211c38"/><stop offset="1" stop-color="#0a0814"/>
-            </linearGradient>
-            <pattern id="winPattern" width="16" height="20" patternUnits="userSpaceOnUse">
-              <rect x="3" y="4" width="5" height="6" fill="#ffcf8a" opacity=".55"/>
-            </pattern>
-          </defs>
-          <g fill="url(#bldgFill)">
-            <rect x="-20" y="220" width="120" height="180"/>
-            <rect x="110" y="160" width="82" height="240"/>
-            <rect x="200" y="245" width="130" height="155"/>
-            <rect x="340" y="120" width="66" height="280"/>
-            <rect x="415" y="205" width="140" height="195"/>
-            <rect x="565" y="170" width="90" height="230"/>
-            <rect x="665" y="265" width="120" height="135"/>
-            <rect x="795" y="140" width="70" height="260"/>
-            <rect x="875" y="225" width="150" height="175"/>
-            <rect x="1035" y="185" width="80" height="215"/>
-            <rect x="1125" y="255" width="150" height="145"/>
-            <rect x="1285" y="155" width="72" height="245"/>
-            <rect x="1367" y="225" width="110" height="175"/>
-            <rect x="1487" y="190" width="130" height="210"/>
-          </g>
-          <g fill="url(#winPattern)" opacity=".38">
-            <rect x="110" y="160" width="82" height="240"/>
-            <rect x="340" y="120" width="66" height="280"/>
-            <rect x="565" y="170" width="90" height="230"/>
-            <rect x="795" y="140" width="70" height="260"/>
-            <rect x="1035" y="185" width="80" height="215"/>
-            <rect x="1285" y="155" width="72" height="245"/>
-            <rect x="1487" y="190" width="130" height="210"/>
-          </g>
-          <g opacity=".7">
-            <rect x="360" y="190" width="8" height="52" fill="#ff4d6e"/>
-            <rect x="1115" y="210" width="6" height="44" fill="#ffd23f"/>
-            <rect x="1500" y="235" width="7" height="60" fill="#ff7a42"/>
-          </g>
-          <g stroke="#f3ead8" stroke-opacity=".16" stroke-width="1">
-            <path d="M150 40v120M1050 30v155M1440 45v145"/>
-            <path d="M120 40h60M1020 30h60M1410 45h60"/>
-          </g>
-        </svg>
-        <div class="hero__glow"></div>
+    <section class="hero-poster" id="top" aria-labelledby="hero-title">
+      <div class="hero-poster__field" aria-hidden="true">
+        <span class="hero-poster__blue"></span>
+        <span class="hero-poster__dots"></span>
       </div>
 
-      <div class="container hero__inner">
-        <div class="hero__copy">
-          <p class="eyebrow">
-            <span class="eyebrow__jp" lang="ja">シティ・ポップ</span>
-            <span class="eyebrow__sep" aria-hidden="true">/</span>
-            <span>CITY POP</span>
-            <span class="eyebrow__sep" aria-hidden="true">/</span>
+      <div class="container hero-poster__inner">
+        <div class="hero-poster__copy">
+          <p class="hero-poster__kicker">
+            <span class="hero-poster__kicker-dot" aria-hidden="true"></span>
+            <span>RUBAR</span>
+            <span aria-hidden="true">/</span>
             <span>2026</span>
+            <span aria-hidden="true">/</span>
+            <span>CITY POP</span>
           </p>
-          <h1 class="hero__title" id="hero-title">
-            <span class="hero__line">SUMMER</span>
-            <span class="hero__line hero__line--two">AVENUE<span class="hero__dot" aria-hidden="true">.</span></span>
+          <h1 class="hero-poster__title" id="hero-title">
+            <span class="hero-poster__jp" lang="ja">サマー・<br>アベニュー</span>
+            <span class="hero-poster__en">SUMMER<br>AVENUE</span>
           </h1>
-          <p class="hero__jp" lang="ja">サマー・アベニュー</p>
-          <p class="hero__lede">Eleven songs for the long way home. The 2026 album by <strong>Rubar</strong> — sung in Japanese and English, made for the hour when the city turns blue.</p>
-          <div class="hero__actions">
-            <button class="btn btn--primary" type="button" data-play-album data-label-play="Play the album" aria-pressed="false">
-              <span class="btn__icon" aria-hidden="true">
-                <svg class="icon-play"><use href="#icon-play"/></svg>
-                <svg class="icon-pause"><use href="#icon-pause"/></svg>
-              </span>
-              <span class="btn__label" data-play-label>Play the album</span>
-            </button>
-            <a class="btn btn--ghost" href="#film">
-              Watch the film
-              <svg class="btn__arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>
-            </a>
-          </div>
-          <p class="hero__meta">RUBAR <span>·</span> SUMMER AVENUE <span>·</span> 11 TRACKS <span>·</span> 46:05</p>
+          <p class="hero-poster__lede">The 2026 album by Rubar — Japanese and English, in eleven tracks.</p>
+          <p class="hero-poster__meta">11 TRACKS <span>·</span> 46:05 <span>·</span> RB–001</p>
         </div>
 
-        <div class="hero__art">
-          <div class="sleeve" data-tilt>
-            <div class="vinyl-wrap" aria-hidden="true">
-              <div class="vinyl"><span class="vinyl__label"></span></div>
-            </div>
-            <figure class="sleeve__cover">
-              <span class="sleeve__spine" aria-hidden="true">RUBAR · SUMMER AVENUE · 2026</span>
-              <picture>
-                <source type="image/webp" srcset="assets/img/cover-800.webp 800w, assets/img/cover-1600.webp 1600w" sizes="(max-width: 900px) 78vw, 440px">
-                <img src="assets/img/cover-800.jpg" srcset="assets/img/cover-800.jpg 800w, assets/img/cover-1600.jpg 1600w" sizes="(max-width: 900px) 78vw, 440px" width="1600" height="1600" alt="Summer Avenue album cover: an illustrated figure in a straw hat beside a mint-green kei van on a neon-lit street at dusk." fetchpriority="high" decoding="async">
-              </picture>
-            </figure>
-            <span class="sticker" aria-hidden="true"><span>11</span>TRACKS<br><em lang="ja">11曲</em></span>
-          </div>
+        <div class="hero-poster__portrait">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-rubar.webp">
+            <img src="assets/img/hero-rubar.png" width="697" height="856" alt="Rubar, chin raised, wearing a yellow Hamamatsu T-shirt." fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+
+        <div class="hero-poster__actions">
+          <button class="btn btn--dark btn--hero" type="button" data-play-album data-label-play="Play the album" aria-pressed="false">
+            <span class="btn__icon" aria-hidden="true">
+              <svg class="icon-play"><use href="#icon-play"/></svg>
+              <svg class="icon-pause"><use href="#icon-pause"/></svg>
+            </span>
+            <span class="btn__label" data-play-label>Play the album</span>
+          </button>
+          <a class="hero-poster__film-link" href="#film">
+            Watch the film
+            <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+          </a>
         </div>
       </div>
 
-      <div class="hero__bottom">
-        <a class="scroll-cue" href="#record"><span class="scroll-cue__line" aria-hidden="true"></span>Scroll to the record</a>
-        <p class="hero__edition">FIRST EDITION · 2026</p>
-      </div>
-
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track">
-          <div class="marquee__group">
-            <span class="marquee__jp" lang="ja">サマー・アベニュー</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">SUMMER AVENUE</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">RUBAR</span><span class="marquee__star">✳</span>
-            <span class="marquee__jp" lang="ja">シティ・ポップ</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">2026</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">11 TRACKS</span><span class="marquee__star">✳</span>
-          </div>
-          <div class="marquee__group">
-            <span class="marquee__jp" lang="ja">サマー・アベニュー</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">SUMMER AVENUE</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">RUBAR</span><span class="marquee__star">✳</span>
-            <span class="marquee__jp" lang="ja">シティ・ポップ</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">2026</span><span class="marquee__star">✳</span>
-            <span class="marquee__en">11 TRACKS</span><span class="marquee__star">✳</span>
-          </div>
-        </div>
+      <div class="container hero-poster__foot">
+        <a class="hero-poster__scroll" href="#record"><span class="hero-poster__scroll-line" aria-hidden="true"></span>Scroll to the record</a>
+        <p class="hero-poster__edition">FIRST EDITION · 2026</p>
       </div>
     </section>
 
@@ -271,21 +196,10 @@
       <div class="container record__inner">
         <div class="record__art" data-reveal>
           <div class="record__frame">
-            <span class="record__frame-label"><span class="record__frame-label-text">RUBAR — SUMMER AVENUE / サマー・アベニュー</span><span class="record__frame-label-dot" aria-hidden="true"></span></span>
             <picture>
               <source type="image/webp" srcset="assets/img/cover-800.webp 800w, assets/img/cover-1600.webp 1600w" sizes="(max-width: 900px) 82vw, 480px">
               <img src="assets/img/cover-800.jpg" srcset="assets/img/cover-800.jpg 800w, assets/img/cover-1600.jpg 1600w" sizes="(max-width: 900px) 82vw, 480px" width="1600" height="1600" alt="Summer Avenue album artwork" loading="lazy" decoding="async">
             </picture>
-          </div>
-          <div class="record__stamp" aria-hidden="true">
-            <svg viewBox="0 0 160 160" role="presentation" focusable="false">
-              <defs><path id="stampPath" d="M80,80 m-60,0 a60,60 0 1,1 120,0 a60,60 0 1,1 -120,0"/></defs>
-              <circle cx="80" cy="80" r="76" fill="none" stroke="currentColor" stroke-width="2"/>
-              <circle cx="80" cy="80" r="52" fill="none" stroke="currentColor" stroke-width="1"/>
-              <text font-size="8.6" letter-spacing="3.2" fill="currentColor" font-family="Space Grotesk, sans-serif"><textPath href="#stampPath" startOffset="0">CITY POP · SUMMER 2026 · RUBAR · シティ・ポップ ·</textPath></text>
-              <text x="80" y="77" text-anchor="middle" fill="currentColor" font-size="23" font-family="Dela Gothic One, Hiragino Sans, sans-serif" lang="ja">夏</text>
-              <text x="80" y="99" text-anchor="middle" fill="currentColor" font-size="6.5" letter-spacing="1.6" font-family="Space Grotesk, sans-serif">SUMMER AVENUE</text>
-            </svg>
           </div>
           <p class="record__caption">RB–001 <span>/</span> 2026 <span>/</span> 11 TRACKS</p>
         </div>
@@ -331,7 +245,7 @@
         </div>
         <figure class="interlude__photo">
           <img src="assets/img/character-black.jpg" width="490" height="780" alt="" loading="lazy" decoding="async">
-          <figcaption>CHARACTER STUDY <span>/</span> 2026</figcaption>
+          <figcaption>RUBAR <span>/</span> 2026</figcaption>
           <span class="interlude__tape"></span>
         </figure>
         <div class="interlude__seal"><span>2026</span><em>CITY POP</em></div>

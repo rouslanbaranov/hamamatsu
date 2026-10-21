@@ -10,11 +10,13 @@
 
 </div>
 
-[![Summer Avenue — desktop preview](docs/preview-desktop.jpg)](https://rouslanbaranov.github.io/summer-avenue/)
+[![Summer Avenue — the yellow hero poster](docs/preview-desktop.jpg)](https://rouslanbaranov.github.io/summer-avenue/)
+
+[Desktop](docs/preview-desktop.jpg) · [Mobile](docs/preview-mobile.jpg) · [Tablet](docs/hero-tablet.jpg)
 
 ## The record
 
-The official album site streams the full record in order, with a custom player, a 15-second film, and the story behind the sleeve. Eleven city-pop songs for the long way home.
+The official album site streams the full record in order, with a custom player, a 15-second film, and the story behind the record. Eleven city-pop songs for the long way home.
 
 | # | 日本語 | English | Time |
 |---:|---|---|---:|
@@ -43,7 +45,7 @@ A deliberately simple static site — no framework, no bundler, no build step.
 - **Video:** native HTML5 video with custom controls and a poster.
 - **Fonts:** Archivo Black, Dela Gothic One, Space Grotesk, Noto Sans JP (Google Fonts).
 - **Hosting:** GitHub Pages, deployed with GitHub Actions.
-- **QA:** Playwright + Chromium; axe-core reports **0 WCAG A/AA violations** at desktop, mobile, playing, and open-menu states.
+- **QA:** Playwright + Chromium; axe-core reports **0 WCAG A/AA violations** at desktop, mobile, playing, and open-menu states. The two remaining incomplete checks are the contrast-over-grain/media heuristic and the approved film having no separate captions track.
 
 No analytics, no cookies, no tracking. The only third-party request is Google Fonts.
 
@@ -53,13 +55,15 @@ The palette is documented in `assets/css/styles.css`:
 
 - **Ink + cream** — paper and night surfaces, primary text.
 - **Sunset orange** — the album's dusk and the primary playback action.
-- **Editorial red** — active indicators, stamps, the quote mark.
-- **Paper yellow** — printed labels, tape, and the secondary **Play all** action.
-- **Cobalt blue** — the film chapter and the interlude's offset shadow.
+- **Editorial red** — the hero marker, active indicators, the interlude seal, the quote mark.
+- **Paper yellow** — the hero field, printed labels, tape, and the secondary **Play all** action.
+- **Cobalt blue** — the film chapter, the hero's left edge, and the interlude's offset shadow.
 
-![Summer Avenue — the interlude](docs/refine-interlude-desktop.jpg)
+![Summer Avenue — the interlude](docs/interlude-desktop.jpg)
 
-The interlude is the single large collage accent: one diagonal red plane, a blue edge, the Japanese title in Dela Gothic One, and a character study cropped from the latest **black Hamamatsu sheet**. The liner-notes portrait follows the latest **yellow Hamamatsu sheet**: the shirt carries only the small `Hamamatsu` mark, and the album title is printed on the tape label instead.
+The first screen is an all-yellow Japanese-release poster. It uses the approved chin-up portrait from the latest **yellow Hamamatsu sheet** (top-right frame), cut out to transparency and set directly on the yellow with no card, sleeve, vinyl, or frame. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level; the portrait, title, and **Play the album** action share the first screen.
+
+The Record shows the official cover flat, with a hairline border and plain metadata — no tilt, vinyl, stamp, tape, spine, or offset block. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and a portrait crop from the latest **black Hamamatsu sheet**, captioned `RUBAR / 2026`. The Notes portrait keeps the yellow-shirt reference, with its `Hamamatsu` mark locally reduced toward the sheet's scale.
 
 ## Project structure
 
@@ -72,7 +76,7 @@ The interlude is the single large collage accent: one diagonal red plane, a blue
 │   ├── img/                # cover, portrait, poster, icons, og.jpg
 │   ├── js/main.js
 │   └── video/              # 15s film, 720×1280 H.264
-├── docs/                   # README previews + refinement screenshots
+├── docs/                   # README previews + section screenshots
 ├── tools/og.html           # source for the social preview
 ├── .github/workflows/pages.yml
 ├── site.webmanifest
@@ -106,7 +110,7 @@ open http://127.0.0.1:8765/tools/og.html
 - **Copy and sections:** `index.html`.
 - **Palette, type, layout:** `assets/css/styles.css`.
 - **Player behaviour:** `assets/js/main.js`.
-- **Cover / portrait / poster:** `assets/img/`.
+- **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-rubar.png` with a `hero-rubar.webp` source; the sheet itself is not shipped as a web asset.
 - **Film:** `assets/video/summer-avenue-film.mp4`, with `assets/img/film-poster.jpg`.
 - **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
 - **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
@@ -123,14 +127,15 @@ Live URL: **https://rouslanbaranov.github.io/summer-avenue/**
 
 - Skip link, visible focus states, semantic landmarks, and labelled controls.
 - Full keyboard support for the player, film, menu, and all actions.
-- `prefers-reduced-motion` disables the marquee, vinyl spin, reveals, and tilt.
+- `prefers-reduced-motion` disables the hero entrance, the interlude seal, and all reveals while keeping the full composition visible.
+- One semantic `H1` contains both the Japanese and English album title; decorative repeats are hidden from assistive technology. The Japanese title uses `lang="ja"` and Dela Gothic One with a full katakana/long-vowel set.
 - Accessible track names include the visible number, Japanese title, English title, romanization, and duration.
 - Play/pause states are reflected with `aria-pressed`, and track changes are announced politely.
-- Metadata labels use a larger, higher-contrast scale; focus is a dual ink/yellow ring; primary touch targets are 44 px or larger.
+- Metadata labels use a larger, higher-contrast scale; focus is a dual ink/yellow ring; primary touch targets are 44 px or larger. The hero portrait has a descriptive alt and fixed dimensions, and is loaded eagerly with `fetchpriority="high"`.
 - The interlude's seal motion and all existing motion are disabled by `prefers-reduced-motion`.
 
 ## Credits & rights
 
-Music, artwork, film, and character sheets: **Rubar**, 2026. The site portrait uses the latest yellow character sheet as the shirt reference; the interlude uses a crop from the latest black sheet.
+Music, artwork, film, and character sheets: **Rubar**, 2026. The hero uses the chin-up top-right portrait from the latest yellow character sheet; the Notes portrait keeps the same yellow-shirt / `Hamamatsu` reference; the interlude uses a crop from the latest black sheet.
 
 © 2026 Rubar. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.
