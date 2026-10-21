@@ -172,11 +172,11 @@
                 var top = 1 + i * 97 / 63 + (rand() - 0.5) * 2;
                 var left;
                 var delay;
-                if (wave === 0) { delay = -rand() * 0.28; left = 8 + rand() * 82; }
-                else if (wave === 1) { delay = rand() * 0.12; left = 55 + rand() * 55; }
-                else if (wave === 2) { delay = 0.12 + rand() * 0.2; left = 95 + rand() * 45; }
-                else if (wave === 3) { delay = 0.3 + rand() * 0.25; left = 110 + rand() * 45; }
-                else { delay = 0.5 + rand() * 0.3; left = 120 + rand() * 50; }
+                if (wave === 0) { delay = -rand() * 0.2; left = 8 + rand() * 82; }
+                else if (wave === 1) { delay = rand() * 0.08; left = 55 + rand() * 55; }
+                else if (wave === 2) { delay = 0.08 + rand() * 0.1; left = 95 + rand() * 45; }
+                else if (wave === 3) { delay = 0.18 + rand() * 0.12; left = 110 + rand() * 45; }
+                else { delay = 0.3 + rand() * 0.15; left = 120 + rand() * 50; }
                 var streak = document.createElement('span');
                 streak.className = 'hero-poster__streak';
                 streak.style.setProperty('--top', Math.max(0.8, Math.min(99.2, top)).toFixed(1) + '%');
@@ -187,7 +187,7 @@
                 streak.style.setProperty('--h', (7 + rand() * 16).toFixed(0) + 'px');
                 streak.style.setProperty('--alpha', (0.12 + rand() * 0.24).toFixed(2));
                 streak.style.setProperty('--blur', (2.5 + rand() * 3).toFixed(1) + 'px');
-                streak.style.setProperty('--dur', (0.34 + rand() * 0.2).toFixed(2) + 's');
+                streak.style.setProperty('--dur', (0.26 + rand() * 0.14).toFixed(2) + 's');
                 streak.style.setProperty('--delay', delay.toFixed(2) + 's');
                 layer.insertBefore(streak, flash);
               }
