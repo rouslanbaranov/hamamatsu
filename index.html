@@ -157,15 +157,42 @@
         <span class="hero-poster__dots"></span>
         <div class="hero-poster__speed" aria-hidden="true">
           <span class="hero-poster__speed-field"></span>
-          <span class="hero-poster__streak hero-poster__streak--1"></span>
-          <span class="hero-poster__streak hero-poster__streak--2"></span>
-          <span class="hero-poster__streak hero-poster__streak--3"></span>
-          <span class="hero-poster__streak hero-poster__streak--4"></span>
-          <span class="hero-poster__streak hero-poster__streak--5"></span>
-          <span class="hero-poster__streak hero-poster__streak--6"></span>
-          <span class="hero-poster__streak hero-poster__streak--7"></span>
-          <span class="hero-poster__streak hero-poster__streak--8"></span>
           <span class="hero-poster__speed-flash"></span>
+          <script>
+            (function () {
+              var layer = document.currentScript.parentElement;
+              var flash = layer.querySelector('.hero-poster__speed-flash');
+              var seed = 20261022;
+              function rand() {
+                seed = (seed * 1664525 + 1013904223) >>> 0;
+                return seed / 4294967296;
+              }
+              for (var i = 0; i < 64; i++) {
+                var wave = i % 5;
+                var top = 1 + i * 97 / 63 + (rand() - 0.5) * 2;
+                var left;
+                var delay;
+                if (wave === 0) { delay = -rand() * 0.28; left = 8 + rand() * 82; }
+                else if (wave === 1) { delay = rand() * 0.12; left = 55 + rand() * 55; }
+                else if (wave === 2) { delay = 0.12 + rand() * 0.2; left = 95 + rand() * 45; }
+                else if (wave === 3) { delay = 0.3 + rand() * 0.25; left = 110 + rand() * 45; }
+                else { delay = 0.5 + rand() * 0.3; left = 120 + rand() * 50; }
+                var streak = document.createElement('span');
+                streak.className = 'hero-poster__streak';
+                streak.style.setProperty('--top', Math.max(0.8, Math.min(99.2, top)).toFixed(1) + '%');
+                streak.style.setProperty('--left', left.toFixed(0) + '%');
+                var width = 20 + rand() * 46;
+                streak.style.setProperty('--w', width.toFixed(0) + '%');
+                streak.style.setProperty('--travel', (-((left + 10) / width * 100)).toFixed(0) + '%');
+                streak.style.setProperty('--h', (7 + rand() * 16).toFixed(0) + 'px');
+                streak.style.setProperty('--alpha', (0.12 + rand() * 0.24).toFixed(2));
+                streak.style.setProperty('--blur', (2.5 + rand() * 3).toFixed(1) + 'px');
+                streak.style.setProperty('--dur', (0.34 + rand() * 0.2).toFixed(2) + 's');
+                streak.style.setProperty('--delay', delay.toFixed(2) + 's');
+                layer.insertBefore(streak, flash);
+              }
+            })();
+          </script>
         </div>
       </div>
       <div class="container hero-poster__inner">

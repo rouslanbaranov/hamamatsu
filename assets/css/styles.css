@@ -3519,94 +3519,6 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   pointer-events: none;
 }
 
-.hero-poster__streak--1 {
-  --top: 8%;
-  --left: 60%;
-  --w: 50%;
-  --h: 18px;
-  --alpha: 0.75;
-  --blur: 4px;
-  --dur: 0.9s;
-  --delay: 0s;
-}
-
-.hero-poster__streak--2 {
-  --top: 17%;
-  --left: 18%;
-  --w: 58%;
-  --h: 14px;
-  --alpha: 0.6;
-  --blur: 3px;
-  --dur: 1s;
-  --delay: 0.03s;
-}
-
-.hero-poster__streak--3 {
-  --top: 29%;
-  --left: 72%;
-  --w: 44%;
-  --h: 24px;
-  --alpha: 0.7;
-  --blur: 5px;
-  --dur: 0.85s;
-  --delay: 0.01s;
-}
-
-.hero-poster__streak--4 {
-  --top: 41%;
-  --left: 32%;
-  --w: 52%;
-  --h: 16px;
-  --alpha: 0.65;
-  --blur: 3.5px;
-  --dur: 0.95s;
-  --delay: 0.06s;
-}
-
-.hero-poster__streak--5 {
-  --top: 53%;
-  --left: 112%;
-  --w: 48%;
-  --h: 20px;
-  --alpha: 0.75;
-  --blur: 4px;
-  --dur: 0.95s;
-  --delay: 0.18s;
-}
-
-.hero-poster__streak--6 {
-  --top: 65%;
-  --left: 126%;
-  --w: 55%;
-  --h: 12px;
-  --alpha: 0.5;
-  --blur: 2.5px;
-  --dur: 1s;
-  --delay: 0.28s;
-}
-
-.hero-poster__streak--7 {
-  --top: 77%;
-  --left: 106%;
-  --w: 46%;
-  --h: 22px;
-  --alpha: 0.68;
-  --blur: 4px;
-  --dur: 0.9s;
-  --delay: 0.12s;
-}
-
-.hero-poster__streak--8 {
-  --top: 89%;
-  --left: 132%;
-  --w: 52%;
-  --h: 14px;
-  --alpha: 0.55;
-  --blur: 3px;
-  --dur: 1.05s;
-  --delay: 0.34s;
-}
-
 .hero-poster__speed-flash {
   position: absolute;
   inset: 0;
@@ -3938,9 +3850,10 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 }
 
 @keyframes heroStreak {
-  0% { opacity: var(--alpha, 0.55); transform: translate3d(0, 0, 0); }
-  70% { opacity: var(--alpha, 0.55); }
-  100% { opacity: 0; transform: translate3d(-320%, 0, 0); }
+  0% { opacity: 0; transform: translate3d(0, 0, 0); }
+  6% { opacity: var(--alpha, 0.3); }
+  68% { opacity: var(--alpha, 0.3); }
+  100% { opacity: 0; transform: translate3d(var(--travel, -320%), 0, 0); }
 }
 
 @keyframes heroFlash {
@@ -4102,15 +4015,6 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   .hero-poster__speed {
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 36%);
   }
-
-  .hero-poster__streak--1 { --top: 4%; --left: 50%; --w: 62%; --h: 12px; --blur: 3px; --dur: 0.8s; }
-  .hero-poster__streak--2 { --top: 12%; --left: 12%; --w: 68%; --h: 9px; --blur: 2.5px; --dur: 0.9s; --delay: 0.02s; }
-  .hero-poster__streak--3 { --top: 20%; --left: 65%; --w: 52%; --h: 16px; --blur: 4px; --dur: 0.78s; }
-  .hero-poster__streak--4 { --top: 26%; --left: 30%; --w: 60%; --h: 11px; --blur: 3px; --dur: 0.88s; --delay: 0.04s; }
-  .hero-poster__streak--5 { --top: 8%; --left: 112%; --w: 55%; --h: 13px; --blur: 3px; --dur: 0.9s; --delay: 0.18s; }
-  .hero-poster__streak--6 { --top: 25%; --left: 126%; --w: 60%; --h: 10px; --blur: 2.5px; --dur: 1s; --delay: 0.28s; }
-  .hero-poster__streak--7,
-  .hero-poster__streak--8 { display: none; }
 
   .hero-poster__sakura-branch {
     top: -10%;
