@@ -3378,7 +3378,7 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   display: flex;
   flex-direction: column;
   min-height: calc(100svh - var(--header-h));
-  overflow: hidden;
+  overflow: visible;
   background: var(--yellow);
   color: var(--ink);
   border-bottom: 1.5px solid var(--ink);
@@ -3431,15 +3431,16 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 
 .hero-poster__portrait {
   grid-area: portrait;
-  align-self: end;
+  align-self: stretch;
   justify-self: center;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   width: 100%;
-  height: min(78vh, 760px);
-  min-height: 460px;
-  margin-bottom: -2vh;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  overflow: visible;
 }
 
 .hero-poster__portrait picture {
@@ -3695,6 +3696,17 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   color: rgba(243, 234, 216, 0.95);
 }
 
+@media (min-width: 901px) {
+  .hero-poster {
+    height: calc(100svh - var(--header-h));
+    min-height: 0;
+  }
+
+  .hero-poster__portrait img {
+    max-height: calc(100svh - var(--header-h) - 74px);
+  }
+}
+
 @media (max-width: 900px) {
   .hero-poster__inner {
     grid-template-columns: 1fr;
@@ -3716,9 +3728,15 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   }
 
   .hero-poster__portrait {
-    height: clamp(240px, 42vh, 430px);
+    height: auto;
     min-height: 0;
     margin: 0;
+  }
+
+  .hero-poster__portrait img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 
   .hero-poster__actions {
@@ -3749,7 +3767,6 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 }
 
 @media (max-width: 380px) {
-  .hero-poster__portrait { height: clamp(225px, 36vh, 300px); }
   .hero-poster__lede { font-size: 0.9rem; }
 }
 

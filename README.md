@@ -61,7 +61,7 @@ The palette is documented in `assets/css/styles.css`:
 
 ![Summer Avenue — the interlude](docs/interlude-desktop.jpg)
 
-The first screen is an all-yellow Japanese-release poster. It uses the supplied **black Hamamatsu hero portrait** (1024×1536), cropped to a 600×700 head/shoulder portrait and matted against the yellow with no card, sleeve, vinyl, or frame. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level; the portrait, title, and **Play the album** action share the first screen.
+The first screen is an all-yellow Japanese-release poster. It uses the supplied **black Hamamatsu hero portrait** (1024×1536) at full height, fully contained against the yellow with no crop, card, sleeve, vinyl, or frame. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level; the portrait, title, and **Play the album** action share the first screen.
 
 The Record shows the new official cover flat — the 1254×1254 artwork has no Rubar wordmark; a hairline border and plain metadata are the only framing. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and the top-left front face from the new **4-face Hamamatsu sheet**, cropped and converted to B&W, captioned `RUBAR / 2026`. The Notes portrait remains the yellow-shirt portrait, with its `Hamamatsu` mark locally reduced.
 
@@ -110,7 +110,7 @@ open http://127.0.0.1:8765/tools/og.html
 - **Copy and sections:** `index.html`.
 - **Palette, type, layout:** `assets/css/styles.css`.
 - **Player behaviour:** `assets/js/main.js`.
-- **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-rubar-black.png` with a `hero-rubar-black.webp` source; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
+- **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-rubar-black-full.png` with a `hero-rubar-black-full.webp` source and no crop; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
 - **Film:** `assets/video/summer-avenue-film.mp4`, with `assets/img/film-poster.jpg`.
 - **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
 - **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
