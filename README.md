@@ -61,9 +61,9 @@ The palette is documented in `assets/css/styles.css`:
 
 ![Summer Avenue — the interlude](docs/interlude-desktop.jpg)
 
-The first screen is an all-yellow Japanese-release poster. It uses the approved chin-up portrait from the latest **yellow Hamamatsu sheet** (top-right frame), cut out to transparency and set directly on the yellow with no card, sleeve, vinyl, or frame. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level; the portrait, title, and **Play the album** action share the first screen.
+The first screen is an all-yellow Japanese-release poster. It uses the supplied **black Hamamatsu hero portrait** (1024×1536), cropped to a 600×700 head/shoulder portrait and matted against the yellow with no card, sleeve, vinyl, or frame. The Japanese title is live HTML in Dela Gothic One (`lang="ja"`); the English title is the second level; the portrait, title, and **Play the album** action share the first screen.
 
-The Record shows the official cover flat, with a hairline border and plain metadata — no tilt, vinyl, stamp, tape, spine, or offset block. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and a portrait crop from the latest **black Hamamatsu sheet**, captioned `RUBAR / 2026`. The Notes portrait keeps the yellow-shirt reference, with its `Hamamatsu` mark locally reduced toward the sheet's scale.
+The Record shows the new official cover flat — the 1254×1254 artwork has no Rubar wordmark; a hairline border and plain metadata are the only framing. The interlude remains the single collage accent: one diagonal red plane, a blue edge, the Japanese title, and the top-left front face from the new **4-face Hamamatsu sheet**, cropped and converted to B&W, captioned `RUBAR / 2026`. The Notes portrait remains the yellow-shirt portrait, with its `Hamamatsu` mark locally reduced.
 
 ## Project structure
 
@@ -73,7 +73,7 @@ The Record shows the official cover flat, with a hairline border and plain metad
 ├── assets/
 │   ├── audio/              # 11 × 320 kbps MP3 website streams
 │   ├── css/styles.css
-│   ├── img/                # cover, portrait, poster, icons, og.jpg
+│   ├── img/                # cover, black hero portrait, sheet crop, yellow portrait, poster, icons, og
 │   ├── js/main.js
 │   └── video/              # 15s film, 720×1280 H.264
 ├── docs/                   # README previews + section screenshots
@@ -110,7 +110,7 @@ open http://127.0.0.1:8765/tools/og.html
 - **Copy and sections:** `index.html`.
 - **Palette, type, layout:** `assets/css/styles.css`.
 - **Player behaviour:** `assets/js/main.js`.
-- **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-rubar.png` with a `hero-rubar.webp` source; the sheet itself is not shipped as a web asset.
+- **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-rubar-black.png` with a `hero-rubar-black.webp` source; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
 - **Film:** `assets/video/summer-avenue-film.mp4`, with `assets/img/film-poster.jpg`.
 - **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
 - **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
@@ -136,6 +136,6 @@ Live URL: **https://rouslanbaranov.github.io/summer-avenue/**
 
 ## Credits & rights
 
-Music, artwork, film, and character sheets: **Rubar**, 2026. The hero uses the chin-up top-right portrait from the latest yellow character sheet; the Notes portrait keeps the same yellow-shirt / `Hamamatsu` reference; the interlude uses a crop from the latest black sheet.
+Music, artwork, film, and character sheets: **Rubar**, 2026. The hero uses the supplied black Hamamatsu hero portrait; the interlude uses the top-left front of the new 4-face sheet; the Notes portrait remains the yellow-shirt version.
 
 © 2026 Rubar. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.

@@ -3050,7 +3050,9 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
 .interlude__photo img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 22%;
 }
 
 .interlude__photo figcaption {
@@ -3452,8 +3454,6 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   height: 100%;
   object-fit: contain;
   object-position: bottom center;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
 }
 
 .hero-poster__copy {

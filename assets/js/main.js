@@ -349,9 +349,9 @@
           artist: 'Rubar',
           album: 'Summer Avenue',
           artwork: [
-            { src: 'assets/img/cover-200.jpg', sizes: '200x200', type: 'image/jpeg' },
-            { src: 'assets/img/cover-800.jpg', sizes: '800x800', type: 'image/jpeg' },
-            { src: 'assets/img/cover-1600.jpg', sizes: '1600x1600', type: 'image/jpeg' }
+            { src: 'assets/img/cover-summer-avenue-200.jpg', sizes: '200x200', type: 'image/jpeg' },
+            { src: 'assets/img/cover-summer-avenue-800.jpg', sizes: '800x800', type: 'image/jpeg' },
+            { src: 'assets/img/cover-summer-avenue-1254.jpg', sizes: '1254x1254', type: 'image/jpeg' }
           ]
         });
       } catch (error) {
