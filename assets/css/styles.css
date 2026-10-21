@@ -39,6 +39,7 @@
   --font-body: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+  --font-script: "Caveat", "Segoe Script", "Bradley Hand", cursive;
 
   --header-h: 76px;
   --player-h: 88px;
@@ -1702,6 +1703,26 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   object-fit: cover;
   background: #000;
   cursor: pointer;
+}
+
+.film-player__poster {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: url("../img/film-poster.jpg") center / cover no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s linear, visibility 0.25s linear;
+}
+
+.film-player.is-poster .film-player__poster {
+  opacity: 1;
+  visibility: visible;
+}
+
+.film-player.is-poster .film-player__video {
+  visibility: hidden;
 }
 
 .film-player__overlay {
@@ -3427,6 +3448,23 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   mask-image: linear-gradient(to left, #000 0%, transparent 82%);
 }
 
+.hero-poster__city-pop {
+  position: absolute;
+  top: 6.5%;
+  right: 1.4%;
+  z-index: 1;
+  transform: rotate(-9deg);
+  transform-origin: 100% 50%;
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 3.4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  color: var(--red-deep);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 .hero-poster__inner {
   position: relative;
   z-index: 1;
@@ -3729,6 +3767,10 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
     align-self: start;
   }
 
+  .hero-poster__copy {
+    padding-left: clamp(24px, 3.5vw, 50px);
+  }
+
   .hero-poster__actions {
     align-self: start;
     margin-top: -92px;
@@ -3783,6 +3825,12 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
     padding-bottom: clamp(10px, 2vh, 18px);
   }
 
+  .hero-poster__city-pop {
+    top: 8%;
+    right: 16px;
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+  }
+
   .hero-poster__jp { font-size: clamp(2.8rem, 12.4vw, 4.6rem); }
   .hero-poster__en {
     margin-top: 10px;
@@ -3799,6 +3847,12 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 @media (min-width: 601px) and (max-width: 900px) {
   .hero-poster__rose {
     clip-path: polygon(0 0, 100% 0, 100% 28%, 0 30%);
+  }
+
+  .hero-poster__city-pop {
+    top: 9%;
+    right: 28px;
+    font-size: clamp(2rem, 5vw, 2.8rem);
   }
 }
 

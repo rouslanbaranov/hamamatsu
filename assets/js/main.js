@@ -730,19 +730,25 @@
         }
       }
 
-      function showOverlay(replay) {
+      function showOverlay(reset) {
         overlay.hidden = false;
         controls.hidden = true;
         filmEl.classList.remove('is-playing');
         video.pause();
         if (caption) {
-          caption.innerHTML = (replay ? 'REPLAY THE FILM' : 'PLAY THE FILM') + '<br><small>00:15 · SOUND ON</small>';
+          caption.innerHTML = 'PLAY THE FILM<br><small>00:15 · SOUND ON</small>';
+        }
+        if (reset) {
+          video.currentTime = 0;
+          filmEl.classList.add('is-poster');
+          syncFilmControls();
         }
       }
 
       function playFilm() {
         if (audio && !audio.paused) audio.pause();
-        if (video.ended) video.currentTime = 0;
+        filmEl.classList.remove('is-poster');
+        if (video.ended || video.currentTime >= getDuration() - 0.1) video.currentTime = 0;
         video.muted = false;
         muteButton.setAttribute('aria-label', 'Mute film');
         filmEl.classList.remove('is-muted');
@@ -774,6 +780,7 @@
       video.addEventListener('pause', () => {
         filmEl.classList.remove('is-playing');
         if (toggleButton) toggleButton.setAttribute('aria-label', 'Play film');
+        syncFilmControls();
       });
 
       video.addEventListener('timeupdate', syncFilmControls);
@@ -781,7 +788,6 @@
 
       video.addEventListener('ended', () => {
         filmEl.classList.remove('is-playing');
-        syncFilmControls();
         showOverlay(true);
       });
 
