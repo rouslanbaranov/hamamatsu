@@ -1,0 +1,22 @@
+{
+  "name": "Summer Avenue — Rubar",
+  "short_name": "Summer Avenue",
+  "description": "Eleven city-pop songs for the long way home. The 2026 album by Rubar.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#12101f",
+  "theme_color": "#12101f",
+  "icons": [
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

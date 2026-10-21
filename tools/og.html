@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summer Avenue — Open Graph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Space+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    position: relative;
+    overflow: hidden;
+    background: #12101f;
+    color: #f3ead8;
+    font-family: "Space Grotesk", sans-serif;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(243,234,216,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(243,234,216,.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .sun {
+    position: absolute; top: -90px; right: 155px; width: 545px; height: 545px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 38%, #ffe6b0 0%, #ffc06c 32%, #ff8750 64%, #e8503b 100%);
+    box-shadow: 0 0 140px rgba(255,122,66,.22);
+  }
+  .sun::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background-image: radial-gradient(rgba(18,16,31,.3) 1px, transparent 1.2px);
+    background-size: 7px 7px; mix-blend-mode: multiply; opacity: .55;
+  }
+  .kanji {
+    position: absolute; right: -55px; bottom: -150px;
+    font-family: "Dela Gothic One", sans-serif; font-size: 600px; line-height: .8;
+    color: transparent; -webkit-text-stroke: 1px rgba(243,234,216,.12);
+  }
+  .copy { position: absolute; left: 62px; top: 56px; z-index: 2; }
+  .eyebrow {
+    display: flex; align-items: center; gap: 12px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 13px; letter-spacing: .2em; color: rgba(243,234,216,.7);
+  }
+  .eyebrow .jp { font-family: "Dela Gothic One", sans-serif; color: #ffd23f; letter-spacing: .1em; }
+  .eyebrow .sep { color: #ff7a42; }
+  h1 {
+    margin-top: 30px;
+    font-family: "Archivo Black", sans-serif; font-weight: 400;
+    font-size: 152px; line-height: .78; letter-spacing: -.055em;
+    text-transform: uppercase;
+  }
+  h1 .dot { color: #ff7a42; }
+  .jp-strip {
+    display: inline-block; margin-top: 24px; padding: 8px 14px 10px;
+    background: #ffd23f; color: #12101f;
+    font-family: "Dela Gothic One", sans-serif; font-size: 21px; letter-spacing: .08em;
+    transform: rotate(-1.5deg);
+    box-shadow: 4px 4px 0 #e5402f;
+  }
+  .meta {
+    margin-top: 24px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px; letter-spacing: .17em; color: rgba(243,234,216,.52);
+  }
+  .meta b { color: #f3ead8; font-weight: 500; }
+  .art {
+    position: absolute; right: 62px; top: 112px; z-index: 3;
+    width: 365px;
+    border: 6px solid #f3ead8;
+    transform: rotate(-3deg);
+    box-shadow: 0 40px 80px rgba(0,0,0,.55);
+  }
+  .art img { display: block; width: 100%; }
+  .sticker {
+    position: absolute; right: 32px; top: 74px; z-index: 4;
+    display: grid; place-content: center;
+    width: 88px; height: 88px;
+    border: 2px solid #f3ead8; border-radius: 50%;
+    background: #e5402f; color: #f3ead8;
+    font-family: ui-monospace, Menlo, monospace; font-size: 10px; line-height: 1.1; letter-spacing: .1em;
+    text-align: center; transform: rotate(9deg);
+  }
+  .sticker b { display: block; font-family: "Archivo Black", sans-serif; font-size: 26px; line-height: 1; }
+  .strip {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+    display: flex; align-items: center; gap: 25px;
+    height: 48px; padding-left: 62px;
+    background: #ff7a42; border-top: 1.5px solid #12101f;
+    font-family: ui-monospace, Menlo, monospace; font-size: 13px; letter-spacing: .13em;
+    color: #12101f; white-space: nowrap;
+  }
+  .strip .jp { font-family: "Dela Gothic One", sans-serif; font-size: 15px; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="sun"></div>
+  <div class="kanji">夏</div>
+  <div class="copy">
+    <p class="eyebrow"><span class="jp">シティ・ポップ</span><span class="sep">/</span><span>CITY POP</span><span class="sep">/</span><span>2026</span></p>
+    <h1>SUMMER<br>AVENUE<span class="dot">.</span></h1>
+    <div class="jp-strip">サマー・アベニュー</div>
+    <p class="meta"><b>RUBAR</b> · 11 TRACKS · 46:05</p>
+  </div>
+  <div class="art"><img src="../assets/img/cover-800.jpg" alt="Summer Avenue cover"></div>
+  <div class="sticker"><b>11</b>TRACKS</div>
+  <div class="strip">
+    <span class="jp">サマー・アベニュー</span><span>✳</span>
+    <span>SUMMER AVENUE</span><span>✳</span>
+    <span>RUBAR</span><span>✳</span>
+    <span>2026</span>
+  </div>
+</body>
+</html>

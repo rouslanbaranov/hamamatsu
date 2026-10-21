@@ -1,7 +1,120 @@
-# Summer Avenue
+<div align="center">
 
-The official website for **Summer Avenue** — the 2026 album by **Rubar**.
+# SUMMER AVENUE
 
-サマー・アベニュー · 11 tracks · city pop for the long way home.
+**The 2026 album by Rubar**
 
-Built as a fast, self-contained static site. No framework, no build step.
+サマー・アベニュー · 11 tracks · 46:05 · Japanese / English
+
+**[▶ Listen to the album](https://rouslanbaranov.github.io/summer-avenue/)**
+
+</div>
+
+[![Summer Avenue — desktop preview](docs/preview-desktop.jpg)](https://rouslanbaranov.github.io/summer-avenue/)
+
+## The record
+
+Eleven city-pop songs for the long way home — neon dusk, late trains, and the places we almost stayed. The official album site streams the full record in order, with a custom player, a 15-second film, and the story behind the sleeve.
+
+| # | 日本語 | English | Time |
+|---:|---|---|---:|
+| 01 | もう少しそばにいて | Stay With Me | 4:54 |
+| 02 | 春の歌 | Leise zieht | 3:34 |
+| 03 | サマー・アベニュー | Summer Avenue | 3:48 |
+| 04 | 身体と勇気の体操 | Reboot | 3:15 |
+| 05 | 君の愛以外 | Lilichka | 3:30 |
+| 06 | 遠くで | Arigato | 3:32 |
+| 07 | アナスタシア | Anastasia | 3:50 |
+| 08 | 風に乗せたメッセージ | Crossing Into Tomorrow | 4:53 |
+| 09 | シャガネ、愛しいシャガネ | Shagane | 4:14 |
+| 10 | 海へ行こう | June Ease | 5:04 |
+| 11 | 今夜だけはさよならを言わないで | Blue Tile Reflections | 5:30 |
+
+**Runtime:** 46:05 · **Catalogue:** RB–001 · **Year:** 2026
+
+## Stack
+
+A deliberately simple static site — no framework, no bundler, no build step.
+
+- **HTML5** with semantic landmarks, ARIA, and `MusicAlbum` JSON-LD.
+- **CSS3** with custom properties, Grid/Flexbox, fluid typography, and no dependencies.
+- **Vanilla JavaScript** for the custom audio player, film player, mobile menu, reveals, and share action.
+- **Audio:** native `HTMLAudioElement` + **Media Session API**; full-album stream, seek, next/previous, volume, auto-advance.
+- **Video:** native HTML5 video with custom controls and a poster.
+- **Fonts:** Archivo Black, Dela Gothic One, Space Grotesk, Noto Sans JP (Google Fonts).
+- **Hosting:** GitHub Pages, deployed with GitHub Actions.
+- **QA:** Playwright + Chromium; axe-core reports **0 WCAG A/AA violations** at desktop, mobile, playing, and open-menu states.
+
+No analytics, no cookies, no tracking. The only third-party request is Google Fonts.
+
+## Project structure
+
+```text
+.
+├── index.html
+├── assets/
+│   ├── audio/              # 11 × 320 kbps MP3 website streams
+│   ├── css/styles.css
+│   ├── img/                # cover, portrait, poster, icons, og.jpg
+│   ├── js/main.js
+│   └── video/              # 15s film, 720×1280 H.264
+├── docs/                   # README previews
+├── tools/og.html           # source for the social preview
+├── .github/workflows/pages.yml
+├── site.webmanifest
+├── robots.txt
+├── sitemap.xml
+└── .nojekyll
+```
+
+The repository intentionally includes the **320 kbps website masters** (106 MB). FLAC and WAV distribution masters are not committed; keep those in the mastering pipeline or a distributor package.
+
+## Local development
+
+```bash
+# From the repository root
+npx http-server -p 8765 -c-1 .
+# then open http://127.0.0.1:8765/
+```
+
+> Use a range-capable server for audio testing. Python's built-in `http.server` does not support HTTP Range requests, so **seeking** in the player may fail locally even though it works on GitHub Pages. `http-server` supports ranges.
+
+To preview the social card:
+
+```bash
+# with the server running
+open http://127.0.0.1:8765/tools/og.html
+```
+
+## Editing content
+
+- **Track list:** the 11 `.track` elements in `index.html`. Each button carries `data-src` and `data-duration`; the Japanese title is `.track__ja`, the English title is `.track__en`, and the romanization is `.track__romaji`. Keep the JSON-LD block and durations in sync.
+- **Copy and sections:** `index.html`.
+- **Palette, type, layout:** `assets/css/styles.css`.
+- **Player behaviour:** `assets/js/main.js`.
+- **Cover / portrait / poster:** `assets/img/`.
+- **Film:** `assets/video/summer-avenue-film.mp4`, with `assets/img/film-poster.jpg`.
+- **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
+- **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
+
+## Deployment
+
+Every push to `main` deploys the site through **GitHub Actions → GitHub Pages** (`.github/workflows/pages.yml`).
+
+In the repository settings, **Pages → Build and deployment → Source** must be **GitHub Actions**. The workflow uploads the repository root as the Pages artifact, then deploys it.
+
+Live URL: **https://rouslanbaranov.github.io/summer-avenue/**
+
+## Accessibility
+
+- Skip link, visible focus states, semantic landmarks, and labelled controls.
+- Full keyboard support for the player, film, menu, and all actions.
+- `prefers-reduced-motion` disables the marquee, vinyl spin, reveals, and tilt.
+- Accessible track names include the visible number, Japanese title, English title, romanization, and duration.
+- Play/pause states are reflected with `aria-pressed`, and track changes are announced politely.
+
+## Credits & rights
+
+Music, artwork, and film: **Rubar**, 2026.
+
+© 2026 Rubar. All rights reserved. The music, cover artwork, portrait, and film may not be reproduced or redistributed without permission. The repository contains the website versions of the mastered recordings; it is not a grant of rights to the recordings or artwork.
