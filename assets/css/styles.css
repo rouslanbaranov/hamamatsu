@@ -3486,11 +3486,9 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   mask-image: linear-gradient(to left, #000 0%, transparent 82%);
 }
 
-/* First-render anime rush: the type is stationary, while the rose field,
-   the sakura photograph and ink speed lines tear past behind it. */
+/* First-render anime rush: the type is stationary, while the rose field
+   turns into a set of thick horizontal speed bands flying past. */
 .hero-poster__speed {
-  --burst-x: 70%;
-  --burst-y: 28%;
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -3503,59 +3501,110 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   position: absolute;
   inset: 0;
   opacity: 0;
-  background-color: var(--hero-rose);
-  background-image:
-    radial-gradient(ellipse at var(--burst-x) var(--burst-y), rgba(255, 255, 255, 0.95) 0%, rgba(253, 243, 240, 0.75) 26%, rgba(243, 215, 210, 0.35) 56%, transparent 80%),
-    repeating-conic-gradient(from 0deg at var(--burst-x) var(--burst-y), transparent 0deg 3.8deg, rgba(18, 16, 31, 0.1) 3.8deg 4.1deg, transparent 4.1deg 9deg),
-    repeating-linear-gradient(1.5deg, transparent 0 26px, rgba(18, 16, 31, 0.22) 26px 31px, transparent 31px 94px, rgba(18, 16, 31, 0.1) 94px 97px, transparent 97px 168px),
-    repeating-linear-gradient(-4deg, transparent 0 58px, rgba(229, 64, 47, 0.14) 58px 63px, transparent 63px 146px);
+  background: var(--hero-rose);
   pointer-events: none;
 }
 
-.hero-poster__speed-burst {
+.hero-poster__streak {
   position: absolute;
-  inset: 0;
+  top: var(--top, 10%);
+  left: var(--left, 60%);
+  width: var(--w, 48%);
+  height: var(--h, 14px);
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, var(--ink) 12%, var(--ink) 88%, transparent 100%);
+  filter: blur(var(--blur, 5px));
   opacity: 0;
-  background: repeating-conic-gradient(from 0deg at var(--burst-x) var(--burst-y), transparent 0deg 4.4deg, rgba(18, 16, 31, 0.42) 4.4deg 4.75deg, transparent 4.75deg 11deg);
-  filter: blur(1.4px);
-  transform: scale(0.9);
+  transform: translate3d(0, 0, 0);
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse at var(--burst-x) var(--burst-y), transparent 0 14%, #000 38%, transparent 64%);
-  mask-image: radial-gradient(ellipse at var(--burst-x) var(--burst-y), transparent 0 14%, #000 38%, transparent 64%);
 }
 
-.hero-poster__speed-line {
-  position: absolute;
-  top: -20%;
-  left: -70%;
-  display: block;
-  width: 240%;
-  height: 140%;
-  opacity: 0;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 16%, #000 84%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 16%, #000 84%, transparent 100%);
+.hero-poster__streak--1 {
+  --top: 8%;
+  --left: 60%;
+  --w: 50%;
+  --h: 18px;
+  --alpha: 0.75;
+  --blur: 4px;
+  --dur: 0.9s;
+  --delay: 0s;
 }
 
-.hero-poster__speed-line--ink {
-  background-image:
-    repeating-linear-gradient(2deg, transparent 0 18px, rgba(18, 16, 31, 0.55) 18px 22px, transparent 22px 56px, rgba(18, 16, 31, 0.16) 56px 59px, transparent 59px 112px),
-    repeating-linear-gradient(-3deg, transparent 0 38px, rgba(18, 16, 31, 0.2) 38px 43px, transparent 43px 144px);
-  filter: blur(2.6px);
+.hero-poster__streak--2 {
+  --top: 17%;
+  --left: 18%;
+  --w: 58%;
+  --h: 14px;
+  --alpha: 0.6;
+  --blur: 3px;
+  --dur: 1s;
+  --delay: 0.03s;
 }
 
-.hero-poster__speed-line--red {
-  background-image:
-    repeating-linear-gradient(3deg, transparent 0 78px, rgba(229, 64, 47, 0.55) 78px 84px, transparent 84px 190px),
-    repeating-linear-gradient(-2deg, transparent 0 46px, rgba(255, 122, 66, 0.3) 46px 51px, transparent 51px 120px);
-  filter: blur(4.2px);
+.hero-poster__streak--3 {
+  --top: 29%;
+  --left: 72%;
+  --w: 44%;
+  --h: 24px;
+  --alpha: 0.7;
+  --blur: 5px;
+  --dur: 0.85s;
+  --delay: 0.01s;
 }
 
-.hero-poster__speed-line--haze {
-  background:
-    linear-gradient(6deg, transparent 22%, rgba(255, 255, 255, 0.7) 44%, transparent 64%),
-    repeating-linear-gradient(4deg, transparent 0 64px, rgba(255, 255, 255, 0.45) 64px 74px, transparent 74px 160px);
-  filter: blur(14px);
+.hero-poster__streak--4 {
+  --top: 41%;
+  --left: 32%;
+  --w: 52%;
+  --h: 16px;
+  --alpha: 0.65;
+  --blur: 3.5px;
+  --dur: 0.95s;
+  --delay: 0.06s;
+}
+
+.hero-poster__streak--5 {
+  --top: 53%;
+  --left: 112%;
+  --w: 48%;
+  --h: 20px;
+  --alpha: 0.75;
+  --blur: 4px;
+  --dur: 0.95s;
+  --delay: 0.18s;
+}
+
+.hero-poster__streak--6 {
+  --top: 65%;
+  --left: 126%;
+  --w: 55%;
+  --h: 12px;
+  --alpha: 0.5;
+  --blur: 2.5px;
+  --dur: 1s;
+  --delay: 0.28s;
+}
+
+.hero-poster__streak--7 {
+  --top: 77%;
+  --left: 106%;
+  --w: 46%;
+  --h: 22px;
+  --alpha: 0.68;
+  --blur: 4px;
+  --dur: 0.9s;
+  --delay: 0.12s;
+}
+
+.hero-poster__streak--8 {
+  --top: 89%;
+  --left: 132%;
+  --w: 52%;
+  --h: 14px;
+  --alpha: 0.55;
+  --blur: 3px;
+  --dur: 1.05s;
+  --delay: 0.34s;
 }
 
 .hero-poster__speed-flash {
@@ -3831,27 +3880,15 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero-poster__sakura {
-    animation: heroSakuraReveal 1.3s 0.02s cubic-bezier(0.16, 0.8, 0.2, 1) both;
+    animation: heroSakuraReveal 1.25s 0.02s cubic-bezier(0.16, 0.8, 0.2, 1) both;
   }
 
   .hero-poster__speed-field {
-    animation: heroSpeedField 1.2s cubic-bezier(0.16, 0.8, 0.2, 1) both;
+    animation: heroSpeedField 1.15s cubic-bezier(0.16, 0.8, 0.2, 1) both;
   }
 
-  .hero-poster__speed-burst {
-    animation: heroBurst 0.46s 0.02s cubic-bezier(0.16, 0.8, 0.2, 1) both;
-  }
-
-  .hero-poster__speed-line--ink {
-    animation: heroSpeedInk 0.8s 0.01s cubic-bezier(0.12, 0.7, 0.18, 1) both;
-  }
-
-  .hero-poster__speed-line--red {
-    animation: heroSpeedRed 0.9s 0.02s cubic-bezier(0.1, 0.7, 0.18, 1) both;
-  }
-
-  .hero-poster__speed-line--haze {
-    animation: heroSpeedHaze 0.95s 0.03s cubic-bezier(0.12, 0.7, 0.2, 1) both;
+  .hero-poster__streak {
+    animation: heroStreak var(--dur, 0.9s) var(--delay, 0s) linear both;
   }
 
   .hero-poster__speed-flash {
@@ -3889,42 +3926,21 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 }
 
 @keyframes heroSakuraReveal {
-  0%, 62% { opacity: 0; transform: scale(1.04); filter: blur(10px); }
-  82% { opacity: 0.45; filter: blur(4px); }
+  0%, 50% { opacity: 0; transform: scale(1.04); filter: blur(10px); }
+  72% { opacity: 0.5; filter: blur(4px); }
   100% { opacity: 1; transform: none; filter: none; }
 }
 
 @keyframes heroSpeedField {
   0% { opacity: 1; }
-  68% { opacity: 1; }
+  55% { opacity: 1; }
   100% { opacity: 0; }
 }
 
-@keyframes heroBurst {
-  0% { opacity: 0; transform: scale(0.9); }
-  8% { opacity: 0.5; }
-  45% { opacity: 0.18; }
-  100% { opacity: 0; transform: scale(1.14); }
-}
-
-@keyframes heroSpeedInk {
-  0% { opacity: 0; transform: translate3d(25%, 0, 0); }
-  6% { opacity: 0.96; }
-  52% { opacity: 0.65; }
-  100% { opacity: 0; transform: translate3d(-56%, 0, 0); }
-}
-
-@keyframes heroSpeedRed {
-  0% { opacity: 0; transform: translate3d(52%, 0, 0); }
-  8% { opacity: 0.8; }
-  56% { opacity: 0.45; }
-  100% { opacity: 0; transform: translate3d(-70%, 0, 0); }
-}
-
-@keyframes heroSpeedHaze {
-  0% { opacity: 0; transform: translate3d(30%, 0, 0) scaleX(1.1); }
-  12% { opacity: 0.7; }
-  100% { opacity: 0; transform: translate3d(-42%, 0, 0) scaleX(1); }
+@keyframes heroStreak {
+  0% { opacity: var(--alpha, 0.55); transform: translate3d(0, 0, 0); }
+  70% { opacity: var(--alpha, 0.55); }
+  100% { opacity: 0; transform: translate3d(-320%, 0, 0); }
 }
 
 @keyframes heroFlash {
@@ -3998,7 +4014,8 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-poster__sakura,
-  .hero-poster__speed-line,
+  .hero-poster__speed-field,
+  .hero-poster__streak,
   .hero-poster__speed-flash,
   .hero-poster__jp,
   .hero-poster__en-row,
@@ -4083,10 +4100,17 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   }
 
   .hero-poster__speed {
-    --burst-x: 48%;
-    --burst-y: 20%;
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 36%);
   }
+
+  .hero-poster__streak--1 { --top: 4%; --left: 50%; --w: 62%; --h: 12px; --blur: 3px; --dur: 0.8s; }
+  .hero-poster__streak--2 { --top: 12%; --left: 12%; --w: 68%; --h: 9px; --blur: 2.5px; --dur: 0.9s; --delay: 0.02s; }
+  .hero-poster__streak--3 { --top: 20%; --left: 65%; --w: 52%; --h: 16px; --blur: 4px; --dur: 0.78s; }
+  .hero-poster__streak--4 { --top: 26%; --left: 30%; --w: 60%; --h: 11px; --blur: 3px; --dur: 0.88s; --delay: 0.04s; }
+  .hero-poster__streak--5 { --top: 8%; --left: 112%; --w: 55%; --h: 13px; --blur: 3px; --dur: 0.9s; --delay: 0.18s; }
+  .hero-poster__streak--6 { --top: 25%; --left: 126%; --w: 60%; --h: 10px; --blur: 2.5px; --dur: 1s; --delay: 0.28s; }
+  .hero-poster__streak--7,
+  .hero-poster__streak--8 { display: none; }
 
   .hero-poster__sakura-branch {
     top: -10%;
