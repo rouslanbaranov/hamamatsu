@@ -112,7 +112,7 @@ open http://127.0.0.1:8765/tools/og.html
 - **Palette, type, layout:** `assets/css/styles.css`.
 - **Player behaviour:** `assets/js/main.js`.
 - **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-portrait-black-full.png` with a `hero-portrait-black-full.webp` source and no crop; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
-- **Film:** `assets/video/summer-avenue-film.mp4`, with `assets/img/film-poster.jpg`.
+- **Film:** `assets/video/summer-avenue-film-30s.mp4`, with `assets/img/film-poster.jpg`.
 - **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
 - **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
 
