@@ -2340,7 +2340,7 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   background: var(--yellow);
   color: var(--ink);
   border-top: 1.5px solid var(--ink);
-  padding: clamp(78px, 10vw, 140px) 0;
+  padding: clamp(78px, 10vw, 140px) 0 clamp(28px, 4vw, 52px);
 }
 
 .outro::before {
@@ -2438,90 +2438,52 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   flex: none;
 }
 
-/* ------------------------------------------------------------
-   SOCIAL BAND
-   Two monochrome link banners between the yellow outro and the
-   footer. The row is centred at every breakpoint.
-   ------------------------------------------------------------ */
+/* --- social links: quiet row inside the yellow outro --------------- */
 
-.social-band {
-  padding: clamp(20px, 2.6vw, 30px) 0;
-  background: var(--cream);
-  color: var(--ink);
-  border-top: 1.5px solid var(--ink);
-}
-
-.social-band__inner {
+.outro__social {
+  position: relative;
+  z-index: 1;
   display: flex;
-  justify-content: center;
-}
-
-.social-band__links {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(10px, 1.4vw, 16px);
-  width: min(100%, 820px);
-  margin-inline: auto;
-}
-
-.social-band__link {
-  display: inline-flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  min-width: 0;
-  min-height: 64px;
-  padding: 16px clamp(18px, 2.4vw, 30px);
-  border: 1.5px solid var(--ink);
-  border-radius: 999px;
+  gap: clamp(16px, 2.2vw, 28px);
+  margin-top: clamp(24px, 2.4vw, 32px);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: clamp(13px, 1.1vw, 14px);
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.2;
   letter-spacing: -0.005em;
   white-space: nowrap;
-  transition:
-    background-color 0.22s var(--ease),
-    color 0.22s var(--ease);
 }
 
-.social-band__link:hover {
-  background: var(--ink);
-  color: var(--cream);
+.social-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
 }
 
-.social-band__link:focus-visible {
+.social-link:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
-.social-band__icon {
-  width: 24px;
-  height: 24px;
+.social-icon {
+  width: clamp(18px, 1.4vw, 20px);
+  height: clamp(18px, 1.4vw, 20px);
   flex: none;
   fill: currentColor;
-}
-
-@media (max-width: 600px) {
-  .social-band { padding: 18px 0; }
-
-  .social-band__links {
-    grid-template-columns: minmax(0, 1fr);
-    width: min(100%, 420px);
-    gap: 10px;
-  }
-
-  .social-band__link {
-    min-height: 56px;
-    padding: 13px 20px;
-    font-size: 13px;
-  }
-
-  .social-band__icon {
-    width: 22px;
-    height: 22px;
-  }
 }
 
 .footer {
@@ -3186,7 +3148,7 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
   }
   .credits dt { margin: 0; }
 
-  .outro { padding: 70px 0; }
+  .outro { padding: 70px 0 28px; }
   .outro__buttons { gap: 9px; margin-bottom: 24px; }
   .outro__meta { font-size: 6.5px; }
 
@@ -4108,50 +4070,12 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   border-color: var(--red);
 }
 
-.hero-poster__soundcloud {
-  display: inline-flex;
+.hero-poster__social {
+  display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 8px;
-  flex: none;
-  max-width: 100%;
-  margin-left: auto;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  color: var(--ink);
-  text-decoration: none;
-  transition: color 0.2s var(--ease);
-}
-
-.hero-poster__soundcloud:hover {
-  color: var(--red);
-}
-
-.hero-poster__soundcloud:hover .soundcloud-label {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.hero-poster__soundcloud:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
-}
-
-.soundcloud-icon {
-  width: 26px;
-  height: 26px;
-  flex: none;
-  color: #ff5500;
-  fill: currentColor;
-}
-
-.soundcloud-label {
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  gap: clamp(14px, 1.6vw, 22px);
+  margin-right: auto;
 }
 
 .hero-poster__foot {
@@ -4490,7 +4414,17 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   }
   .hero-poster__lede { margin-top: 12px; font-size: 0.95rem; max-width: 34ch; }
   .hero-poster__meta { margin-top: 9px; font-size: 9px; }
-  .hero-poster__foot { display: none; }
+  .hero-poster__foot {
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-bottom: max(15px, env(safe-area-inset-bottom));
+  }
+
+  .hero-poster__scroll,
+  .hero-poster__edition { display: none; }
+
+  .hero-poster__social { margin-right: 0; }
+
   .hero-poster__blue { width: 7px; }
   .hero-poster__dots { width: 55%; height: 60%; }
 }
@@ -4516,6 +4450,11 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 
 @media (max-width: 380px) {
   .hero-poster__lede { font-size: 0.9rem; }
+
+  .hero-poster__social,
+  .outro__social { gap: 8px; }
+
+  .social-link { font-size: 12.5px; }
 }
 
 @media (max-width: 700px) {

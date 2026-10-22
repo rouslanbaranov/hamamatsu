@@ -48,7 +48,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="/hamamatsu/assets/img/hero-portrait-black-full.webp" type="image/webp">
-  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=social-30">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=social-trio-33">
   <script>
     document.documentElement.classList.add('js');
     // Safety net: if the app script fails or is blocked, reveal the content anyway.
@@ -104,6 +104,14 @@
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
     <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></symbol>
     <symbol id="icon-soundcloud" viewBox="0 0 24 24"><path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/></symbol>
+    <!-- Monochrome RB mark redrawn from the rbaranov.ch favicon. -->
+    <defs>
+      <mask id="rbaranov-rb-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+        <rect width="64" height="64" fill="#fff"/>
+        <text x="32" y="42" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#000">RB</text>
+      </mask>
+    </defs>
+    <symbol id="icon-rbaranov" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="currentColor" mask="url(#rbaranov-rb-cutout)"/></symbol>
   </svg>
 
   <header class="site-header" id="site-header">
@@ -238,20 +246,27 @@
             Watch the film
             <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
           </a>
-          <a
-            class="hero-poster__soundcloud"
-            href="https://soundcloud.com/rouslan-baranov/sets/summer-avenue"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Listen to Summer Avenue on SoundCloud in a new tab"
-          >
-            <svg class="soundcloud-icon" aria-hidden="true" focusable="false"><use href="#icon-soundcloud"/></svg>
-            <span class="soundcloud-label">Listen on SoundCloud</span>
-          </a>
         </div>
       </div>
 
       <div class="container hero-poster__foot">
+        <nav class="hero-poster__social" aria-label="Social and portfolio links">
+          <a class="social-link" href="https://www.linkedin.com/in/rbaranov/" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg>
+            <span>LinkedIn</span>
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a class="social-link" href="https://soundcloud.com/rouslan-baranov" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-soundcloud"/></svg>
+            <span>SoundCloud</span>
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a class="social-link" href="https://rbaranov.ch/" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-rbaranov"/></svg>
+            <span>Portfolio</span>
+            <span class="sr-only"> (rbaranov.ch; opens in a new tab)</span>
+          </a>
+        </nav>
         <a class="hero-poster__scroll" href="#record"><span class="hero-poster__scroll-line" aria-hidden="true"></span>Scroll to the record</a>
         <p class="hero-poster__edition">FIRST EDITION · 2026</p>
       </div>
@@ -529,25 +544,25 @@
           </div>
         </div>
       </div>
-    </section>
-  </main>
-
-  <nav class="social-band" aria-label="Social links">
-    <div class="container social-band__inner">
-      <div class="social-band__links">
-        <a class="social-band__link" href="https://www.linkedin.com/in/rbaranov/" target="_blank" rel="noopener noreferrer">
-          <svg class="social-band__icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg>
+      <nav class="container outro__social" aria-label="Social and portfolio links at the end of the page">
+        <a class="social-link" href="https://www.linkedin.com/in/rbaranov/" target="_blank" rel="noopener noreferrer">
+          <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg>
           <span>LinkedIn</span>
           <span class="sr-only"> (opens in a new tab)</span>
         </a>
-        <a class="social-band__link" href="https://soundcloud.com/rouslan-baranov" target="_blank" rel="noopener noreferrer">
-          <svg class="social-band__icon" aria-hidden="true" focusable="false"><use href="#icon-soundcloud"/></svg>
+        <a class="social-link" href="https://soundcloud.com/rouslan-baranov" target="_blank" rel="noopener noreferrer">
+          <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-soundcloud"/></svg>
           <span>SoundCloud</span>
           <span class="sr-only"> (opens in a new tab)</span>
         </a>
-      </div>
-    </div>
-  </nav>
+        <a class="social-link" href="https://rbaranov.ch/" target="_blank" rel="noopener noreferrer">
+          <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-rbaranov"/></svg>
+          <span>Portfolio</span>
+          <span class="sr-only"> (rbaranov.ch; opens in a new tab)</span>
+        </a>
+      </nav>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="container footer__inner">
