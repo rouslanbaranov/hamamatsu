@@ -105,6 +105,12 @@ To preview the social card:
 open http://127.0.0.1:8765/tools/og.html
 ```
 
+### Social preview
+
+The head advertises the 30-second vertical film in `og:video` (720×1280, H.264/AAC, fast-start MP4), so clients that support Open Graph video can show a playable vertical preview instead of a static card. The 1200×630 image remains the fallback for X, LinkedIn, WhatsApp, and older clients; Instagram does not unfurl links in posts, and X needs a whitelisted player card or a native upload.
+
+Previews are cached per URL. After changing the tags, refresh Telegram's card by sending the link to [@WebpageBot](https://t.me/webpagebot); Facebook has the Sharing Debugger.
+
 ## Editing content
 
 - **Track list:** the 11 `.track` elements in `index.html`. Each button carries `data-src` and `data-duration`; the Japanese title is `.track__ja`, the English title is `.track__en`, and the romanization is `.track__romaji`. Keep the JSON-LD block and durations in sync.
@@ -114,7 +120,7 @@ open http://127.0.0.1:8765/tools/og.html
 - **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-portrait-black-full.png` with a `hero-portrait-black-full.webp` source and no crop; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
 - **Film:** `assets/video/summer-avenue-film-30s.mp4`, with `assets/img/film-poster.jpg`.
 - **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
-- **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
+- **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image and video URLs, sitemap, and robots sitemap line.
 
 ## Deployment
 
