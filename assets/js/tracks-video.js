@@ -1,5 +1,5 @@
 /* Background film for the tracklist: loads after the page + hero entrance,
-   waits for a complete download, then follows audio playback + visibility. */
+   waits for a complete download, then follows audio playback. */
 (() => {
   const section = document.querySelector('.tracks');
   const stage = section?.querySelector('.tracks__stage');
@@ -21,13 +21,15 @@
   video.loop = true;
 
   const isPlaying = () => document.body.classList.contains('is-playing');
-  const shouldPlay = () => ready && inView && isPlaying() && !document.hidden;
+  const isActive = () => ready && isPlaying() && !document.hidden;
 
   function sync() {
-    const next = shouldPlay();
-    active = next;
-    section.classList.toggle('is-video-active', next);
-    if (next) {
+    const next = isActive();
+    if (next !== active) {
+      active = next;
+      section.classList.toggle('is-video-active', next);
+    }
+    if (next && inView) {
       if (video.paused) video.play().catch(() => {});
     } else if (!video.paused) {
       video.pause();
