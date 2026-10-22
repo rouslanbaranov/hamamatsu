@@ -1748,6 +1748,14 @@ body.is-playing .vinyl { animation-play-state: running; }
   text-transform: none;
 }
 
+.track__end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
 .track__time {
   justify-self: end;
   font-family: var(--font-mono);
@@ -1774,17 +1782,6 @@ body.is-playing .vinyl { animation-play-state: running; }
 .track:focus-within {
   background: #0c0a15;
   color: var(--cream);
-}
-
-.track:hover .track__num,
-.track:focus-within .track__num {
-  opacity: 0;
-}
-
-.track:hover .track__icon,
-.track:focus-within .track__icon {
-  opacity: 1;
-  transform: none;
 }
 
 .track:hover .track__sub,
