@@ -2100,8 +2100,9 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
 .outro__jp {
   margin-top: clamp(20px, 2.6vw, 30px);
   font-family: var(--font-jp-display);
-  font-size: clamp(0.85rem, 1.5vw, 1.15rem);
+  font-size: clamp(1.25rem, 2.2vw, 2.35rem);
   letter-spacing: 0.13em;
+  color: var(--red);
 }
 
 .outro__actions {
@@ -2816,7 +2817,7 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
   .outro { padding: 70px 0 54px; }
   .outro__title { font-size: clamp(3rem, 15.5vw, 6rem); }
   .outro__title > span:last-child { margin-left: 3vw; }
-  .outro__jp { margin-top: 20px; font-size: 0.85rem; }
+  .outro__jp { margin-top: 20px; font-size: clamp(1.15rem, 4.6vw, 1.5rem); }
   .outro__buttons { gap: 9px; margin-bottom: 24px; }
   .outro__lede { font-size: 0.95rem; }
   .outro__meta { font-size: 6.5px; }
