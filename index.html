@@ -575,12 +575,15 @@
         </button>
         <input class="player__volume-range" id="player-volume" type="range" min="0" max="1" step="0.01" value="0.85" aria-label="Volume">
       </div>
+      <button class="player__btn player__close" type="button" data-player-close aria-label="Stop and close player">
+        <svg class="icon-close" aria-hidden="true"><use href="#icon-close"/></svg>
+      </button>
     </div>
   </div>
 
   <div class="toast" role="status" aria-live="polite" data-toast></div>
   <p class="sr-only" aria-live="polite" data-player-status></p>
 
-  <script src="/hamamatsu/assets/js/main.js?v=30s" defer></script>
+  <script src="/hamamatsu/assets/js/main.js?v=player-close" defer></script>
 </body>
 </html>

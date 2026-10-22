@@ -138,7 +138,8 @@ h1, h2, h3 { text-wrap: balance; }
 .icon-mute,
 .icon-share,
 .icon-arrow,
-.icon-down { width: 1em; height: 1em; fill: currentColor; flex: none; }
+.icon-down,
+.icon-close { width: 1em; height: 1em; fill: currentColor; flex: none; }
 
 .icon-pause { display: none; }
 .icon-mute { display: none; }
@@ -2372,6 +2373,8 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   background: rgba(243, 234, 216, 0.1);
   color: var(--orange);
 }
+
+.player__close { margin-left: auto; }
 
 .player__play {
   display: grid;

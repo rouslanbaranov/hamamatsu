@@ -283,6 +283,7 @@
   const muteButton = $('[data-player-mute]');
   const playButtons = $$('[data-play-album]');
   const playerToggle = $('[data-player-toggle]');
+  const closeButton = $('[data-player-close]');
   const trackNodes = $$('.track');
 
   const tracks = trackNodes.map((node, index) => {
@@ -320,6 +321,7 @@
 
   let film = null;
   let playToken = 0;
+  let playerTrigger = null;
 
   if (audio && player && tracks.length) {
     const savedVolume = Number(storage.get('sa-volume', '0.85'));
@@ -417,11 +419,42 @@
 
     function revealPlayer() {
       if (state.visible) return;
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && !player.contains(active)) playerTrigger = active;
       state.visible = true;
       player.classList.add('is-visible');
       player.removeAttribute('aria-hidden');
       if ('inert' in player) player.inert = false;
       body.classList.add('has-player');
+    }
+
+    function closePlayer() {
+      playToken += 1;
+      audio.pause();
+      state.loading = false;
+      state.seekDragging = false;
+      player.classList.remove('is-loading');
+      setPlaying(false);
+      setActive(-1);
+      resetProgressUI();
+      if (playerStatus) playerStatus.textContent = '';
+      if (currentEl) currentEl.textContent = '0:00';
+      if (totalEl) totalEl.textContent = '0:00';
+
+      audio.removeAttribute('src');
+      audio.load();
+
+      state.visible = false;
+      player.classList.remove('is-visible');
+      player.setAttribute('aria-hidden', 'true');
+      if ('inert' in player) player.inert = true;
+      body.classList.remove('has-player');
+
+      const target = playerTrigger && document.contains(playerTrigger)
+        ? playerTrigger
+        : document.querySelector('.site-header [data-play-album]');
+      playerTrigger = null;
+      if (target && typeof target.focus === 'function') target.focus({ preventScroll: true });
     }
 
     function resetProgressUI() {
@@ -597,6 +630,7 @@
     const nextButton = $('[data-player-next]');
     if (prevButton) prevButton.addEventListener('click', previousTrack);
     if (nextButton) nextButton.addEventListener('click', nextTrack);
+    if (closeButton) closeButton.addEventListener('click', closePlayer);
 
     playButtons.forEach((button) => button.addEventListener('click', togglePlayback));
 
