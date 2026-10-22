@@ -24,6 +24,7 @@
   const objectUrls = [];
   const phoneQuery = window.matchMedia('(max-width: 699px) and (orientation: portrait)');
   let videoRow = null;
+  let restoreTimer = 0;
 
   videos.forEach((video) => {
     video.muted = true;
@@ -131,6 +132,8 @@
   }
 
   function restoreVideo() {
+    window.clearTimeout(restoreTimer);
+    restoreTimer = 0;
     if (!videoRow) return;
     const row = videoRow;
     videoRow = null;
@@ -138,6 +141,15 @@
       stage.insertBefore(wrapper, stage.querySelector('.tracks__list'));
     }
     row.remove();
+  }
+
+  function scheduleRestore() {
+    if (!videoRow) return;
+    window.clearTimeout(restoreTimer);
+    restoreTimer = window.setTimeout(() => {
+      restoreTimer = 0;
+      restoreVideo();
+    }, 700);
   }
 
   function placeVideo() {
@@ -169,18 +181,30 @@
   }
 
   function syncPosition() {
-    if (active) placeVideo();
-    else restoreVideo();
+    if (active) {
+      window.clearTimeout(restoreTimer);
+      restoreTimer = 0;
+      placeVideo();
+    } else if (videoRow) {
+      scheduleRestore();
+    }
   }
 
   function sync() {
     const next = shouldActivate();
     if (next === active) return;
     active = next;
-    section.classList.toggle('is-video-active', next);
-    if (next) startPlaylist();
-    else resetPlaylist();
-    syncPosition();
+    if (next) {
+      // Place the empty row first, then start the height/fade transition.
+      syncPosition();
+      void wrapper.offsetHeight;
+      section.classList.add('is-video-active');
+      startPlaylist();
+    } else {
+      section.classList.remove('is-video-active');
+      resetPlaylist();
+      syncPosition();
+    }
   }
 
   function loadVideo(video, src) {
