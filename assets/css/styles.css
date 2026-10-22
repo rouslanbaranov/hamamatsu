@@ -1514,7 +1514,7 @@ body.is-playing .vinyl { animation-play-state: running; }
 
   .tracks.is-video-active .tracks__labels,
   .tracks.is-video-active .track__btn {
-    grid-template-columns: 52px minmax(0, 1fr) 64px;
+    grid-template-columns: 52px minmax(0, 1fr) 84px;
     gap: 12px;
   }
 }
@@ -1621,7 +1621,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   }
 
   .tracks.is-video-active .track__btn {
-    grid-template-columns: 44px minmax(0, 1fr) 56px;
+    grid-template-columns: 44px minmax(0, 1fr) 84px;
     gap: 10px;
     min-height: 0;
     padding: 10px 16px;
@@ -1705,7 +1705,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
+  width: 44px;
   font-size: 13px;
   opacity: 0;
   transform: translateX(-5px);
@@ -1714,8 +1714,8 @@ body.is-playing .vinyl { animation-play-state: running; }
 
 .track__icon .icon-cassette {
   display: none;
-  width: 22px;
-  height: 22px;
+  width: 44px;
+  height: 44px;
 }
 
 .cassette__reel {
