@@ -3793,12 +3793,14 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   filter: blur(7px) saturate(1.3) brightness(1.1) sepia(0.18) hue-rotate(322deg);
   transform: rotate(1deg);
   transform-origin: top right;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 22%, rgba(0, 0, 0, 0.78) 55%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 22%, rgba(0, 0, 0, 0.78) 55%, #000 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 10%, rgba(0, 0, 0, 0.08) 24%, rgba(0, 0, 0, 0.5) 50%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, transparent 10%, rgba(0, 0, 0, 0.08) 24%, rgba(0, 0, 0, 0.5) 50%, #000 100%);
 }
 
+/* Cover the full texture box so the photo never leaves a hard inner edge
+   where its contained image starts; the mask supplies the soft entry. */
 .hero-poster__sakura-branch img {
-  object-fit: contain;
+  object-fit: cover;
   object-position: 100% 0;
 }
 
