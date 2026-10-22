@@ -3745,78 +3745,44 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   justify-self: start;
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
   max-width: 100%;
-  padding: 12px 16px;
-  background: var(--cream);
-  border: 1.5px solid var(--ink);
-  box-shadow: 5px 5px 0 var(--red);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
   color: var(--ink);
-  transform: rotate(-0.6deg);
-  transition: background 0.2s var(--ease), color 0.2s var(--ease),
-    border-color 0.2s var(--ease), box-shadow 0.2s var(--ease),
-    transform 0.2s var(--ease);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
 }
 
 .hero-poster__soundcloud:hover {
-  background: var(--ink);
-  border-color: var(--orange);
-  color: var(--cream);
-  box-shadow: 5px 5px 0 var(--orange);
-  transform: rotate(-0.6deg) translateY(-2px);
+  color: var(--red);
+}
+
+.hero-poster__soundcloud:hover .soundcloud-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .hero-poster__soundcloud:focus-visible {
   outline: 2px solid var(--ink);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 .soundcloud-icon {
-  width: 36px;
-  height: 36px;
+  width: 26px;
+  height: 26px;
   flex: none;
   color: #ff5500;
 }
 
-.soundcloud-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-
-.soundcloud-eyebrow {
+.soundcloud-label {
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 8.5px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(18, 16, 31, 0.62);
-}
-
-.soundcloud-title {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-
-.soundcloud-arrow {
-  flex: none;
-  margin-left: 2px;
-  color: var(--red);
-  font-size: 15px;
-  line-height: 1;
-  transition: color 0.2s var(--ease);
-}
-
-.hero-poster__soundcloud:hover .soundcloud-eyebrow {
-  color: rgba(243, 234, 216, 0.62);
-}
-
-.hero-poster__soundcloud:hover .soundcloud-arrow {
-  color: var(--orange);
 }
 
 .hero-poster__foot {
@@ -4162,25 +4128,10 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   .hero-poster__dots { width: 55%; height: 60%; }
 }
 
-@media (max-width: 420px) {
-  .hero-poster__soundcloud {
-    width: 100%;
-    align-items: flex-start;
-  }
-
-  .soundcloud-title {
-    white-space: normal;
-  }
-}
-
 @media (min-width: 901px) and (max-height: 760px) {
   .hero-poster__actions {
     margin-top: -16px;
     padding-bottom: 8px;
-  }
-
-  .hero-poster__soundcloud {
-    margin-top: -24px;
   }
 }
 
