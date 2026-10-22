@@ -1683,7 +1683,9 @@ body.is-playing .vinyl { animation-play-state: running; }
 
 .track__index {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   min-height: 26px;
 }
 
@@ -1698,8 +1700,8 @@ body.is-playing .vinyl { animation-play-state: running; }
 }
 
 .track__icon {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  flex: none;
   display: flex;
   align-items: center;
   font-size: 13px;
@@ -1801,7 +1803,10 @@ body.is-playing .vinyl { animation-play-state: running; }
   scroll-margin-top: 24px;
 }
 
-.track.is-active .track__num { opacity: 0; }
+.track.is-active .track__num {
+  color: var(--ink);
+  -webkit-text-stroke: 0;
+}
 .track.is-active .track__icon { opacity: 1; transform: none; }
 .track.is-active .track__sub { color: rgba(18, 16, 31, 0.82); }
 .track.is-active .track__time { color: rgba(18, 16, 31, 0.82); }
