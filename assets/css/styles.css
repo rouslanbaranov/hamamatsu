@@ -2438,6 +2438,92 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   flex: none;
 }
 
+/* ------------------------------------------------------------
+   SOCIAL BAND
+   Two monochrome link banners between the yellow outro and the
+   footer. The row is centred at every breakpoint.
+   ------------------------------------------------------------ */
+
+.social-band {
+  padding: clamp(20px, 2.6vw, 30px) 0;
+  background: var(--cream);
+  color: var(--ink);
+  border-top: 1.5px solid var(--ink);
+}
+
+.social-band__inner {
+  display: flex;
+  justify-content: center;
+}
+
+.social-band__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 16px);
+  width: min(100%, 820px);
+  margin-inline: auto;
+}
+
+.social-band__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 64px;
+  padding: 16px clamp(18px, 2.4vw, 30px);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition:
+    background-color 0.22s var(--ease),
+    color 0.22s var(--ease);
+}
+
+.social-band__link:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.social-band__link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.social-band__icon {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  fill: currentColor;
+}
+
+@media (max-width: 600px) {
+  .social-band { padding: 18px 0; }
+
+  .social-band__links {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100%, 420px);
+    gap: 10px;
+  }
+
+  .social-band__link {
+    min-height: 56px;
+    padding: 13px 20px;
+    font-size: 13px;
+  }
+
+  .social-band__icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 .footer {
   background: var(--ink);
   color: var(--cream);
@@ -4057,6 +4143,7 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   height: 26px;
   flex: none;
   color: #ff5500;
+  fill: currentColor;
 }
 
 .soundcloud-label {
