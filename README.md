@@ -56,7 +56,7 @@ The palette is documented in `assets/css/styles.css`:
 - **Ink + cream** — paper and night surfaces, primary text.
 - **Sunset orange** — the album's dusk and the primary playback action.
 - **Editorial red** — the hero marker, active indicators, the interlude seal, the quote mark.
-- **Paper yellow** — the hero field, printed labels, tape, and the secondary **Play all** action.
+- **Paper yellow** — the hero field, printed labels, and tape.
 - **Cobalt blue** — the film chapter, the hero's left edge, and the interlude's offset shadow.
 
 ![Summer Avenue — the interlude](docs/interlude-desktop.jpg)
