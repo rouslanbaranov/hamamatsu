@@ -3,6 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>html.hero-entrance-pending .hero-poster__portrait picture { visibility: hidden; }</style>
+  <script>
+    // Decide before the first paint; keep the image available when motion is disabled.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !navigator.connection?.saveData) {
+      document.documentElement.classList.add('hero-entrance-pending');
+      window.__heroEntranceTimer = setTimeout(function () {
+        if (window.__heroEntranceAbort) window.__heroEntranceAbort(new Error('Loading timeout'));
+        document.documentElement.classList.remove('hero-entrance-pending');
+      }, 15000);
+    }
+  </script>
+
   <title>Summer Avenue — Project Hamamatsu</title>
   <meta name="description" content="Summer Avenue is the 2026 album from Project Hamamatsu: eleven city-pop songs in Japanese and English, made for the long way home. Listen to the full record.">
   <meta name="author" content="Project Hamamatsu">
@@ -585,6 +597,6 @@
   <p class="sr-only" aria-live="polite" data-player-status></p>
 
   <script src="/hamamatsu/assets/js/main.js?v=player-close" defer></script>
-  <script src="/hamamatsu/assets/js/hero-entrance.js?v=1" defer></script>
+  <script src="/hamamatsu/assets/js/hero-entrance.js?v=2" defer></script>
 </body>
 </html>
