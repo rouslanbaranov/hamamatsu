@@ -632,7 +632,48 @@
     if (nextButton) nextButton.addEventListener('click', nextTrack);
     if (closeButton) closeButton.addEventListener('click', closePlayer);
 
-    playButtons.forEach((button) => button.addEventListener('click', togglePlayback));
+    let heroScrollToken = 0;
+
+    function scrollToTracklist() {
+      const track = state.index >= 0 && tracks[state.index] ? tracks[state.index].node : document.querySelector('.track.is-active');
+      const videoRow = document.querySelector('.tracks__video-row');
+      const anchor = videoRow || track;
+      if (!anchor) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      anchor.scrollIntoView({
+        behavior: reduce ? 'auto' : 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+    }
+
+    function scheduleTracklistScroll() {
+      const token = ++heroScrollToken;
+      window.setTimeout(() => {
+        if (token !== heroScrollToken) return;
+        scrollToTracklist();
+      }, 120);
+      window.setTimeout(() => {
+        if (token === heroScrollToken) heroScrollToken = 0;
+      }, 10000);
+    }
+
+    document.addEventListener('tracks:video-positioned', () => {
+      if (!heroScrollToken) return;
+      window.setTimeout(() => {
+        if (heroScrollToken) scrollToTracklist();
+      }, 40);
+    });
+
+    playButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const wasPlaying = state.playing;
+        togglePlayback();
+        if (!wasPlaying && button.hasAttribute('data-scroll-tracklist')) {
+          scheduleTracklistScroll();
+        }
+      });
+    });
 
     trackNodes.forEach((node, index) => {
       const button = $('.track__btn', node);

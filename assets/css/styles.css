@@ -1646,6 +1646,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   padding: 0;
   border: 0;
   list-style: none;
+  scroll-margin-top: 24px;
 }
 
 .tracklist {
@@ -1797,6 +1798,7 @@ body.is-playing .vinyl { animation-play-state: running; }
 .track.is-active {
   background: var(--orange);
   color: var(--ink);
+  scroll-margin-top: 24px;
 }
 
 .track.is-active .track__num { opacity: 0; }

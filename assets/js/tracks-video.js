@@ -177,7 +177,10 @@
       track.parentElement.insertBefore(row, track);
       moved = true;
     }
-    if (moved && phase === 'playing') playCurrent();
+    if (moved) {
+      section.dispatchEvent(new CustomEvent('tracks:video-positioned', { bubbles: true }));
+      if (phase === 'playing') playCurrent();
+    }
   }
 
   function syncPosition() {
