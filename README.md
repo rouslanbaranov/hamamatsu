@@ -100,7 +100,7 @@ npx http-server -p 8765 -c-1 .
 
 ### Social preview
 
-The card is a 1200×630 capture of the homepage hero with the header hidden and the left blue edge removed, `assets/img/og-summer-avenue-home-2026.jpg`, used for both `og:image` and `twitter:image`. Re-capture it at 1200×630 with reduced motion enabled when the hero changes. `tools/og.html` is the earlier hand-built card, kept for reference.
+The card is a 1200×628 capture of the homepage hero with the header hidden, the left blue edge removed, and the hero's bottom border trimmed, `assets/img/og-summer-avenue-home-2026.jpg`, used for both `og:image` and `twitter:image`. Re-capture it at 1200×630 with reduced motion enabled when the hero changes. `tools/og.html` is the earlier hand-built card, kept for reference.
 
 Previews are cached per URL. After replacing the image, re-scrape with the Facebook Sharing Debugger or LinkedIn Post Inspector.
 
