@@ -1,5 +1,5 @@
 /* Background film for the tracklist: two clips, a 5s freeze on the last
-   frame, then a fade through black into the next clip. */
+   frame of the second clip, then a fade through black into the next clip. */
 (() => {
   const section = document.querySelector('.tracks');
   const stage = section?.querySelector('.tracks__stage');
@@ -11,7 +11,7 @@
     '/hamamatsu/assets/video/tracklist-katya-tokyo-1080-left.mp4',
     '/hamamatsu/assets/video/tracklist-polina-tower-1080.mp4'
   ];
-  const HOLD_MS = 5000;
+  const HOLD_MS_BY_VIDEO = [0, 5000];
   const FADE_MS = 700;
 
   let ready = false;
@@ -87,14 +87,18 @@
     playCurrent();
   }
 
-  function beginHold() {
+  function beginHold(delay) {
     if (!active || phase !== 'playing') return;
+    if (delay <= 0) {
+      beginFade();
+      return;
+    }
     phase = 'hold';
-    holdTimer = window.setTimeout(beginFade, HOLD_MS);
+    holdTimer = window.setTimeout(beginFade, delay);
   }
 
   function beginFade() {
-    if (!active || phase !== 'hold') return;
+    if (!active || (phase !== 'hold' && phase !== 'playing')) return;
     phase = 'fade';
     wrapper.classList.add('is-black');
     fadeTimer = window.setTimeout(showNext, FADE_MS);
@@ -130,7 +134,7 @@
   videos.forEach((video, index) => {
     video.addEventListener('ended', () => {
       if (!active || index !== current || phase !== 'playing') return;
-      beginHold();
+      beginHold(HOLD_MS_BY_VIDEO[index] ?? 5000);
     });
   });
 
