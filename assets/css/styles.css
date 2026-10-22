@@ -2399,9 +2399,11 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
 }
 
 .outro__lede {
-  margin-bottom: 24px;
-  font-size: clamp(1rem, 1.2vw, 1.1rem);
-  line-height: 1.55;
+  margin-bottom: 28px;
+  font-size: clamp(1.8rem, 3.2vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
 }
 
 .outro__buttons {
@@ -3104,7 +3106,7 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
 
   .outro { padding: 70px 0 54px; }
   .outro__buttons { gap: 9px; margin-bottom: 24px; }
-  .outro__lede { font-size: 0.95rem; }
+  .outro__lede { font-size: clamp(1.8rem, 7.5vw, 2.7rem); }
   .outro__meta { font-size: 6.5px; }
 
   .footer { padding: 42px 0 26px; }
