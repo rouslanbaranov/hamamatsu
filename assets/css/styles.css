@@ -1408,7 +1408,9 @@ body.is-playing .vinyl { animation-play-state: running; }
   z-index: 2;
   width: 100%;
   margin-left: 0;
-  transition: width 0.8s var(--ease), margin-left 0.8s var(--ease);
+  margin-right: 0;
+  transition: width 0.8s var(--ease), margin-left 0.8s var(--ease),
+    margin-right 0.8s var(--ease);
 }
 
 .tracks__video {
@@ -1452,8 +1454,10 @@ body.is-playing .vinyl { animation-play-state: running; }
 }
 
 .tracks.is-video-active .tracks__list {
-  width: 40%;
-  margin-left: 60%;
+  --track-list-w: clamp(320px, 34vw, 620px);
+  width: var(--track-list-w);
+  margin-left: calc(50% + 50vw - var(--track-list-w));
+  margin-right: calc(50% - 50vw);
 }
 
 .tracks.is-video-active .tracks__video {
@@ -1527,6 +1531,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   .tracks.is-video-active .tracks__list {
     width: 100%;
     margin-left: 0;
+    margin-right: 0;
   }
 }
 
