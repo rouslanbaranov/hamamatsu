@@ -1718,6 +1718,10 @@ body.is-playing .vinyl { animation-play-state: running; }
   height: 44px;
 }
 
+.track__icon .icon-cassette * {
+  stroke-width: 0.9;
+}
+
 .cassette__reel {
   transform-box: fill-box;
   transform-origin: center;
