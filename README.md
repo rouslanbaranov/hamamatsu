@@ -107,9 +107,9 @@ open http://127.0.0.1:8765/tools/og.html
 
 ### Social preview
 
-The head advertises the 30-second vertical film in `og:video` (720×1280, H.264/AAC, fast-start MP4), so clients that support Open Graph video can show a playable vertical preview instead of a static card. The 1200×630 image remains the fallback for X, LinkedIn, WhatsApp, and older clients; Instagram does not unfurl links in posts, and X needs a whitelisted player card or a native upload.
+The head advertises the 30-second vertical film in `og:video` (720×1280, H.264/AAC, fast-start MP4), so Facebook can show a playable vertical preview instead of a static card. The 1200×630 image remains the fallback everywhere else: WhatsApp ignores `og:video`, LinkedIn does not play third-party video in link previews, and X needs a whitelisted player card. Instagram does not unfurl links in posts. A Reel-style player on those platforms needs a native video upload, not a link.
 
-Previews are cached per URL. After changing the tags, refresh Telegram's card by sending the link to [@WebpageBot](https://t.me/webpagebot); Facebook has the Sharing Debugger.
+Previews are cached per URL. After changing the tags, re-scrape with the Facebook Sharing Debugger or LinkedIn Post Inspector. X has no refresh tool; test with a fresh query string.
 
 ## Editing content
 
