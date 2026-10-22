@@ -2385,35 +2385,12 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   width: 100%;
   height: auto;
   border-radius: 3.4% / 5.8%;
+  box-shadow: 0 2px 5px rgba(42, 27, 8, 0.24), 0 0 22px 5px rgba(42, 27, 8, 0.2);
 }
 
-.outro__cassette-shadow {
-  position: absolute;
-  z-index: 0;
-  left: 9%;
-  bottom: 6%;
-  width: 88%;
-  height: 28%;
-  background: linear-gradient(170deg, rgba(54, 35, 12, 0.28), rgba(54, 35, 12, 0));
-  clip-path: polygon(0 100%, 100% 100%, 100% 0, 27% 0);
-  transform: translate(9%, -12%) skewX(-28deg);
-  transform-origin: bottom left;
-  filter: blur(12px);
-  pointer-events: none;
-}
-
+.outro__cassette-shadow,
 .outro__cassette-stage::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  left: 2%;
-  bottom: 5%;
-  width: 90%;
-  height: 3%;
-  border-radius: 50%;
-  background: rgba(42, 27, 8, 0.4);
-  filter: blur(5px);
-  pointer-events: none;
+  display: none;
 }
 
 .outro__actions {
