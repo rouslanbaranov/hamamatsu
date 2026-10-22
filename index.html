@@ -48,7 +48,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="/hamamatsu/assets/img/hero-portrait-black-full.webp" type="image/webp">
-  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=tracklist-video-9">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=tracklist-video-10">
   <script>
     document.documentElement.classList.add('js');
     // Safety net: if the app script fails or is blocked, reveal the content anyway.
@@ -342,7 +342,9 @@
 
         <div class="tracks__stage">
           <div class="tracks__video" aria-hidden="true">
-            <video class="tracks__video-el" loop muted playsinline preload="none" disablepictureinpicture></video>
+            <video class="tracks__video-el is-current" muted playsinline preload="none" disablepictureinpicture></video>
+            <video class="tracks__video-el" muted playsinline preload="none" disablepictureinpicture></video>
+            <div class="tracks__video-shade"></div>
           </div>
 
           <div class="tracks__list">
@@ -609,6 +611,6 @@
 
   <script src="/hamamatsu/assets/js/main.js?v=player-close" defer></script>
   <script src="/hamamatsu/assets/js/hero-entrance.js?v=3" defer></script>
-  <script src="/hamamatsu/assets/js/tracks-video.js?v=6" defer></script>
+  <script src="/hamamatsu/assets/js/tracks-video.js?v=7" defer></script>
 </body>
 </html>
