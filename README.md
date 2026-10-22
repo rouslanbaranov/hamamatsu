@@ -98,18 +98,11 @@ npx http-server -p 8765 -c-1 .
 
 > Use a range-capable server for audio testing. Python's built-in `http.server` does not support HTTP Range requests, so **seeking** in the player may fail locally even though it works on GitHub Pages. `http-server` supports ranges.
 
-To preview the social card:
-
-```bash
-# with the server running
-open http://127.0.0.1:8765/tools/og.html
-```
-
 ### Social preview
 
-The head advertises the 30-second vertical film in `og:video` (720×1280, H.264/AAC, fast-start MP4), so Facebook can show a playable vertical preview instead of a static card. The 1200×630 image remains the fallback everywhere else: WhatsApp ignores `og:video`, LinkedIn does not play third-party video in link previews, and X needs a whitelisted player card. Instagram does not unfurl links in posts. A Reel-style player on those platforms needs a native video upload, not a link.
+The card is a 1200×630 capture of the homepage hero, `assets/img/og-summer-avenue-home-2026.jpg`, used for both `og:image` and `twitter:image`. Re-capture it at 1200×630 with reduced motion enabled when the hero changes. `tools/og.html` is the earlier hand-built card, kept for reference.
 
-Previews are cached per URL. After changing the tags, re-scrape with the Facebook Sharing Debugger or LinkedIn Post Inspector. X has no refresh tool; test with a fresh query string.
+Previews are cached per URL. After replacing the image, re-scrape with the Facebook Sharing Debugger or LinkedIn Post Inspector.
 
 ## Editing content
 
@@ -120,7 +113,7 @@ Previews are cached per URL. After changing the tags, re-scrape with the Faceboo
 - **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-portrait-black-full.png` with a `hero-portrait-black-full.webp` source and no crop; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
 - **Film:** `assets/video/summer-avenue-film-30s.mp4`, with `assets/img/film-poster.jpg`.
 - **Streaming / social / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
-- **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image and video URLs, sitemap, and robots sitemap line.
+- **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
 
 ## Deployment
 
