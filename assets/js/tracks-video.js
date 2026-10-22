@@ -1,5 +1,5 @@
-/* Background film for the tracklist: two clips, a 5s freeze on the last
-   frame of the second clip, then a fade through black into the next clip. */
+/* Background film for the tracklist: two clips, fading through black
+   into the next clip. */
 (() => {
   const section = document.querySelector('.tracks');
   const stage = section?.querySelector('.tracks__stage');
@@ -8,10 +8,9 @@
   if (!section || !stage || !wrapper || videos.length < 2) return;
 
   const sources = [
-    '/hamamatsu/assets/video/tracklist-katya-tokyo-1080-left.mp4',
+    '/hamamatsu/assets/video/tracklist-katya-tokyo-1080-left-trimmed.mp4',
     '/hamamatsu/assets/video/tracklist-polina-tower-1080.mp4'
   ];
-  const HOLD_MS_BY_VIDEO = [0, 5000];
   const FADE_MS = 700;
 
   let ready = false;
@@ -19,7 +18,6 @@
   let active = false;
   let current = 0;
   let phase = 'idle';
-  let holdTimer = 0;
   let fadeTimer = 0;
   let fadeInTimer = 0;
   let waitTimer = 0;
@@ -36,10 +34,8 @@
   const shouldActivate = () => ready && isPlaying() && !document.hidden;
 
   function clearTimers() {
-    window.clearTimeout(holdTimer);
     window.clearTimeout(fadeTimer);
     window.clearTimeout(fadeInTimer);
-    holdTimer = 0;
     fadeTimer = 0;
     fadeInTimer = 0;
   }
@@ -87,18 +83,8 @@
     playCurrent();
   }
 
-  function beginHold(delay) {
-    if (!active || phase !== 'playing') return;
-    if (delay <= 0) {
-      beginFade();
-      return;
-    }
-    phase = 'hold';
-    holdTimer = window.setTimeout(beginFade, delay);
-  }
-
   function beginFade() {
-    if (!active || (phase !== 'hold' && phase !== 'playing')) return;
+    if (!active || phase !== 'playing') return;
     phase = 'fade';
     wrapper.classList.add('is-black');
     fadeTimer = window.setTimeout(showNext, FADE_MS);
@@ -134,7 +120,7 @@
   videos.forEach((video, index) => {
     video.addEventListener('ended', () => {
       if (!active || index !== current || phase !== 'playing') return;
-      beginHold(HOLD_MS_BY_VIDEO[index] ?? 5000);
+      beginFade();
     });
   });
 
