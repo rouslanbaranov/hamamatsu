@@ -283,6 +283,7 @@
   const muteButton = $('[data-player-mute]');
   const playButtons = $$('[data-play-album]');
   const playerToggle = $('[data-player-toggle]');
+  const playerInfo = $('.player__info');
   const closeButton = $('[data-player-close]');
   const trackNodes = $$('.track');
 
@@ -674,6 +675,14 @@
         }
       });
     });
+
+    if (playerInfo) {
+      playerInfo.addEventListener('click', (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        scheduleTracklistScroll();
+      });
+    }
 
     trackNodes.forEach((node, index) => {
       const button = $('.track__btn', node);
