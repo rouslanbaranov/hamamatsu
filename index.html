@@ -48,7 +48,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="/hamamatsu/assets/img/hero-portrait-black-full.webp" type="image/webp">
-  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=hero-entrance-1">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=tracklist-video-1">
   <script>
     document.documentElement.classList.add('js');
     // Safety net: if the app script fails or is blocked, reveal the content anyway.
@@ -340,9 +340,15 @@
           </div>
         </header>
 
-        <div class="tracks__labels" aria-hidden="true"><span>No.</span><span>Track / 曲名</span><span>Time</span></div>
+        <div class="tracks__stage">
+          <div class="tracks__video" aria-hidden="true">
+            <video class="tracks__video-el" loop muted playsinline preload="none" disablepictureinpicture></video>
+          </div>
 
-        <ol class="tracklist" data-reveal>
+          <div class="tracks__list">
+            <div class="tracks__labels" aria-hidden="true"><span>No.</span><span>Track / 曲名</span><span>Time</span></div>
+
+            <ol class="tracklist" data-reveal>
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/01-stay-with-me.mp3" data-duration="294" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">01</span><span class="track__icon"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-pause"><use href="#icon-pause"/></svg></span></span>
@@ -433,7 +439,9 @@
           </li>
         </ol>
 
-        <p class="tracks__note">Full album · Japanese / English · 2026 <span>·</span> All songs © Project Hamamatsu</p>
+            <p class="tracks__note">Full album · Japanese / English · 2026 <span>·</span> All songs © Project Hamamatsu</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -600,6 +608,7 @@
   <p class="sr-only" aria-live="polite" data-player-status></p>
 
   <script src="/hamamatsu/assets/js/main.js?v=player-close" defer></script>
-  <script src="/hamamatsu/assets/js/hero-entrance.js?v=2" defer></script>
+  <script src="/hamamatsu/assets/js/hero-entrance.js?v=3" defer></script>
+  <script src="/hamamatsu/assets/js/tracks-video.js?v=1" defer></script>
 </body>
 </html>

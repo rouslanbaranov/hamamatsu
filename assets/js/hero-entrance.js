@@ -2,15 +2,20 @@
 (() => {
  const root=document.documentElement;
  function revealStill(){clearTimeout(window.__heroEntranceTimer);root.classList.remove('hero-entrance-pending');}
+ function signalDone(){
+  if(window.__heroEntranceDone)return;
+  window.__heroEntranceDone=true;
+  window.dispatchEvent(new Event('hero-entrance:done'));
+ }
  const host=document.querySelector('.hero-poster__portrait');
  const still=host?.querySelector('img');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- if(!still || reduced.matches || navigator.connection?.saveData || !root.classList.contains('hero-entrance-pending')) {revealStill();return;}
+ if(!still || reduced.matches || navigator.connection?.saveData || !root.classList.contains('hero-entrance-pending')) {revealStill();signalDone();return;}
  const canvas=document.createElement('canvas');
  canvas.className='hero-entrance';canvas.width=1440;canvas.height=1440;
  canvas.setAttribute('aria-hidden','true');
  const ctx=canvas.getContext('2d');
- if(!ctx){revealStill();return;}
+ if(!ctx){revealStill();signalDone();return;}
  const scratch=document.createElement('canvas');scratch.width=2880;scratch.height=1440;
  const source=scratch.getContext('2d',{willReadFrequently:true});
  const output=ctx.createImageData(1440,1440);
@@ -21,7 +26,7 @@
  function fallback(reason){
   stopped=true;clearTimeout(timer);cancelAnimationFrame(frame);video.pause();
   host.dataset.entrance='fallback';host.dataset.entranceReason=reason?.message || 'Video unavailable';
-  host.classList.remove('hero-entrance-active');canvas.remove();observer.disconnect();revealStill();
+  host.classList.remove('hero-entrance-active');canvas.remove();observer.disconnect();revealStill();signalDone();
  }
  function fit(){const box=still.getBoundingClientRect();const h=Math.min(box.height,box.width*1.5);canvas.style.height=h+'px';canvas.style.width=h+'px';}
  const observer=new ResizeObserver(fit);observer.observe(still);host.append(canvas);fit();
@@ -44,7 +49,8 @@
   if(!video.ended)frame=requestAnimationFrame(draw);
  }
  video.addEventListener('playing',draw,{once:true});
- video.addEventListener('ended',()=>{draw();stopped=true;cancelAnimationFrame(frame);host.dataset.entrance='complete';video.pause();},{once:true});
+ video.addEventListener('canplaythrough',signalDone,{once:true});
+ video.addEventListener('ended',()=>{draw();stopped=true;cancelAnimationFrame(frame);host.dataset.entrance='complete';video.pause();signalDone();},{once:true});
  video.addEventListener('error',()=>fallback(new Error('Video error '+video.error?.code)),{once:true});
  reduced.addEventListener('change',e=>{if(e.matches)fallback(new Error('Reduced motion'));});
  timer=setTimeout(()=>fallback(new Error('Loading timeout')),15000);

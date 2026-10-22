@@ -1399,6 +1399,112 @@ body.is-playing .vinyl { animation-play-state: running; }
   color: rgba(243, 234, 216, 0.62);
 }
 
+.tracks__stage {
+  position: relative;
+}
+
+.tracks__list {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-left: 0;
+  transition: width 0.8s var(--ease), margin-left 0.8s var(--ease);
+}
+
+.tracks__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 35%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ink);
+  border-right: 1px solid rgba(243, 234, 216, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-24px) scale(1.02);
+  transition: opacity 0.5s var(--ease), transform 0.8s var(--ease),
+    visibility 0s linear 0.65s;
+}
+
+.tracks__video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(18, 16, 31, 0.28), transparent 24%, transparent 70%, rgba(18, 16, 31, 0.5)),
+    linear-gradient(90deg, transparent 74%, rgba(18, 16, 31, 0.28));
+}
+
+.tracks__video-el {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.tracks.is-video-active .tracks__list {
+  width: 62%;
+  margin-left: 38%;
+}
+
+.tracks.is-video-active .tracks__video {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.5s 0.1s var(--ease), transform 0.8s var(--ease),
+    visibility 0s;
+}
+
+@media (max-width: 900px) {
+  .tracks__video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    border-right: 0;
+    transform: none;
+    transition: height 0.65s var(--ease), margin-bottom 0.65s var(--ease),
+      opacity 0.45s var(--ease), visibility 0s linear 0.65s;
+  }
+
+  .tracks__video::after {
+    background: linear-gradient(
+      180deg,
+      rgba(18, 16, 31, 0.2),
+      transparent 28%,
+      transparent 68%,
+      rgba(18, 16, 31, 0.52)
+    );
+  }
+
+  .tracks.is-video-active .tracks__video {
+    height: clamp(180px, 52vw, 300px);
+    margin-bottom: 18px;
+    opacity: 1;
+    visibility: visible;
+    transition: height 0.65s var(--ease), margin-bottom 0.65s var(--ease),
+      opacity 0.45s 0.1s var(--ease), visibility 0s;
+  }
+
+  .tracks.is-video-active .tracks__list {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tracks__list,
+  .tracks__video,
+  .tracks.is-video-active .tracks__video {
+    transition: none;
+  }
+}
+
 .tracklist {
   list-style: none;
   margin: 0;
