@@ -1521,13 +1521,18 @@ body.is-playing .vinyl { animation-play-state: running; }
 @media (max-width: 900px) {
   .tracks__video {
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 0;
-    margin: 0;
+    margin: 0 0 0 calc(50% - 50vw);
     border-right: 0;
     transform: none;
-    transition: height 0.65s var(--ease), margin-bottom 0.65s var(--ease),
-      opacity 0.45s var(--ease), visibility 0s linear 0.65s;
+    transition: height 0.65s var(--ease), opacity 0.45s var(--ease),
+      visibility 0s linear 0.65s;
+  }
+
+  .tracks__video-el {
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 68%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 68%, transparent 100%);
   }
 
   .tracks__video::after {
@@ -1535,24 +1540,29 @@ body.is-playing .vinyl { animation-play-state: running; }
       180deg,
       rgba(18, 16, 31, 0.2),
       transparent 28%,
-      transparent 68%,
-      rgba(18, 16, 31, 0.52)
+      transparent 50%,
+      rgba(18, 16, 31, 0.55) 76%,
+      var(--ink) 100%
     );
   }
 
   .tracks.is-video-active .tracks__video {
     height: clamp(180px, 52vw, 300px);
-    margin-bottom: 18px;
+    margin-bottom: 0;
     opacity: 1;
     visibility: visible;
-    transition: height 0.65s var(--ease), margin-bottom 0.65s var(--ease),
-      opacity 0.45s 0.1s var(--ease), visibility 0s;
+    transition: height 0.65s var(--ease), opacity 0.45s 0.1s var(--ease),
+      visibility 0s;
   }
 
   .tracks.is-video-active .tracks__list {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .tracks.is-video-active .tracks__labels {
+    padding-top: 12px;
   }
 }
 
@@ -1567,6 +1577,21 @@ body.is-playing .vinyl { animation-play-state: running; }
     transform: translateX(-24px) scale(1.02);
     transition: opacity 0.5s var(--ease), transform 0.8s var(--ease),
       visibility 0s linear 0.65s;
+  }
+
+  .tracks__video-el {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .tracks__video::after {
+    background: linear-gradient(
+      180deg,
+      rgba(18, 16, 31, 0.28),
+      transparent 24%,
+      transparent 70%,
+      rgba(18, 16, 31, 0.5)
+    );
   }
 
   .tracks.is-video-active .tracks__video {
