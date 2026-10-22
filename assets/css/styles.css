@@ -1416,11 +1416,10 @@ body.is-playing .vinyl { animation-play-state: running; }
   top: 0;
   left: 0;
   z-index: 1;
-  width: 35%;
+  width: 60%;
   height: 100%;
   overflow: hidden;
   background: var(--ink);
-  border-right: 1px solid rgba(243, 234, 216, 0.18);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1436,7 +1435,13 @@ body.is-playing .vinyl { animation-play-state: running; }
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(18, 16, 31, 0.28), transparent 24%, transparent 70%, rgba(18, 16, 31, 0.5)),
-    linear-gradient(90deg, transparent 74%, rgba(18, 16, 31, 0.28));
+    linear-gradient(
+      90deg,
+      transparent 80%,
+      rgba(18, 16, 31, 0.18) 90%,
+      rgba(18, 16, 31, 0.68) 97%,
+      var(--ink) 100%
+    );
 }
 
 .tracks__video-el {
@@ -1444,12 +1449,12 @@ body.is-playing .vinyl { animation-play-state: running; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 42%;
+  object-position: 50% 40%;
 }
 
 .tracks.is-video-active .tracks__list {
-  width: 62%;
-  margin-left: 38%;
+  width: 40%;
+  margin-left: 60%;
 }
 
 .tracks.is-video-active .tracks__video {
@@ -1458,6 +1463,14 @@ body.is-playing .vinyl { animation-play-state: running; }
   transform: none;
   transition: opacity 0.5s 0.1s var(--ease), transform 0.8s var(--ease),
     visibility 0s;
+}
+
+@media (min-width: 901px) {
+  .tracks.is-video-active .tracks__labels,
+  .tracks.is-video-active .track__btn {
+    grid-template-columns: 52px minmax(0, 1fr) 64px;
+    gap: 12px;
+  }
 }
 
 @media (max-width: 900px) {

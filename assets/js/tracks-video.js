@@ -6,7 +6,7 @@
   const video = section?.querySelector('.tracks__video-el');
   if (!section || !stage || !video) return;
 
-  const src = '/hamamatsu/assets/video/tracklist-katya-tokyo.mp4';
+  const src = '/hamamatsu/assets/video/tracklist-katya-tokyo-portrait.mp4';
   let ready = false;
   let requested = false;
   let inView = false;
