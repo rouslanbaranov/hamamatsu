@@ -2340,7 +2340,7 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   background: var(--yellow);
   color: var(--ink);
   border-top: 1.5px solid var(--ink);
-  padding: clamp(78px, 10vw, 140px) 0 clamp(56px, 7vw, 88px);
+  padding: clamp(78px, 10vw, 140px) 0;
 }
 
 .outro::before {
@@ -2360,7 +2360,7 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  align-items: end;
+  align-items: center;
   gap: clamp(36px, 6vw, 90px);
 }
 
@@ -2370,7 +2370,7 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   position: relative;
   isolation: isolate;
   width: 100%;
-  padding: 8% 8% 5% 0;
+  padding: 0 8% 0 0;
 }
 
 .outro__cassette {
@@ -3100,7 +3100,7 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
   }
   .credits dt { margin: 0; }
 
-  .outro { padding: 70px 0 54px; }
+  .outro { padding: 70px 0; }
   .outro__buttons { gap: 9px; margin-bottom: 24px; }
   .outro__meta { font-size: 6.5px; }
 
