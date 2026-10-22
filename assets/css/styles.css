@@ -1448,7 +1448,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 40%;
+  object-position: 50% 90%;
 }
 
 .tracks.is-video-active .tracks__list {
