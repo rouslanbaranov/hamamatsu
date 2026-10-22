@@ -1704,10 +1704,36 @@ body.is-playing .vinyl { animation-play-state: running; }
   flex: none;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 22px;
   font-size: 13px;
   opacity: 0;
   transform: translateX(-5px);
   transition: opacity 0.2s var(--ease), transform 0.25s var(--ease);
+}
+
+.track__icon .icon-cassette {
+  display: none;
+  width: 22px;
+  height: 22px;
+}
+
+.cassette__reel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cassette-spin 1.6s linear infinite;
+}
+
+.cassette__reel + .cassette__reel {
+  animation-delay: -0.55s;
+}
+
+@keyframes cassette-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cassette__reel { animation: none; }
 }
 
 .track__titles {
@@ -1752,7 +1778,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 5px;
   min-width: 0;
 }
 
@@ -1809,7 +1835,7 @@ body.is-playing .vinyl { animation-play-state: running; }
 .track.is-active .track__time { color: rgba(18, 16, 31, 0.82); }
 
 .track.is-active.is-playing .track__icon .icon-play { display: none; }
-.track.is-active.is-playing .track__icon .icon-pause { display: block; }
+.track.is-active.is-playing .track__icon .icon-cassette { display: block; }
 
 .track.is-active .track__progress { opacity: 1; }
 
