@@ -2366,27 +2366,54 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
 
 .outro__head { min-width: 0; }
 
-.outro__title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(3.4rem, 9.6vw, 10.5rem);
-  line-height: 0.78;
-  letter-spacing: -0.055em;
-  text-transform: uppercase;
+.outro__cassette-stage {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: 8% 8% 5% 0;
 }
 
-.outro__title > span { display: block; }
-.outro__title > span:last-child { margin-left: clamp(0px, 3vw, 42px); }
-.outro__dot { color: var(--red); }
+.outro__cassette {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+}
 
-.outro__jp {
-  margin-top: clamp(20px, 2.6vw, 30px);
-  font-family: var(--font-jp-display);
-  font-size: clamp(2.5rem, 4.4vw, 4.7rem);
-  letter-spacing: 0.13em;
-  color: var(--red);
-  word-break: keep-all;
+.outro__cassette img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3.4% / 5.8%;
+}
+
+.outro__cassette-shadow {
+  position: absolute;
+  z-index: 0;
+  left: 9%;
+  bottom: 6%;
+  width: 88%;
+  height: 28%;
+  background: linear-gradient(170deg, rgba(54, 35, 12, 0.28), rgba(54, 35, 12, 0));
+  clip-path: polygon(0 100%, 100% 100%, 100% 0, 27% 0);
+  transform: translate(9%, -12%) skewX(-28deg);
+  transform-origin: bottom left;
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.outro__cassette-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 2%;
+  bottom: 5%;
+  width: 90%;
+  height: 3%;
+  border-radius: 50%;
+  background: rgba(42, 27, 8, 0.4);
+  filter: blur(5px);
+  pointer-events: none;
 }
 
 .outro__actions {
@@ -3099,9 +3126,6 @@ body.has-player .toast { bottom: calc(var(--player-h) + 18px); }
   .credits dt { margin: 0; }
 
   .outro { padding: 70px 0 54px; }
-  .outro__title { font-size: clamp(3rem, 15.5vw, 6rem); }
-  .outro__title > span:last-child { margin-left: 3vw; }
-  .outro__jp { margin-top: 20px; font-size: clamp(2.3rem, 9.2vw, 3rem); }
   .outro__buttons { gap: 9px; margin-bottom: 24px; }
   .outro__lede { font-size: 0.95rem; }
   .outro__meta { font-size: 6.5px; }
