@@ -1535,6 +1535,53 @@ body.is-playing .vinyl { animation-play-state: running; }
   }
 }
 
+@media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+  .tracks__video {
+    position: relative;
+    left: auto;
+    width: 100vw;
+    height: 0;
+    margin: 0 0 0 calc(50% - 50vw);
+    transform: none;
+    transition: height 0.65s var(--ease), margin-bottom 0.65s var(--ease),
+      opacity 0.45s var(--ease), visibility 0s linear 0.65s;
+  }
+
+  .tracks.is-video-active .tracks__video {
+    height: clamp(320px, 52vw, 560px);
+    margin-bottom: 20px;
+    opacity: 1;
+    visibility: visible;
+    transition: height 0.65s var(--ease), margin-bottom 0.65s var(--ease),
+      opacity 0.45s 0.1s var(--ease), visibility 0s;
+  }
+
+  .tracks.is-video-active .tracks__list {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .tracks.is-video-active .tracks__list::before {
+    display: none;
+  }
+
+  .tracks.is-video-active .tracks__labels {
+    display: none;
+  }
+
+  .tracks.is-video-active .tracklist {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(16px, 3vw, 30px);
+  }
+
+  .tracks.is-video-active .track__btn {
+    grid-template-columns: 52px minmax(0, 1fr) 64px;
+    gap: 12px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tracks__list,
   .tracks__video,
