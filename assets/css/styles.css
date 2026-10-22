@@ -2358,8 +2358,14 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
   height: 34px;
   border-radius: 50%;
   color: var(--cream);
-  font-size: 13px;
+  font-size: 14px;
   transition: background 0.2s, color 0.2s;
+}
+
+.player__btn svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
 }
 
 .player__btn:hover {
