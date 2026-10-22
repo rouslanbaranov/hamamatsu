@@ -1519,8 +1519,8 @@ body.is-playing .vinyl { animation-play-state: running; }
 
 .track:hover,
 .track:focus-within {
-  background: var(--cream);
-  color: var(--ink);
+  background: #0c0a15;
+  color: var(--cream);
 }
 
 .track:hover .track__num,
@@ -1536,12 +1536,12 @@ body.is-playing .vinyl { animation-play-state: running; }
 
 .track:hover .track__sub,
 .track:focus-within .track__sub {
-  color: rgba(18, 16, 31, 0.6);
+  color: rgba(243, 234, 216, 0.74);
 }
 
 .track:hover .track__time,
 .track:focus-within .track__time {
-  color: rgba(18, 16, 31, 0.72);
+  color: rgba(243, 234, 216, 0.82);
 }
 
 .track.is-active {
