@@ -1639,6 +1639,14 @@ body.is-playing .vinyl { animation-play-state: running; }
   }
 }
 
+.tracks__video-row {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+}
+
 .tracklist {
   list-style: none;
   margin: 0;

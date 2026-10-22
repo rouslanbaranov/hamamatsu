@@ -22,6 +22,8 @@
   let fadeInTimer = 0;
   let waitTimer = 0;
   const objectUrls = [];
+  const phoneQuery = window.matchMedia('(max-width: 699px) and (orientation: portrait)');
+  let videoRow = null;
 
   videos.forEach((video) => {
     video.muted = true;
@@ -124,6 +126,53 @@
     });
   });
 
+  function activeTrack() {
+    return section.querySelector('.track.is-active');
+  }
+
+  function restoreVideo() {
+    if (!videoRow) return;
+    const row = videoRow;
+    videoRow = null;
+    if (wrapper.parentElement === row) {
+      stage.insertBefore(wrapper, stage.querySelector('.tracks__list'));
+    }
+    row.remove();
+  }
+
+  function placeVideo() {
+    if (!active || !phoneQuery.matches) {
+      restoreVideo();
+      return;
+    }
+    const track = activeTrack();
+    if (!track) {
+      restoreVideo();
+      return;
+    }
+    if (!videoRow) {
+      videoRow = document.createElement('li');
+      videoRow.className = 'tracks__video-row';
+      videoRow.setAttribute('aria-hidden', 'true');
+    }
+    const row = videoRow;
+    let moved = false;
+    if (wrapper.parentElement !== row) {
+      row.appendChild(wrapper);
+      moved = true;
+    }
+    if (row.parentElement !== track.parentElement || row.nextElementSibling !== track) {
+      track.parentElement.insertBefore(row, track);
+      moved = true;
+    }
+    if (moved && phase === 'playing') playCurrent();
+  }
+
+  function syncPosition() {
+    if (active) placeVideo();
+    else restoreVideo();
+  }
+
   function sync() {
     const next = shouldActivate();
     if (next === active) return;
@@ -131,6 +180,7 @@
     section.classList.toggle('is-video-active', next);
     if (next) startPlaylist();
     else resetPlaylist();
+    syncPosition();
   }
 
   function loadVideo(video, src) {
@@ -194,6 +244,27 @@
     attributeFilter: ['class']
   });
   document.addEventListener('visibilitychange', sync);
+
+  const tracklist = section.querySelector('.tracklist');
+  if (tracklist) {
+    new MutationObserver(() => {
+      if (active) syncPosition();
+    }).observe(tracklist, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+
+  const handlePhoneChange = () => {
+    if (active) syncPosition();
+    else restoreVideo();
+  };
+  if (typeof phoneQuery.addEventListener === 'function') {
+    phoneQuery.addEventListener('change', handlePhoneChange);
+  } else if (typeof phoneQuery.addListener === 'function') {
+    phoneQuery.addListener(handlePhoneChange);
+  }
 
   function whenPageAndHeroReady() {
     if (document.readyState !== 'complete') {
