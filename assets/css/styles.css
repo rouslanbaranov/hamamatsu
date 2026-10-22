@@ -4124,3 +4124,13 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 }
 
 
+
+/* Transparent entrance shares the existing portrait geometry; no layout shift. */
+.hero-poster { overflow-x: clip; }
+.hero-poster__portrait { position: relative; }
+.hero-poster__portrait img { animation: none; }
+.hero-entrance { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); pointer-events: none; visibility: hidden; max-width: none; }
+.hero-entrance-active picture { visibility: hidden; }
+.hero-entrance-active .hero-entrance { visibility: visible; }
+@media (prefers-reduced-motion: reduce) { .hero-entrance { display: none; } .hero-entrance-active picture { visibility: visible; } }
+@media print { .hero-entrance { display: none; } .hero-entrance-active picture { visibility: visible; } }
