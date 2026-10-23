@@ -1913,7 +1913,7 @@ body.is-playing .vinyl { animation-play-state: running; }
      scrolling inside it when the tracks do not fit. */
   .tracks.is-video-active .tracks__stage {
     --tracklist-w: 494px;
-    --side-gap: clamp(20px, 2.2vw, 40px);
+    --side-gap: 0px;
     --max-video-h: calc(100svh - var(--header-h) - var(--player-h));
     --stage-w: calc(100vw - (var(--pad) * 2));
     --video-w: min(
