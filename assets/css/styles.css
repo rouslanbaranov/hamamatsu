@@ -1864,14 +1864,15 @@ body.is-playing .vinyl { animation-play-state: running; }
 }
 
 @media (min-width: 1441px) {
-  /* Keep the full 16:9 frame on wide screens: the video defines the stage
-     height while active, instead of being cropped to the tracklist height. */
+  /* Keep the full 16:9 frame on screen: cap the film height by the space
+     between the header and the player. When the width no longer fits that
+     height, the film keeps its ratio and leaves dark gaps on the sides. */
   .tracks.is-video-active .tracks__stage {
-    min-height: 56.25vw;
+    min-height: min(56.25vw, calc(100svh - var(--header-h) - var(--player-h)));
   }
 
   .tracks__video {
-    height: 56.25vw;
+    height: min(56.25vw, calc(100svh - var(--header-h) - var(--player-h)));
   }
 
   .tracks__video-el {
