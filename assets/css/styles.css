@@ -1866,13 +1866,20 @@ body.is-playing .vinyl { animation-play-state: running; }
 @media (min-width: 1441px) {
   /* Keep the full 16:9 frame on screen: cap the film height by the space
      between the header and the player. When the width no longer fits that
-     height, the film keeps its ratio and leaves dark gaps on the sides. */
+     height, the film keeps its ratio and leaves dark gaps on the sides.
+     The tracklist overlay is inset by the same gap so it always stays on
+     the visible film instead of climbing onto the empty edges. */
+  .tracks {
+    --film-h: min(56.25vw, calc(100svh - var(--header-h) - var(--player-h)));
+    --film-gap: max(0px, calc(50vw - var(--film-h) * 0.8888889));
+  }
+
   .tracks.is-video-active .tracks__stage {
-    min-height: min(56.25vw, calc(100svh - var(--header-h) - var(--player-h)));
+    min-height: var(--film-h);
   }
 
   .tracks__video {
-    height: min(56.25vw, calc(100svh - var(--header-h) - var(--player-h)));
+    height: var(--film-h);
   }
 
   .tracks__video-el {
@@ -1884,6 +1891,7 @@ body.is-playing .vinyl { animation-play-state: running; }
     width: max-content;
     margin-left: auto;
     margin-right: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw + var(--film-gap));
   }
 
   .tracks.is-video-active .track__btn {
