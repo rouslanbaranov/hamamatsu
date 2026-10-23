@@ -1,7 +1,8 @@
 /* Background film for the tracklist: five clips, sliding vertically into
-   the next clip. Clips load lazily: the first clip is fetched up front, the
-   next one is prefetched once the playlist is active, and a clip joins the
-   carousel (dots and navigation) only after it has fully loaded. */
+   the next clip. All clips start loading in the background, one after the
+   other, as soon as the page starts. Every clip has a dot from the start;
+   the loading dot shows a spinner, and only fully loaded clips can be
+   selected in the carousel. */
 (() => {
   const section = document.querySelector('.tracks');
   const stage = section?.querySelector('.tracks__stage');
@@ -32,7 +33,6 @@
   let current = 0;
   let transitioning = false;
   let slideTimer = 0;
-  let waitTimer = 0;
   let uiReadyTimer = 0;
   const objectUrls = [];
   const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -43,9 +43,9 @@
   let videoRow = null;
   let restoreTimer = 0;
   const dotButtons = [];
-  let availableCount = 0;
   const loaded = videos.map(() => false);
   const loading = videos.map(() => false);
+  let nextToLoad = 0;
 
   videos.forEach((video) => {
     video.muted = true;
@@ -54,6 +54,22 @@
     video.loop = false;
   });
 
+  if (dots) {
+    videos.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'tracks__video-dot is-pending';
+      dot.disabled = true;
+      dot.addEventListener('click', () => {
+        if (!loaded[index]) return;
+        goTo(index, index > current ? 1 : -1);
+      });
+      dots.append(dot);
+      dotButtons.push(dot);
+    });
+  }
+
+  updateDotLabels();
   document.addEventListener('i18n:changed', updateDotLabels);
 
   const isPlaying = () => document.body.classList.contains('is-playing');
@@ -94,46 +110,56 @@
   }
 
   function goTo(index, direction) {
-    if (!active || availableCount < 2) return;
-    const next = (index + availableCount) % availableCount;
-    if (next === current) return;
-    const dir = typeof direction === 'number' ? direction : next > current ? 1 : -1;
-    slideTo(next, dir);
+    if (!active || index < 0 || index >= videos.length) return;
+    if (!loaded[index] || index === current) return;
+    const dir = typeof direction === 'number' ? direction : index > current ? 1 : -1;
+    slideTo(index, dir);
+  }
+
+  function stepIndex(from, direction) {
+    for (let step = 1; step <= videos.length; step += 1) {
+      const index = (from + direction * step + videos.length) % videos.length;
+      if (loaded[index]) return index;
+    }
+    return from;
+  }
+
+  function firstLoadedIndex() {
+    return videos.findIndex((_, index) => loaded[index]);
   }
 
   function updateDotLabels() {
-    const total = availableCount;
+    const total = videos.length;
     dotButtons.forEach((dot, index) => {
       dot.setAttribute('aria-label', t('tracks.showClip', { index: index + 1, total }));
-      if (index === current) dot.setAttribute('aria-current', 'true');
+      if (index === current && loaded[index]) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
     });
   }
 
-  function syncDots() {
-    if (!dots) return;
-    while (dotButtons.length < availableCount) {
-      const index = dotButtons.length;
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'tracks__video-dot';
-      dot.addEventListener('click', () => goTo(index, index > current ? 1 : -1));
-      dots.append(dot);
-      dotButtons.push(dot);
-    }
-    updateDotLabels();
+  function setDotState(index) {
+    const dot = dotButtons[index];
+    if (!dot) return;
+    const isLoading = loading[index];
+    const isLoaded = loaded[index];
+    dot.classList.toggle('is-loading', isLoading);
+    dot.classList.toggle('is-pending', !isLoading && !isLoaded);
+    dot.disabled = !isLoaded;
+    if (isLoading) dot.setAttribute('aria-busy', 'true');
+    else dot.removeAttribute('aria-busy');
+    if (!isLoaded) dot.removeAttribute('aria-current');
   }
 
-  if (prevButton) prevButton.addEventListener('click', () => goTo(current - 1, -1));
-  if (nextButton) nextButton.addEventListener('click', () => goTo(current + 1, 1));
+  if (prevButton) prevButton.addEventListener('click', () => goTo(stepIndex(current, -1), -1));
+  if (nextButton) nextButton.addEventListener('click', () => goTo(stepIndex(current, 1), 1));
   if (ui) {
     ui.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
         event.preventDefault();
-        goTo(current - 1, -1);
+        goTo(stepIndex(current, -1), -1);
       } else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
         event.preventDefault();
-        goTo(current + 1, 1);
+        goTo(stepIndex(current, 1), 1);
       }
     });
   }
@@ -161,8 +187,10 @@
         video.currentTime = 0;
       } catch {}
     });
-    showVideo(0);
-    layoutVideos(0, false);
+    const start = firstLoadedIndex();
+    if (start < 0) return;
+    showVideo(start);
+    layoutVideos(start, false);
   }
 
   function startPlaylist() {
@@ -173,20 +201,20 @@
         video.currentTime = 0;
       } catch {}
     });
-    showVideo(0);
-    layoutVideos(0, false);
+    const start = firstLoadedIndex();
+    if (start < 0) return;
+    showVideo(start);
+    layoutVideos(start, false);
     playCurrent();
-    ensureNextLoaded();
   }
 
   function slideTo(index, direction) {
-    if (!active || availableCount < 2 || transitioning) return;
-    const next = (index + availableCount) % availableCount;
-    if (next === current) return;
+    if (!active || transitioning) return;
+    if (index === current || !loaded[index]) return;
 
     const dir = direction < 0 ? -1 : 1;
     const outgoing = videos[current];
-    const incoming = videos[next];
+    const incoming = videos[index];
 
     transitioning = true;
     window.clearTimeout(slideTimer);
@@ -205,8 +233,7 @@
     void incoming.offsetHeight;
     incoming.style.transition = '';
 
-    showVideo(next);
-    ensureNextLoaded();
+    showVideo(index);
 
     // Both clips travel in the same vertical direction.
     outgoing.style.transform = 'translateY(' + (-dir * 100) + '%)';
@@ -228,15 +255,15 @@
   videos.forEach((video, index) => {
     video.addEventListener('ended', () => {
       if (!active || index !== current || transitioning) return;
-      if (availableCount < 2) {
+      const next = stepIndex(current, 1);
+      if (next === current) {
         // Only one clip has loaded so far: keep the film moving by replaying it.
         video.currentTime = 0;
         syncVideoProgress();
         video.play().catch(() => {});
-        ensureNextLoaded();
         return;
       }
-      slideTo((current + 1) % availableCount, 1);
+      slideTo(next, 1);
     });
 
     const syncThisVideoProgress = () => {
@@ -452,36 +479,34 @@
     });
   }
 
-  function ensureNextLoaded() {
-    if (!ready || !active) return;
-    const index = current + 1;
-    if (index >= videos.length || index < availableCount) return;
-    if (loaded[index] || loading[index]) return;
+  function loadNext() {
+    if (nextToLoad >= videos.length) return;
+    const index = nextToLoad;
+    nextToLoad += 1;
     loading[index] = true;
+    setDotState(index);
     loadVideo(videos[index], sources[index]).then((ok) => {
       loading[index] = false;
-      if (!ok) return;
-      loaded[index] = true;
-      if (index !== availableCount) return;
-      availableCount = index + 1;
-      syncDots();
+      if (ok) {
+        loaded[index] = true;
+        setDotState(index);
+        if (!ready) {
+          ready = true;
+          showVideo(index);
+          layoutVideos(index, false);
+          sync();
+        }
+      } else {
+        setDotState(index);
+      }
+      loadNext();
     });
   }
 
   function startLoad() {
     if (requested) return;
     requested = true;
-    window.clearTimeout(waitTimer);
-    loadVideo(videos[0], sources[0]).then((ok) => {
-      if (!ok) return;
-      loaded[0] = true;
-      availableCount = 1;
-      syncDots();
-      ready = true;
-      showVideo(0);
-      layoutVideos(0, false);
-      sync();
-    });
+    loadNext();
   }
 
   new MutationObserver(sync).observe(document.body, {
@@ -511,18 +536,5 @@
     rowQuery.addListener(handleRowChange);
   }
 
-  function whenPageAndHeroReady() {
-    if (document.readyState !== 'complete') {
-      window.addEventListener('load', whenPageAndHeroReady, { once: true });
-      return;
-    }
-    if (window.__heroEntranceDone) {
-      startLoad();
-      return;
-    }
-    window.addEventListener('hero-entrance:done', startLoad, { once: true });
-    waitTimer = window.setTimeout(startLoad, 6000);
-  }
-
-  whenPageAndHeroReady();
+  startLoad();
 })();
