@@ -1907,16 +1907,27 @@ body.is-playing .vinyl { animation-play-state: running; }
 }
 
 @media (min-width: 1441px) {
-  /* Put the tracklist outside the film: a two-column stage with the video
-     on the left and the tracks on the right. The film is sized by the
-     available width and by the space between header and player, so it
-     always keeps 16:9 and stays fully visible. */
+  /* Put the tracklist outside the film, next to it. The stage is the common
+     parent: the video sets the height (16:9, capped by the space between
+     header and player) and the tracklist column has exactly the same height,
+     scrolling inside it when the tracks do not fit. */
   .tracks.is-video-active .tracks__stage {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) max-content;
-    column-gap: clamp(20px, 2.2vw, 40px);
-    align-items: start;
+    --tracklist-w: 494px;
+    --side-gap: clamp(20px, 2.2vw, 40px);
+    --max-video-h: calc(100svh - var(--header-h) - var(--player-h));
+    --stage-w: calc(100vw - (var(--pad) * 2));
+    --video-w: min(
+      calc(var(--stage-w) - var(--tracklist-w) - var(--side-gap)),
+      calc(var(--max-video-h) * 16 / 9)
+    );
+    --video-h: calc(var(--video-w) * 9 / 16);
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: var(--side-gap);
     width: 100vw;
+    height: var(--video-h);
     margin-left: calc(50% - 50vw);
     padding: 0 var(--pad);
   }
@@ -1925,12 +1936,11 @@ body.is-playing .vinyl { animation-play-state: running; }
     position: relative;
     top: auto;
     left: auto;
-    width: min(100%, calc((100svh - var(--header-h) - var(--player-h)) * 16 / 9));
-    height: auto;
+    flex: 0 0 auto;
+    width: var(--video-w);
+    height: 100%;
     aspect-ratio: 16 / 9;
     margin: 0;
-    justify-self: end;
-    align-self: start;
   }
 
   .tracks__video-el {
@@ -1939,9 +1949,28 @@ body.is-playing .vinyl { animation-play-state: running; }
   }
 
   .tracks.is-video-active .tracks__list {
-    grid-column: 2;
-    width: max-content;
+    flex: 0 0 auto;
+    width: var(--tracklist-w);
+    height: 100%;
     margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(243, 234, 216, 0.32) transparent;
+  }
+
+  .tracks.is-video-active .tracks__list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .tracks.is-video-active .tracks__list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .tracks.is-video-active .tracks__list::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(243, 234, 216, 0.3);
   }
 
   .tracks.is-video-active .track__btn {
