@@ -1,5 +1,7 @@
 /* Background film for the tracklist: four clips, sliding vertically into
-   the next clip. Previous/next controls and dots can jump between clips. */
+   the next clip. Clips load lazily: the first clip is fetched up front, the
+   next one is prefetched once the playlist is active, and a clip joins the
+   carousel (dots and navigation) only after it has fully loaded. */
 (() => {
   const section = document.querySelector('.tracks');
   const stage = section?.querySelector('.tracks__stage');
@@ -40,6 +42,9 @@
   let videoRow = null;
   let restoreTimer = 0;
   const dotButtons = [];
+  let availableCount = 0;
+  const loaded = videos.map(() => false);
+  const loading = videos.map(() => false);
 
   videos.forEach((video) => {
     video.muted = true;
@@ -48,23 +53,7 @@
     video.loop = false;
   });
 
-  if (dots) {
-    videos.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'tracks__video-dot';
-      dot.setAttribute('aria-label', t('tracks.showClip', { index: index + 1, total: videos.length }));
-      dot.addEventListener('click', () => goTo(index, index > current ? 1 : -1));
-      dots.append(dot);
-      dotButtons.push(dot);
-    });
-  }
-
-  document.addEventListener('i18n:changed', () => {
-    dotButtons.forEach((dot, index) => {
-      dot.setAttribute('aria-label', t('tracks.showClip', { index: index + 1, total: videos.length }));
-    });
-  });
+  document.addEventListener('i18n:changed', updateDotLabels);
 
   const isPlaying = () => document.body.classList.contains('is-playing');
   const shouldActivate = () => ready && isPlaying() && !document.hidden;
@@ -89,10 +78,7 @@
     videos.forEach((video, i) => {
       video.classList.toggle('is-current', i === index);
     });
-    dotButtons.forEach((dot, i) => {
-      if (i === index) dot.setAttribute('aria-current', 'true');
-      else dot.removeAttribute('aria-current');
-    });
+    updateDotLabels();
     syncVideoProgress();
   }
 
@@ -107,11 +93,34 @@
   }
 
   function goTo(index, direction) {
-    if (!active || videos.length < 2) return;
-    const next = (index + videos.length) % videos.length;
+    if (!active || availableCount < 2) return;
+    const next = (index + availableCount) % availableCount;
     if (next === current) return;
     const dir = typeof direction === 'number' ? direction : next > current ? 1 : -1;
     slideTo(next, dir);
+  }
+
+  function updateDotLabels() {
+    const total = availableCount;
+    dotButtons.forEach((dot, index) => {
+      dot.setAttribute('aria-label', t('tracks.showClip', { index: index + 1, total }));
+      if (index === current) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+  }
+
+  function syncDots() {
+    if (!dots) return;
+    while (dotButtons.length < availableCount) {
+      const index = dotButtons.length;
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'tracks__video-dot';
+      dot.addEventListener('click', () => goTo(index, index > current ? 1 : -1));
+      dots.append(dot);
+      dotButtons.push(dot);
+    }
+    updateDotLabels();
   }
 
   if (prevButton) prevButton.addEventListener('click', () => goTo(current - 1, -1));
@@ -166,11 +175,12 @@
     showVideo(0);
     layoutVideos(0, false);
     playCurrent();
+    ensureNextLoaded();
   }
 
   function slideTo(index, direction) {
-    if (!active || videos.length < 2 || transitioning) return;
-    const next = (index + videos.length) % videos.length;
+    if (!active || availableCount < 2 || transitioning) return;
+    const next = (index + availableCount) % availableCount;
     if (next === current) return;
 
     const dir = direction < 0 ? -1 : 1;
@@ -195,6 +205,7 @@
     incoming.style.transition = '';
 
     showVideo(next);
+    ensureNextLoaded();
 
     // Both clips travel in the same vertical direction.
     outgoing.style.transform = 'translateY(' + (-dir * 100) + '%)';
@@ -216,7 +227,15 @@
   videos.forEach((video, index) => {
     video.addEventListener('ended', () => {
       if (!active || index !== current || transitioning) return;
-      slideTo((current + 1) % videos.length, 1);
+      if (availableCount < 2) {
+        // Only one clip has loaded so far: keep the film moving by replaying it.
+        video.currentTime = 0;
+        syncVideoProgress();
+        video.play().catch(() => {});
+        ensureNextLoaded();
+        return;
+      }
+      slideTo((current + 1) % availableCount, 1);
     });
 
     const syncThisVideoProgress = () => {
@@ -432,12 +451,31 @@
     });
   }
 
+  function ensureNextLoaded() {
+    if (!ready || !active) return;
+    const index = current + 1;
+    if (index >= videos.length || index < availableCount) return;
+    if (loaded[index] || loading[index]) return;
+    loading[index] = true;
+    loadVideo(videos[index], sources[index]).then((ok) => {
+      loading[index] = false;
+      if (!ok) return;
+      loaded[index] = true;
+      if (index !== availableCount) return;
+      availableCount = index + 1;
+      syncDots();
+    });
+  }
+
   function startLoad() {
     if (requested) return;
     requested = true;
     window.clearTimeout(waitTimer);
-    Promise.all(videos.map((video, index) => loadVideo(video, sources[index]))).then((loaded) => {
-      if (!loaded.every(Boolean)) return;
+    loadVideo(videos[0], sources[0]).then((ok) => {
+      if (!ok) return;
+      loaded[0] = true;
+      availableCount = 1;
+      syncDots();
       ready = true;
       showVideo(0);
       layoutVideos(0, false);
