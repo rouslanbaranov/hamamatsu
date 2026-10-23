@@ -7,6 +7,7 @@
   const videos = [...(wrapper?.querySelectorAll('.tracks__video-el') || [])];
   if (!section || !stage || !wrapper || videos.length < 2) return;
 
+  const progressFill = wrapper.querySelector('[data-video-progress]');
   const ui = section.querySelector('[data-video-ui]');
   const dots = section.querySelector('[data-video-dots]');
   const prevButton = section.querySelector('[data-video-prev]');
@@ -72,6 +73,15 @@
     transitioning = false;
   }
 
+  function syncVideoProgress() {
+    if (!progressFill) return;
+    const video = videos[current];
+    if (!video) return;
+    const duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 0;
+    const ratio = duration > 0 ? Math.min(1, Math.max(0, video.currentTime / duration)) : 0;
+    progressFill.style.transform = 'scaleX(' + ratio.toFixed(4) + ')';
+  }
+
   function showVideo(index) {
     current = index;
     videos.forEach((video, i) => {
@@ -81,6 +91,7 @@
       if (i === index) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
     });
+    syncVideoProgress();
   }
 
   function playCurrent() {
@@ -88,6 +99,7 @@
     if (!video) return;
     if (Number.isFinite(video.duration) && video.currentTime >= video.duration - 0.05) {
       video.currentTime = 0;
+      syncVideoProgress();
     }
     video.play().catch(() => {});
   }
@@ -204,6 +216,14 @@
       if (!active || index !== current || transitioning) return;
       slideTo((current + 1) % videos.length, 1);
     });
+
+    const syncThisVideoProgress = () => {
+      if (index === current) syncVideoProgress();
+    };
+    video.addEventListener('timeupdate', syncThisVideoProgress);
+    video.addEventListener('loadedmetadata', syncThisVideoProgress);
+    video.addEventListener('durationchange', syncThisVideoProgress);
+    video.addEventListener('seeked', syncThisVideoProgress);
   });
 
   function activeTrack() {

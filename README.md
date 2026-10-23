@@ -43,7 +43,7 @@ A deliberately simple static site — no framework, no bundler, no build step, a
 - **Vanilla JavaScript** for the custom audio player, film player, mobile menu, reveals, and share action.
 - **i18n:** **i18next 26** (vendored UMD build, MIT) for English and Japanese interface copy, metadata, ARIA labels, player/film states, and the header flag switcher. The library lives in `assets/js/vendor/`; no package install is required.
 - **Audio:** native `HTMLAudioElement` + **Media Session API**; full-album stream, seek, next/previous, volume, auto-advance.
-- **Video:** native HTML5 video with custom controls and a poster.
+- **Video:** native HTML5 video with custom controls, a poster, and a non-interactive full-width progress bar on the background tracklist clips.
 - **Fonts:** Archivo Black, Dela Gothic One, Space Grotesk, Noto Sans JP (Google Fonts).
 - **Hosting:** Vercel, deployed from the `main` branch of `rouslanbaranov/hamamatsu`.
 - **QA:** Playwright + Chromium; axe-core reports **0 WCAG A/AA violations** in both languages at desktop, mobile, playing, and open-menu states. The two remaining incomplete checks are the contrast-over-grain/media heuristic and the approved film having no separate captions track.

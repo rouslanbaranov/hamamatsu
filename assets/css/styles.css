@@ -1526,6 +1526,30 @@ body.is-playing .vinyl { animation-play-state: running; }
   transform: translateY(0);
 }
 
+.tracks__video-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  height: 3px;
+  background: rgba(243, 234, 216, 0.22);
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.tracks__video-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(243, 234, 216, 0.35);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.12s linear;
+  will-change: transform;
+}
+
 .tracks.is-video-active {
   --track-list-w: clamp(320px, 34vw, 620px);
 }
@@ -1876,6 +1900,10 @@ body.is-playing .vinyl { animation-play-state: running; }
   .tracks.is-video-active .tracks__video,
   .tracks__video-el,
   .tracks__video-ui {
+    transition: none;
+  }
+
+  .tracks__video-progress-fill {
     transition: none;
   }
 }
