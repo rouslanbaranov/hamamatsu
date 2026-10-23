@@ -1,4 +1,4 @@
-/* Background film for the tracklist: three clips, sliding vertically into
+/* Background film for the tracklist: four clips, sliding vertically into
    the next clip. Previous/next controls and dots can jump between clips. */
 (() => {
   const section = document.querySelector('.tracks');
@@ -16,7 +16,8 @@
   const sources = [
     '/hamamatsu/assets/video/tracklist-katya-tokyo-1080-left-trimmed.mp4',
     '/hamamatsu/assets/video/tracklist-polina-tower-1080.mp4',
-    '/hamamatsu/assets/video/tracklist-alex-boss-1080.mp4'
+    '/hamamatsu/assets/video/tracklist-alex-boss-1080.mp4',
+    '/hamamatsu/assets/video/tracklist-elena-icecream-1080.mp4'
   ];
   const i18n = window.SummerAvenueI18n;
   const t = (key, options) => (i18n ? i18n.t(key, options) : key);
