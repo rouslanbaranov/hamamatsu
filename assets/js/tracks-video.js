@@ -1,4 +1,4 @@
-/* Background film for the tracklist: four clips, sliding vertically into
+/* Background film for the tracklist: five clips, sliding vertically into
    the next clip. Clips load lazily: the first clip is fetched up front, the
    next one is prefetched once the playlist is active, and a clip joins the
    carousel (dots and navigation) only after it has fully loaded. */
@@ -19,7 +19,8 @@
     '/hamamatsu/assets/video/tracklist-katya-tokyo-1080-left-trimmed.mp4',
     '/hamamatsu/assets/video/tracklist-polina-tower-1080.mp4',
     '/hamamatsu/assets/video/tracklist-alex-boss-1080.mp4',
-    '/hamamatsu/assets/video/tracklist-elena-icecream-1080.mp4'
+    '/hamamatsu/assets/video/tracklist-elena-icecream-1080.mp4',
+    '/hamamatsu/assets/video/tracklist-midnight-tokyo-riders-1080.mp4'
   ];
   const i18n = window.SummerAvenueI18n;
   const t = (key, options) => (i18n ? i18n.t(key, options) : key);
