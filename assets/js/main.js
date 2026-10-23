@@ -11,6 +11,11 @@
   const body = document.body;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(pointer: fine)');
+  const i18n = window.SummerAvenueI18n;
+  const t = (key, options) => (i18n ? i18n.t(key, options) : key);
+  const currentLanguage = () => (i18n ? i18n.getLanguage() : document.documentElement.lang || 'en');
+  const trackTitleForLanguage = (track) => (currentLanguage() === 'ja' ? track.ja : track.en);
+  const trackAltTitleForLanguage = (track) => (currentLanguage() === 'ja' ? track.en : track.ja);
 
   const storage = {
     get(key, fallback) {
@@ -172,7 +177,7 @@
     mobileMenu.hidden = true;
     menuButton.setAttribute('aria-expanded', 'false');
     const label = $('.sr-only', menuButton);
-    if (label) label.textContent = 'Open menu';
+    if (label) label.textContent = t('a11y.openMenu');
     body.classList.remove('menu-open');
     if (restoreFocus && menuFocus && typeof menuFocus.focus === 'function') {
       menuFocus.focus({ preventScroll: true });
@@ -186,7 +191,7 @@
     mobileMenu.hidden = false;
     menuButton.setAttribute('aria-expanded', 'true');
     const label = $('.sr-only', menuButton);
-    if (label) label.textContent = 'Close menu';
+    if (label) label.textContent = t('a11y.closeMenu');
     body.classList.add('menu-open');
     const firstLink = $('a', mobileMenu);
     if (firstLink) firstLink.focus({ preventScroll: true });
@@ -214,6 +219,12 @@
       if (window.innerWidth > 980 && isMenuOpen()) closeMenu(false);
     }, { passive: true });
   }
+
+  document.addEventListener('i18n:changed', () => {
+    if (!menuButton) return;
+    const label = $('.sr-only', menuButton);
+    if (label) label.textContent = isMenuOpen() ? t('a11y.closeMenu') : t('a11y.openMenu');
+  });
 
   /* ---------- hero tilt ---------- */
 
@@ -248,8 +259,8 @@
   $$('[data-share]').forEach((button) => {
     button.addEventListener('click', async () => {
       const payload = {
-        title: 'Summer Avenue — Project Hamamatsu',
-        text: 'The 2026 album from Project Hamamatsu. Eleven city-pop songs for the long way home.',
+        title: t('share.title'),
+        text: t('share.text'),
         url: document.querySelector('link[rel="canonical"]').href
       };
       if (navigator.share) {
@@ -262,9 +273,9 @@
       }
       try {
         await copyText(payload.url);
-        toast('Link copied to clipboard.');
+        toast(t('toasts.linkCopied'));
       } catch (error) {
-        toast('Could not copy the link — use your address bar.');
+        toast(t('toasts.copyFailed'));
       }
     });
   });
@@ -307,7 +318,7 @@
     const action = document.createElement('span');
     action.className = 'sr-only';
     action.setAttribute('data-track-action', '');
-    action.textContent = 'Play track';
+    action.textContent = t('tracks.playTrack');
     track.button.prepend(action);
     track.button.removeAttribute('aria-label');
   });
@@ -339,7 +350,7 @@
       const volume = audio.muted ? 0 : audio.volume;
       playerVolume.value = String(volume);
       playerVolume.style.setProperty('--v', (volume * 100).toFixed(1) + '%');
-      if (muteButton) muteButton.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
+      if (muteButton) muteButton.setAttribute('aria-label', muted ? t('player.unmute') : t('player.mute'));
     }
 
     function updateMediaSession() {
@@ -348,9 +359,9 @@
       if (!track) return;
       try {
         navigator.mediaSession.metadata = new window.MediaMetadata({
-          title: track.ja,
+          title: trackTitleForLanguage(track),
           artist: 'Project Hamamatsu',
-          album: 'Summer Avenue',
+          album: t('meta.albumTitle'),
           artwork: [
             { src: '/hamamatsu/assets/img/cover-summer-avenue-200.jpg', sizes: '200x200', type: 'image/jpeg' },
             { src: '/hamamatsu/assets/img/cover-summer-avenue-800.jpg', sizes: '800x800', type: 'image/jpeg' },
@@ -374,19 +385,20 @@
         node.classList.toggle('is-playing', node.classList.contains('is-active') && playing);
       });
 
+      const playLabel = playing ? t('hero.pauseAlbum') : t('hero.playAlbum');
       playButtons.forEach((button) => {
         const label = $('[data-play-label]', button);
-        const defaultLabel = button.dataset.labelPlay || 'Play';
-        const nextLabel = playing ? defaultLabel.replace(/^Play/i, 'Pause') : defaultLabel;
-        if (label) label.textContent = nextLabel;
-        button.setAttribute('aria-label', nextLabel);
+        if (label) label.textContent = playLabel;
+        button.setAttribute('aria-label', playLabel);
         button.setAttribute('aria-pressed', playing ? 'true' : 'false');
       });
 
-      if (playerToggle) playerToggle.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+      if (playerToggle) playerToggle.setAttribute('aria-label', playing ? t('player.pause') : t('player.play'));
 
       const track = tracks[state.index];
-      document.title = playing && track ? '▶ ' + track.en + ' — Project Hamamatsu' : 'Summer Avenue — Project Hamamatsu';
+      document.title = playing && track
+        ? t('meta.nowPlayingTitle', { title: trackTitleForLanguage(track) })
+        : t('meta.title');
 
       if ('mediaSession' in navigator) {
         try { navigator.mediaSession.playbackState = playing ? 'playing' : 'paused'; } catch (error) { /* ignore */ }
@@ -405,16 +417,26 @@
         if (button) {
           button.setAttribute('aria-pressed', isActive && state.playing ? 'true' : 'false');
           const action = $('[data-track-action]', button);
-          if (action) action.textContent = isActive && state.playing ? 'Pause track' : 'Play track';
+          if (action) action.textContent = isActive && state.playing ? t('tracks.pauseTrack') : t('tracks.playTrack');
         }
       });
 
       if (!track) return;
-      if (playerTitle) playerTitle.textContent = track.ja;
-      if (playerSub) playerSub.textContent = 'Project Hamamatsu · ' + track.en;
-      if (playerStatus) playerStatus.textContent = 'Now playing: ' + track.ja + ' — ' + track.en;
+      const title = trackTitleForLanguage(track);
+      const altTitle = trackAltTitleForLanguage(track);
+      if (playerTitle) playerTitle.textContent = title;
+      if (playerSub) {
+        playerSub.textContent = t('player.subtitle', { track: altTitle });
+        playerSub.lang = currentLanguage() === 'ja' ? 'en' : 'ja';
+      }
+      if (playerStatus) playerStatus.textContent = t('player.nowPlaying', { title, alt: altTitle });
       if (totalEl) totalEl.textContent = formatDuration(track.duration);
-      if (playerSeek) playerSeek.setAttribute('aria-valuetext', '0:00 of ' + formatDuration(track.duration));
+      if (playerSeek) {
+        playerSeek.setAttribute('aria-valuetext', t('player.timeOf', {
+          time: '0:00',
+          total: formatDuration(track.duration)
+        }));
+      }
       updateMediaSession();
     }
 
@@ -469,7 +491,7 @@
       }
     }
 
-    function playTrack(index) {
+    function playTrack(index, options) {
       if (!tracks[index]) return;
       if (film) film.pause();
       const token = ++playToken;
@@ -494,9 +516,11 @@
           state.loading = false;
           if (player) player.classList.remove('is-loading');
           setPlaying(false);
-          toast('Playback could not start. Tap play to try again.');
+          toast(t('toasts.playbackFailed'));
         });
       }
+
+      if (!options || options.scroll !== false) scheduleTracklistScroll();
     }
 
     function togglePlayback() {
@@ -508,8 +532,9 @@
         if (film) film.pause();
         revealPlayer();
         audio.play().catch(() => {
-          toast('Playback could not start. Tap play to try again.');
+          toast(t('toasts.playbackFailed'));
         });
+        scheduleTracklistScroll();
         return;
       }
       playTrack(0);
@@ -549,7 +574,10 @@
         if (playerSeek) {
           playerSeek.value = String(Math.round(ratio * 1000));
           playerSeek.style.setProperty('--p', (ratio * 100).toFixed(2) + '%');
-          playerSeek.setAttribute('aria-valuetext', formatTime(time) + ' of ' + formatDuration(duration));
+          playerSeek.setAttribute('aria-valuetext', t('player.timeOf', {
+            time: formatTime(time),
+            total: formatDuration(duration)
+          }));
         }
         track.node.style.setProperty('--p', ratio.toFixed(4));
       }
@@ -605,21 +633,21 @@
 
     audio.addEventListener('ended', () => {
       if (state.index < tracks.length - 1) {
-        playTrack(state.index + 1);
+        playTrack(state.index + 1, { scroll: false });
         return;
       }
       setPlaying(false);
       state.loading = false;
       if (player) player.classList.remove('is-loading');
       if (currentEl) currentEl.textContent = formatDuration(tracks[state.index].duration);
-      toast('End of the avenue.');
+      toast(t('toasts.endOfAvenue'));
     });
 
     audio.addEventListener('error', () => {
       state.loading = false;
       if (player) player.classList.remove('is-loading');
       setPlaying(false);
-      toast('Could not load this track. Please try again.');
+      toast(t('toasts.trackLoadFailed'));
     });
 
     audio.addEventListener('volumechange', syncVolumeUI);
@@ -634,14 +662,78 @@
     if (closeButton) closeButton.addEventListener('click', closePlayer);
 
     let heroScrollToken = 0;
+    let scrollWaitsForVideo = false;
+    const wideLayout = window.matchMedia('(min-width: 1441px)');
 
     function scrollToTracklist() {
-      const track = state.index >= 0 && tracks[state.index] ? tracks[state.index].node : document.querySelector('.track.is-active');
-      const videoRow = document.querySelector('.tracks__video-row');
-      const anchor = videoRow || track;
-      if (!anchor) return;
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      anchor.scrollIntoView({
+      const header = document.querySelector('.site-header');
+      const player = document.querySelector('.player');
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const playerH = body.classList.contains('has-player') && player ? player.getBoundingClientRect().height : 0;
+      const viewTop = headerH + 12;
+      const viewBottom = window.innerHeight - playerH - 12;
+
+      // On wide screens the tracklist sits beside the film. Scroll by the film
+      // only; the active track is not used as a positioning anchor there.
+      if (wideLayout.matches) {
+        const video = document.querySelector('.tracks__video');
+        if (video) {
+          const target = window.scrollY + video.getBoundingClientRect().top - viewTop;
+          const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+          window.scrollTo({
+            top: Math.max(0, Math.min(target, max)),
+            behavior: reduce ? 'auto' : 'smooth'
+          });
+          return;
+        }
+      }
+
+      const track = state.index >= 0 && tracks[state.index] ? tracks[state.index].node : document.querySelector('.track.is-active');
+      if (!track) return;
+      const videoRow = document.querySelector('.tracks__video-row');
+
+      if (videoRow && videoRow.nextElementSibling === track) {
+        const rect = track.getBoundingClientRect();
+        let transformY = 0;
+        const transform = getComputedStyle(track).transform;
+        if (transform && transform !== 'none') {
+          const match = /matrix\(([^)]+)\)/.exec(transform);
+          if (match) {
+            const parts = match[1].split(',').map(Number);
+            if (parts.length >= 6 && Number.isFinite(parts[5])) transformY = parts[5];
+          }
+        }
+
+        // If the inline film is still expanding, measure the row as it will be
+        // once the transition ends. This lets the page scroll with the transition
+        // instead of waiting for it and then jumping.
+        let videoExpansion = 0;
+        const video = videoRow.querySelector('.tracks__video');
+        if (video) {
+          const videoRect = video.getBoundingClientRect();
+          const marginBottom = parseFloat(getComputedStyle(video).marginBottom) || 0;
+          const finalHeight = window.innerWidth * 0.5625 + 18;
+          videoExpansion = Math.max(0, finalHeight - (videoRect.height + marginBottom));
+        }
+
+        const finalTop = rect.top - transformY;
+        const finalBottom = rect.bottom - transformY + videoExpansion;
+        const available = viewBottom - viewTop;
+        // The active row wins over the film: keep it fully visible and put the
+        // remaining space above it to work, so the video is as visible as possible.
+        const target = rect.height > available
+          ? window.scrollY + finalTop - viewTop
+          : window.scrollY + finalBottom - viewBottom;
+        const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        window.scrollTo({
+          top: Math.max(0, Math.min(target, max)),
+          behavior: reduce ? 'auto' : 'smooth'
+        });
+        return;
+      }
+
+      track.scrollIntoView({
         behavior: reduce ? 'auto' : 'smooth',
         block: 'start',
         inline: 'nearest'
@@ -650,29 +742,37 @@
 
     function scheduleTracklistScroll() {
       const token = ++heroScrollToken;
+      scrollWaitsForVideo = !document.querySelector('.tracks__video-row');
+      const delay = scrollWaitsForVideo ? 120 : 0;
       window.setTimeout(() => {
         if (token !== heroScrollToken) return;
         scrollToTracklist();
-      }, 120);
+      }, delay);
       window.setTimeout(() => {
         if (token === heroScrollToken) heroScrollToken = 0;
       }, 10000);
     }
 
     document.addEventListener('tracks:video-positioned', () => {
-      if (!heroScrollToken) return;
+      if (!heroScrollToken || !scrollWaitsForVideo) return;
+      scrollWaitsForVideo = false;
       window.setTimeout(() => {
         if (heroScrollToken) scrollToTracklist();
       }, 40);
     });
 
+    const trackVideo = document.querySelector('.tracks__video');
+    if (trackVideo) {
+      trackVideo.addEventListener('transitionend', (event) => {
+        if (event.target !== trackVideo || event.propertyName !== 'height') return;
+        if (!heroScrollToken || !state.playing) return;
+        scrollToTracklist();
+      });
+    }
+
     playButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const wasPlaying = state.playing;
         togglePlayback();
-        if (!wasPlaying && button.hasAttribute('data-scroll-tracklist')) {
-          scheduleTracklistScroll();
-        }
       });
     });
 
@@ -692,7 +792,8 @@
           if (audio.paused) {
             if (film) film.pause();
             revealPlayer();
-            audio.play().catch(() => toast('Playback could not start. Tap play to try again.'));
+            audio.play().catch(() => toast(t('toasts.playbackFailed')));
+            scheduleTracklistScroll();
           } else {
             audio.pause();
           }
@@ -711,7 +812,10 @@
         const ratio = Number(playerSeek.value) / 1000;
         playerSeek.style.setProperty('--p', (ratio * 100).toFixed(2) + '%');
         if (currentEl) currentEl.textContent = formatTime(ratio * duration);
-        playerSeek.setAttribute('aria-valuetext', formatTime(ratio * duration) + ' of ' + formatDuration(duration));
+        playerSeek.setAttribute('aria-valuetext', t('player.timeOf', {
+          time: formatTime(ratio * duration),
+          total: formatDuration(duration)
+        }));
       });
 
       playerSeek.addEventListener('change', () => {
@@ -781,6 +885,13 @@
     syncVolumeUI();
     setPlaying(false);
     updateTime();
+
+    document.addEventListener('i18n:changed', () => {
+      syncVolumeUI();
+      setPlaying(state.playing);
+      setActive(state.index);
+      updateTime();
+    });
   }
 
   /* ---------- film ---------- */
@@ -810,7 +921,10 @@
           const ratio = duration > 0 ? Math.min(1, Math.max(0, time / duration)) : 0;
           seek.value = String(Math.round(ratio * 1000));
           seek.style.setProperty('--p', (ratio * 100).toFixed(2) + '%');
-          seek.setAttribute('aria-valuetext', formatTime(time) + ' of ' + formatTime(duration));
+          seek.setAttribute('aria-valuetext', t('player.timeOf', {
+            time: formatTime(time),
+            total: formatTime(duration)
+          }));
         }
       }
 
@@ -820,7 +934,7 @@
         filmEl.classList.remove('is-playing');
         video.pause();
         if (caption) {
-          caption.innerHTML = 'PLAY THE FILM<br><small>00:30 · SOUND ON</small>';
+          caption.innerHTML = t('film.playOverlay');
         }
         if (reset) {
           video.currentTime = 0;
@@ -834,7 +948,7 @@
         filmEl.classList.remove('is-poster');
         if (video.ended || video.currentTime >= getDuration() - 0.1) video.currentTime = 0;
         video.muted = false;
-        muteButton.setAttribute('aria-label', 'Mute film');
+        muteButton.setAttribute('aria-label', t('film.mute'));
         filmEl.classList.remove('is-muted');
         overlay.hidden = true;
         controls.hidden = false;
@@ -842,7 +956,7 @@
           filmEl.classList.add('is-playing');
         }).catch(() => {
           showOverlay(false);
-          toast('The film could not start. Please try again.');
+          toast(t('toasts.filmFailed'));
         });
       }
 
@@ -858,12 +972,12 @@
 
       video.addEventListener('play', () => {
         filmEl.classList.add('is-playing');
-        if (toggleButton) toggleButton.setAttribute('aria-label', 'Pause film');
+        if (toggleButton) toggleButton.setAttribute('aria-label', t('film.pause'));
       });
 
       video.addEventListener('pause', () => {
         filmEl.classList.remove('is-playing');
-        if (toggleButton) toggleButton.setAttribute('aria-label', 'Play film');
+        if (toggleButton) toggleButton.setAttribute('aria-label', t('film.play'));
         syncFilmControls();
       });
 
@@ -886,7 +1000,7 @@
         muteButton.addEventListener('click', () => {
           video.muted = !video.muted;
           filmEl.classList.toggle('is-muted', video.muted);
-          muteButton.setAttribute('aria-label', video.muted ? 'Unmute film' : 'Mute film');
+          muteButton.setAttribute('aria-label', video.muted ? t('film.unmute') : t('film.mute'));
         });
       }
 
@@ -896,7 +1010,10 @@
         const ratio = Number(seek.value) / 1000;
         seek.style.setProperty('--p', (ratio * 100).toFixed(2) + '%');
         timeLabel.textContent = formatTime(ratio * duration) + ' / ' + formatTime(duration);
-        seek.setAttribute('aria-valuetext', formatTime(ratio * duration) + ' of ' + formatTime(duration));
+        seek.setAttribute('aria-valuetext', t('player.timeOf', {
+          time: formatTime(ratio * duration),
+          total: formatTime(duration)
+        }));
       });
 
       seek.addEventListener('change', () => {
@@ -912,6 +1029,13 @@
           if (!video.paused) video.pause();
         });
       }
+
+      document.addEventListener('i18n:changed', () => {
+        if (caption && !overlay.hidden) caption.innerHTML = t('film.playOverlay');
+        if (toggleButton) toggleButton.setAttribute('aria-label', video.paused ? t('film.play') : t('film.pause'));
+        if (muteButton) muteButton.setAttribute('aria-label', video.muted ? t('film.unmute') : t('film.mute'));
+        syncFilmControls();
+      });
 
       film = {
         pause() {

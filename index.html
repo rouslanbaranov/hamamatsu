@@ -3,6 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // Pick the language before first paint so Japanese copy never flashes in English.
+    (function () {
+      try {
+        var supported = ['en', 'ja'];
+        var query = String(new URLSearchParams(window.location.search).get('lang') || '').toLowerCase();
+        var stored = '';
+        try { stored = String(window.localStorage.getItem('sa-lang') || '').toLowerCase(); } catch (error) {}
+        var browser = 'en';
+        var preferences = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+        preferences.some(function (preference) {
+          var code = String(preference || '').toLowerCase().slice(0, 2);
+          if (code === 'en' || code === 'ja') { browser = code; return true; }
+          return false;
+        });
+        var language = supported.indexOf(query) > -1 ? query : supported.indexOf(stored) > -1 ? stored : browser;
+        document.documentElement.lang = language;
+        document.documentElement.setAttribute('data-lang', language);
+        document.documentElement.classList.add('i18n-pending');
+        window.__saInitialLang = language;
+        window.setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 3000);
+      } catch (error) {}
+    })();
+  </script>
   <style>html.hero-entrance-pending .hero-poster__portrait picture { visibility: hidden; }</style>
   <script>
     // Decide before the first paint; keep the image available when motion is disabled.
@@ -32,6 +56,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="600">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Summer Avenue — Project Hamamatsu">
   <meta name="twitter:description" content="Eleven city-pop songs for the long way home. The 2026 album from Project Hamamatsu.">
@@ -48,7 +73,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="/hamamatsu/assets/img/hero-portrait-black-full.webp" type="image/webp">
-  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=sakura-soft-34">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=i18n-1">
   <script>
     document.documentElement.classList.add('js');
     // Safety net: if the app script fails or is blocked, reveal the content anyway.
@@ -70,6 +95,7 @@
     "image": "https://rbaranov.ch/hamamatsu/assets/img/cover-summer-avenue-1254.jpg",
     "byArtist": { "@type": "MusicGroup", "name": "Project Hamamatsu" },
     "datePublished": "2026",
+    "inLanguage": ["ja", "en"],
     "numTracks": 11,
     "track": [
       { "@type": "MusicRecording", "name": "もう少しそばにいて", "alternateName": "Stay With Me", "position": 1, "duration": "PT4M54S", "audio": "https://rbaranov.ch/hamamatsu/assets/audio/01-stay-with-me.mp3" },
@@ -88,7 +114,7 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="a11y.skipToContent">Skip to content</a>
   <div class="grain" aria-hidden="true"></div>
 
   <svg class="svg-sprite" aria-hidden="true" focusable="false">
@@ -96,12 +122,25 @@
     <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M6.5 5h4v14h-4zM13.5 5h4v14h-4z"/></symbol>
     <symbol id="icon-prev" viewBox="0 0 24 24"><path d="M6 5h2.2v14H6zM19 5.5v13L9.2 12 19 5.5Z"/></symbol>
     <symbol id="icon-next" viewBox="0 0 24 24"><path d="M15.8 5H18v14h-2.2zM5 5.5v13L14.8 12 5 5.5Z"/></symbol>
+    <symbol id="icon-chevron-up" viewBox="0 0 24 24"><path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24"><path d="m5 9.5 7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="icon-volume" viewBox="0 0 24 24"><path d="M4 9.2h3.6L12.6 5v14l-5-4.2H4V9.2Z"/><path d="M16 8.2a5.2 5.2 0 0 1 0 7.6M18.6 5.6a8.8 8.8 0 0 1 0 12.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
     <symbol id="icon-mute" viewBox="0 0 24 24"><path d="M4 9.2h3.6L12.6 5v14l-5-4.2H4V9.2Z"/><path d="m16 9 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="icon-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="icon-share" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 13v6.5h14V13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="icon-flag-gb" viewBox="0 0 60 30">
+      <rect width="60" height="30" fill="#012169"/>
+      <path d="M0 0 60 30M60 0 0 30" stroke="#fff" stroke-width="6"/>
+      <path d="M0 0 60 30M60 0 0 30" clip-path="url(#flag-gb-diagonal-clip)" stroke="#c8102e" stroke-width="4"/>
+      <path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/>
+      <path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/>
+    </symbol>
+    <symbol id="icon-flag-jp" viewBox="0 0 60 30">
+      <rect width="60" height="30" fill="#fff"/>
+      <circle cx="30" cy="15" r="9" fill="#bc002d"/>
+    </symbol>
     <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></symbol>
     <symbol id="icon-soundcloud" viewBox="0 0 24 24"><path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/></symbol>
     <!-- Monochrome RB mark redrawn from the rbaranov.ch favicon. -->
@@ -110,28 +149,39 @@
         <rect width="64" height="64" fill="#fff"/>
         <text x="32" y="42" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#000">RB</text>
       </mask>
+      <clipPath id="flag-gb-diagonal-clip">
+        <path d="M30 15h30v15zv15H0zH0V15zV0h30z"/>
+      </clipPath>
     </defs>
     <symbol id="icon-rbaranov" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="currentColor" mask="url(#rbaranov-rb-cutout)"/></symbol>
   </svg>
 
   <header class="site-header" id="site-header">
     <div class="container site-header__inner">
-      <a class="brand" href="#top" aria-label="Project Hamamatsu — Summer Avenue">
+      <a class="brand" href="#top" aria-label="Project Hamamatsu — Summer Avenue" data-i18n-attr="aria-label:header.brandAria">
         <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false" aria-hidden="true"><rect width="64" height="64" fill="#FFD23F"/><path fill="#12101F" d="M9 7h14v21h18V7h12l5 5v46H41V37H23v20H9z"/></svg></span>
         <span class="brand__name">Hamamatsu</span>
         <span class="brand__rule" aria-hidden="true"></span>
-        <span class="brand__album">SUMMER AVENUE</span>
+        <span class="brand__album" lang="en">SUMMER AVENUE</span>
       </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="#record">The record</a>
-        <a href="#tracklist">Tracklist</a>
-        <a href="#film">The film</a>
-        <a href="#notes">Notes</a>
+      <nav class="nav" aria-label="Primary" data-i18n-attr="aria-label:nav.primaryAria">
+        <a href="#record" data-i18n="nav.record">The record</a>
+        <a href="#tracklist" data-i18n="nav.tracklist">Tracklist</a>
+        <a href="#film" data-i18n="nav.film">The film</a>
+        <a href="#notes" data-i18n="nav.notes">Notes</a>
       </nav>
       <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="true" aria-label="Switch to English" title="Switch to English" data-i18n-attr="aria-label:lang.switchToEnglish; title:lang.switchToEnglish">
+            <span class="lang-switch__flag" aria-hidden="true"><svg viewBox="0 0 60 30" focusable="false" aria-hidden="true"><use href="#icon-flag-gb"/></svg></span>
+          </button>
+          <button class="lang-switch__btn" type="button" data-lang="ja" aria-pressed="false" aria-label="Switch to Japanese" title="Switch to Japanese" data-i18n-attr="aria-label:lang.switchToJapanese; title:lang.switchToJapanese">
+            <span class="lang-switch__flag" aria-hidden="true"><svg viewBox="0 0 60 30" focusable="false" aria-hidden="true"><use href="#icon-flag-jp"/></svg></span>
+          </button>
+        </div>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu">
           <span class="menu-btn__lines" aria-hidden="true"><i></i><i></i></span>
-          <span class="sr-only">Open menu</span>
+          <span class="sr-only" data-i18n="a11y.openMenu">Open menu</span>
         </button>
       </div>
     </div>
@@ -139,24 +189,25 @@
   </header>
 
   <div class="mobile-menu" id="mobile-menu" hidden>
-    <nav class="mobile-menu__nav" aria-label="Mobile">
-      <a href="#record"><span>01</span>The record</a>
-      <a href="#tracklist"><span>02</span>Tracklist</a>
-      <a href="#film"><span>03</span>The film</a>
-      <a href="#notes"><span>04</span>Notes</a>
+    <nav class="mobile-menu__nav" aria-label="Mobile" data-i18n-attr="aria-label:nav.mobileAria">
+      <a href="#record"><span class="mobile-menu__index">01</span><span class="mobile-menu__label" data-i18n="nav.record">The record</span></a>
+      <a href="#tracklist"><span class="mobile-menu__index">02</span><span class="mobile-menu__label" data-i18n="nav.tracklist">Tracklist</span></a>
+      <a href="#film"><span class="mobile-menu__index">03</span><span class="mobile-menu__label" data-i18n="nav.film">The film</span></a>
+      <a href="#notes"><span class="mobile-menu__index">04</span><span class="mobile-menu__label" data-i18n="nav.notes">Notes</span></a>
     </nav>
     <div class="mobile-menu__foot">
       <img src="/hamamatsu/assets/img/cover-summer-avenue-200.jpg" width="80" height="80" alt="" loading="lazy">
       <div>
-        <p class="mobile-menu__title">SUMMER AVENUE</p>
-        <p class="mobile-menu__meta">Project Hamamatsu · 2026 · 11 TRACKS</p>
+        <p class="mobile-menu__title" lang="en">SUMMER AVENUE</p>
+        <p class="mobile-menu__meta" data-i18n="menu.meta">Project Hamamatsu · 2026 · 11 TRACKS</p>
       </div>
     </div>
   </div>
 
   <noscript>
     <div class="noscript">
-      <p>The full player needs JavaScript. You can still listen directly: <a href="/hamamatsu/assets/audio/03-summer-avenue.mp3">Summer Avenue (MP3)</a>.</p>
+      <p lang="en">The full player needs JavaScript. You can still listen directly: <a href="/hamamatsu/assets/audio/03-summer-avenue.mp3">Summer Avenue (MP3)</a>.</p>
+      <p lang="ja">全曲プレイヤーにはJavaScriptが必要です。こちらから直接聴くこともできます：<a href="/hamamatsu/assets/audio/03-summer-avenue.mp3">サマー・アベニュー（MP3）</a>。</p>
     </div>
   </noscript>
 
@@ -219,90 +270,90 @@
           <h1 class="hero-poster__title" id="hero-title">
             <span class="hero-poster__jp" lang="ja">サマー・<br>アベニュー</span>
             <span class="hero-poster__en-row">
-              <span class="hero-poster__en">SUMMER<br>AVENUE</span>
-              <span class="hero-poster__city-pop" aria-hidden="true">’80s-style City Pop</span>
+              <span class="hero-poster__en" lang="en">SUMMER<br>AVENUE</span>
+              <span class="hero-poster__city-pop" aria-hidden="true" data-i18n="hero.cityPop">’80s-style City Pop</span>
             </span>
           </h1>
-          <p class="hero-poster__lede">The 2026 album from Project Hamamatsu — Japanese and English, in eleven tracks.</p>
-          <p class="hero-poster__meta">11 TRACKS <span>·</span> 46:05 <span>·</span> RB–001</p>
+          <p class="hero-poster__lede" data-i18n="hero.lede">The 2026 album from Project Hamamatsu — Japanese and English, in eleven tracks.</p>
+          <p class="hero-poster__meta" data-i18n-html="hero.meta">11 TRACKS <span>·</span> 46:05 <span>·</span> RB–001</p>
         </div>
 
         <div class="hero-poster__portrait">
           <picture>
             <source type="image/webp" srcset="/hamamatsu/assets/img/hero-portrait-black-full.webp">
-            <img src="/hamamatsu/assets/img/hero-portrait-black-full.png" width="1024" height="1536" alt="Portrait of the Project Hamamatsu character, chin raised, wearing a black Hamamatsu T-shirt." fetchpriority="high" decoding="async">
+            <img src="/hamamatsu/assets/img/hero-portrait-black-full.png" width="1024" height="1536" alt="Portrait of the Project Hamamatsu character, chin raised, wearing a black Hamamatsu T-shirt." fetchpriority="high" decoding="async" data-i18n-attr="alt:hero.portraitAlt">
           </picture>
         </div>
 
         <div class="hero-poster__actions">
-          <button class="btn btn--dark btn--hero" type="button" data-play-album data-scroll-tracklist data-label-play="Play the album" aria-pressed="false">
+          <button class="btn btn--dark btn--hero" type="button" data-play-album aria-label="Play the album" aria-pressed="false" data-i18n-attr="aria-label:hero.playAlbum">
             <span class="btn__icon" aria-hidden="true">
               <svg class="icon-play"><use href="#icon-play"/></svg>
               <svg class="icon-pause"><use href="#icon-pause"/></svg>
             </span>
-            <span class="btn__label" data-play-label>Play the album</span>
+            <span class="btn__label" data-play-label data-i18n="hero.playAlbum">Play the album</span>
           </button>
           <a class="hero-poster__film-link" href="#film">
-            Watch the film
+            <span data-i18n="hero.watchFilm">Watch the film</span>
             <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
           </a>
         </div>
       </div>
 
       <div class="container hero-poster__foot">
-        <nav class="hero-poster__social" aria-label="Social and portfolio links">
+        <nav class="hero-poster__social" aria-label="Social and portfolio links" data-i18n-attr="aria-label:hero.socialAria">
           <a class="social-link" href="https://www.linkedin.com/in/rbaranov/" target="_blank" rel="noopener noreferrer">
             <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg>
             <span>LinkedIn</span>
-            <span class="sr-only"> (opens in a new tab)</span>
+            <span class="sr-only" data-i18n="a11y.newTab"> (opens in a new tab)</span>
           </a>
           <a class="social-link" href="https://soundcloud.com/rouslan-baranov" target="_blank" rel="noopener noreferrer">
             <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-soundcloud"/></svg>
             <span>SoundCloud</span>
-            <span class="sr-only"> (opens in a new tab)</span>
+            <span class="sr-only" data-i18n="a11y.newTab"> (opens in a new tab)</span>
           </a>
           <a class="social-link" href="https://rbaranov.ch/" target="_blank" rel="noopener noreferrer">
             <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-rbaranov"/></svg>
-            <span>Portfolio</span>
-            <span class="sr-only"> (rbaranov.ch; opens in a new tab)</span>
+            <span data-i18n="hero.portfolio">Portfolio</span>
+            <span class="sr-only" data-i18n="a11y.portfolioNewTab"> (rbaranov.ch; opens in a new tab)</span>
           </a>
         </nav>
-        <a class="hero-poster__scroll" href="#record"><span class="hero-poster__scroll-line" aria-hidden="true"></span>Scroll to the record</a>
-        <p class="hero-poster__edition">FIRST EDITION · 2026</p>
+        <a class="hero-poster__scroll" href="#record"><span class="hero-poster__scroll-line" aria-hidden="true"></span><span data-i18n="hero.scrollToRecord">Scroll to the record</span></a>
+        <p class="hero-poster__edition" data-i18n="hero.edition">FIRST EDITION · 2026</p>
       </div>
     </section>
 
     <section class="record" id="record" aria-labelledby="record-title">
-      <div class="record__side" aria-hidden="true">CITY POP · シティ・ポップ · 2026</div>
+      <div class="record__side" aria-hidden="true" data-i18n="record.side">CITY POP · シティ・ポップ · 2026</div>
       <div class="container record__inner">
         <div class="record__art" data-reveal>
           <div class="record__frame">
             <picture>
               <source type="image/webp" srcset="/hamamatsu/assets/img/cover-summer-avenue-800.webp 800w, /hamamatsu/assets/img/cover-summer-avenue-1254.webp 1254w" sizes="(max-width: 900px) 82vw, 480px">
-              <img src="/hamamatsu/assets/img/cover-summer-avenue-800.jpg" srcset="/hamamatsu/assets/img/cover-summer-avenue-800.jpg 800w, /hamamatsu/assets/img/cover-summer-avenue-1254.jpg 1254w" sizes="(max-width: 900px) 82vw, 480px" width="1254" height="1254" alt="Summer Avenue album artwork: an illustrated evening Japanese street with a mint-green kei van and a figure in a yellow Hamamatsu T-shirt and short-brim straw hat, looking down." loading="lazy" decoding="async">
+              <img src="/hamamatsu/assets/img/cover-summer-avenue-800.jpg" srcset="/hamamatsu/assets/img/cover-summer-avenue-800.jpg 800w, /hamamatsu/assets/img/cover-summer-avenue-1254.jpg 1254w" sizes="(max-width: 900px) 82vw, 480px" width="1254" height="1254" alt="Summer Avenue album artwork: an illustrated evening Japanese street with a mint-green kei van and a figure in a yellow Hamamatsu T-shirt and short-brim straw hat, looking down." loading="lazy" decoding="async" data-i18n-attr="alt:record.coverAlt">
             </picture>
           </div>
-          <p class="record__caption">RB–001 <span>/</span> 2026 <span>/</span> 11 TRACKS</p>
+          <p class="record__caption" data-i18n-html="record.caption">RB–001 <span>/</span> 2026 <span>/</span> 11 TRACKS</p>
         </div>
 
         <div class="record__copy">
           <header class="section-head" data-reveal>
-            <h2 class="display" id="record-title">Two languages.<br>One record.</h2>
+            <h2 class="display" id="record-title" data-i18n-html="record.title">Two languages.<br>One record.</h2>
           </header>
           <div class="record__prose" data-reveal>
-            <p class="lead">Summer Avenue is a record about distance, warm streets, and the hour after sunset.</p>
-            <p>The album moves between Japanese and English; both languages belong to the same world. Around them, the record holds its city-pop balance — bright surfaces, a quiet center, and room to breathe.</p>
+            <p class="lead" data-i18n="record.lead">Summer Avenue is a record about distance, warm streets, and the hour after sunset.</p>
+            <p data-i18n="record.body">The album moves between Japanese and English; both languages belong to the same world. Around them, the record holds its city-pop balance — bright surfaces, a quiet center, and room to breathe.</p>
           </div>
           <dl class="record__meta" data-reveal>
-            <div><dt>Project</dt><dd>Project Hamamatsu</dd></div>
-            <div><dt>Released</dt><dd>2026</dd></div>
-            <div><dt>Tracks</dt><dd>11</dd></div>
-            <div><dt>Runtime</dt><dd>46:05</dd></div>
-            <div><dt>Language</dt><dd>日本語 / English</dd></div>
-            <div><dt>Catalogue</dt><dd>RB–001</dd></div>
+            <div><dt data-i18n="record.meta.project">Project</dt><dd>Project Hamamatsu</dd></div>
+            <div><dt data-i18n="record.meta.released">Released</dt><dd>2026</dd></div>
+            <div><dt data-i18n="record.meta.tracks">Tracks</dt><dd>11</dd></div>
+            <div><dt data-i18n="record.meta.runtime">Runtime</dt><dd>46:05</dd></div>
+            <div><dt data-i18n="record.meta.language">Language</dt><dd data-i18n="record.meta.languageValue">日本語 / English</dd></div>
+            <div><dt data-i18n="record.meta.catalogue">Catalogue</dt><dd>RB–001</dd></div>
           </dl>
           <div class="record__actions" data-reveal>
-            <a class="text-link" href="#tracklist">See the tracklist <svg class="text-link__arrow" aria-hidden="true"><use href="#icon-down"/></svg></a>
+            <a class="text-link" href="#tracklist"><span data-i18n="record.seeTracklist">See the tracklist</span> <svg class="text-link__arrow" aria-hidden="true"><use href="#icon-down"/></svg></a>
           </div>
         </div>
       </div>
@@ -311,9 +362,9 @@
     <div class="interlude" aria-hidden="true">
       <div class="container interlude__inner">
         <div class="interlude__copy">
-          <p class="interlude__label">CITY POP / 2026 / 11 TRACKS</p>
+          <p class="interlude__label" data-i18n="interlude.label">CITY POP / 2026 / 11 TRACKS</p>
           <p class="interlude__jp" lang="ja">サマー・アベニュー</p>
-          <p class="interlude__en">SUMMER AVENUE</p>
+          <p class="interlude__en" lang="en">SUMMER AVENUE</p>
           <p class="interlude__credits">Project Hamamatsu</p>
         </div>
         <figure class="interlude__photo">
@@ -324,7 +375,7 @@
           <figcaption>Hamamatsu <span>/</span> 2026</figcaption>
           <span class="interlude__tape"></span>
         </figure>
-        <div class="interlude__seal"><span>2026</span><em>CITY POP</em></div>
+        <div class="interlude__seal"><span>2026</span><em data-i18n="interlude.seal">CITY POP</em></div>
       </div>
     </div>
 
@@ -332,28 +383,36 @@
       <div class="container">
         <header class="tracks__head">
           <div class="section-head" data-reveal>
-            <h2 class="display" id="tracks-title">The avenue,<br>track by track.</h2>
+            <h2 class="display" id="tracks-title" data-i18n-html="tracks.title">The avenue,<br>track by track.</h2>
           </div>
           <div class="tracks__aside" data-reveal>
-            <p class="tracks__count">11 tracks <span>·</span> 46:05</p>
+            <p class="tracks__count" data-i18n-html="tracks.count">11 tracks <span>·</span> 46:05</p>
           </div>
         </header>
 
         <div class="tracks__stage">
-          <div class="tracks__video" aria-hidden="true">
-            <video class="tracks__video-el is-current" muted playsinline preload="none" disablepictureinpicture></video>
-            <video class="tracks__video-el" muted playsinline preload="none" disablepictureinpicture></video>
-            <div class="tracks__video-shade"></div>
+          <div class="tracks__video">
+            <video class="tracks__video-el is-current" aria-hidden="true" muted playsinline preload="none" disablepictureinpicture></video>
+            <video class="tracks__video-el" aria-hidden="true" muted playsinline preload="none" disablepictureinpicture></video>
+
+            <div class="tracks__video-ui" data-video-ui>
+              <button class="tracks__video-nav" type="button" data-video-prev aria-label="Previous clip" data-i18n-attr="aria-label:tracks.previousClip">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-chevron-up"/></svg>
+              </button>
+              <div class="tracks__video-dots" data-video-dots role="group" aria-label="Background clips" data-i18n-attr="aria-label:tracks.backgroundClips"></div>
+              <button class="tracks__video-nav" type="button" data-video-next aria-label="Next clip" data-i18n-attr="aria-label:tracks.nextClip">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-chevron-down"/></svg>
+              </button>
+            </div>
           </div>
 
           <div class="tracks__list">
-            <div class="tracks__labels" aria-hidden="true"><span>No.</span><span>Track / 曲名</span><span>Time</span></div>
 
             <ol class="tracklist" data-reveal>
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/01-stay-with-me.mp3" data-duration="294" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">01</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">もう少しそばにいて</span><span class="track__sub"><span class="track__en">Stay With Me</span><span class="track__romaji" lang="ja-Latn">Mō sukoshi soba ni ite</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">もう少しそばにいて</span><span class="track__sub"><span class="track__en" lang="en">Stay With Me</span><span class="track__romaji" lang="ja-Latn">Mō sukoshi soba ni ite</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">4:54</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -361,7 +420,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/02-leise-zieht.mp3" data-duration="214.2" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">02</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">春の歌</span><span class="track__sub"><span class="track__en">Leise zieht</span><span class="track__romaji" lang="ja-Latn">Haru no uta</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">春の歌</span><span class="track__sub"><span class="track__en" lang="en">Leise zieht</span><span class="track__romaji" lang="ja-Latn">Haru no uta</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">3:34</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -369,7 +428,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/03-summer-avenue.mp3" data-duration="227.56" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">03</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">サマー・アベニュー</span><span class="track__sub"><span class="track__en">Summer Avenue</span><span class="track__romaji" lang="ja-Latn">Samā abenyū</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">サマー・アベニュー</span><span class="track__sub"><span class="track__en" lang="en">Summer Avenue</span><span class="track__romaji" lang="ja-Latn">Samā abenyū</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">3:48</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -377,7 +436,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/04-reboot.mp3" data-duration="195.48" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">04</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">身体と勇気の体操</span><span class="track__sub"><span class="track__en">Reboot</span><span class="track__romaji" lang="ja-Latn">Shintai to yūki no taisō</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">身体と勇気の体操</span><span class="track__sub"><span class="track__en" lang="en">Reboot</span><span class="track__romaji" lang="ja-Latn">Shintai to yūki no taisō</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">3:15</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -385,7 +444,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/05-lilichka.mp3" data-duration="210" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">05</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">君の愛以外</span><span class="track__sub"><span class="track__en">Lilichka</span><span class="track__romaji" lang="ja-Latn">Kimi no ai igai</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">君の愛以外</span><span class="track__sub"><span class="track__en" lang="en">Lilichka</span><span class="track__romaji" lang="ja-Latn">Kimi no ai igai</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">3:30</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -393,7 +452,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/06-arigato.mp3" data-duration="212.4" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">06</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">遠くで</span><span class="track__sub"><span class="track__en">Arigato</span><span class="track__romaji" lang="ja-Latn">Tōku de</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">遠くで</span><span class="track__sub"><span class="track__en" lang="en">Arigato</span><span class="track__romaji" lang="ja-Latn">Tōku de</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">3:32</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -401,7 +460,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/07-anastasia.mp3" data-duration="230" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">07</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">アナスタシア</span><span class="track__sub"><span class="track__en">Anastasia</span><span class="track__romaji" lang="ja-Latn">Anasutashia</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">アナスタシア</span><span class="track__sub"><span class="track__en" lang="en">Anastasia</span><span class="track__romaji" lang="ja-Latn">Anasutashia</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">3:50</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -409,7 +468,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/08-crossing-into-tomorrow.mp3" data-duration="293.2" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">08</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">風に乗せたメッセージ</span><span class="track__sub"><span class="track__en">Crossing Into Tomorrow</span><span class="track__romaji" lang="ja-Latn">Kaze ni noseta messēji</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">風に乗せたメッセージ</span><span class="track__sub"><span class="track__en" lang="en">Crossing Into Tomorrow</span><span class="track__romaji" lang="ja-Latn">Kaze ni noseta messēji</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">4:53</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -417,7 +476,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/09-shagane.mp3" data-duration="254.48" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">09</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">シャガネ、愛しいシャガネ</span><span class="track__sub"><span class="track__en">Shagane</span><span class="track__romaji" lang="ja-Latn">Shagane, itoshii Shagane</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">シャガネ、愛しいシャガネ</span><span class="track__sub"><span class="track__en" lang="en">Shagane</span><span class="track__romaji" lang="ja-Latn">Shagane, itoshii Shagane</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">4:14</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -425,7 +484,7 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/10-june-ease.mp3" data-duration="303.84" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">10</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">海へ行こう</span><span class="track__sub"><span class="track__en">June Ease</span><span class="track__romaji" lang="ja-Latn">Umi e ikō</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">海へ行こう</span><span class="track__sub"><span class="track__en" lang="en">June Ease</span><span class="track__romaji" lang="ja-Latn">Umi e ikō</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">5:04</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
@@ -433,53 +492,52 @@
           <li class="track">
             <button class="track__btn" type="button" data-src="/hamamatsu/assets/audio/11-blue-tile-reflections.mp3" data-duration="329.96" aria-pressed="false">
               <span class="track__index" aria-hidden="true"><span class="track__num">11</span></span>
-              <span class="track__titles"><span class="track__ja" lang="ja">今夜だけはさよならを言わないで</span><span class="track__sub"><span class="track__en">Blue Tile Reflections</span><span class="track__romaji" lang="ja-Latn">Kon’ya dake wa sayonara o iwanaide</span></span></span>
+              <span class="track__titles"><span class="track__ja" lang="ja">今夜だけはさよならを言わないで</span><span class="track__sub"><span class="track__en" lang="en">Blue Tile Reflections</span><span class="track__romaji" lang="ja-Latn">Kon’ya dake wa sayonara o iwanaide</span></span></span>
               <span class="track__end"><span class="track__icon" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg><svg class="icon-cassette" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1.8" y="4.2" width="20.4" height="15.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.2" y="7.1" width="13.6" height="5.8" rx="1.1" fill="none" stroke="currentColor" stroke-width="1.2"/><g class="cassette__reel"><circle cx="8.7" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.7 8.2v3.6M6.9 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><g class="cassette__reel"><circle cx="15.3" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.3 8.2v3.6M13.5 10h3.6" fill="none" stroke="currentColor" stroke-width="1.1"/></g><path d="M4 16.4h16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="track__time">5:30</span></span>
               <span class="track__progress" aria-hidden="true"></span>
             </button>
           </li>
         </ol>
 
-            <p class="tracks__note">Full album · Japanese / English · 2026 <span>·</span> All songs © Project Hamamatsu</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="film" id="film" aria-labelledby="film-title">
-      <div class="film__word" aria-hidden="true">FILM</div>
+      <div class="film__word" aria-hidden="true" data-i18n="film.word">FILM</div>
       <div class="container film__inner">
         <div class="film__copy" data-reveal>
-          <h2 class="display" id="film-title">A postcard<br>from the avenue.</h2>
-          <p class="lead">Thirty seconds of neon, late trains, and one long look at the camera. A visual companion to the title track.</p>
+          <h2 class="display" id="film-title" data-i18n-html="film.title">A postcard<br>from the avenue.</h2>
+          <p class="lead" data-i18n="film.lead">Thirty seconds of neon, late trains, and one long look at the camera. A visual companion to the title track.</p>
         </div>
 
         <div class="film__media" data-reveal>
           <div class="film-player" data-film>
             <video class="film-player__video" poster="/hamamatsu/assets/img/film-poster.jpg" preload="none" playsinline>
               <source src="/hamamatsu/assets/video/summer-avenue-film-30s.mp4" type="video/mp4">
-              Your browser does not support HTML video.
+              <span data-i18n="film.videoFallback">Your browser does not support HTML video.</span>
             </video>
             <div class="film-player__poster" aria-hidden="true"></div>
             <button class="film-player__overlay" type="button" data-film-play>
               <span class="film-player__play" aria-hidden="true"><svg class="icon-play"><use href="#icon-play"/></svg></span>
-              <span class="film-player__caption">PLAY THE FILM<br><small>00:30 · SOUND ON</small></span>
+              <span class="film-player__caption" data-i18n-html="film.playOverlay">PLAY THE FILM<br><small>00:30 · SOUND ON</small></span>
             </button>
             <div class="film-player__controls" data-film-controls hidden>
-              <button class="film-player__mini" type="button" data-film-toggle aria-label="Pause film">
+              <button class="film-player__mini" type="button" data-film-toggle aria-label="Pause film" data-i18n-attr="aria-label:film.pause">
                 <svg class="icon-play"><use href="#icon-play"/></svg>
                 <svg class="icon-pause"><use href="#icon-pause"/></svg>
               </button>
-              <input class="film-player__seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek within the film">
+              <input class="film-player__seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek within the film" data-i18n-attr="aria-label:film.seek">
               <span class="film-player__time" data-film-time>0:00 / 0:30</span>
-              <button class="film-player__mini" type="button" data-film-mute aria-label="Mute film">
+              <button class="film-player__mini" type="button" data-film-mute aria-label="Mute film" data-i18n-attr="aria-label:film.mute">
                 <svg class="icon-volume"><use href="#icon-volume"/></svg>
                 <svg class="icon-mute"><use href="#icon-mute"/></svg>
               </button>
             </div>
             <span class="film-player__sticker" aria-hidden="true"><strong>00:30</strong><span lang="ja">夏</span></span>
           </div>
-          <p class="film__caption">SUMMER AVENUE — VISUAL COMPANION <span>·</span> 2026</p>
+          <p class="film__caption" data-i18n-html="film.caption">SUMMER AVENUE — VISUAL COMPANION <span>·</span> 2026</p>
         </div>
       </div>
     </section>
@@ -489,7 +547,7 @@
         <div class="notes__media" data-reveal>
           <figure class="notes__art">
             <picture>
-              <img src="/hamamatsu/assets/img/notes-city.svg" width="1000" height="1250" alt="Anime-style illustration of a wide neon-lit city avenue at dusk, with a huge setting sun, overhead wires, and glowing Japanese shop signs." loading="lazy" decoding="async">
+              <img src="/hamamatsu/assets/img/notes-city.svg" width="1000" height="1250" alt="Anime-style illustration of a wide neon-lit city avenue at dusk, with a huge setting sun, overhead wires, and glowing Japanese shop signs." loading="lazy" decoding="async" data-i18n-attr="alt:notes.artAlt">
             </picture>
             <figcaption>Hamamatsu <span>·</span> 2026</figcaption>
           </figure>
@@ -498,20 +556,20 @@
         </div>
         <div class="notes__copy">
           <header class="section-head" data-reveal>
-            <h2 class="display" id="notes-title">For the<br>in-between hours.</h2>
+            <h2 class="display" id="notes-title" data-i18n-html="notes.title">For the<br>in-between hours.</h2>
           </header>
           <div class="notes__prose" data-reveal>
-            <p class="lead">Project Hamamatsu is a city-pop project built around the space between Japanese and English — and the quieter side of the city.</p>
-            <p>Summer Avenue is a record to hear from beginning to end. It treats Japanese and English as one language, and nostalgia as something you can move to.</p>
+            <p class="lead" data-i18n="notes.lead">Project Hamamatsu is a city-pop project built around the space between Japanese and English — and the quieter side of the city.</p>
+            <p data-i18n="notes.body">Summer Avenue is a record to hear from beginning to end. It treats Japanese and English as one language, and nostalgia as something you can move to.</p>
           </div>
           <blockquote class="pullquote" data-reveal>
-            <p>For the long way home.</p>
+            <p data-i18n="notes.quote">For the long way home.</p>
             <cite>— Project Hamamatsu</cite>
           </blockquote>
           <dl class="credits" data-reveal>
-            <div><dt>Music &amp; direction</dt><dd>Project Hamamatsu</dd></div>
-            <div><dt>Year</dt><dd>2026</dd></div>
-            <div><dt>Catalogue</dt><dd>RB–001</dd></div>
+            <div><dt data-i18n="notes.musicDirection">Music &amp; direction</dt><dd>Project Hamamatsu</dd></div>
+            <div><dt data-i18n="notes.year">Year</dt><dd>2026</dd></div>
+            <div><dt data-i18n="notes.catalogue">Catalogue</dt><dd>RB–001</dd></div>
           </dl>
         </div>
       </div>
@@ -520,11 +578,11 @@
     <section class="outro" id="listen" aria-labelledby="listen-title">
       <div class="container outro__inner">
         <div class="outro__actions" data-reveal>
-          <p class="display outro__lede">The full record, in order. Stay a while.</p>
+          <p class="display outro__lede" data-i18n="outro.lede">The full record, in order. Stay a while.</p>
           <div class="outro__buttons">
             <button class="btn btn--outline" type="button" data-share>
               <svg class="btn__icon" aria-hidden="true"><use href="#icon-share"/></svg>
-              <span>Share the page</span>
+              <span data-i18n="outro.share">Share the page</span>
             </button>
           </div>
           <div class="outro__meta">
@@ -534,31 +592,31 @@
           </div>
         </div>
         <div class="outro__head" data-reveal>
-          <h2 class="sr-only" id="listen-title">Summer Avenue — サマー・アベニュー</h2>
+          <h2 class="sr-only" id="listen-title" data-i18n="outro.listenTitle">Summer Avenue — サマー・アベニュー</h2>
           <div class="outro__cassette-stage">
             <span class="outro__cassette-shadow" aria-hidden="true"></span>
             <picture class="outro__cassette">
               <source srcset="/hamamatsu/assets/img/summer-avenue-cassette-cutout.webp" type="image/webp">
-              <img src="/hamamatsu/assets/img/summer-avenue-cassette-cutout.webp" width="1386" height="814" loading="lazy" decoding="async" alt="Summer Avenue by Project Hamamatsu, on a beige cassette with Japanese and English artwork.">
+              <img src="/hamamatsu/assets/img/summer-avenue-cassette-cutout.webp" width="1386" height="814" loading="lazy" decoding="async" alt="Summer Avenue by Project Hamamatsu, on a beige cassette with Japanese and English artwork." data-i18n-attr="alt:outro.cassetteAlt">
             </picture>
           </div>
         </div>
       </div>
-      <nav class="container outro__social" aria-label="Social and portfolio links at the end of the page">
+      <nav class="container outro__social" aria-label="Social and portfolio links at the end of the page" data-i18n-attr="aria-label:outro.socialAria">
         <a class="social-link" href="https://www.linkedin.com/in/rbaranov/" target="_blank" rel="noopener noreferrer">
           <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg>
           <span>LinkedIn</span>
-          <span class="sr-only"> (opens in a new tab)</span>
+          <span class="sr-only" data-i18n="a11y.newTab"> (opens in a new tab)</span>
         </a>
         <a class="social-link" href="https://soundcloud.com/rouslan-baranov" target="_blank" rel="noopener noreferrer">
           <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-soundcloud"/></svg>
           <span>SoundCloud</span>
-          <span class="sr-only"> (opens in a new tab)</span>
+          <span class="sr-only" data-i18n="a11y.newTab"> (opens in a new tab)</span>
         </a>
         <a class="social-link" href="https://rbaranov.ch/" target="_blank" rel="noopener noreferrer">
           <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-rbaranov"/></svg>
-          <span>Portfolio</span>
-          <span class="sr-only"> (rbaranov.ch; opens in a new tab)</span>
+          <span data-i18n="hero.portfolio">Portfolio</span>
+          <span class="sr-only" data-i18n="a11y.portfolioNewTab"> (rbaranov.ch; opens in a new tab)</span>
         </a>
       </nav>
     </section>
@@ -568,31 +626,31 @@
     <div class="container footer__inner">
       <div class="footer__brand">
         <span class="brand__mark brand__mark--footer" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false" aria-hidden="true"><rect width="64" height="64" fill="#FFD23F"/><path fill="#12101F" d="M9 7h14v21h18V7h12l5 5v46H41V37H23v20H9z"/></svg></span>
-        <p class="footer__name">Project Hamamatsu<br><span>SUMMER AVENUE</span></p>
+        <p class="footer__name" lang="en">Project Hamamatsu<br><span>SUMMER AVENUE</span></p>
       </div>
-      <nav class="footer__nav" aria-label="Footer">
-        <a href="#record">The record</a>
-        <a href="#tracklist">Tracklist</a>
-        <a href="#film">The film</a>
-        <a href="#notes">Notes</a>
-        <a href="#listen">Listen</a>
+      <nav class="footer__nav" aria-label="Footer" data-i18n-attr="aria-label:nav.footerAria">
+        <a href="#record" data-i18n="nav.record">The record</a>
+        <a href="#tracklist" data-i18n="nav.tracklist">Tracklist</a>
+        <a href="#film" data-i18n="nav.film">The film</a>
+        <a href="#notes" data-i18n="nav.notes">Notes</a>
+        <a href="#listen" data-i18n="nav.listen">Listen</a>
       </nav>
       <div class="footer__meta">
-        <p>© 2026 Project Hamamatsu. All rights reserved.</p>
+        <p data-i18n="footer.copyright">© 2026 Project Hamamatsu. All rights reserved.</p>
         <p lang="ja">サマー・アベニュー · 夏の大通り</p>
-        <p>CITY POP · 2026</p>
+        <p data-i18n="footer.cityPop">CITY POP · 2026</p>
       </div>
-      <a class="footer__top" href="#top">Back to top <svg aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+      <a class="footer__top" href="#top"><span data-i18n="footer.backToTop">Back to top</span> <svg aria-hidden="true"><use href="#icon-arrow"/></svg></a>
     </div>
   </footer>
 
   <audio id="audio" preload="none"></audio>
 
-  <div class="player" id="player" role="region" aria-label="Album player" aria-hidden="true" inert>
-    <input class="player__seek" id="player-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek within the current track">
+  <div class="player" id="player" role="region" aria-label="Album player" aria-hidden="true" inert data-i18n-attr="aria-label:player.region">
+    <input class="player__seek" id="player-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek within the current track" data-i18n-attr="aria-label:player.seek">
     <div class="container player__inner">
       <a class="player__info" href="#tracklist">
-        <span class="sr-only">Go to tracklist</span>
+        <span class="sr-only" data-i18n="player.goToTracklist">Go to tracklist</span>
         <img class="player__cover" src="/hamamatsu/assets/img/cover-summer-avenue-200.jpg" width="200" height="200" alt="">
         <span class="player__text">
           <span class="player__title" data-player-title>Summer Avenue</span>
@@ -600,22 +658,22 @@
         </span>
       </a>
       <div class="player__controls">
-        <button class="player__btn" type="button" data-player-prev aria-label="Previous track"><svg class="icon-prev" aria-hidden="true"><use href="#icon-prev"/></svg></button>
-        <button class="player__play" type="button" data-player-toggle aria-label="Play">
+        <button class="player__btn" type="button" data-player-prev aria-label="Previous track" data-i18n-attr="aria-label:player.previous"><svg class="icon-prev" aria-hidden="true"><use href="#icon-prev"/></svg></button>
+        <button class="player__play" type="button" data-player-toggle aria-label="Play" data-i18n-attr="aria-label:player.play">
           <svg class="icon-play"><use href="#icon-play"/></svg>
           <svg class="icon-pause"><use href="#icon-pause"/></svg>
         </button>
-        <button class="player__btn" type="button" data-player-next aria-label="Next track"><svg class="icon-next" aria-hidden="true"><use href="#icon-next"/></svg></button>
+        <button class="player__btn" type="button" data-player-next aria-label="Next track" data-i18n-attr="aria-label:player.next"><svg class="icon-next" aria-hidden="true"><use href="#icon-next"/></svg></button>
       </div>
       <div class="player__time"><span data-current>0:00</span><span class="player__time-sep">/</span><span data-total>0:00</span></div>
       <div class="player__volume">
-        <button class="player__btn player__btn--volume" type="button" data-player-mute aria-label="Mute">
+        <button class="player__btn player__btn--volume" type="button" data-player-mute aria-label="Mute" data-i18n-attr="aria-label:player.mute">
           <svg class="icon-volume"><use href="#icon-volume"/></svg>
           <svg class="icon-mute"><use href="#icon-mute"/></svg>
         </button>
-        <input class="player__volume-range" id="player-volume" type="range" min="0" max="1" step="0.01" value="0.85" aria-label="Volume">
+        <input class="player__volume-range" id="player-volume" type="range" min="0" max="1" step="0.01" value="0.85" aria-label="Volume" data-i18n-attr="aria-label:player.volume">
       </div>
-      <button class="player__btn player__close" type="button" data-player-close aria-label="Stop and close player">
+      <button class="player__btn player__close" type="button" data-player-close aria-label="Stop and close player" data-i18n-attr="aria-label:player.close">
         <svg class="icon-close" aria-hidden="true"><use href="#icon-close"/></svg>
       </button>
     </div>
@@ -623,9 +681,12 @@
 
   <div class="toast" role="status" aria-live="polite" data-toast></div>
   <p class="sr-only" aria-live="polite" data-player-status></p>
+  <p class="sr-only" aria-live="polite" data-i18n-status></p>
 
-  <script src="/hamamatsu/assets/js/main.js?v=player-scroll" defer></script>
+  <script src="/hamamatsu/assets/js/vendor/i18next.min.js" defer></script>
+  <script src="/hamamatsu/assets/js/i18n.js?v=1" defer></script>
+  <script src="/hamamatsu/assets/js/main.js?v=i18n-1" defer></script>
   <script src="/hamamatsu/assets/js/hero-entrance.js?v=3" defer></script>
-  <script src="/hamamatsu/assets/js/tracks-video.js?v=12" defer></script>
+  <script src="/hamamatsu/assets/js/tracks-video.js?v=i18n-1" defer></script>
 </body>
 </html>
