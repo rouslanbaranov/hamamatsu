@@ -1907,22 +1907,30 @@ body.is-playing .vinyl { animation-play-state: running; }
 }
 
 @media (min-width: 1441px) {
-  /* Keep the full 16:9 frame on screen: cap the film height by the space
-     between the header and the player. When the width no longer fits that
-     height, the film keeps its ratio and leaves dark gaps on the sides.
-     The tracklist overlay is inset by the same gap so it always stays on
-     the visible film instead of climbing onto the empty edges. */
-  .tracks {
-    --film-h: min(56.25vw, calc(100svh - var(--header-h) - var(--player-h)));
-    --film-gap: max(0px, calc(50vw - var(--film-h) * 0.8888889));
-  }
-
+  /* Put the tracklist outside the film: a two-column stage with the video
+     on the left and the tracks on the right. The film is sized by the
+     available width and by the space between header and player, so it
+     always keeps 16:9 and stays fully visible. */
   .tracks.is-video-active .tracks__stage {
-    min-height: var(--film-h);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    column-gap: clamp(20px, 2.2vw, 40px);
+    align-items: start;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 0 var(--pad);
   }
 
-  .tracks__video {
-    height: var(--film-h);
+  .tracks.is-video-active .tracks__video {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(100%, calc((100svh - var(--header-h) - var(--player-h)) * 16 / 9));
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+    justify-self: end;
+    align-self: start;
   }
 
   .tracks__video-el {
@@ -1931,10 +1939,9 @@ body.is-playing .vinyl { animation-play-state: running; }
   }
 
   .tracks.is-video-active .tracks__list {
+    grid-column: 2;
     width: max-content;
-    margin-left: auto;
-    margin-right: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw + var(--film-gap));
+    margin: 0;
   }
 
   .tracks.is-video-active .track__btn {
