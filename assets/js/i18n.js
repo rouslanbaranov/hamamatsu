@@ -113,7 +113,7 @@
           caption: 'SUMMER AVENUE — VISUAL COMPANION <span>·</span> 2026'
         },
         notes: {
-          artAlt: 'Anime-style illustration of a wide neon-lit city avenue at dusk, with a huge setting sun, overhead wires, and glowing Japanese shop signs.',
+          artAlt: 'A woman in a floral dress presents the Summer Avenue cassette with both hands against a neon city at dusk.',
           title: 'For the<br>in-between hours.',
           lead: 'Project Hamamatsu is a city-pop project built around the space between Japanese and English — and the quieter side of the city.',
           body: 'Summer Avenue is a record to hear from beginning to end. It treats Japanese and English as one language, and nostalgia as something you can move to.',
@@ -265,7 +265,7 @@
           caption: 'SUMMER AVENUE — ビジュアル・コンパニオン <span>·</span> 2026'
         },
         notes: {
-          artAlt: '夕暮れの広いネオンの街路を描いたアニメ調のイラスト。巨大な夕日、頭上を走る電線、光る日本語の看板。',
+          artAlt: '花柄のワンピースを着た女性が、夕暮れのネオン街を背景に、Summer Avenueのカセットを両手で紹介しています。',
           title: 'その隙間の<br>時間のために。',
           lead: 'Project Hamamatsuは、日本語と英語のあいだ、そして街の静かな側に寄り添うシティポップ・プロジェクト。',
           body: '『サマー・アベニュー』は、最初から最後まで通して聴くレコード。日本語と英語をひとつの言語として扱い、ノスタルジーを身体で動かせるものとして描いている。',

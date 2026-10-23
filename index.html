@@ -73,7 +73,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="/hamamatsu/assets/img/hero-portrait-black-full.webp" type="image/webp">
-  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=i18n-1">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=i18n-katik-2">
   <script>
     document.documentElement.classList.add('js');
     // Safety net: if the app script fails or is blocked, reveal the content anyway.
@@ -546,9 +546,11 @@
       <div class="container notes__inner">
         <div class="notes__media" data-reveal>
           <figure class="notes__art">
-            <picture>
-              <img src="/hamamatsu/assets/img/notes-city.svg" width="1000" height="1250" alt="Anime-style illustration of a wide neon-lit city avenue at dusk, with a huge setting sun, overhead wires, and glowing Japanese shop signs." loading="lazy" decoding="async" data-i18n-attr="alt:notes.artAlt">
-            </picture>
+            <div class="notes__scene">
+              <img class="notes__city" src="/hamamatsu/assets/img/notes-city.svg" width="1000" height="1250" alt="" loading="lazy" decoding="async">
+              <img class="notes__presenter" src="/hamamatsu/assets/img/notes-katik-cassette.webp" width="1024" height="1536" alt="A woman in a floral dress presents the Summer Avenue cassette with both hands against a neon city at dusk." data-i18n-attr="alt:notes.artAlt" loading="lazy" decoding="async">
+            </div>
+
             <figcaption>Hamamatsu <span>·</span> 2026</figcaption>
           </figure>
           <span class="notes__tape" aria-hidden="true"><span class="notes__tape-jp" lang="ja">サマー・アベニュー</span><span class="notes__tape-en">SUMMER AVENUE</span></span>
