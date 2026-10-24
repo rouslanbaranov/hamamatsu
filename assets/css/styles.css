@@ -400,7 +400,7 @@ html[data-lang="ja"] .lang-switch__btn[data-lang="ja"]::after,
   justify-content: center;
   width: 34px;
   height: 28px;
-  margin-left: var(--header-actions-gap);
+  margin-left: calc(var(--header-actions-gap) * 3);
   padding: 0;
   border-radius: 2px;
   color: inherit;
@@ -3462,8 +3462,12 @@ html[lang="ja"] .mobile-menu__meta { letter-spacing: 0.06em; }
   .video-toggle__icon { width: 26px; height: 26px; }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 390px) {
   .site-header__inner { gap: 8px; }
+}
+
+@media (max-width: 349px) {
+  .video-toggle { margin-left: var(--header-actions-gap); }
 }
 
 /* ------------------------------------------------------------
