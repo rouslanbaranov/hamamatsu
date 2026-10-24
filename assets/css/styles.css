@@ -1648,6 +1648,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   color: var(--cream);
   background: transparent;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: background-color 0.2s var(--ease), color 0.2s var(--ease),
     transform 0.2s var(--ease);
 }
@@ -1659,9 +1660,11 @@ body.is-playing .vinyl { animation-play-state: running; }
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
 }
 
-.tracks__video-nav:hover {
-  color: var(--ink);
-  background: var(--cream);
+@media (hover: hover) {
+  .tracks__video-nav:hover {
+    color: var(--ink);
+    background: var(--cream);
+  }
 }
 
 .tracks__video-nav:active {
@@ -1682,6 +1685,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   padding: 0;
   border-radius: 999px;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tracks__video-dot::before {
@@ -1698,9 +1702,14 @@ body.is-playing .vinyl { animation-play-state: running; }
   transition: background-color 0.2s var(--ease), transform 0.25s var(--ease);
 }
 
-.tracks__video-dot:hover::before,
 .tracks__video-dot:focus-visible::before {
   background: var(--cream);
+}
+
+@media (hover: hover) {
+  .tracks__video-dot:hover::before {
+    background: var(--cream);
+  }
 }
 
 .tracks__video-dot[aria-current="true"]::before {
