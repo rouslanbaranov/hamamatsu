@@ -11,6 +11,7 @@
   const SUPPORTED = ['en', 'ja'];
   const FALLBACK = 'en';
   const STORAGE_KEY = 'sa-lang';
+  const preferenceStore = window.store;
 
   const resources = {
     en: {
@@ -331,14 +332,19 @@
 
   function readStoredLanguage() {
     try {
-      return normalize(window.localStorage.getItem(STORAGE_KEY));
+      if (!preferenceStore || typeof preferenceStore.get !== 'function') return '';
+      return normalize(preferenceStore.get(STORAGE_KEY));
     } catch (error) {
       return '';
     }
   }
 
   function storeLanguage(language) {
-    try { window.localStorage.setItem(STORAGE_KEY, language); } catch (error) { /* private mode */ }
+    try {
+      if (preferenceStore && typeof preferenceStore.set === 'function') {
+        preferenceStore.set(STORAGE_KEY, language);
+      }
+    } catch (error) { /* private mode */ }
   }
 
   function detectLanguage() {

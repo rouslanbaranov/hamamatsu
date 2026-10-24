@@ -36,14 +36,15 @@ The official album site streams the full record in order, with a custom player, 
 
 ## Stack
 
-A deliberately simple static site — no framework, no bundler, no build step, and one vendored runtime library.
+A deliberately simple static site — no framework, no bundler, no build step, and two vendored runtime libraries.
 
 - **HTML5** with semantic landmarks, ARIA, and `MusicAlbum` JSON-LD.
 - **CSS3** with custom properties, Grid/Flexbox, fluid typography, and no dependencies.
 - **Vanilla JavaScript** for the custom audio player, film player, mobile menu, reveals, and share action.
 - **i18n:** **i18next 26** (vendored UMD build, MIT) for English and Japanese interface copy, metadata, ARIA labels, player/film states, and the header flag switcher. The library lives in `assets/js/vendor/`; no package install is required.
+- **Storage:** **store2 2.14.4** (vendored UMD build, MIT) for the selected language (`sa-lang`) and the background-video preference (`sa-videos`). The library lives in `assets/js/vendor/`; no package install is required.
 - **Audio:** native `HTMLAudioElement` + **Media Session API**; full-album stream, seek, next/previous, volume, auto-advance.
-- **Video:** native HTML5 video with custom controls, a poster, and a non-interactive full-width progress bar on the background tracklist clips.
+- **Video:** native HTML5 video with custom controls, a poster, and a non-interactive full-width progress bar on the background tracklist clips; a header toggle shows or hides those clips while tracks play.
 - **Fonts:** Archivo Black, Dela Gothic One, Space Grotesk, Noto Sans JP (Google Fonts).
 - **Hosting:** Vercel, deployed from the `main` branch of `rouslanbaranov/hamamatsu`.
 - **QA:** Playwright + Chromium; axe-core reports **0 WCAG A/AA violations** in both languages at desktop, mobile, playing, and open-menu states. The two remaining incomplete checks are the contrast-over-grain/media heuristic and the approved film having no separate captions track.
@@ -79,7 +80,7 @@ The Record shows the new official cover flat — the 1254×1254 artwork has no a
 │   │   ├── i18n.js         # i18next setup + English/Japanese dictionaries
 │   │   ├── main.js
 │   │   ├── tracks-video.js
-│   │   └── vendor/         # vendored i18next UMD build + MIT license
+│   │   └── vendor/         # vendored i18next + store2 UMD builds with MIT licenses
 │   └── video/              # 30s film, 720×1280 H.264
 ├── docs/                   # README previews + section screenshots
 ├── tools/og.html           # source for the social preview
@@ -117,6 +118,7 @@ Previews are cached per URL. After replacing the image, re-scrape with the Faceb
 - **Player behaviour:** `assets/js/main.js`.
 - **Cover / hero cutout / portrait / poster:** `assets/img/` — the hero uses `hero-portrait-black-full.png` with a `hero-portrait-black-full.webp` source and no crop; the collage uses the 660×470 `character-black-2026` crop. The full sheets are not shipped as web assets.
 - **Film:** `assets/video/summer-avenue-film-30s.mp4`, with `assets/img/film-poster.jpg`.
+- **Background video:** the tracklist film clips; the header icon to the right of the language flags shows or hides them during playback. The preference is stored in `sa-videos` through store2.
 - **Social links:** the three centred links at the bottom of the yellow outro (`.outro__social`) and the matching trio in the hero's bottom-left corner (`.hero-poster__social`) open LinkedIn at `https://www.linkedin.com/in/rbaranov/`, SoundCloud at `https://soundcloud.com/rouslan-baranov`, and the rbaranov.ch landing page (the RB favicon, redrawn monochrome).
 - **Streaming / store links:** not wired yet. Add them to the outro section when the album is live on platforms. Release date is shown as **2026** only; update if a specific date is set.
 - **Custom domain:** add a `CNAME`, then update the canonical URL, Open Graph image URL, sitemap, and robots sitemap line.
@@ -128,7 +130,7 @@ The site ships with **English** and **Japanese** interface copy. The dictionarie
 - **Static markup:** add `data-i18n="namespace.key"` for plain text, `data-i18n-html="namespace.key"` when the string contains markup such as `<br>` or separator spans, and `data-i18n-attr="aria-label:namespace.key; title:namespace.key"` for attributes.
 - **Stateful UI:** strings set by JavaScript (player labels, document title, Media Session metadata, share payload, toasts, film controls, background-clip labels) call `t('namespace.key', { ... })` from `assets/js/main.js` or `assets/js/tracks-video.js`. Language changes dispatch `i18n:changed`, and both scripts refresh their current-state labels.
 - **Add a string:** add the key to both dictionaries, then either use one of the data attributes above or call `t()` from JavaScript.
-- **Language selection:** `?lang=en|ja` wins, then the saved `sa-lang` choice, then the first supported browser language. The header flags call `i18next.changeLanguage`, persist the choice, update the query string with `history.replaceState`, and refresh `<html lang>`, document metadata, alternate `og:locale`, ARIA labels, and image alt text.
+- **Language selection:** `?lang=en|ja` wins, then the saved `sa-lang` choice (read through store2), then the first supported browser language. The header flags call `i18next.changeLanguage`, persist the choice, update the query string with `history.replaceState`, and refresh `<html lang>`, document metadata, alternate `og:locale`, ARIA labels, and image alt text.
 - **Titles:** album and track titles are proper names, so the tracklist keeps both the Japanese title and its English alternate. The surrounding UI, metadata, and accessibility copy switch language.
 
 ## Deployment

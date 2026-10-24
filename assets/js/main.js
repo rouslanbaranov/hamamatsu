@@ -12,6 +12,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(pointer: fine)');
   const i18n = window.SummerAvenueI18n;
+  const preferenceStore = window.store;
   const t = (key, options) => (i18n ? i18n.t(key, options) : key);
   const currentLanguage = () => (i18n ? i18n.getLanguage() : document.documentElement.lang || 'en');
   const trackTitleForLanguage = (track) => (currentLanguage() === 'ja' ? track.ja : track.en);
@@ -229,7 +230,14 @@
   /* ---------- tracklist background video ---------- */
 
   const videoToggle = $('[data-video-toggle]');
-  let videosEnabled = storage.get('sa-videos', 'on') !== 'off';
+  let videosEnabled = true;
+  try {
+    const storedVideoPreference =
+      preferenceStore && typeof preferenceStore.get === 'function'
+        ? preferenceStore.get('sa-videos', 'on')
+        : 'on';
+    videosEnabled = storedVideoPreference !== 'off';
+  } catch (error) { /* private mode */ }
 
   function updateVideoToggleLabel() {
     if (!videoToggle) return;
@@ -243,7 +251,13 @@
     body.classList.toggle('is-video-hidden', !enabled);
     if (videoToggle) videoToggle.setAttribute('aria-pressed', String(enabled));
     updateVideoToggleLabel();
-    if (persist) storage.set('sa-videos', enabled ? 'on' : 'off');
+    if (persist) {
+      try {
+        if (preferenceStore && typeof preferenceStore.set === 'function') {
+          preferenceStore.set('sa-videos', enabled ? 'on' : 'off');
+        }
+      } catch (error) { /* private mode */ }
+    }
   }
 
   setVideosEnabled(videosEnabled, false);

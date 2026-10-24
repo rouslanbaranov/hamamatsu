@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/hamamatsu/assets/js/vendor/store2.min.js?v=2.14.4"></script>
   <script>
     // Pick the language before first paint so Japanese copy never flashes in English.
     (function () {
@@ -10,7 +11,7 @@
         var supported = ['en', 'ja'];
         var query = String(new URLSearchParams(window.location.search).get('lang') || '').toLowerCase();
         var stored = '';
-        try { stored = String(window.localStorage.getItem('sa-lang') || '').toLowerCase(); } catch (error) {}
+        try { stored = String((window.store && window.store.get ? window.store.get('sa-lang') : '') || '').toLowerCase(); } catch (error) {}
         var browser = 'en';
         var preferences = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
         preferences.some(function (preference) {
@@ -697,8 +698,8 @@
   <p class="sr-only" aria-live="polite" data-i18n-status></p>
 
   <script src="/hamamatsu/assets/js/vendor/i18next.min.js" defer></script>
-  <script src="/hamamatsu/assets/js/i18n.js?v=video-toggle-1" defer></script>
-  <script src="/hamamatsu/assets/js/main.js?v=video-toggle-1" defer></script>
+  <script src="/hamamatsu/assets/js/i18n.js?v=store2-1" defer></script>
+  <script src="/hamamatsu/assets/js/main.js?v=store2-1" defer></script>
   <script src="/hamamatsu/assets/js/hero-entrance.js?v=3" defer></script>
   <script src="/hamamatsu/assets/js/tracks-video.js?v=video-toggle-1" defer></script>
 </body>
