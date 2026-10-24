@@ -318,9 +318,11 @@ html.i18n-pending [data-i18n-html] {
 }
 
 .header-actions {
+  --header-actions-gap: 10px;
+
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--header-actions-gap);
   flex: none;
 }
 
@@ -398,6 +400,7 @@ html[data-lang="ja"] .lang-switch__btn[data-lang="ja"]::after,
   justify-content: center;
   width: 34px;
   height: 28px;
+  margin-left: var(--header-actions-gap);
   padding: 0;
   border-radius: 2px;
   color: inherit;
@@ -3459,6 +3462,10 @@ html[lang="ja"] .mobile-menu__meta { letter-spacing: 0.06em; }
   .video-toggle__icon { width: 26px; height: 26px; }
 }
 
+@media (max-width: 360px) {
+  .site-header__inner { gap: 8px; }
+}
+
 /* ------------------------------------------------------------
    RESPONSIVE
    ------------------------------------------------------------ */
@@ -3570,7 +3577,7 @@ html[lang="ja"] .mobile-menu__meta { letter-spacing: 0.06em; }
     font-size: 8px;
   }
 
-  .header-actions { gap: 7px; }
+  .header-actions { --header-actions-gap: 7px; }
 
   .hero { padding-top: 18px; }
   .hero__inner { padding-top: 10px; padding-bottom: 34px; gap: 34px; }
