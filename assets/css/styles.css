@@ -410,8 +410,8 @@ html[data-lang="ja"] .lang-switch__btn[data-lang="ja"]::after,
 
 .video-toggle__icon {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
 }
 
 .video-toggle__slash {
@@ -3456,7 +3456,7 @@ html[lang="ja"] .mobile-menu__meta { letter-spacing: 0.06em; }
   .lang-switch__btn::after { width: 24px; bottom: -3px; }
   .lang-switch__flag { width: 24px; height: 16px; }
   .video-toggle { width: 32px; height: 26px; }
-  .video-toggle__icon { width: 17px; height: 17px; }
+  .video-toggle__icon { width: 26px; height: 26px; }
 }
 
 /* ------------------------------------------------------------
