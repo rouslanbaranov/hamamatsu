@@ -1,4 +1,4 @@
-/* Background film for the tracklist: five clips, sliding vertically into
+/* Background film for the tracklist: six clips, sliding vertically into
    the next clip. All clips start loading in the background, one after the
    other, as soon as the page starts. Every clip has a dot from the start;
    the loading dot shows a spinner, and only fully loaded clips can be
@@ -19,6 +19,7 @@
   const sources = [
     '/hamamatsu/assets/video/tracklist-katya-tokyo-1080-left-trimmed.mp4',
     '/hamamatsu/assets/video/tracklist-polina-tower-1080.mp4',
+    '/hamamatsu/assets/video/tracklist-olga-leo-tokyo-drift-1080.mp4',
     '/hamamatsu/assets/video/tracklist-alex-boss-1080.mp4',
     '/hamamatsu/assets/video/tracklist-elena-icecream-1080.mp4',
     '/hamamatsu/assets/video/tracklist-midnight-tokyo-riders-1080.mp4'

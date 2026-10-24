@@ -1839,7 +1839,7 @@ body.is-playing .vinyl { animation-play-state: running; }
   }
 
   .tracks__video-ui {
-    gap: 1px;
+    gap: 0;
   }
 
   .tracks__video-nav {
@@ -1848,11 +1848,11 @@ body.is-playing .vinyl { animation-play-state: running; }
   }
 
   .tracks__video-dots {
-    gap: 1px;
+    gap: 0;
   }
 
   .tracks__video-dot {
-    height: 22px;
+    height: 19px;
   }
 }
 
