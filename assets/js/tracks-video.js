@@ -73,7 +73,8 @@
   document.addEventListener('i18n:changed', updateDotLabels);
 
   const isPlaying = () => document.body.classList.contains('is-playing');
-  const shouldActivate = () => ready && isPlaying() && !document.hidden;
+  const shouldActivate = () =>
+    ready && isPlaying() && !document.hidden && !document.body.classList.contains('is-video-hidden');
 
   function clearTimers() {
     window.clearTimeout(slideTimer);

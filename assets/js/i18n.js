@@ -42,7 +42,9 @@
           listen: 'Listen'
         },
         header: {
-          brandAria: 'Project Hamamatsu — Summer Avenue'
+          brandAria: 'Project Hamamatsu — Summer Avenue',
+          hideVideos: 'Hide video clips',
+          showVideos: 'Show video clips'
         },
         menu: {
           meta: 'Project Hamamatsu · 2026 · 11 TRACKS'
@@ -194,7 +196,9 @@
           listen: '聴く'
         },
         header: {
-          brandAria: 'Project Hamamatsu — SUMMER AVENUE（サマー・アベニュー）'
+          brandAria: 'Project Hamamatsu — SUMMER AVENUE（サマー・アベニュー）',
+          hideVideos: '動画クリップを隠す',
+          showVideos: '動画クリップを表示'
         },
         menu: {
           meta: 'Project Hamamatsu · 2026 · 全11曲'

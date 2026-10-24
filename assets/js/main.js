@@ -226,6 +226,36 @@
     if (label) label.textContent = isMenuOpen() ? t('a11y.closeMenu') : t('a11y.openMenu');
   });
 
+  /* ---------- tracklist background video ---------- */
+
+  const videoToggle = $('[data-video-toggle]');
+  let videosEnabled = storage.get('sa-videos', 'on') !== 'off';
+
+  function updateVideoToggleLabel() {
+    if (!videoToggle) return;
+    const label = t(videosEnabled ? 'header.hideVideos' : 'header.showVideos');
+    videoToggle.setAttribute('aria-label', label);
+    videoToggle.setAttribute('title', label);
+  }
+
+  function setVideosEnabled(enabled, persist) {
+    videosEnabled = enabled;
+    body.classList.toggle('is-video-hidden', !enabled);
+    if (videoToggle) videoToggle.setAttribute('aria-pressed', String(enabled));
+    updateVideoToggleLabel();
+    if (persist) storage.set('sa-videos', enabled ? 'on' : 'off');
+  }
+
+  setVideosEnabled(videosEnabled, false);
+
+  if (videoToggle) {
+    videoToggle.addEventListener('click', () => {
+      setVideosEnabled(!videosEnabled, true);
+    });
+  }
+
+  document.addEventListener('i18n:changed', updateVideoToggleLabel);
+
   /* ---------- hero tilt ---------- */
 
   const heroArt = $('.hero-art');
