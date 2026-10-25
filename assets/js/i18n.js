@@ -34,20 +34,22 @@
         },
         nav: {
           primaryAria: 'Primary',
-          mobileAria: 'Mobile',
+          mobileAria: 'Menu',
           footerAria: 'Footer',
           record: 'The record',
           tracklist: 'Tracklist',
+          lyrics: 'Lyrics',
           film: 'The film',
           notes: 'Notes',
           listen: 'Listen'
         },
         header: {
-          brandAria: 'Project Hamamatsu — Summer Avenue',
-          hideVideos: 'Hide video clips',
-          showVideos: 'Show video clips'
+          brandAria: 'Project Hamamatsu — Summer Avenue'
         },
         menu: {
+          preferencesAria: 'Display preferences',
+          video: 'Background video',
+          lyrics: 'Lyrics in the tracklist',
           meta: 'Project Hamamatsu · 2026 · 11 TRACKS'
         },
         lang: {
@@ -102,6 +104,21 @@
           playTrack: 'Play track',
           pauseTrack: 'Pause track'
         },
+        lyrics: {
+          title: 'The words,<br>as they are sung.',
+          count: '11 songs <span>·</span> 46:05',
+          lead: 'All eleven songs, in Japanese, with romaji and Cyrillic for singing along. Open a track to read along.',
+          note: 'Japanese lyrics + romaji / Cyrillic.',
+          follow: 'Follow the lyrics',
+          romaji: 'Romaji',
+          showRomaji: 'Show romaji',
+          hideRomaji: 'Hide romaji',
+          cyrillic: 'Cyrillic',
+          showCyrillic: 'Show Cyrillic',
+          hideCyrillic: 'Hide Cyrillic',
+          indexAria: 'Jump to a song',
+          credit: 'Words © 2026 Project Hamamatsu.'
+        },
         film: {
           word: 'FILM',
           title: 'A postcard<br>from the avenue.',
@@ -145,6 +162,7 @@
           subtitle: 'Project Hamamatsu · {{track}}',
           previous: 'Previous track',
           next: 'Next track',
+          lyrics: 'Lyrics for the current track',
           play: 'Play',
           pause: 'Pause',
           mute: 'Mute',
@@ -188,20 +206,22 @@
         },
         nav: {
           primaryAria: 'メインメニュー',
-          mobileAria: 'モバイルメニュー',
+          mobileAria: 'メニュー',
           footerAria: 'フッターメニュー',
           record: 'レコード',
           tracklist: 'トラックリスト',
+          lyrics: '歌詞',
           film: 'フィルム',
           notes: 'ノート',
           listen: '聴く'
         },
         header: {
-          brandAria: 'Project Hamamatsu — SUMMER AVENUE（サマー・アベニュー）',
-          hideVideos: '動画クリップを隠す',
-          showVideos: '動画クリップを表示'
+          brandAria: 'Project Hamamatsu — SUMMER AVENUE（サマー・アベニュー）'
         },
         menu: {
+          preferencesAria: '表示設定',
+          video: '背景の映像',
+          lyrics: 'トラックリストの歌詞',
           meta: 'Project Hamamatsu · 2026 · 全11曲'
         },
         lang: {
@@ -256,6 +276,21 @@
           playTrack: '曲を再生',
           pauseTrack: '曲を一時停止'
         },
+        lyrics: {
+          title: '歌詞は、<br>歌われるままに。',
+          count: '11曲 <span>·</span> 46:05',
+          lead: '全11曲の日本語詞にローマ字とキリル文字を添えました。曲を開いて、歌いながら読めます。',
+          note: '日本語詞＋ローマ字／キリル文字。',
+          follow: '歌詞を追従',
+          romaji: 'ローマ字',
+          showRomaji: 'ローマ字を表示',
+          hideRomaji: 'ローマ字を隠す',
+          cyrillic: 'キリル文字',
+          showCyrillic: 'キリル文字を表示',
+          hideCyrillic: 'キリル文字を隠す',
+          indexAria: '曲へ移動',
+          credit: '歌詞 © 2026 Project Hamamatsu'
+        },
         film: {
           word: 'フィルム',
           title: '大通りからの<br>ポストカード。',
@@ -299,6 +334,7 @@
           subtitle: 'Project Hamamatsu · {{track}}',
           previous: '前の曲',
           next: '次の曲',
+          lyrics: '再生中の曲の歌詞',
           play: '再生',
           pause: '一時停止',
           mute: 'ミュート',

@@ -215,10 +215,6 @@
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && isMenuOpen()) closeMenu();
     });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 980 && isMenuOpen()) closeMenu(false);
-    }, { passive: true });
   }
 
   document.addEventListener('i18n:changed', () => {
@@ -239,18 +235,10 @@
     videosEnabled = storedVideoPreference !== 'off';
   } catch (error) { /* private mode */ }
 
-  function updateVideoToggleLabel() {
-    if (!videoToggle) return;
-    const label = t(videosEnabled ? 'header.hideVideos' : 'header.showVideos');
-    videoToggle.setAttribute('aria-label', label);
-    videoToggle.setAttribute('title', label);
-  }
-
   function setVideosEnabled(enabled, persist) {
     videosEnabled = enabled;
     body.classList.toggle('is-video-hidden', !enabled);
-    if (videoToggle) videoToggle.setAttribute('aria-pressed', String(enabled));
-    updateVideoToggleLabel();
+    if (videoToggle) videoToggle.checked = enabled;
     if (persist) {
       try {
         if (preferenceStore && typeof preferenceStore.set === 'function') {
@@ -263,12 +251,10 @@
   setVideosEnabled(videosEnabled, false);
 
   if (videoToggle) {
-    videoToggle.addEventListener('click', () => {
-      setVideosEnabled(!videosEnabled, true);
+    videoToggle.addEventListener('change', () => {
+      setVideosEnabled(videoToggle.checked, true);
     });
   }
-
-  document.addEventListener('i18n:changed', updateVideoToggleLabel);
 
   /* ---------- hero tilt ---------- */
 
@@ -712,7 +698,16 @@
     let scrollWaitsForVideo = false;
     const wideLayout = window.matchMedia('(min-width: 1441px)');
 
-    function scrollToTracklist() {
+    const lyricsSection = document.querySelector('.lyrics');
+    const lyricsSectionInView = () => {
+      if (!lyricsSection) return false;
+      const box = lyricsSection.getBoundingClientRect();
+      return box.bottom > 0 && box.top < window.innerHeight;
+    };
+
+    function scrollToTracklist(force) {
+      if (!force && body.classList.contains('follow-lyrics-on') && lyricsSectionInView()) return;
+
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const header = document.querySelector('.site-header');
       const player = document.querySelector('.player');
@@ -787,13 +782,13 @@
       });
     }
 
-    function scheduleTracklistScroll() {
+    function scheduleTracklistScroll(force) {
       const token = ++heroScrollToken;
       scrollWaitsForVideo = !document.querySelector('.tracks__video-row');
       const delay = scrollWaitsForVideo ? 120 : 0;
       window.setTimeout(() => {
         if (token !== heroScrollToken) return;
-        scrollToTracklist();
+        scrollToTracklist(force);
       }, delay);
       window.setTimeout(() => {
         if (token === heroScrollToken) heroScrollToken = 0;
@@ -827,7 +822,7 @@
       playerInfo.addEventListener('click', (event) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
-        scheduleTracklistScroll();
+        scheduleTracklistScroll(true);
       });
     }
 

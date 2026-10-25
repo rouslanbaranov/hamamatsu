@@ -417,7 +417,7 @@
     if (!videoRow) {
       videoRow = document.createElement('li');
       videoRow.className = 'tracks__video-row';
-      videoRow.setAttribute('role', 'none');
+      // A role="none" child of <ol> is invalid ARIA; the row stays a real list item.
     }
     const row = videoRow;
     let moved = false;
