@@ -77,6 +77,56 @@
   const shouldActivate = () =>
     ready && isPlaying() && !document.hidden && !document.body.classList.contains('is-video-hidden');
 
+  const headerEl = document.querySelector('.site-header');
+  const playerEl = document.querySelector('.player');
+  let onScreenPlaying = false;
+  let onScreenFrame = 0;
+
+  function setOnScreenPlaying(value) {
+    if (value === onScreenPlaying) return;
+    onScreenPlaying = value;
+    document.body.classList.toggle('is-on-screen-playing', value);
+  }
+
+  // "On-screen playing" = the accordion layout is active, a track is playing,
+  // and the film sits completely inside the unobstructed viewport between the
+  // fixed header and player. Only then an automatic next-track scroll follows.
+  function syncOnScreenPlaying() {
+    if (
+      !active ||
+      !isPlaying() ||
+      !rowQuery.matches ||
+      document.body.classList.contains('is-video-hidden')
+    ) {
+      setOnScreenPlaying(false);
+      return;
+    }
+    const rect = wrapper.getBoundingClientRect();
+    if (rect.width < 1 || rect.height < 1) {
+      setOnScreenPlaying(false);
+      return;
+    }
+    const headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
+    const playerH =
+      document.body.classList.contains('has-player') && playerEl
+        ? playerEl.getBoundingClientRect().height
+        : 0;
+    const viewTop = headerH;
+    const viewBottom = window.innerHeight - playerH;
+    setOnScreenPlaying(rect.top >= viewTop - 1 && rect.bottom <= viewBottom + 1);
+  }
+
+  function queueOnScreenPlaying() {
+    if (onScreenFrame) return;
+    onScreenFrame = window.requestAnimationFrame(() => {
+      onScreenFrame = 0;
+      syncOnScreenPlaying();
+    });
+  }
+
+  window.addEventListener('scroll', queueOnScreenPlaying, { passive: true });
+  window.addEventListener('resize', queueOnScreenPlaying, { passive: true });
+
   function clearTimers() {
     window.clearTimeout(slideTimer);
     slideTimer = 0;
@@ -326,6 +376,7 @@
       if (token !== flipToken) return;
       flipAnimations = [];
       row.classList.remove('is-dragging');
+      queueOnScreenPlaying();
     });
   }
 
@@ -341,6 +392,7 @@
       stage.insertBefore(wrapper, list);
     }
     row.remove();
+    queueOnScreenPlaying();
   }
 
   function scheduleRestore() {
@@ -401,6 +453,7 @@
       section.dispatchEvent(new CustomEvent('tracks:video-positioned', { bubbles: true }));
       if (active) playCurrent();
     }
+    queueOnScreenPlaying();
   }
 
   function syncPosition() {
@@ -415,6 +468,7 @@
 
   function sync() {
     const next = shouldActivate();
+    queueOnScreenPlaying();
     if (next === active) return;
     active = next;
     window.clearTimeout(uiReadyTimer);

@@ -677,7 +677,10 @@
 
     audio.addEventListener('ended', () => {
       if (state.index < tracks.length - 1) {
-        playTrack(state.index + 1, { scroll: false });
+        // Keep the accordion in view on automatic advances only while the
+        // film is fully on screen; otherwise leave the current scroll alone.
+        const keepOnScreen = body.classList.contains('is-on-screen-playing');
+        playTrack(state.index + 1, { scroll: keepOnScreen });
         return;
       }
       setPlaying(false);
