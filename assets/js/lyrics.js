@@ -30,6 +30,8 @@
   let cyrillic = false;
   let currentLine = null;
   let inlineEnabled = false;
+  const INLINE_SCROLL_MS = 500;
+  let inlineScroll = null;
 
   const pad = (number) => String(number).padStart(2, '0');
   const songFor = (number) => section.querySelector('#lyrics-' + pad(number));
@@ -120,6 +122,7 @@
     romaji = Boolean(enabled);
     document.body.classList.toggle('hide-lyrics-romaji', !romaji);
     if (romajiToggle) romajiToggle.checked = romaji;
+    window.requestAnimationFrame(syncActiveInlineHeight);
     if (persist) {
       try {
         if (preferenceStore) preferenceStore.set('sa-lyrics-romaji', romaji);
@@ -145,6 +148,7 @@
     cyrillic = Boolean(enabled);
     document.body.classList.toggle('hide-lyrics-cyrillic', !cyrillic);
     if (cyrillicToggle) cyrillicToggle.checked = cyrillic;
+    window.requestAnimationFrame(syncActiveInlineHeight);
     if (persist) {
       try {
         if (preferenceStore) preferenceStore.set('sa-lyrics-cyrillic', cyrillic);
@@ -157,6 +161,27 @@
 
   /* ---------- inline lyrics in the active track row ---------- */
 
+  function createInlineGroup() {
+    const group = document.createElement('span');
+    group.className = 'track__lyric-group';
+    group.hidden = true;
+
+    const ja = document.createElement('span');
+    ja.className = 'track__lyric track__lyric--ja';
+    ja.lang = 'ja';
+
+    const romaji = document.createElement('span');
+    romaji.className = 'track__lyric track__lyric--romaji';
+    romaji.lang = 'ja-Latn';
+
+    const cyrillic = document.createElement('span');
+    cyrillic.className = 'track__lyric track__lyric--cyrillic';
+    cyrillic.lang = 'ru';
+
+    group.append(ja, romaji, cyrillic);
+    return group;
+  }
+
   function ensureTrackLyrics() {
     trackRows.forEach((track) => {
       if (track.querySelector('.track__lyrics')) return;
@@ -167,31 +192,15 @@
       block.className = 'track__lyrics';
       block.setAttribute('aria-hidden', 'true');
 
-      const current = document.createElement('span');
-      current.className = 'track__lyric track__lyric--current';
-      current.lang = 'ja';
+      const viewport = document.createElement('span');
+      viewport.className = 'track__lyrics-viewport';
 
-      const currentRomaji = document.createElement('span');
-      currentRomaji.className = 'track__lyric track__lyric--romaji track__lyric--current-romaji';
-      currentRomaji.lang = 'ja-Latn';
+      const trackEl = document.createElement('span');
+      trackEl.className = 'track__lyrics-track';
+      for (let i = 0; i < 3; i += 1) trackEl.append(createInlineGroup());
 
-      const currentCyrillic = document.createElement('span');
-      currentCyrillic.className = 'track__lyric track__lyric--cyrillic track__lyric--current-cyrillic';
-      currentCyrillic.lang = 'ru';
-
-      const next = document.createElement('span');
-      next.className = 'track__lyric track__lyric--next';
-      next.lang = 'ja';
-
-      const nextRomaji = document.createElement('span');
-      nextRomaji.className = 'track__lyric track__lyric--romaji track__lyric--next-romaji';
-      nextRomaji.lang = 'ja-Latn';
-
-      const nextCyrillic = document.createElement('span');
-      nextCyrillic.className = 'track__lyric track__lyric--cyrillic track__lyric--next-cyrillic';
-      nextCyrillic.lang = 'ru';
-
-      block.append(current, currentRomaji, currentCyrillic, next, nextRomaji, nextCyrillic);
+      viewport.append(trackEl);
+      block.append(viewport);
       titles.insertAdjacentElement('afterend', block);
     });
   }
@@ -220,6 +229,153 @@
     return readings;
   }
 
+  function fillInlineGroup(group, line) {
+    if (!group) return;
+    const ja = group.querySelector('.track__lyric--ja');
+    const romaji = group.querySelector('.track__lyric--romaji');
+    const cyrillic = group.querySelector('.track__lyric--cyrillic');
+
+    if (!line) {
+      group.hidden = true;
+      if (ja) ja.textContent = '';
+      if (romaji) romaji.textContent = '';
+      if (cyrillic) cyrillic.textContent = '';
+      return;
+    }
+
+    group.hidden = false;
+    const readings = readingsFor(line);
+    if (ja) ja.textContent = line.textContent.trim();
+    if (romaji) romaji.textContent = readings.romaji;
+    if (cyrillic) cyrillic.textContent = readings.cyrillic;
+  }
+
+  function inlineParts(block) {
+    const viewport = block.querySelector('.track__lyrics-viewport');
+    const track = block.querySelector('.track__lyrics-track');
+    const groups = track ? Array.from(track.children) : [];
+    return { viewport, track, groups };
+  }
+
+  function setInlineRole(group, role) {
+    if (!group) return;
+    group.classList.remove('is-current', 'is-next', 'is-upcoming');
+    if (!group.hidden) group.classList.add('is-' + role);
+  }
+
+  function syncInlineHeight(block) {
+    if (!block) return;
+    const { viewport, track, groups } = inlineParts(block);
+    if (!viewport || !track) return;
+
+    const visible = groups.filter((group) => !group.hidden);
+    const styles = window.getComputedStyle(track);
+    const gap = parseFloat(styles.rowGap || styles.gap || '0') || 0;
+    const first = visible[0];
+    const second = visible[1];
+    const firstHeight = first ? first.getBoundingClientRect().height : 0;
+    const secondHeight = second ? second.getBoundingClientRect().height : 0;
+    viewport.style.height = (firstHeight + (second ? gap + secondHeight : 0)) + 'px';
+  }
+
+  function syncActiveInlineHeight() {
+    if (!inlineEnabled || inlineScroll) return;
+    const active = activeTrack();
+    const block = active ? active.querySelector('.track__lyrics') : null;
+    if (block) syncInlineHeight(block);
+  }
+
+  function cancelInlineScroll() {
+    if (!inlineScroll) return;
+    window.clearTimeout(inlineScroll.timer);
+    const block = inlineScroll.block;
+    const fromIndex = inlineScroll.fromIndex;
+    const track = block ? block.querySelector('.track__lyrics-track') : null;
+    if (track) {
+      track.style.transition = 'none';
+      track.style.transform = 'translateY(0)';
+      const groups = Array.from(track.children);
+      if (groups[0]) setInlineRole(groups[0], 'current');
+      if (groups[1]) setInlineRole(groups[1], 'next');
+      if (groups[2]) setInlineRole(groups[2], 'upcoming');
+      void track.offsetWidth;
+      track.style.transition = '';
+    }
+    if (block) block.dataset.lineIndex = String(fromIndex);
+    inlineScroll = null;
+  }
+
+  function renderInlineRows(block, position, lines) {
+    cancelInlineScroll();
+    const { track, groups } = inlineParts(block);
+    if (!track) return;
+
+    track.style.transition = 'none';
+    track.style.transform = 'translateY(0)';
+
+    const roles = ['current', 'next', 'upcoming'];
+    groups.slice(0, 3).forEach((group, index) => {
+      const line = lines[position + index] || null;
+      fillInlineGroup(group, line);
+      if (line) setInlineRole(group, roles[index]);
+      else group.classList.remove('is-current', 'is-next', 'is-upcoming');
+    });
+
+    block.dataset.lineIndex = String(position);
+    block.dataset.ready = '1';
+    void track.offsetWidth;
+    track.style.transition = '';
+    syncInlineHeight(block);
+  }
+
+  function animateInlineScroll(block, position, lines) {
+    const { track, groups } = inlineParts(block);
+    if (!track || groups.length < 3) {
+      renderInlineRows(block, position, lines);
+      return;
+    }
+
+    const styles = window.getComputedStyle(track);
+    const gap = parseFloat(styles.rowGap || styles.gap || '0') || 0;
+    const distance = groups[0].getBoundingClientRect().height + gap;
+    const target = position;
+    const fromIndex = Number(block.dataset.lineIndex);
+
+    const startGroups = Array.from(track.children);
+    if (startGroups[0]) setInlineRole(startGroups[0], 'upcoming');
+    if (startGroups[1]) setInlineRole(startGroups[1], 'current');
+    if (startGroups[2]) setInlineRole(startGroups[2], 'next');
+    block.dataset.lineIndex = String(target);
+
+    track.style.transition = 'transform ' + INLINE_SCROLL_MS + 'ms linear';
+    void track.offsetWidth;
+    track.style.transform = 'translateY(-' + distance + 'px)';
+
+    const finish = () => {
+      if (!inlineScroll || inlineScroll.block !== block || inlineScroll.target !== target) return;
+      inlineScroll = null;
+
+      const children = Array.from(track.children);
+      track.style.transition = 'none';
+      track.style.transform = 'translateY(0)';
+      if (children[0]) children[0].remove();
+
+      const upcoming = createInlineGroup();
+      track.append(upcoming);
+      const upcomingLine = lines[target + 2] || null;
+      fillInlineGroup(upcoming, upcomingLine);
+      if (upcomingLine) setInlineRole(upcoming, 'upcoming');
+
+      block.dataset.lineIndex = String(target);
+      void track.offsetWidth;
+      track.style.transition = '';
+      syncInlineHeight(block);
+    };
+
+    const timer = window.setTimeout(finish, INLINE_SCROLL_MS + 20);
+    inlineScroll = { block, target, fromIndex, timer };
+  }
+
   function updateTrackLyrics(timeOverride) {
     if (!inlineEnabled) return;
 
@@ -232,50 +388,51 @@
     if (!song || !block) return;
 
     const lines = Array.from(song.querySelectorAll('.lyric-line'));
+    if (!lines.length) return;
+
     const time = Number.isFinite(timeOverride)
       ? timeOverride
       : audio && Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
     const position = indexAt(lines, time);
-    const rowPosition = position >= 0 ? position : (lines.length ? 0 : -1);
-    const line = rowPosition >= 0 ? lines[rowPosition] : null;
-    const nextLine = rowPosition >= 0 && rowPosition + 1 < lines.length
-      ? lines[rowPosition + 1]
-      : null;
-    const currentText = line ? line.textContent.trim() : '';
-    const currentReadings = readingsFor(line);
-    const nextText = nextLine ? nextLine.textContent.trim() : '';
-    const nextReadings = readingsFor(nextLine);
+    const rowPosition = position >= 0 ? position : 0;
 
-    const currentEl = block.querySelector('.track__lyric--current');
-    const currentRomajiEl = block.querySelector('.track__lyric--current-romaji');
-    const currentCyrillicEl = block.querySelector('.track__lyric--current-cyrillic');
-    const nextEl = block.querySelector('.track__lyric--next');
-    const nextRomajiEl = block.querySelector('.track__lyric--next-romaji');
-    const nextCyrillicEl = block.querySelector('.track__lyric--next-cyrillic');
-    let changed = false;
-    const setText = (el, value) => {
-      if (el && el.textContent !== value) {
-        el.textContent = value;
-        changed = true;
-      }
-    };
+    if (inlineScroll && inlineScroll.block !== block) cancelInlineScroll();
 
-    setText(currentEl, currentText);
-    setText(currentRomajiEl, currentReadings.romaji);
-    setText(currentCyrillicEl, currentReadings.cyrillic);
-    setText(nextEl, nextText);
-    setText(nextRomajiEl, nextReadings.romaji);
-    setText(nextCyrillicEl, nextReadings.cyrillic);
+    const ready = block.dataset.ready === '1';
+    const currentIndex = Number(block.dataset.lineIndex);
 
-    if (changed) {
-      block.classList.remove('is-line-change');
-      void block.offsetWidth;
-      block.classList.add('is-line-change');
+    if (!ready) {
+      renderInlineRows(block, rowPosition, lines);
+      return;
     }
+
+    if (inlineScroll) {
+      if (inlineScroll.target === rowPosition) return;
+      cancelInlineScroll();
+      if (rowPosition === currentIndex) {
+        syncInlineHeight(block);
+        return;
+      }
+      renderInlineRows(block, rowPosition, lines);
+      return;
+    }
+
+    if (rowPosition === currentIndex) {
+      syncInlineHeight(block);
+      return;
+    }
+
+    if (rowPosition === currentIndex + 1 && !reduceMotion.matches) {
+      animateInlineScroll(block, rowPosition, lines);
+      return;
+    }
+
+    renderInlineRows(block, rowPosition, lines);
   }
 
   function setInlineLyrics(enabled, persist) {
     inlineEnabled = Boolean(enabled);
+    if (!inlineEnabled) cancelInlineScroll();
     document.body.classList.toggle('has-track-lyrics', inlineEnabled);
 
     if (inlineToggle) inlineToggle.checked = inlineEnabled;
@@ -290,6 +447,7 @@
     }
 
     updateTrackLyrics();
+    syncActiveInlineHeight();
   }
 
   function clearLyricsHash() {
@@ -406,6 +564,14 @@
       attributes: true,
       attributeFilter: ['class']
     });
+  }
+
+  window.addEventListener('resize', () => {
+    window.requestAnimationFrame(syncActiveInlineHeight);
+  });
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => syncActiveInlineHeight());
   }
 
   if (audio) {

@@ -2198,6 +2198,20 @@ body.is-playing .vinyl { animation-play-state: running; }
   .cassette__reel { animation: none; }
 }
 
+.track__main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.track__meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
 .track__titles {
   display: flex;
   flex-direction: column;
@@ -2208,7 +2222,7 @@ body.is-playing .vinyl { animation-play-state: running; }
 .track__ja {
   font-family: var(--font-jp);
   font-weight: 700;
-  font-size: clamp(1rem, 1.45vw, 1.3rem);
+  font-size: clamp(1.2rem, 1.74vw, 1.56rem);
   line-height: 1.35;
   letter-spacing: 0.005em;
 }
@@ -2219,18 +2233,21 @@ body.is-playing .vinyl { animation-play-state: running; }
   align-items: baseline;
   gap: 3px 14px;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 10.8px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(243, 234, 216, 0.6);
   transition: color 0.28s var(--ease);
 }
 
-.track__en { font-weight: 600; }
+.track__en {
+  font-size: 1.2em;
+  font-weight: 600;
+}
 
 .track__romaji {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 12.6px;
   font-weight: 400;
   letter-spacing: 0.01em;
   text-transform: none;
@@ -2292,6 +2309,14 @@ body.is-playing .vinyl { animation-play-state: running; }
   color: var(--ink);
   -webkit-text-stroke: 0;
 }
+
+.track.is-active .track__ja {
+  align-self: flex-start;
+  max-width: 100%;
+  background-image: linear-gradient(transparent 58%, var(--yellow) 58%, var(--yellow) 92%, transparent 92%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
 .track.is-active .track__icon { opacity: 1; transform: translateX(7px); }
 .track.is-active .track__sub { color: rgba(18, 16, 31, 0.82); }
 .track.is-active .track__time { color: rgba(18, 16, 31, 0.82); }
@@ -2328,30 +2353,42 @@ body.is-playing .track.is-playing .track__progress { opacity: 1; }
 .track__lyrics {
   display: none;
   min-width: 0;
-  overflow: hidden;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1px;
   padding-left: 0;
   border-top: 0;
   border-left: 0;
   font-family: var(--font-jp);
-  font-size: clamp(0.66rem, 0.78vw, 0.72rem);
+  font-size: clamp(0.792rem, 0.936vw, 0.864rem);
   line-height: 1.5;
-  color: var(--ink);
+  color: #4a2a24;
 }
 
 body.has-track-lyrics .track.is-active .track__lyrics {
-  display: flex;
-  grid-column: 2 / -1;
-  grid-row: 2;
-  margin-top: 4px;
-  padding-top: 5px;
+  display: block;
+  padding-top: 4px;
   border-top: 1px solid rgba(18, 16, 31, 0.22);
+  border-left: 0;
 }
 
-body.has-track-lyrics .track.is-active .track__titles { grid-column: 2; grid-row: 1; }
-body.has-track-lyrics .track.is-active .track__end { grid-column: 3; grid-row: 1; }
+.track__lyrics-viewport {
+  display: block;
+  overflow: hidden;
+}
+
+.track__lyrics-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  transition: transform 500ms linear;
+  will-change: transform;
+}
+
+.track__lyric-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.track__lyric-group[hidden] { display: none; }
 
 .track__lyric {
   display: block;
@@ -2361,19 +2398,20 @@ body.has-track-lyrics .track.is-active .track__end { grid-column: 3; grid-row: 1
   text-overflow: ellipsis;
 }
 
-.track__lyric--current { font-weight: 700; }
-.track__lyric--next { margin-top: 2px; color: rgba(18, 16, 31, 0.78); }
+.track__lyric-group.is-current .track__lyric--ja,
+.track__lyric-group.is-current .track__lyric--romaji,
+.track__lyric-group.is-current .track__lyric--cyrillic { font-weight: 700; }
+.track__lyric-group.is-current .track__lyric--ja { color: #3f241f; }
+.track__lyric-group.is-next .track__lyric--ja,
+.track__lyric-group.is-upcoming .track__lyric--ja { color: #4a2a24; }
 
 .track__lyric--romaji,
 .track__lyric--cyrillic {
   font-family: var(--font-mono);
   font-size: 0.86em;
   letter-spacing: 0.01em;
-  color: rgba(18, 16, 31, 0.72);
+  color: #4a2a24;
 }
-
-.track__lyric--next-romaji,
-.track__lyric--next-cyrillic { color: rgba(18, 16, 31, 0.68); }
 
 body.hide-lyrics-romaji .track__lyric--romaji,
 body.hide-lyrics-cyrillic .track__lyric--cyrillic { display: none; }
@@ -2381,57 +2419,37 @@ body.hide-lyrics-cyrillic .track__lyric--cyrillic { display: none; }
 .track__lyric--romaji:empty,
 .track__lyric--cyrillic:empty { display: none; }
 
-.track__lyrics.is-line-change {
-  animation: track-line-scroll 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@keyframes track-line-scroll {
-  from { transform: translateY(14px); }
-  to { transform: translateY(0); }
-}
-
 @media (min-width: 1000px) {
-  body.has-track-lyrics .track.is-active .track__btn {
-    grid-template-columns: 72px minmax(0, 1fr) minmax(220px, 0.95fr) 84px;
+  body.has-track-lyrics .track.is-active .track__main {
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
   }
 
+  body.has-track-lyrics .track.is-active .track__titles { flex: 0 1 auto; }
+
   body.has-track-lyrics .track.is-active .track__lyrics {
-    grid-column: 3;
-    grid-row: 1;
-    margin-top: 0;
+    flex: 1 1 auto;
     padding-top: 0;
     padding-left: 18px;
     border-top: 0;
     border-left: 1px solid rgba(18, 16, 31, 0.28);
   }
-
-  body.has-track-lyrics .track.is-active .track__end { grid-column: 4; grid-row: 1; }
-}
-
-@media (min-width: 1000px) and (max-width: 1180px) {
-  body.has-track-lyrics .track.is-active .track__btn {
-    grid-template-columns: 60px minmax(0, 1fr) minmax(200px, 0.95fr) 70px;
-  }
 }
 
 @media (min-width: 1441px) {
-  body.has-track-lyrics .tracks.is-video-active .track.is-active .track__btn {
-    grid-template-columns: 72px minmax(0, 1fr) 84px;
+  body.has-track-lyrics .tracks.is-video-active .track.is-active .track__main {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
   }
 
   body.has-track-lyrics .tracks.is-video-active .track.is-active .track__lyrics {
-    grid-column: 2 / -1;
-    grid-row: 2;
-    margin-top: 4px;
-    padding-top: 5px;
+    flex: none;
+    padding-top: 4px;
     padding-left: 0;
     border-top: 1px solid rgba(18, 16, 31, 0.22);
     border-left: 0;
-  }
-
-  body.has-track-lyrics .tracks.is-video-active .track.is-active .track__end {
-    grid-column: 3;
-    grid-row: 1;
   }
 }
 
@@ -2736,6 +2754,11 @@ body.hide-lyrics-cyrillic .lyric-cyrillic { display: none; }
   color: var(--ink);
 }
 
+.lyric-line.is-current + br + .lyric-romaji,
+.lyric-line.is-current + .lyric-romaji,
+.lyric-line.is-current + br + .lyric-romaji + .lyric-cyrillic,
+.lyric-line.is-current + .lyric-romaji + .lyric-cyrillic { font-weight: 700; }
+
 
 
 @media (min-width: 1000px) {
@@ -2803,7 +2826,7 @@ body.hide-lyrics-cyrillic .lyric-cyrillic { display: none; }
   .song__body { animation: none; }
   .song__chevron { transition: none; }
   .lyric-line { transition: none; }
-  .track__lyrics.is-line-change { animation: none; }
+  .track__lyrics-track { transition: none; }
 }
 
 @media print {
@@ -4174,8 +4197,8 @@ html[lang="ja"] .mobile-menu__meta { letter-spacing: 0.06em; }
   .track__btn { min-height: 68px; padding: 15px 10px; }
   .track__num { font-size: 1.05rem; }
   .track__icon { font-size: 11px; }
-  .track__ja { font-size: 0.97rem; line-height: 1.4; }
-  .track__sub { font-size: 7px; gap: 2px 9px; }
+  .track__ja { font-size: 1.164rem; line-height: 1.4; }
+  .track__sub { font-size: 10.2px; gap: 2px 9px; }
   .track__romaji { display: none; }
   .track__time { font-size: 9px; }
   .track__progress { left: 10px; right: 10px; }
@@ -4670,8 +4693,8 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
 .record__meta dd { font-size: 13px; }
 .record__side { font-size: 8px; }
 .tracks__count { font-size: 9.5px; }
-.track__sub { font-size: 9px; }
-.track__romaji { font-size: 10.5px; }
+.track__sub { font-size: 10.8px; }
+.track__romaji { font-size: 12.6px; }
 .track__time { font-size: 11px; }
 .film__meta { font-size: 9px; color: var(--text-muted-film); }
 .film__hint { font-size: 9px; color: var(--text-muted-film); }
@@ -4746,7 +4769,7 @@ body.is-playing .play-pill:hover .play-pill__dot { background: var(--red); }
   .record__meta dt { font-size: 8px; }
   .record__meta dd { font-size: 12.5px; }
   .tracks__count { font-size: 8.5px; }
-  .track__sub { font-size: 8.5px; }
+  .track__sub { font-size: 10.2px; }
   .track__time { font-size: 10px; }
   .film__meta { font-size: 8px; }
   .film__hint { font-size: 8.5px; }
