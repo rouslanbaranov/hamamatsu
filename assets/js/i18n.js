@@ -50,6 +50,8 @@
           preferencesAria: 'Display preferences',
           video: 'Background video',
           lyrics: 'Lyrics in the tracklist',
+          romajiLatin: 'Romaji latin',
+          romajiCyrillic: 'Romaji cyrillic',
           meta: 'Project Hamamatsu · 2026 · 11 TRACKS'
         },
         lang: {
@@ -107,16 +109,10 @@
         lyrics: {
           title: 'The words,<br>as they are sung.',
           count: '11 songs <span>·</span> 46:05',
-          lead: 'All eleven songs, in Japanese, with romaji and Cyrillic for singing along. Open a track to read along.',
-          note: 'Japanese lyrics + romaji / Cyrillic.',
+          lead: 'All eleven songs, in Japanese, with Romaji latin and Romaji cyrillic for singing along. Open a track to read along.',
+          note: 'Japanese lyrics + Romaji latin / Romaji cyrillic.',
           follow: 'Follow the lyrics',
-          romaji: 'Romaji',
-          showRomaji: 'Show romaji',
-          hideRomaji: 'Hide romaji',
-          cyrillic: 'Cyrillic',
-          showCyrillic: 'Show Cyrillic',
-          hideCyrillic: 'Hide Cyrillic',
-          indexAria: 'Jump to a song',
+          indexAria: 'Lyrics navigation',
           credit: 'Words © 2026 Project Hamamatsu.'
         },
         film: {
@@ -222,6 +218,8 @@
           preferencesAria: '表示設定',
           video: '背景の映像',
           lyrics: 'トラックリストの歌詞',
+          romajiLatin: 'ローマ字（ラテン）',
+          romajiCyrillic: 'ローマ字（キリル）',
           meta: 'Project Hamamatsu · 2026 · 全11曲'
         },
         lang: {
@@ -279,16 +277,10 @@
         lyrics: {
           title: '歌詞は、<br>歌われるままに。',
           count: '11曲 <span>·</span> 46:05',
-          lead: '全11曲の日本語詞にローマ字とキリル文字を添えました。曲を開いて、歌いながら読めます。',
-          note: '日本語詞＋ローマ字／キリル文字。',
+          lead: '全11曲の日本語詞にローマ字（ラテン）とローマ字（キリル）を添えました。曲を開いて、歌いながら読めます。',
+          note: '日本語詞＋ローマ字（ラテン）／ローマ字（キリル）。',
           follow: '歌詞を追従',
-          romaji: 'ローマ字',
-          showRomaji: 'ローマ字を表示',
-          hideRomaji: 'ローマ字を隠す',
-          cyrillic: 'キリル文字',
-          showCyrillic: 'キリル文字を表示',
-          hideCyrillic: 'キリル文字を隠す',
-          indexAria: '曲へ移動',
+          indexAria: '歌詞ナビゲーション',
           credit: '歌詞 © 2026 Project Hamamatsu'
         },
         film: {

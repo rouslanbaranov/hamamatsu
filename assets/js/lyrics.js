@@ -11,29 +11,23 @@
   const section = document.querySelector('.lyrics');
   if (!section) return;
 
-  const i18n = window.SummerAvenueI18n;
-  const t = (key, options) => (i18n ? i18n.t(key, options) : key);
-
   const songs = Array.from(section.querySelectorAll('.song'));
   const indexLinks = Array.from(section.querySelectorAll('[data-lyrics-jump]'));
   const playerButton = document.querySelector('[data-lyrics-open]');
   const followButton = section.querySelector('[data-lyrics-follow]');
-  const romajiToggle = section.querySelector('[data-lyrics-romaji]');
-  const cyrillicToggle = section.querySelector('[data-lyrics-cyrillic]');
+  const romajiToggle = document.querySelector('[data-romaji-toggle]');
+  const cyrillicToggle = document.querySelector('[data-cyrillic-toggle]');
   const inlineToggle = document.querySelector('[data-track-lyrics-toggle]');
   const audio = document.querySelector('#audio');
   const header = document.querySelector('.site-header');
   const indexBar = section.querySelector('.lyrics__index');
-  const list = section.querySelector('.lyrics__list');
   const trackRows = Array.from(document.querySelectorAll('.track'));
   const trackList = document.querySelector('.tracklist');
   const preferenceStore = window.store;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let printing = false;
-  let follow = false;
   let romaji = true;
   let cyrillic = false;
-  let followPauseUntil = 0;
   let currentLine = null;
   let inlineEnabled = false;
 
@@ -90,29 +84,7 @@
     }
   }
 
-  function lyricsSectionInView() {
-    const box = section.getBoundingClientRect();
-    return box.bottom > 0 && box.top < window.innerHeight;
-  }
-
-  function followLine(line, force) {
-    if (!follow || Date.now() < followPauseUntil) return;
-
-    if (!force) {
-      if (!lyricsSectionInView()) return;
-
-      const lineBox = line.getBoundingClientRect();
-      const topLimit = (header ? header.offsetHeight : 0) + (indexBar ? indexBar.offsetHeight : 0) + 24;
-      if (lineBox.top >= topLimit && lineBox.bottom <= window.innerHeight - 24) return;
-    }
-
-    line.scrollIntoView({
-      block: 'center',
-      behavior: reduceMotion.matches ? 'auto' : 'smooth'
-    });
-  }
-
-  function updateHighlight(forceScroll, forceFollow) {
+  function updateHighlight() {
     const open = section.querySelector('.song[open]');
     if (!open || Number(open.dataset.trackIndex) !== activeTrackIndex()) {
       clearHighlight();
@@ -124,47 +96,12 @@
     const position = indexAt(lines, time);
     const next = position >= 0 ? lines[position] : null;
 
-    if (next === currentLine) {
-      if (forceScroll && next) followLine(next, forceFollow);
-      return;
-    }
+    if (next === currentLine) return;
 
     clearHighlight();
     if (next) {
       currentLine = next;
       next.classList.add('is-current');
-      if (follow) followLine(next, forceFollow);
-    }
-  }
-
-  function readFollowPreference() {
-    try {
-      const value = preferenceStore
-        ? preferenceStore.get('sa-lyrics-follow')
-        : window.localStorage.getItem('sa-lyrics-follow');
-      return value === true || value === 'true';
-    } catch (error) {
-      return false;
-    }
-  }
-
-  function setFollow(enabled, persist) {
-    follow = Boolean(enabled);
-    document.body.classList.toggle('follow-lyrics-on', follow);
-    if (followButton) followButton.setAttribute('aria-pressed', follow ? 'true' : 'false');
-
-    if (persist) {
-      try {
-        if (preferenceStore) preferenceStore.set('sa-lyrics-follow', follow);
-        else window.localStorage.setItem('sa-lyrics-follow', String(follow));
-      } catch (error) {
-        /* private mode */
-      }
-    }
-
-    if (follow) {
-      followPauseUntil = 0;
-      followActiveSong(true);
     }
   }
 
@@ -179,20 +116,10 @@
     }
   }
 
-  function updateRomajiLabel() {
-    if (!romajiToggle) return;
-    const label = t(romaji ? 'lyrics.hideRomaji' : 'lyrics.showRomaji');
-    romajiToggle.setAttribute('aria-label', label);
-    romajiToggle.title = label;
-  }
-
   function setRomaji(enabled, persist) {
     romaji = Boolean(enabled);
     document.body.classList.toggle('hide-lyrics-romaji', !romaji);
-    if (romajiToggle) {
-      romajiToggle.setAttribute('aria-pressed', romaji ? 'true' : 'false');
-      updateRomajiLabel();
-    }
+    if (romajiToggle) romajiToggle.checked = romaji;
     if (persist) {
       try {
         if (preferenceStore) preferenceStore.set('sa-lyrics-romaji', romaji);
@@ -214,20 +141,10 @@
     }
   }
 
-  function updateCyrillicLabel() {
-    if (!cyrillicToggle) return;
-    const label = t(cyrillic ? 'lyrics.hideCyrillic' : 'lyrics.showCyrillic');
-    cyrillicToggle.setAttribute('aria-label', label);
-    cyrillicToggle.title = label;
-  }
-
   function setCyrillic(enabled, persist) {
     cyrillic = Boolean(enabled);
     document.body.classList.toggle('hide-lyrics-cyrillic', !cyrillic);
-    if (cyrillicToggle) {
-      cyrillicToggle.setAttribute('aria-pressed', cyrillic ? 'true' : 'false');
-      updateCyrillicLabel();
-    }
+    if (cyrillicToggle) cyrillicToggle.checked = cyrillic;
     if (persist) {
       try {
         if (preferenceStore) preferenceStore.set('sa-lyrics-cyrillic', cyrillic);
@@ -254,11 +171,27 @@
       current.className = 'track__lyric track__lyric--current';
       current.lang = 'ja';
 
+      const currentRomaji = document.createElement('span');
+      currentRomaji.className = 'track__lyric track__lyric--romaji track__lyric--current-romaji';
+      currentRomaji.lang = 'ja-Latn';
+
+      const currentCyrillic = document.createElement('span');
+      currentCyrillic.className = 'track__lyric track__lyric--cyrillic track__lyric--current-cyrillic';
+      currentCyrillic.lang = 'ru';
+
       const next = document.createElement('span');
       next.className = 'track__lyric track__lyric--next';
       next.lang = 'ja';
 
-      block.append(current, next);
+      const nextRomaji = document.createElement('span');
+      nextRomaji.className = 'track__lyric track__lyric--romaji track__lyric--next-romaji';
+      nextRomaji.lang = 'ja-Latn';
+
+      const nextCyrillic = document.createElement('span');
+      nextCyrillic.className = 'track__lyric track__lyric--cyrillic track__lyric--next-cyrillic';
+      nextCyrillic.lang = 'ru';
+
+      block.append(current, currentRomaji, currentCyrillic, next, nextRomaji, nextCyrillic);
       titles.insertAdjacentElement('afterend', block);
     });
   }
@@ -272,6 +205,19 @@
     } catch (error) {
       return false;
     }
+  }
+
+  function readingsFor(line) {
+    const readings = { romaji: '', cyrillic: '' };
+    if (!line) return readings;
+
+    let node = line.nextElementSibling;
+    while (node && !node.classList.contains('lyric-line')) {
+      if (node.classList.contains('lyric-romaji')) readings.romaji = node.textContent.trim();
+      else if (node.classList.contains('lyric-cyrillic')) readings.cyrillic = node.textContent.trim();
+      node = node.nextElementSibling;
+    }
+    return readings;
   }
 
   function updateTrackLyrics(timeOverride) {
@@ -290,15 +236,42 @@
       ? timeOverride
       : audio && Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
     const position = indexAt(lines, time);
-    const currentText = position >= 0 ? lines[position].textContent.trim() : '';
-    const nextText = position + 1 < lines.length
-      ? lines[position + 1].textContent.trim()
-      : position < 0 && lines[0] ? lines[0].textContent.trim() : '';
+    const rowPosition = position >= 0 ? position : (lines.length ? 0 : -1);
+    const line = rowPosition >= 0 ? lines[rowPosition] : null;
+    const nextLine = rowPosition >= 0 && rowPosition + 1 < lines.length
+      ? lines[rowPosition + 1]
+      : null;
+    const currentText = line ? line.textContent.trim() : '';
+    const currentReadings = readingsFor(line);
+    const nextText = nextLine ? nextLine.textContent.trim() : '';
+    const nextReadings = readingsFor(nextLine);
 
     const currentEl = block.querySelector('.track__lyric--current');
+    const currentRomajiEl = block.querySelector('.track__lyric--current-romaji');
+    const currentCyrillicEl = block.querySelector('.track__lyric--current-cyrillic');
     const nextEl = block.querySelector('.track__lyric--next');
-    if (currentEl && currentEl.textContent !== currentText) currentEl.textContent = currentText;
-    if (nextEl && nextEl.textContent !== nextText) nextEl.textContent = nextText;
+    const nextRomajiEl = block.querySelector('.track__lyric--next-romaji');
+    const nextCyrillicEl = block.querySelector('.track__lyric--next-cyrillic');
+    let changed = false;
+    const setText = (el, value) => {
+      if (el && el.textContent !== value) {
+        el.textContent = value;
+        changed = true;
+      }
+    };
+
+    setText(currentEl, currentText);
+    setText(currentRomajiEl, currentReadings.romaji);
+    setText(currentCyrillicEl, currentReadings.cyrillic);
+    setText(nextEl, nextText);
+    setText(nextRomajiEl, nextReadings.romaji);
+    setText(nextCyrillicEl, nextReadings.cyrillic);
+
+    if (changed) {
+      block.classList.remove('is-line-change');
+      void block.offsetWidth;
+      block.classList.add('is-line-change');
+    }
   }
 
   function setInlineLyrics(enabled, persist) {
@@ -319,6 +292,12 @@
     updateTrackLyrics();
   }
 
+  function clearLyricsHash() {
+    if (window.history.replaceState && /^#lyrics-\d{1,2}$/.test(window.location.hash)) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }
+
   function openSong(number, options) {
     const settings = options || {};
     const details = songFor(number);
@@ -330,17 +309,13 @@
     details.open = true;
     setActive(details);
 
-    if (settings.hash !== false && window.history.replaceState) {
-      window.history.replaceState(null, '', '#lyrics-' + pad(number));
-    }
-
     if (settings.scroll !== false) {
       window.requestAnimationFrame(() => {
         scrollToSong(details, settings.smooth !== false);
-        window.requestAnimationFrame(() => updateHighlight(true));
+        window.requestAnimationFrame(() => updateHighlight());
       });
     } else {
-      updateHighlight(true);
+      updateHighlight();
     }
 
     if (settings.focus) {
@@ -348,9 +323,7 @@
     }
   }
 
-  function followActiveSong(forceScroll) {
-    if (!follow) return;
-
+  function goToActiveLyrics(focus) {
     const number = activeTrackIndex();
     if (!number) return;
 
@@ -363,23 +336,24 @@
       });
       details.open = true;
       setActive(details);
-      if (window.history.replaceState) {
-        window.history.replaceState(null, '', '#lyrics-' + pad(number));
-      }
     }
 
     const time = audio && Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
     const lines = Array.from(details.querySelectorAll('.lyric-line'));
     const position = indexAt(lines, time);
+    updateHighlight();
 
-    updateHighlight(Boolean(forceScroll), Boolean(forceScroll));
-
-    if (
-      position < 0 &&
-      Date.now() >= followPauseUntil &&
-      (forceScroll || lyricsSectionInView())
-    ) {
+    if (position >= 0 && lines[position]) {
+      lines[position].scrollIntoView({
+        block: 'center',
+        behavior: reduceMotion.matches ? 'auto' : 'smooth'
+      });
+    } else {
       scrollToSong(details, !reduceMotion.matches);
+    }
+
+    if (focus) {
+      window.requestAnimationFrame(() => focusSummary(details));
     }
   }
 
@@ -398,38 +372,26 @@
           if (other !== details) other.open = false;
         });
         setActive(details);
-        if (window.history.replaceState) {
-          window.history.replaceState(null, '', '#lyrics-' + pad(Number(details.dataset.trackIndex)));
-        }
       } else if (!songs.some((song) => song.open)) {
         setActive(null);
-        if (window.history.replaceState) {
-          window.history.replaceState(null, '', window.location.pathname + window.location.search);
-        }
       }
       updateHighlight();
     });
   });
 
   if (followButton) {
-    setFollow(readFollowPreference(), false);
-    followButton.addEventListener('click', () => setFollow(!follow, true));
+    followButton.addEventListener('click', () => goToActiveLyrics(false));
   }
 
   if (romajiToggle) {
     setRomaji(readRomajiPreference(), false);
-    romajiToggle.addEventListener('click', () => setRomaji(!romaji, true));
+    romajiToggle.addEventListener('change', () => setRomaji(romajiToggle.checked, true));
   }
 
   if (cyrillicToggle) {
     setCyrillic(readCyrillicPreference(), false);
-    cyrillicToggle.addEventListener('click', () => setCyrillic(!cyrillic, true));
+    cyrillicToggle.addEventListener('change', () => setCyrillic(cyrillicToggle.checked, true));
   }
-
-  document.addEventListener('i18n:changed', () => {
-    updateRomajiLabel();
-    updateCyrillicLabel();
-  });
 
   ensureTrackLyrics();
 
@@ -438,24 +400,13 @@
     inlineToggle.addEventListener('change', () => setInlineLyrics(inlineToggle.checked, true));
   }
 
-  let lastActiveNumber = activeTrackIndex();
-
   if (trackList) {
-    new MutationObserver(() => {
-      const number = activeTrackIndex();
-      if (number !== lastActiveNumber) {
-        lastActiveNumber = number;
-        if (follow && number) followActiveSong(false);
-      }
-      updateTrackLyrics();
-    }).observe(trackList, {
+    new MutationObserver(() => updateTrackLyrics()).observe(trackList, {
       subtree: true,
       attributes: true,
       attributeFilter: ['class']
     });
   }
-
-  if (follow && lastActiveNumber) followActiveSong(false);
 
   if (audio) {
     const refresh = () => {
@@ -475,26 +426,14 @@
     });
   }
 
-  if (list) {
-    const pause = () => { if (follow) followPauseUntil = Date.now() + 6000; };
-    list.addEventListener('wheel', pause, { passive: true });
-    list.addEventListener('touchstart', pause, { passive: true });
-  }
-
-  window.addEventListener('keydown', (event) => {
-    if (!follow) return;
-    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(event.key)) {
-      followPauseUntil = Date.now() + 6000;
-    }
-  });
-
   function openFromHash() {
     const match = window.location.hash.match(/^#lyrics-(\d{1,2})$/);
     if (!match) return;
     const number = Number(match[1]);
     if (songFor(number)) {
-      openSong(number, { focus: false, hash: false, smooth: false });
+      openSong(number, { focus: false, smooth: false });
     }
+    clearLyricsHash();
   }
 
   const initiallyOpen = songs.find((details) => details.open);
@@ -511,7 +450,7 @@
       const index = active ? trackRows.indexOf(active) : -1;
 
       if (index >= 0) {
-        openSong(index + 1, { focus: true });
+        goToActiveLyrics(true);
         return;
       }
 

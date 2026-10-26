@@ -698,16 +698,7 @@
     let scrollWaitsForVideo = false;
     const wideLayout = window.matchMedia('(min-width: 1441px)');
 
-    const lyricsSection = document.querySelector('.lyrics');
-    const lyricsSectionInView = () => {
-      if (!lyricsSection) return false;
-      const box = lyricsSection.getBoundingClientRect();
-      return box.bottom > 0 && box.top < window.innerHeight;
-    };
-
-    function scrollToTracklist(force) {
-      if (!force && body.classList.contains('follow-lyrics-on') && lyricsSectionInView()) return;
-
+    function scrollToTracklist() {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const header = document.querySelector('.site-header');
       const player = document.querySelector('.player');
@@ -782,13 +773,13 @@
       });
     }
 
-    function scheduleTracklistScroll(force) {
+    function scheduleTracklistScroll() {
       const token = ++heroScrollToken;
       scrollWaitsForVideo = !document.querySelector('.tracks__video-row');
       const delay = scrollWaitsForVideo ? 120 : 0;
       window.setTimeout(() => {
         if (token !== heroScrollToken) return;
-        scrollToTracklist(force);
+        scrollToTracklist();
       }, delay);
       window.setTimeout(() => {
         if (token === heroScrollToken) heroScrollToken = 0;
@@ -822,7 +813,7 @@
       playerInfo.addEventListener('click', (event) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
-        scheduleTracklistScroll(true);
+        scheduleTracklistScroll();
       });
     }
 

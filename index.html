@@ -28,6 +28,19 @@
       } catch (error) {}
     })();
   </script>
+  <script>
+    // Older builds wrote #lyrics-NN; clear it on reload so refreshing never anchors to the lyrics.
+    (function () {
+      if (!/^#lyrics-\d{1,2}$/.test(window.location.hash)) return;
+      var entries = window.performance && performance.getEntriesByType('navigation');
+      var type = entries && entries.length ? entries[0].type : '';
+      var legacy = window.performance && performance.navigation ? performance.navigation.type : 0;
+      if (type !== 'reload' && legacy !== 1) return;
+      if (window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    })();
+  </script>
   <style>html.hero-entrance-pending .hero-poster__portrait picture { visibility: hidden; }</style>
   <script>
     // Decide before the first paint; keep the image available when motion is disabled.
@@ -74,7 +87,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="/hamamatsu/assets/img/hero-portrait-black-full.webp" type="image/webp">
-  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=cyrillic-1">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=controls-7">
   <script>
     document.documentElement.classList.add('js');
     // Safety net: if the app script fails or is blocked, reveal the content anyway.
@@ -132,6 +145,7 @@
     <symbol id="icon-share" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 13v6.5h14V13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
     <symbol id="icon-lyrics" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.5 4.5h17v12h-8.6l-5.4 3.9v-3.9H3.5V4.5Zm3.1 3.1v1.7h10.8V7.6H6.6Zm0 3.3v1.7h7.4v-1.7H6.6Z"/></symbol>
+    <symbol id="icon-follow" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3.2M12 18.8V22M2 12h3.2M18.8 12H22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
     <symbol id="icon-flag-gb" viewBox="0 0 60 30">
       <rect width="60" height="30" fill="#012169"/>
       <path d="M0 0 60 30M60 0 0 30" stroke="#fff" stroke-width="6"/>
@@ -208,6 +222,14 @@
         <label class="menu-toggle">
           <span class="menu-toggle__label" data-i18n="menu.lyrics">Lyrics in the tracklist</span>
           <input class="menu-toggle__input" type="checkbox" role="switch" data-track-lyrics-toggle>
+        </label>
+        <label class="menu-toggle">
+          <span class="menu-toggle__label" data-i18n="menu.romajiLatin">Romaji latin</span>
+          <input class="menu-toggle__input" type="checkbox" role="switch" data-romaji-toggle checked>
+        </label>
+        <label class="menu-toggle">
+          <span class="menu-toggle__label" data-i18n="menu.romajiCyrillic">Romaji cyrillic</span>
+          <input class="menu-toggle__input" type="checkbox" role="switch" data-cyrillic-toggle>
         </label>
       </div>
       <div class="mobile-menu__foot">
@@ -534,24 +556,12 @@
           </div>
           <div class="lyrics__aside" data-reveal>
             <p class="lyrics__count" data-i18n-html="lyrics.count">11 songs <span>·</span> 46:05</p>
-            <p class="lead" data-i18n="lyrics.lead">All eleven songs, in Japanese, with romaji and Cyrillic for singing along. Open a track to read along.</p>
-            <p class="lyrics__note" data-i18n="lyrics.note">Japanese lyrics + romaji / Cyrillic.</p>
-            <div class="lyrics__controls">
-              <button class="lyrics__follow" type="button" data-lyrics-follow aria-pressed="false" aria-label="Follow the lyrics" title="Follow the lyrics" data-i18n-attr="aria-label:lyrics.follow; title:lyrics.follow">
-                <span class="lyrics__follow-dot" aria-hidden="true"></span>
-                <span data-i18n="lyrics.follow">Follow the lyrics</span>
-              </button>
-              <button class="lyrics__follow lyrics__romaji" type="button" data-lyrics-romaji aria-pressed="true" aria-label="Hide romaji" title="Hide romaji" data-i18n-attr="aria-label:lyrics.hideRomaji; title:lyrics.hideRomaji">
-                <span data-i18n="lyrics.romaji">Romaji</span>
-              </button>
-              <button class="lyrics__follow lyrics__cyrillic" type="button" data-lyrics-cyrillic aria-pressed="false" aria-label="Show Cyrillic" title="Show Cyrillic" data-i18n-attr="aria-label:lyrics.showCyrillic; title:lyrics.showCyrillic">
-                <span data-i18n="lyrics.cyrillic">Cyrillic</span>
-              </button>
-            </div>
+            <p class="lead" data-i18n="lyrics.lead">All eleven songs, in Japanese, with Romaji latin and Romaji cyrillic for singing along. Open a track to read along.</p>
+            <p class="lyrics__note" data-i18n="lyrics.note">Japanese lyrics + Romaji latin / Romaji cyrillic.</p>
           </div>
         </header>
 
-        <nav class="lyrics__index" aria-label="Jump to a song" data-i18n-attr="aria-label:lyrics.indexAria" data-reveal>
+        <nav class="lyrics__index" aria-label="Lyrics navigation" data-i18n-attr="aria-label:lyrics.indexAria" data-reveal>
           <a href="#lyrics-01" data-lyrics-jump="1"><span>01</span><span class="sr-only" lang="ja">もう少しそばにいて</span><span class="sr-only" lang="en">Stay With Me</span></a>
           <a href="#lyrics-02" data-lyrics-jump="2"><span>02</span><span class="sr-only" lang="ja">春の歌</span><span class="sr-only" lang="en">Leise zieht</span></a>
           <a href="#lyrics-03" data-lyrics-jump="3"><span>03</span><span class="sr-only" lang="ja">サマー・アベニュー</span><span class="sr-only" lang="en">Summer Avenue</span></a>
@@ -563,6 +573,9 @@
           <a href="#lyrics-09" data-lyrics-jump="9"><span>09</span><span class="sr-only" lang="ja">シャガネ、愛しいシャガネ</span><span class="sr-only" lang="en">Shagane</span></a>
           <a href="#lyrics-10" data-lyrics-jump="10"><span>10</span><span class="sr-only" lang="ja">海へ行こう</span><span class="sr-only" lang="en">June Ease</span></a>
           <a href="#lyrics-11" data-lyrics-jump="11"><span>11</span><span class="sr-only" lang="ja">今夜だけはさよならを言わないで</span><span class="sr-only" lang="en">Blue Tile Reflections</span></a>
+          <button class="lyrics__jump" type="button" data-lyrics-follow aria-label="Follow the lyrics" title="Follow the lyrics" data-i18n-attr="aria-label:lyrics.follow; title:lyrics.follow">
+            <svg aria-hidden="true" focusable="false"><use href="#icon-follow"/></svg>
+          </button>
         </nav>
 
         <div class="lyrics__list" data-reveal>
@@ -987,10 +1000,10 @@
   <p class="sr-only" aria-live="polite" data-i18n-status></p>
 
   <script src="/hamamatsu/assets/js/vendor/i18next.min.js" defer></script>
-  <script src="/hamamatsu/assets/js/i18n.js?v=cyrillic-1" defer></script>
-  <script src="/hamamatsu/assets/js/main.js?v=follow-2" defer></script>
+  <script src="/hamamatsu/assets/js/i18n.js?v=controls-1" defer></script>
+  <script src="/hamamatsu/assets/js/main.js?v=jump-1" defer></script>
   <script src="/hamamatsu/assets/js/hero-entrance.js?v=3" defer></script>
   <script src="/hamamatsu/assets/js/tracks-video.js?v=menu-1" defer></script>
-  <script src="/hamamatsu/assets/js/lyrics.js?v=follow-2" defer></script>
+  <script src="/hamamatsu/assets/js/lyrics.js?v=controls-5" defer></script>
 </body>
 </html>
