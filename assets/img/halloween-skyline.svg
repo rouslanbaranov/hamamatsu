@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 300" role="img" aria-label="Silhouetted city skyline with a torii gate, a tapered tower and power lines">
+  <defs>
+    <linearGradient id="hwSkylineFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070410"/>
+      <stop offset="1" stop-color="#04020a"/>
+    </linearGradient>
+    <filter id="hwWindowGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+  </defs>
+
+  <!-- far layer -->
+  <g fill="#0a0716">
+    <rect x="-10" y="196" width="128" height="100"/>
+    <rect x="126" y="214" width="86" height="82"/>
+    <rect x="228" y="230" width="58" height="66"/>
+    <rect x="470" y="186" width="76" height="110"/>
+    <rect x="556" y="206" width="104" height="90"/>
+    <rect x="672" y="190" width="52" height="106"/>
+    <rect x="736" y="216" width="62" height="80"/>
+    <rect x="1044" y="204" width="84" height="92"/>
+    <rect x="1140" y="218" width="64" height="78"/>
+  </g>
+
+  <!-- far antennae -->
+  <g stroke="#0a0716" stroke-width="3" stroke-linecap="round">
+    <path d="M64 196v-34M64 176h-10M64 186h12"/>
+    <path d="M588 206v-42M588 178h-12"/>
+    <path d="M1082 204v-30"/>
+  </g>
+
+  <!-- main silhouette -->
+  <g fill="url(#hwSkylineFade)">
+    <!-- left low street -->
+    <path d="M-10 286v-58h64v-18h44v30h22v-12h58v-24h40v20h34v-38h52v58h26v42z"/>
+    <!-- mid block with pitched roof -->
+    <path d="M468 286v-86l26-24 30 18 22-26 46 34 14 16v68z"/>
+    <rect x="616" y="220" width="44" height="66"/>
+    <rect x="666" y="186" width="58" height="100"/>
+    <path d="M724 286v-56h34v-22h38v34h22v-26h54v70z"/>
+    <!-- water tower -->
+    <g>
+      <rect x="700" y="152" width="42" height="26" rx="3"/>
+      <path d="M704 178l6 12h26l6-12z"/>
+      <rect x="708" y="178" width="4" height="18"/>
+      <rect x="730" y="178" width="4" height="18"/>
+      <path d="M698 152l24-10 24 10z"/>
+    </g>
+    <!-- tapered tower -->
+    <path d="M900 286V156c0-46 18-86 54-122 4 46 20 84 44 114 8 10 12 22 12 36v102z"/>
+    <g fill="#0c081b">
+      <rect x="926" y="196" width="52" height="2.4" opacity=".85"/>
+      <rect x="922" y="220" width="60" height="2.4" opacity=".85"/>
+      <rect x="918" y="244" width="68" height="2.4" opacity=".85"/>
+      <rect x="914" y="268" width="76" height="2.4" opacity=".85"/>
+    </g>
+    <path d="M954 34V6" stroke="#06030d" stroke-width="3" stroke-linecap="round"/>
+    <!-- right street -->
+    <path d="M1044 286v-52h48v-22h44v34h26v-14h62v22h34v-30h58v62z"/>
+    <rect x="1330" y="216" width="40" height="70"/>
+    <path d="M1372 286v-46h78v46z"/>
+  </g>
+
+  <!-- torii gate -->
+  <g fill="#070410">
+    <path d="M292 170c30-11 63-16 98-16s68 5 98 16l-5 15c-29-10-59-14-93-14s-64 4-93 14z"/>
+    <rect x="318" y="184" width="17" height="102"/>
+    <rect x="445" y="184" width="17" height="102"/>
+    <rect x="330" y="204" width="120" height="10"/>
+    <rect x="381" y="170" width="18" height="34"/>
+  </g>
+
+  <!-- temple roof + hill, right edge -->
+  <g fill="#06030d">
+    <path d="M1196 286v-52l16-10 6-20 16 14 10-26 18 22 8-18 14 26 8-14 12 20 14-8 10 16v50z"/>
+    <path d="M1300 286v-34h18v-16h20v16h20v-24h22v24h20v-14h22v48z"/>
+    <path d="M1160 286c28-42 62-66 104-72 46-6 96 18 150 72z" opacity=".8"/>
+  </g>
+
+  <!-- trees -->
+  <g fill="#05030c">
+    <path d="M1236 252c-18-2-28-14-24-30 4-15 19-23 33-18 4-14 22-20 33-9 12-6 26 4 25 17 14 2 22 15 18 28-3 10-13 16-24 16z"/>
+    <rect x="1268" y="248" width="6" height="38"/>
+    <path d="M1352 270c-12-1-19-10-16-20 3-10 13-16 22-12 3-9 15-13 22-6 8-4 18 3 17 12 9 2 15 10 12 19-2 7-9 11-16 11z"/>
+    <rect x="1374" y="266" width="4" height="20"/>
+  </g>
+
+  <!-- power poles and wires -->
+  <g stroke="#06030d" fill="none" stroke-linecap="round">
+    <path d="M824 286V148" stroke-width="5"/>
+    <path d="M806 164h36M810 180h28" stroke-width="4"/>
+    <path d="M1178 286V172" stroke-width="4"/>
+    <path d="M1164 188h28" stroke-width="3"/>
+    <path d="M824 158c88 16 164 20 230 12 44-6 82-2 116 12" stroke-width="2"/>
+    <path d="M824 170c88 18 164 22 230 14 44-6 82-2 116 12" stroke-width="1.6" opacity=".8"/>
+  </g>
+
+  <!-- lit windows -->
+  <g fill="#ff8b2d">
+    <rect x="548" y="214" width="7" height="11" opacity=".8"/>
+    <rect x="566" y="236" width="7" height="11" opacity=".5"/>
+    <rect x="586" y="214" width="7" height="11" opacity=".7"/>
+    <rect x="608" y="250" width="7" height="11" opacity=".45"/>
+    <rect x="644" y="196" width="6" height="9" opacity=".6"/>
+    <rect x="676" y="232" width="7" height="10" opacity=".75"/>
+    <rect x="690" y="258" width="7" height="10" opacity=".4"/>
+    <rect x="778" y="246" width="6" height="9" opacity=".55"/>
+    <rect x="1058" y="248" width="6" height="9" opacity=".6"/>
+    <rect x="1096" y="266" width="6" height="9" opacity=".4"/>
+    <rect x="1152" y="242" width="6" height="9" opacity=".5"/>
+    <rect x="1224" y="262" width="6" height="8" opacity=".5"/>
+    <rect x="1348" y="234" width="5" height="8" opacity=".55"/>
+  </g>
+  <g fill="#ffd47a" filter="url(#hwWindowGlow)" opacity=".7">
+    <rect x="524" y="242" width="9" height="12"/>
+    <rect x="704" y="230" width="10" height="12"/>
+    <rect x="1144" y="258" width="9" height="10"/>
+  </g>
+
+  <!-- neon sign -->
+  <g>
+    <rect x="500" y="240" width="3" height="34" fill="#ff5a24" opacity=".75"/>
+    <rect x="497" y="238" width="9" height="38" fill="none" stroke="#ff5a24" stroke-width="1.4" opacity=".55"/>
+    <rect x="500" y="238" width="3" height="6" fill="#ffd47a" opacity=".9"/>
+  </g>
+
+  <!-- ground -->
+  <path d="M0 284h1440v16H0z" fill="#04020a"/>
+</svg>

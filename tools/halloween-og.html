@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Summer Avenue (Halloween Remix) — social card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bone: #f3ead8;
+    --pumpkin: #ff8b2d;
+    --blood: #c01830;
+    --mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+    --display: "Archivo Black", "Arial Black", sans-serif;
+    --script: "Sedgwick Ave Display", cursive;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #0a0613; }
+  .card {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse at 82% 12%, rgba(255, 170, 80, .18), transparent 46%),
+      radial-gradient(ellipse at 6% 92%, rgba(192, 24, 48, .16), transparent 46%),
+      linear-gradient(150deg, #1c0e17 0%, #0f0719 56%, #0a0613 100%);
+    color: var(--bone);
+    font-family: "Space Grotesk", sans-serif;
+  }
+  .stars {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: radial-gradient(rgba(243,234,216,.7) 1px, transparent 1.2px);
+    background-size: 39px 39px;
+    opacity: .3;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%, rgba(0,0,0,.5) 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 40%, rgba(0,0,0,.5) 100%);
+  }
+  .moon {
+    position: absolute; top: -250px; right: -250px; z-index: 0;
+    width: 540px; height: 540px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 46% 58%, rgba(160,100,46,.13) 0 8%, transparent 8.8%),
+      radial-gradient(circle at 64% 40%, rgba(160,100,46,.11) 0 5%, transparent 5.8%),
+      radial-gradient(circle at 40% 32%, #fff5da 0%, #ffe2ab 34%, #ffc274 66%, #f2a052 86%, #dd7f35 100%);
+    box-shadow: 0 0 100px rgba(255,170,80,.28), inset -30px -26px 90px rgba(110,54,24,.3);
+    opacity: .24;
+  }
+  .branch { position: absolute; top: -80px; right: -50px; z-index: 1; width: 380px; opacity: .85; }
+  .shade {
+    position: absolute; left: 548px; top: 0; right: 0; bottom: 0; z-index: 2;
+    background: linear-gradient(90deg, rgba(10, 6, 19, .9) 0%, rgba(10, 6, 19, .82) 32%, rgba(10, 6, 19, .5) 68%, rgba(10, 6, 19, .15) 100%);
+  }
+  .bats { position: absolute; inset: 0; z-index: 1; color: #06030d; }
+  .bat { position: absolute; }
+  .bat svg { display: block; width: 100%; height: auto; }
+  .bat--a { top: 70px; right: 110px; width: 120px; transform: rotate(-7deg); }
+  .bat--b { top: 180px; right: 45px; width: 62px; transform: rotate(8deg); }
+  .bat--c { top: 30px; right: 330px; width: 46px; transform: rotate(-12deg); }
+  .rule { position: absolute; top: 48px; left: 48px; right: 48px; height: 1px; background: rgba(243,234,216,.14); z-index: 3; }
+  .cover-wrap {
+    position: absolute; z-index: 3; left: 48px; top: 68px;
+    width: 494px; height: 494px;
+    border: 1px solid rgba(243,234,216,.24);
+    box-shadow: 0 34px 80px rgba(0,0,0,.6);
+    overflow: hidden;
+  }
+  .cover-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .copy {
+    position: absolute; z-index: 3; left: 600px; top: 86px; right: 54px;
+  }
+  .kicker {
+    margin: 0 0 24px;
+    font-family: var(--mono); font-size: 15px; letter-spacing: .27em; text-transform: uppercase;
+    color: var(--pumpkin);
+  }
+  .pre {
+    margin: 0 0 10px;
+    font-family: var(--mono); font-size: 18px; letter-spacing: .3em; text-transform: uppercase;
+    color: rgba(243,234,216,.66);
+  }
+  .title {
+    margin: 0;
+    font-family: var(--display); font-weight: 400;
+    font-size: 82px; line-height: .86; letter-spacing: -.055em; text-transform: uppercase;
+    color: var(--bone);
+    text-shadow: .03em .015em 0 rgba(192,24,48,.7);
+  }
+  .remix {
+    display: block;
+    margin: 4px 0 0 8px;
+    font-family: var(--script); font-size: 84px; line-height: 1;
+    color: var(--pumpkin); transform: rotate(-4deg); transform-origin: left center;
+    text-shadow: 0 0 28px rgba(255,139,45,.3);
+  }
+  .lede {
+    margin: 22px 0 0; max-width: 44ch;
+    font-size: 19px; line-height: 1.45; color: rgba(243,234,216,.74);
+  }
+  .meta {
+    position: absolute; z-index: 3; left: 48px; bottom: 42px;
+    display: flex; gap: 26px;
+    font-family: var(--mono); font-size: 14px; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(243,234,216,.52);
+  }
+  .meta strong { font-weight: 400; color: rgba(243,234,216,.9); }
+  .url {
+    position: absolute; z-index: 3; right: 54px; bottom: 44px;
+    margin: 0;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(243,234,216,.46);
+  }
+  .grain {
+    position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: .07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="stars"></span>
+    <span class="moon"></span>
+    <img class="branch" src="../assets/img/halloween-branch.svg" alt="">
+    <span class="bats">
+      <span class="bat bat--a"><svg viewBox="0 0 100 44"><use href="#og-bat"/></svg></span>
+      <span class="bat bat--b"><svg viewBox="0 0 100 44"><use href="#og-bat"/></svg></span>
+      <span class="bat bat--c"><svg viewBox="0 0 100 44"><use href="#og-bat"/></svg></span>
+    </span>
+    <span class="rule"></span>
+    <span class="shade"></span>
+    <div class="cover-wrap"><img src="../assets/img/cover-summer-avenue-halloween-800.jpg" alt=""></div>
+    <div class="copy">
+      <p class="kicker">Project Hamamatsu · Single · 2026</p>
+      <p class="pre">Summer Avenue</p>
+      <p class="title">Halloween</p>
+      <span class="remix">Remix</span>
+      <p class="lede">Remixed for the night. One track, outside the album — for the last night of October.</p>
+    </div>
+    <div class="meta"><strong>RB–002</strong><span>3:32</span><span>Digital single</span></div>
+    <p class="url">rbaranov.ch / hamamatsu / halloween</p>
+    <span class="grain"></span>
+  </div>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <symbol id="og-bat" viewBox="0 0 100 44">
+      <path fill="#06030d" d="M50 14C47.5 14 45.5 15.6 44.4 18C39 12 31 8.6 21 8C23.5 12 26 15.5 28 19.5C22 19 16 20.5 11 24C15.5 26.5 19 29.5 21.5 33C17 34.5 13.5 37 11 40C18 39 24 38.5 29 39C33 36 37.5 34 42 33C43 35 44 36.5 45.5 37.5C48 35 50 31 50 27C50 31 52 35 54.5 37.5C56 36.5 57 35 58 33C62.5 34 67 36 71 39C76 38.5 82 39 89 40C86.5 37 83 34.5 78.5 33C81 29.5 84.5 26.5 89 24C84 20.5 78 19 72 19.5C74 15.5 76.5 12 79 8C69 8.6 61 12 55.6 18C54.5 15.6 52.5 14 50 14Z"/>
+      <path fill="#06030d" d="M46 14 L43.6 4.5 L49.4 12.2Z M54 14 L56.4 4.5 L50.6 12.2Z"/>
+    </symbol>
+  </svg>
+</body>
+</html>

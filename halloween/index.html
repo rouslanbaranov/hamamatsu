@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en" data-page="halloween">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/hamamatsu/assets/js/vendor/store2.min.js?v=2.14.4"></script>
+  <script>
+    // Pick the language before first paint so Japanese copy never flashes in English.
+    (function () {
+      try {
+        var supported = ['en', 'ja'];
+        var query = String(new URLSearchParams(window.location.search).get('lang') || '').toLowerCase();
+        var stored = '';
+        try { stored = String((window.store && window.store.get ? window.store.get('sa-lang') : '') || '').toLowerCase(); } catch (error) {}
+        var browser = 'en';
+        var preferences = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+        preferences.some(function (preference) {
+          var code = String(preference || '').toLowerCase().slice(0, 2);
+          if (code === 'en' || code === 'ja') { browser = code; return true; }
+          return false;
+        });
+        var language = supported.indexOf(query) > -1 ? query : supported.indexOf(stored) > -1 ? stored : browser;
+        document.documentElement.lang = language;
+        document.documentElement.setAttribute('data-lang', language);
+        document.documentElement.classList.add('i18n-pending');
+        window.__saInitialLang = language;
+        window.setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 3000);
+      } catch (error) {}
+    })();
+  </script>
+  <script>
+    document.documentElement.classList.add('js');
+    // Safety net: reveal the sections even if the interaction script is blocked.
+    window.setTimeout(function () {
+      if (window.__halloweenReady) return;
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-visible'); });
+    }, 3000);
+  </script>
+  <noscript>
+    <style>[data-reveal] { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+
+  <title>Summer Avenue (Halloween Remix) — Project Hamamatsu</title>
+  <meta name="description" content="Summer Avenue, remixed for the night. A one-off Halloween single from Project Hamamatsu, outside the album.">
+  <meta name="author" content="Project Hamamatsu">
+  <meta name="theme-color" content="#0a0613">
+  <link rel="canonical" href="https://rbaranov.ch/hamamatsu/halloween">
+
+  <meta property="og:type" content="music.song">
+  <meta property="og:site_name" content="Summer Avenue">
+  <meta property="og:title" content="Summer Avenue (Halloween Remix) — Project Hamamatsu">
+  <meta property="og:description" content="One night on the avenue. A one-off Halloween remix of Summer Avenue, outside the album.">
+  <meta property="og:url" content="https://rbaranov.ch/hamamatsu/halloween">
+  <meta property="og:image" content="https://rbaranov.ch/hamamatsu/assets/img/og-summer-avenue-halloween-2026.jpg">
+  <meta property="og:image:alt" content="A full moon over a dark city skyline with bats, a jack-o'-lantern and the words Summer Avenue, Halloween Remix.">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:audio" content="https://rbaranov.ch/hamamatsu/assets/audio/singles/01-summer-avenue-halloween-remix.mp3">
+  <meta property="og:audio:type" content="audio/mpeg">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Summer Avenue (Halloween Remix) — Project Hamamatsu">
+  <meta name="twitter:description" content="One night on the avenue. A one-off Halloween remix of Summer Avenue, outside the album.">
+  <meta name="twitter:image" content="https://rbaranov.ch/hamamatsu/assets/img/og-summer-avenue-halloween-2026.jpg">
+  <meta name="twitter:image:alt" content="A full moon over a dark city skyline with bats, a jack-o'-lantern and the words Summer Avenue, Halloween Remix.">
+
+  <link rel="icon" href="/hamamatsu/assets/img/hamamatsu-mark.svg" type="image/svg+xml">
+  <link rel="icon" href="/hamamatsu/assets/img/favicon-hamamatsu.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="/hamamatsu/assets/img/apple-touch-icon-hamamatsu.png">
+  <link rel="manifest" href="/hamamatsu/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=layout-10">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/halloween.css?v=10">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicRecording",
+    "name": "Summer Avenue (Halloween Remix)",
+    "alternateName": "サマー・アベニュー（ハロウィーン・リミックス）",
+    "url": "https://rbaranov.ch/hamamatsu/halloween",
+    "image": "https://rbaranov.ch/hamamatsu/assets/img/cover-summer-avenue-halloween-1254.jpg",
+    "byArtist": { "@type": "MusicGroup", "name": "Project Hamamatsu" },
+    "duration": "PT3M32S",
+    "datePublished": "2026",
+    "inLanguage": ["ja", "en"],
+    "audio": "https://rbaranov.ch/hamamatsu/assets/audio/singles/01-summer-avenue-halloween-remix.mp3"
+  }
+  </script>
+</head>
+<body class="halloween-page">
+  <a class="skip-link" href="#main" data-i18n="a11y.skipToContent">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 5.4v13.2L18.8 12 8 5.4Z"/></symbol>
+    <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M6.5 5h4v14h-4zM13.5 5h4v14h-4z"/></symbol>
+    <symbol id="icon-volume" viewBox="0 0 24 24"><path d="M4 9.2h3.6L12.6 5v14l-5-4.2H4V9.2Z"/><path d="M16 8.2a5.2 5.2 0 0 1 0 7.6M18.6 5.6a8.8 8.8 0 0 1 0 12.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="icon-mute" viewBox="0 0 24 24"><path d="M4 9.2h3.6L12.6 5v14l-5-4.2H4V9.2Z"/><path d="m16 9 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-back" viewBox="0 0 24 24"><path d="M19.5 12h-15m6.5-6.5L4.5 12 11 18.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-share" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 13v6.5h14V13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-pumpkin" viewBox="0 0 24 24">
+      <ellipse cx="8.2" cy="14.1" rx="4.5" ry="6.5" fill="currentColor"/>
+      <ellipse cx="15.8" cy="14.1" rx="4.5" ry="6.5" fill="currentColor"/>
+      <ellipse cx="12" cy="14.2" rx="5" ry="6.9" fill="currentColor"/>
+      <path d="M12 7.6c-.4-1.6.1-2.8 1.6-3.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-bat" viewBox="0 0 100 44">
+      <path fill="currentColor" d="M50 14C47.5 14 45.5 15.6 44.4 18C39 12 31 8.6 21 8C23.5 12 26 15.5 28 19.5C22 19 16 20.5 11 24C15.5 26.5 19 29.5 21.5 33C17 34.5 13.5 37 11 40C18 39 24 38.5 29 39C33 36 37.5 34 42 33C43 35 44 36.5 45.5 37.5C48 35 50 31 50 27C50 31 52 35 54.5 37.5C56 36.5 57 35 58 33C62.5 34 67 36 71 39C76 38.5 82 39 89 40C86.5 37 83 34.5 78.5 33C81 29.5 84.5 26.5 89 24C84 20.5 78 19 72 19.5C74 15.5 76.5 12 79 8C69 8.6 61 12 55.6 18C54.5 15.6 52.5 14 50 14Z"/>
+      <path fill="currentColor" d="M46 14 L43.6 4.5 L49.4 12.2Z M54 14 L56.4 4.5 L50.6 12.2Z"/>
+    </symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M21.2 2.8C13.6 2.4 7.2 6.9 6.4 14.4c-.3 2.6.5 4.8 2.2 6.6 2.1-1 3.9-2.5 5.4-4.4 2.7-3.5 4.2-7.5 4.5-11.8-1 4.3-3.3 8-6.8 11.1-1.3 1.1-2.7 2-4.2 2.7 1.1 1.1 2.7 1.7 4.4 1.6 6.6-.4 10.2-6.6 9.3-17.4Z"/>
+      <path fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity=".5" d="M5.9 20.1c1.1-4 3.4-7.7 6.6-10.8"/>
+    </symbol>
+    <symbol id="jack-o-lantern" viewBox="0 0 200 200">
+      <defs>
+        <radialGradient id="jackBody" cx="50%" cy="42%" r="64%">
+          <stop offset="0" stop-color="#ffb257"/>
+          <stop offset=".62" stop-color="#ff8b2d"/>
+          <stop offset="1" stop-color="#e05a18"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="100" cy="122" rx="58" ry="60" fill="url(#jackBody)"/>
+      <ellipse cx="59" cy="122" rx="33" ry="52" fill="#f47a22"/>
+      <ellipse cx="141" cy="122" rx="33" ry="52" fill="#f47a22"/>
+      <ellipse cx="100" cy="122" rx="57" ry="59" fill="url(#jackBody)"/>
+      <path d="M101 64c-1.6-11 2.4-19 12-24" fill="none" stroke="#3d2a13" stroke-width="9" stroke-linecap="round"/>
+      <path d="M101 62c6.6-10.8 16.4-15 29-13-3.2 10.6-11.6 17-24.6 19.4Z" fill="#2f3a18"/>
+      <g fill="#ffd47a">
+        <path d="m63 102 16-20 12 20Z"/>
+        <path d="m125 102 12-20 16 20Z"/>
+        <path d="m95 120 5-13 5 13Z"/>
+        <path d="M58 141c9-9 17-7 23 2 6-9 14-9 20 0 6-9 14-9 20 0 6-9 14-11 23-2-5 19-20 29-43 29s-38-10-43-29Z"/>
+      </g>
+      <ellipse cx="100" cy="106" rx="40" ry="30" fill="#ffb057" opacity=".22"/>
+    </symbol>
+    <symbol id="icon-flag-gb" viewBox="0 0 60 30">
+      <rect width="60" height="30" fill="#012169"/>
+      <path d="M0 0 60 30M60 0 0 30" stroke="#fff" stroke-width="6"/>
+      <path d="M0 0 60 30M60 0 0 30" clip-path="url(#flag-gb-diagonal-clip)" stroke="#c8102e" stroke-width="4"/>
+      <path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/>
+      <path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/>
+    </symbol>
+    <symbol id="icon-flag-jp" viewBox="0 0 60 30">
+      <rect width="60" height="30" fill="#fff"/>
+      <circle cx="30" cy="15" r="9" fill="#bc002d"/>
+    </symbol>
+    <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></symbol>
+    <symbol id="icon-soundcloud" viewBox="0 0 24 24"><path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/></symbol>
+    <symbol id="icon-rbaranov" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="currentColor" mask="url(#rbaranov-rb-cutout)"/></symbol>
+    <defs>
+      <mask id="rbaranov-rb-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+        <rect width="64" height="64" fill="#fff"/>
+        <text x="32" y="42" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#000">RB</text>
+      </mask>
+      <clipPath id="flag-gb-diagonal-clip">
+        <path d="M30 15h30v15zv15H0zH0V15zV0h30z"/>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <header class="site-header hw-header" id="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="/hamamatsu" aria-label="Project Hamamatsu — Summer Avenue: Halloween Remix" data-i18n-attr="aria-label:halloween.brandAria">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false" aria-hidden="true"><rect width="64" height="64" fill="#FF8B2D"/><path fill="#0A0613" d="M9 7h14v21h18V7h12l5 5v46H41V37H23v20H9z"/></svg></span>
+        <span class="brand__name">Hamamatsu</span>
+        <span class="brand__rule" aria-hidden="true"></span>
+        <span class="brand__album" lang="en">HALLOWEEN</span>
+      </a>
+      <nav class="nav" aria-label="Primary" data-i18n-attr="aria-label:nav.primaryAria">
+        <a href="#player" data-i18n="halloween.navPlayer">Player</a>
+        <a href="#single" data-i18n="halloween.navSingle">The single</a>
+      </nav>
+      <div class="header-actions">
+        <a class="hw-back" href="/hamamatsu" aria-label="Back to Summer Avenue" data-i18n-attr="aria-label:halloween.backToAlbumAria">
+          <svg aria-hidden="true" focusable="false"><use href="#icon-back"/></svg>
+          <span data-i18n="halloween.backShort">Album</span>
+        </a>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="true" aria-label="Switch to English" title="Switch to English" data-i18n-attr="aria-label:lang.switchToEnglish; title:lang.switchToEnglish">
+            <span class="lang-switch__flag" aria-hidden="true"><svg viewBox="0 0 60 30" focusable="false" aria-hidden="true"><use href="#icon-flag-gb"/></svg></span>
+          </button>
+          <button class="lang-switch__btn" type="button" data-lang="ja" aria-pressed="false" aria-label="Switch to Japanese" title="Switch to Japanese" data-i18n-attr="aria-label:lang.switchToJapanese; title:lang.switchToJapanese">
+            <span class="lang-switch__flag" aria-hidden="true"><svg viewBox="0 0 60 30" focusable="false" aria-hidden="true"><use href="#icon-flag-jp"/></svg></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  </header>
+
+  <noscript>
+    <div class="noscript hw-noscript">
+      <p lang="en">The player needs JavaScript. You can still listen directly: <a href="/hamamatsu/assets/audio/singles/01-summer-avenue-halloween-remix.mp3">Summer Avenue (Halloween Remix) — MP3</a>.</p>
+      <p lang="ja">プレイヤーにはJavaScriptが必要です。こちらから直接聴くこともできます：<a href="/hamamatsu/assets/audio/singles/01-summer-avenue-halloween-remix.mp3">サマー・アベニュー（ハロウィーン・リミックス）— MP3</a>。</p>
+    </div>
+  </noscript>
+
+  <main id="main">
+    <section class="hero-poster hw-hero" id="top" aria-labelledby="hw-title">
+      <div class="hero-poster__field hw-field" aria-hidden="true">
+        <span class="hero-poster__blue hw-edge"></span>
+        <span class="hw-leftglow"></span>
+        <span class="hw-leftmark">31</span>
+        <svg class="hw-web" viewBox="0 0 200 200" fill="none" aria-hidden="true" focusable="false">
+          <defs>
+            <radialGradient id="hwSpiderGlow">
+              <stop offset="0" stop-color="#ff8b2d" stop-opacity=".34"/>
+              <stop offset=".5" stop-color="#ff5a24" stop-opacity=".13"/>
+              <stop offset="1" stop-color="#ff5a24" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <g stroke="currentColor" stroke-width="1">
+            <path d="M0 0 200 200M0 0 140 200M0 0 200 140M0 0 200 60M0 0 60 200M0 0 200 14M0 0 14 200"/>
+            <path d="M39 4c25 12 44 31 56 56M74 10c26 12 46 32 58 58M108 17c27 12 48 33 60 60M141 25c28 13 49 34 61 61"/>
+          </g>
+          <g stroke="currentColor" stroke-width=".8" opacity=".7">
+            <path d="M2 39c14 22 34 38 60 46M8 74c14 22 35 39 61 47M14 108c15 22 36 39 62 47M22 141c15 22 36 39 62 46"/>
+          </g>
+          <g class="hw-spider">
+            <circle class="hw-spider__glow" cx="0" cy="2" r="21" fill="url(#hwSpiderGlow)"/>
+            <g class="hw-spider__legs hw-spider__legs--a">
+              <path d="M-2 -1.6 L-8 -8 L-12 -7"/>
+              <path d="M-2 .4 L-10 -1 L-13 2"/>
+              <path d="M-2 2 L-9 6 L-12 10"/>
+              <path d="M-2 3.4 L-6 9 L-7 13"/>
+            </g>
+            <g class="hw-spider__legs hw-spider__legs--b">
+              <path d="M2 -1.6 L8 -8 L12 -7"/>
+              <path d="M2 .4 L10 -1 L13 2"/>
+              <path d="M2 2 L9 6 L12 10"/>
+              <path d="M2 3.4 L6 9 L7 13"/>
+            </g>
+            <ellipse class="hw-spider__abdomen" cx="0" cy="5" rx="4.6" ry="5.8"/>
+            <circle class="hw-spider__head" cx="0" cy="-2.4" r="2.8"/>
+          </g>
+        </svg>
+        <div class="hero-poster__rose hw-sky">
+          <span class="hw-stars"></span>
+          <span class="hw-moon"></span>
+          <img class="hw-branch" src="/hamamatsu/assets/img/halloween-branch.svg" width="760" height="560" alt="" loading="eager" decoding="async">
+          <div class="hw-leaves" aria-hidden="true">
+            <span class="hw-leaf hw-leaf--1"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-leaf"/></svg></span>
+            <span class="hw-leaf hw-leaf--2"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-leaf"/></svg></span>
+            <span class="hw-leaf hw-leaf--3"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-leaf"/></svg></span>
+            <span class="hw-leaf hw-leaf--4"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-leaf"/></svg></span>
+            <span class="hw-leaf hw-leaf--5"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-leaf"/></svg></span>
+            <span class="hw-leaf hw-leaf--6"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-leaf"/></svg></span>
+            <span class="hw-leaf hw-leaf--7"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-leaf"/></svg></span>
+          </div>
+          <div class="hw-bats">
+            <svg class="hw-bat hw-bat--a" viewBox="0 0 100 44" aria-hidden="true" focusable="false"><use href="#icon-bat"/></svg>
+            <svg class="hw-bat hw-bat--b" viewBox="0 0 100 44" aria-hidden="true" focusable="false"><use href="#icon-bat"/></svg>
+            <svg class="hw-bat hw-bat--c" viewBox="0 0 100 44" aria-hidden="true" focusable="false"><use href="#icon-bat"/></svg>
+            <svg class="hw-bat hw-bat--d" viewBox="0 0 100 44" aria-hidden="true" focusable="false"><use href="#icon-bat"/></svg>
+            <svg class="hw-bat hw-bat--e" viewBox="0 0 100 44" aria-hidden="true" focusable="false"><use href="#icon-bat"/></svg>
+            <svg class="hw-bat hw-bat--f" viewBox="0 0 100 44" aria-hidden="true" focusable="false"><use href="#icon-bat"/></svg>
+          </div>
+          <span class="hw-haze"></span>
+          <span class="hw-cityglow"></span>
+          <span class="hw-skyground" aria-hidden="true"></span>
+          <img class="hw-skyline" src="/hamamatsu/assets/img/halloween-skyline.svg" width="1440" height="300" alt="" loading="eager" decoding="async">
+          <span class="hw-pumpkin-stage">
+            <svg class="hw-pumpkin hw-pumpkin--big" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><use href="#jack-o-lantern"/></svg>
+            <svg class="hw-pumpkin hw-pumpkin--small" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><use href="#jack-o-lantern"/></svg>
+          </span>
+          <span class="hw-fog"></span>
+          <span class="hw-fog hw-fog--2"></span>
+        </div>
+      </div>
+
+      <div class="container hero-poster__inner hw-hero__inner">
+        <div class="hero-poster__copy hw-copy">
+          <p class="hero-poster__kicker hw-kicker">
+            <span class="hero-poster__kicker-dot hw-kicker__dot" aria-hidden="true"></span>
+            <span data-i18n="halloween.kicker">PROJECT HAMAMATSU · SINGLE · 2026</span>
+          </p>
+          <h1 class="hero-poster__title hw-title" id="hw-title">
+            <span class="sr-only" lang="en">Summer Avenue (Halloween Remix)</span>
+            <span class="hero-poster__jp hw-title__jp" lang="ja" aria-hidden="true">ハロウィーン</span>
+            <span class="hero-poster__en-row hw-title__en-row" aria-hidden="true">
+              <span class="hero-poster__en hw-title__en" lang="en">HALLOWEEN<br>REMIX</span>
+              <span class="hero-poster__city-pop hw-script" lang="en">Summer Avenue</span>
+            </span>
+          </h1>
+          <p class="hero-poster__lede hw-lede" data-i18n="halloween.lede">Summer Avenue, remixed for the night. One track, outside the album — for the last night of October.</p>
+          <p class="hero-poster__meta hw-meta" data-i18n-html="halloween.meta">01 TRACK <span>·</span> 3:32 <span>·</span> RB–002</p>
+        </div>
+
+        <div class="hw-player" id="player" data-hw-player role="region" aria-labelledby="hw-player-title">
+          <div class="hw-deck" aria-hidden="true">
+            <span class="hw-deck__halo"></span>
+            <span class="hw-deck__shadow"></span>
+            <div class="hw-disc" data-hw-disc>
+              <span class="hw-disc__grooves"></span>
+              <span class="hw-disc__label">
+                <span class="hw-disc__pumpkin"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><use href="#icon-pumpkin"/></svg></span>
+                <span class="hw-disc__title">Summer Avenue</span>
+                <span class="hw-disc__sub">Halloween Remix</span>
+                <span class="hw-disc__side">SIDE A · 33⅓</span>
+              </span>
+              <span class="hw-disc__pin"></span>
+            </div>
+          </div>
+
+          <div class="hw-readout">
+            <div class="hw-readout__head">
+              <span class="hw-readout__index" aria-hidden="true">01</span>
+              <p class="hw-readout__title" id="hw-player-title"><span lang="en">Summer Avenue</span> <span class="hw-readout__paren" lang="en">(Halloween Remix)</span></p>
+              <p class="hw-readout__cat" aria-hidden="true">RB–002</p>
+            </div>
+            <span class="hw-readout__rule" aria-hidden="true"></span>
+            <div class="hw-transport">
+              <button class="hw-play" type="button" data-hw-toggle aria-label="Play the single" aria-pressed="false" data-i18n-attr="aria-label:halloween.playSingle">
+                <svg class="icon-play" aria-hidden="true"><use href="#icon-play"/></svg>
+                <svg class="icon-pause" aria-hidden="true"><use href="#icon-pause"/></svg>
+              </button>
+              <input class="hw-seek" type="range" min="0" max="1000" step="1" value="0" data-hw-seek aria-label="Seek within Summer Avenue (Halloween Remix)" data-i18n-attr="aria-label:halloween.seek">
+              <p class="hw-time"><span data-hw-current>0:00</span><span class="hw-time__sep">/</span><span data-hw-total>3:32</span></p>
+              <div class="hw-volume">
+                <button class="hw-icon-btn" type="button" data-hw-mute aria-label="Mute" data-i18n-attr="aria-label:halloween.mute">
+                  <svg class="icon-volume" aria-hidden="true"><use href="#icon-volume"/></svg>
+                  <svg class="icon-mute" aria-hidden="true"><use href="#icon-mute"/></svg>
+                </button>
+                <input class="hw-volume-range" type="range" min="0" max="1" step="0.01" value="0.85" data-hw-volume aria-label="Volume" data-i18n-attr="aria-label:halloween.volume">
+              </div>
+            </div>
+            <div class="hw-scope" aria-hidden="true">
+              <canvas data-hw-scope width="720" height="72"></canvas>
+            </div>
+            <p class="sr-only" data-hw-status aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="hero-poster__actions hw-actions">
+          <button class="btn btn--hw-share" type="button" data-share-page>
+            <svg class="btn__icon" aria-hidden="true" focusable="false"><use href="#icon-share"/></svg>
+            <span data-i18n="outro.share">Share the page</span>
+          </button>
+          <a class="hero-poster__film-link hw-back-link" href="/hamamatsu">
+            <span data-i18n="halloween.backToAlbum">Back to Summer Avenue</span>
+            <svg aria-hidden="true" focusable="false"><use href="#icon-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="container hero-poster__foot hw-foot">
+        <nav class="hero-poster__social hw-social" aria-label="Social and portfolio links" data-i18n-attr="aria-label:hero.socialAria">
+          <a class="social-link" href="https://www.linkedin.com/in/rbaranov/" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg>
+            <span>LinkedIn</span>
+            <span class="sr-only" data-i18n="a11y.newTab"> (opens in a new tab)</span>
+          </a>
+          <a class="social-link" href="https://soundcloud.com/rouslan-baranov" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-soundcloud"/></svg>
+            <span>SoundCloud</span>
+            <span class="sr-only" data-i18n="a11y.newTab"> (opens in a new tab)</span>
+          </a>
+          <a class="social-link" href="https://rbaranov.ch/" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" aria-hidden="true" focusable="false"><use href="#icon-rbaranov"/></svg>
+            <span data-i18n="hero.portfolio">Portfolio</span>
+            <span class="sr-only" data-i18n="a11y.portfolioNewTab"> (rbaranov.ch; opens in a new tab)</span>
+          </a>
+        </nav>
+        <a class="hero-poster__scroll hw-scroll" href="#single"><span class="hero-poster__scroll-line" aria-hidden="true"></span><span data-i18n="halloween.scrollToSingle">Scroll to the single</span></a>
+        <p class="hero-poster__edition hw-edition" data-i18n="halloween.edition">DIGITAL SINGLE · 2026</p>
+      </div>
+    </section>
+
+    <section class="hw-single" id="single" aria-labelledby="hw-single-title">
+      <div class="container hw-single__inner">
+        <figure class="hw-single__art" data-reveal>
+          <div class="hw-cover">
+            <img src="/hamamatsu/assets/img/cover-summer-avenue-halloween-800.jpg" width="800" height="800" alt="Summer Avenue (Halloween Remix) cover: a full moon over a dark city skyline, with bats, a jack-o'-lantern and the release title." loading="lazy" decoding="async" data-i18n-attr="alt:halloween.single.coverAlt">
+          </div>
+          <figcaption class="hw-cover__caption" data-i18n-html="halloween.single.caption">RB–002 <span>/</span> 2026 <span>/</span> 01 TRACK</figcaption>
+        </figure>
+
+        <div class="hw-single__copy">
+          <header class="hw-single__head" data-reveal>
+            <p class="hw-single__kicker" data-i18n="halloween.single.kicker">THE SINGLE</p>
+            <h2 class="display" id="hw-single-title" data-i18n-html="halloween.single.title">One night,<br>one track.</h2>
+          </header>
+          <div class="hw-single__prose" data-reveal>
+            <p class="lead" data-i18n="halloween.single.lead">Summer Avenue (Halloween Remix) is a one-off single from Project Hamamatsu, released outside the album. The album's title song, kept out after dark.</p>
+            <p data-i18n="halloween.single.body">One track, one night. The words and the avenue are the same; only the light has changed.</p>
+          </div>
+          <dl class="hw-specs" data-reveal>
+            <div><dt data-i18n="halloween.single.format">Format</dt><dd data-i18n="halloween.single.formatValue">Digital single</dd></div>
+            <div><dt data-i18n="halloween.single.released">Released</dt><dd>2026</dd></div>
+            <div><dt data-i18n="halloween.single.runtime">Runtime</dt><dd>3:32</dd></div>
+            <div><dt data-i18n="halloween.single.catalogue">Catalogue</dt><dd>RB–002</dd></div>
+            <div><dt data-i18n="halloween.single.from">From</dt><dd data-i18n="halloween.single.fromValue">Summer Avenue (RB–001)</dd></div>
+          </dl>
+          <div class="hw-single__actions" data-reveal>
+            <a class="hw-text-link" href="/hamamatsu"><span data-i18n="halloween.single.album">Listen to the album</span> <svg aria-hidden="true" focusable="false"><use href="#icon-arrow"/></svg></a>
+            <a class="hw-text-link" href="/hamamatsu#lyrics-03"><span data-i18n="halloween.single.lyrics">Read the lyrics</span> <svg aria-hidden="true" focusable="false"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer hw-footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="brand__mark brand__mark--footer" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false" aria-hidden="true"><rect width="64" height="64" fill="#FF8B2D"/><path fill="#0A0613" d="M9 7h14v21h18V7h12l5 5v46H41V37H23v20H9z"/></svg></span>
+        <p class="footer__name" lang="en">Project Hamamatsu<br><span>HALLOWEEN REMIX</span></p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer" data-i18n-attr="aria-label:nav.footerAria">
+        <a href="#player" data-i18n="halloween.navPlayer">Player</a>
+        <a href="#single" data-i18n="halloween.navSingle">The single</a>
+        <a href="/hamamatsu" data-i18n="halloween.albumLink">Summer Avenue</a>
+        <a href="/hamamatsu#lyrics-03" data-i18n="halloween.single.lyricsShort">Lyrics</a>
+        <a href="#top" data-i18n="footer.backToTop">Back to top</a>
+      </nav>
+      <div class="footer__meta">
+        <p data-i18n="footer.copyright">© 2026 Project Hamamatsu. All rights reserved.</p>
+        <p lang="ja">サマー・アベニュー · ハロウィーン・リミックス</p>
+        <p data-i18n="halloween.edition">DIGITAL SINGLE · 2026</p>
+      </div>
+      <a class="footer__top" href="#top"><span data-i18n="footer.backToTop">Back to top</span> <svg aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+    </div>
+  </footer>
+
+  <audio id="hw-audio" data-hw-audio preload="metadata" src="/hamamatsu/assets/audio/singles/01-summer-avenue-halloween-remix.mp3"></audio>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+  <p class="sr-only" aria-live="polite" data-i18n-status></p>
+
+  <script src="/hamamatsu/assets/js/vendor/i18next.min.js" defer></script>
+  <script src="/hamamatsu/assets/js/i18n.js?v=halloween-2" defer></script>
+  <script src="/hamamatsu/assets/js/halloween.js?v=5" defer></script>
+</body>
+</html>

@@ -23,7 +23,16 @@
           ogDescription: 'Eleven city-pop songs for the long way home. The 2026 album from Project Hamamatsu.',
           ogImageAlt: 'Beige Project Hamamatsu audio cassette with Summer Avenue artwork, Japanese and English album titles, reel openings and a magnetic tape window.',
           albumTitle: 'Summer Avenue',
-          nowPlayingTitle: '▶ {{title}} — Project Hamamatsu'
+          nowPlayingTitle: '▶ {{title}} — Project Hamamatsu',
+          halloween: {
+            title: 'Summer Avenue (Halloween Remix) — Project Hamamatsu',
+            description: 'Summer Avenue, remixed for the night. A one-off Halloween single from Project Hamamatsu, outside the album.',
+            ogTitle: 'Summer Avenue (Halloween Remix) — Project Hamamatsu',
+            ogDescription: 'One night on the avenue. A one-off Halloween remix of Summer Avenue, outside the album.',
+            ogImageAlt: 'A full moon over a dark city skyline with bats, a jack-o’-lantern and the words Summer Avenue, Halloween Remix.',
+            albumTitle: 'Summer Avenue (Halloween Remix)',
+            nowPlayingTitle: '▶ Summer Avenue (Halloween Remix) — Project Hamamatsu'
+          }
         },
         a11y: {
           skipToContent: 'Skip to content',
@@ -46,6 +55,46 @@
         header: {
           brandAria: 'Project Hamamatsu — Summer Avenue'
         },
+        halloween: {
+          brandAria: 'Project Hamamatsu — Summer Avenue: Halloween Remix',
+          navPlayer: 'Player',
+          navSingle: 'The single',
+          backShort: 'Album',
+          backToAlbum: 'Back to Summer Avenue',
+          backToAlbumAria: 'Back to the Summer Avenue album',
+          albumLink: 'Summer Avenue',
+          kicker: 'PROJECT HAMAMATSU · SINGLE · 2026',
+          lede: 'Summer Avenue, remixed for the night. One track, outside the album — for the last night of October.',
+          meta: '01 TRACK <span>·</span> 3:32 <span>·</span> RB–002',
+          playSingle: 'Play the single',
+          pauseSingle: 'Pause the single',
+          seek: 'Seek within Summer Avenue (Halloween Remix)',
+          mute: 'Mute',
+          unmute: 'Unmute',
+          volume: 'Volume',
+          nowPlaying: 'Now playing: Summer Avenue (Halloween Remix)',
+          toastEnded: 'The night is over. Press play to hear it again.',
+          scrollToSingle: 'Scroll to the single',
+          edition: 'DIGITAL SINGLE · 2026',
+          single: {
+            kicker: 'THE SINGLE',
+            title: 'One night,<br>one track.',
+            lead: 'Summer Avenue (Halloween Remix) is a one-off single from Project Hamamatsu, released outside the album — the album’s title song, kept out after dark.',
+            body: 'One track, one night. The words and the avenue are the same; only the light has changed.',
+            format: 'Format',
+            formatValue: 'Digital single',
+            released: 'Released',
+            runtime: 'Runtime',
+            catalogue: 'Catalogue',
+            from: 'From',
+            fromValue: 'Summer Avenue (RB–001)',
+            caption: 'RB–002 <span>/</span> 2026 <span>/</span> 01 TRACK',
+            coverAlt: 'Summer Avenue (Halloween Remix) cover: a full moon over a dark city skyline, with bats, a jack-o’-lantern and the release title.',
+            album: 'Listen to the album',
+            lyrics: 'Read the lyrics',
+            lyricsShort: 'Lyrics'
+          }
+        },
         menu: {
           preferencesAria: 'Display preferences',
           video: 'Background video',
@@ -63,6 +112,7 @@
         },
         hero: {
           cityPop: '’80s-style City Pop',
+          halloween: 'Halloween',
           lede: 'The 2026 album from Project Hamamatsu — Japanese and English, in eleven tracks.',
           meta: '11 TRACKS <span>·</span> 46:05 <span>·</span> RB–001',
           portraitAlt: 'Portrait of the Project Hamamatsu character, chin raised, wearing a black Hamamatsu T-shirt.',
@@ -191,7 +241,16 @@
           ogDescription: '遠回りして帰る夜のための、11曲のシティポップ。Project Hamamatsuの2026年アルバム。',
           ogImageAlt: '『サマー・アベニュー』のアートワークをあしらった、ベージュのProject Hamamatsuカセット。日本語と英語のアルバムタイトル、リールの穴、磁気テープの窓が見える。',
           albumTitle: 'サマー・アベニュー',
-          nowPlayingTitle: '▶ {{title}} — Project Hamamatsu'
+          nowPlayingTitle: '▶ {{title}} — Project Hamamatsu',
+          halloween: {
+            title: 'サマー・アベニュー（ハロウィーン・リミックス） — Project Hamamatsu',
+            description: '夜のための『サマー・アベニュー』リミックス。Project Hamamatsuによる、アルバムには収録されないハロウィーンのシングル。',
+            ogTitle: 'サマー・アベニュー（ハロウィーン・リミックス） — Project Hamamatsu',
+            ogDescription: '大通りの一夜。アルバムの外に置かれた、『サマー・アベニュー』のハロウィーン・リミックス。',
+            ogImageAlt: '暗い街のシルエットの上に満月、コウモリ、ジャック・オー・ランタン、そして「Summer Avenue, Halloween Remix」の文字。',
+            albumTitle: 'サマー・アベニュー（ハロウィーン・リミックス）',
+            nowPlayingTitle: '▶ サマー・アベニュー（ハロウィーン・リミックス） — Project Hamamatsu'
+          }
         },
         a11y: {
           skipToContent: '本文へスキップ',
@@ -214,6 +273,46 @@
         header: {
           brandAria: 'Project Hamamatsu — SUMMER AVENUE（サマー・アベニュー）'
         },
+        halloween: {
+          brandAria: 'Project Hamamatsu — サマー・アベニュー（ハロウィーン・リミックス）',
+          navPlayer: 'プレイヤー',
+          navSingle: 'シングル',
+          backShort: 'アルバム',
+          backToAlbum: 'サマー・アベニューへ戻る',
+          backToAlbumAria: 'サマー・アベニューのアルバムへ戻る',
+          albumLink: 'サマー・アベニュー',
+          kicker: 'PROJECT HAMAMATSU · シングル · 2026',
+          lede: '夜のための『サマー・アベニュー』リミックス。アルバムには収録されない1曲を、10月最後の夜に。',
+          meta: '1曲 <span>·</span> 3:32 <span>·</span> RB–002',
+          playSingle: 'シングルを再生',
+          pauseSingle: '一時停止',
+          seek: '『サマー・アベニュー（ハロウィーン・リミックス）』内をシーク',
+          mute: 'ミュート',
+          unmute: 'ミュートを解除',
+          volume: '音量',
+          nowPlaying: '再生中：サマー・アベニュー（ハロウィーン・リミックス）',
+          toastEnded: '夜はここまで。もう一度聴くには再生を押してください。',
+          scrollToSingle: 'シングルへスクロール',
+          edition: 'デジタル・シングル · 2026',
+          single: {
+            kicker: 'シングル',
+            title: '一夜かぎり、<br>一曲だけ。',
+            lead: '『サマー・アベニュー（ハロウィーン・リミックス）』は、アルバムには収録されないProject Hamamatsuの単発シングル。アルバムの表題曲を、夜の側に残した。',
+            body: '1曲、一夜。歌詞も大通りもそのままに、光だけが変わる。',
+            format: 'フォーマット',
+            formatValue: 'デジタル・シングル',
+            released: 'リリース',
+            runtime: '収録時間',
+            catalogue: 'カタログ番号',
+            from: '収録元',
+            fromValue: 'サマー・アベニュー（RB–001）',
+            caption: 'RB–002 <span>/</span> 2026 <span>/</span> 1曲',
+            coverAlt: '『サマー・アベニュー（ハロウィーン・リミックス）』のカバー。暗い街のシルエットの上に満月、コウモリ、ジャック・オー・ランタン、そしてリリースタイトル。',
+            album: 'アルバムを聴く',
+            lyrics: '歌詞を読む',
+            lyricsShort: '歌詞'
+          }
+        },
         menu: {
           preferencesAria: '表示設定',
           video: '背景の映像',
@@ -231,6 +330,7 @@
         },
         hero: {
           cityPop: '’80sスタイル・シティポップ',
+          halloween: 'ハロウィーン',
           lede: 'Project Hamamatsuの2026年アルバム。日本語と英語が、11曲の中で交わる。',
           meta: '11曲 <span>·</span> 46:05 <span>·</span> RB–001',
           portraitAlt: '顎を上げ、黒いHamamatsuのTシャツを着たProject Hamamatsuのキャラクターのポートレート。',
@@ -460,20 +560,24 @@
 
     applyAttributes(document);
 
-    document.title = translate('meta.title');
-    setMeta('meta[name="description"]', 'meta.description');
-    setMeta('meta[property="og:title"]', 'meta.ogTitle');
-    setMeta('meta[property="og:description"]', 'meta.ogDescription');
-    setMeta('meta[property="og:image:alt"]', 'meta.ogImageAlt');
+    // Pages such as /halloween carry their own metadata under meta.<page>.*
+    const page = document.documentElement.getAttribute('data-page');
+    const metaKey = (key) => (page ? 'meta.' + page + '.' + key : 'meta.' + key);
+
+    document.title = translate(metaKey('title'));
+    setMeta('meta[name="description"]', metaKey('description'));
+    setMeta('meta[property="og:title"]', metaKey('ogTitle'));
+    setMeta('meta[property="og:description"]', metaKey('ogDescription'));
+    setMeta('meta[property="og:image:alt"]', metaKey('ogImageAlt'));
 
     const ogLocale = $('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute('content', language === 'ja' ? 'ja_JP' : 'en_US');
     const ogLocaleAlternate = $('meta[property="og:locale:alternate"]');
     if (ogLocaleAlternate) ogLocaleAlternate.setAttribute('content', language === 'ja' ? 'en_US' : 'ja_JP');
 
-    setMeta('meta[name="twitter:title"]', 'meta.ogTitle');
-    setMeta('meta[name="twitter:description"]', 'meta.ogDescription');
-    setMeta('meta[name="twitter:image:alt"]', 'meta.ogImageAlt');
+    setMeta('meta[name="twitter:title"]', metaKey('ogTitle'));
+    setMeta('meta[name="twitter:description"]', metaKey('ogDescription'));
+    setMeta('meta[name="twitter:image:alt"]', metaKey('ogImageAlt'));
 
     $$('.lang-switch__btn[data-lang]').forEach((button) => {
       const isCurrent = button.getAttribute('data-lang') === language;

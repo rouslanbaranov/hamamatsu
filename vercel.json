@@ -9,8 +9,24 @@
       "destination": "/index.html"
     },
     {
+      "source": "/hamamatsu/halloween",
+      "destination": "/halloween/index.html"
+    },
+    {
+      "source": "/hamamatsu/halloween/",
+      "destination": "/halloween/index.html"
+    },
+    {
       "source": "/hamamatsu/:path*",
       "destination": "/:path*"
+    },
+    {
+      "source": "/halloween",
+      "destination": "/halloween/index.html"
+    },
+    {
+      "source": "/halloween/",
+      "destination": "/halloween/index.html"
     }
   ]
 }

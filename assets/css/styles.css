@@ -894,6 +894,46 @@ body.is-playing .btn__icon .icon-pause { display: block; }
   color: var(--cream);
 }
 
+/* Halloween campaign link in the album hero */
+.btn--halloween {
+  gap: 9px;
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn--halloween .btn__icon {
+  width: 16px;
+  height: 16px;
+  color: var(--red);
+}
+
+.btn--halloween .btn__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn--halloween:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+.btn--halloween:hover .btn__icon {
+  color: var(--orange);
+}
+
+.btn--halloween-copy { display: none; }
+
+@media (max-width: 900px) {
+  .hero-poster__actions .btn--halloween { display: none; }
+
+  .btn--halloween-copy {
+    display: inline-flex;
+    margin-top: 14px;
+  }
+}
+
 /* Hero artwork */
 
 .hero__art {

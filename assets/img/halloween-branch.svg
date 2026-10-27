@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" role="img" aria-label="Bare, twisted tree branches">
+  <g fill="none" stroke="#06030d" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M774 18C700 42 642 72 590 112C548 144 508 156 458 148C420 142 386 150 358 174" stroke-width="19"/>
+    <path d="M590 112C604 160 592 206 560 250C540 278 528 308 528 344" stroke-width="11"/>
+    <path d="M702 58C690 104 662 132 620 148" stroke-width="8"/>
+    <path d="M620 148C610 186 590 208 558 218" stroke-width="6"/>
+    <path d="M458 148C438 116 410 96 372 88" stroke-width="9"/>
+    <path d="M372 88C348 82 328 88 312 104" stroke-width="5"/>
+    <path d="M458 148C458 186 448 220 424 250C408 270 400 294 400 322" stroke-width="7"/>
+    <path d="M560 250C588 268 606 296 612 330" stroke-width="6"/>
+    <path d="M528 344C500 366 476 394 464 430" stroke-width="5"/>
+    <path d="M528 344C556 360 572 386 576 418" stroke-width="4"/>
+    <path d="M400 322C374 340 356 366 348 398" stroke-width="4"/>
+    <path d="M358 174C330 196 314 224 310 256" stroke-width="7"/>
+    <path d="M310 256C286 270 268 292 262 318" stroke-width="4"/>
+    <path d="M620 148C646 172 660 202 660 236" stroke-width="5"/>
+    <path d="M660 236C684 250 700 272 704 298" stroke-width="3.5"/>
+    <path d="M590 112C620 116 646 110 668 94" stroke-width="4"/>
+    <path d="M660 236C642 262 636 292 642 320" stroke-width="3"/>
+    <path d="M702 58C722 92 726 124 716 156" stroke-width="4"/>
+    <path d="M312 104C300 84 300 64 310 44" stroke-width="3.5"/>
+  </g>
+  <g fill="#06030d">
+    <path d="M345 400c9-5 17-4 24 3-8 2-15 6-20 13-2-6-4-11-4-16z"/>
+    <path d="M574 420c9-5 17-4 24 3-8 2-15 6-20 13-2-6-4-11-4-16z"/>
+    <path d="M258 320c8-4 15-3 21 3-7 2-13 5-18 11-2-5-3-10-3-14z"/>
+  </g>
+</svg>

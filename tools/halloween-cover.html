@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Summer Avenue (Halloween Remix) — cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0a0613;
+    --bone: #f3ead8;
+    --pumpkin: #ff8b2d;
+    --blood: #c01830;
+    --mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+    --display: "Archivo Black", "Arial Black", sans-serif;
+    --script: "Sedgwick Ave Display", cursive;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { width: 1254px; height: 1254px; overflow: hidden; background: var(--night); }
+  .cover {
+    position: relative;
+    width: 1254px;
+    height: 1254px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse at 78% 24%, rgba(255, 170, 80, .2), transparent 44%),
+      radial-gradient(ellipse at 12% 80%, rgba(192, 24, 48, .18), transparent 48%),
+      linear-gradient(165deg, #1c0e17 0%, #0e0719 58%, #0a0613 100%);
+    color: var(--bone);
+    font-family: "Space Grotesk", sans-serif;
+  }
+  .stars {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: radial-gradient(rgba(243,234,216,.7) 1px, transparent 1.2px);
+    background-size: 47px 47px;
+    opacity: .34;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 62%, transparent 92%);
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 62%, transparent 92%);
+  }
+  .moon {
+    position: absolute; top: 108px; left: 50%; width: 620px; height: 620px;
+    margin-left: -238px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 28%, rgba(160,100,46,.2) 0 5.5%, transparent 6.4%),
+      radial-gradient(circle at 63% 22%, rgba(160,100,46,.15) 0 4%, transparent 4.8%),
+      radial-gradient(circle at 48% 55%, rgba(160,100,46,.13) 0 8%, transparent 8.8%),
+      radial-gradient(circle at 71% 67%, rgba(160,100,46,.11) 0 5%, transparent 5.8%),
+      radial-gradient(circle at 31% 72%, rgba(160,100,46,.1) 0 6.5%, transparent 7.4%),
+      radial-gradient(circle at 42% 34%, #fff5da 0%, #ffe2ab 32%, #ffc274 64%, #f2a052 86%, #dd7f35 100%);
+    box-shadow: 0 0 110px rgba(255,170,80,.34), 0 0 300px rgba(255,120,40,.18), inset -30px -26px 90px rgba(110,54,24,.3);
+  }
+  .haze {
+    position: absolute; top: 500px; left: 160px; z-index: 2;
+    width: 1000px; height: 110px;
+    background: linear-gradient(90deg, transparent, rgba(255,180,110,.22) 36%, rgba(255,160,90,.25) 64%, transparent);
+    filter: blur(26px);
+    transform: rotate(-5deg);
+  }
+  .branch { position: absolute; top: -40px; right: -50px; z-index: 4; width: 690px; }
+  .bat { position: absolute; z-index: 3; color: #06030d; }
+  .bat svg { display: block; width: 100%; height: auto; }
+  .bat--a { top: 225px; left: 690px; width: 250px; transform: rotate(-7deg); }
+  .bat--b { top: 420px; left: 430px; width: 150px; transform: rotate(9deg); }
+  .bat--c { top: 330px; left: 878px; width: 110px; transform: rotate(-12deg); }
+  .bat--d { top: 520px; left: 812px; width: 80px; transform: rotate(6deg); }
+  .bat--e { top: 585px; left: 600px; width: 64px; transform: rotate(-4deg); }
+  .skyline { position: absolute; z-index: 2; left: -20px; bottom: -2px; width: 1294px; }
+  .fog { position: absolute; z-index: 3; left: -80px; bottom: 40px; width: 1400px; height: 210px;
+    background: radial-gradient(ellipse at 50% 100%, rgba(150,110,200,.26), transparent 66%);
+    filter: blur(30px);
+  }
+  .pumpkin { position: absolute; z-index: 5; filter: drop-shadow(0 0 24px rgba(255,150,50,.45)) drop-shadow(0 0 80px rgba(255,110,35,.25)); }
+  .pumpkin--big { left: 62px; bottom: 6px; width: 190px; }
+  .pumpkin--small { left: 228px; bottom: 2px; width: 104px; opacity: .92; }
+  .topline {
+    position: absolute; z-index: 6; top: 62px; left: 84px; right: 84px;
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 19px; letter-spacing: .3em; text-transform: uppercase;
+    color: rgba(243,234,216,.72);
+  }
+  .topline span:last-child { color: var(--pumpkin); }
+  .rule { position: absolute; z-index: 6; top: 101px; left: 84px; right: 84px; height: 1px; background: rgba(243,234,216,.22); }
+  .titles { position: absolute; z-index: 6; top: 748px; left: 84px; right: 84px; }
+  .pre { font-family: var(--mono); font-size: 22px; letter-spacing: .34em; text-transform: uppercase; color: var(--pumpkin); margin: 0 0 14px; }
+  .word {
+    margin: 0;
+    font-family: var(--display); font-weight: 400;
+    font-size: 170px; line-height: .84; letter-spacing: -.05em; text-transform: uppercase;
+    color: var(--bone);
+    text-shadow: .028em .014em 0 rgba(192,24,48,.72);
+  }
+  .remix {
+    position: absolute; right: 0; top: 138px;
+    font-family: var(--script); font-size: 148px; line-height: 1;
+    color: var(--pumpkin); transform: rotate(-6deg); transform-origin: right center;
+    text-shadow: 0 0 36px rgba(255,139,45,.35);
+    white-space: nowrap;
+  }
+  .bottomline {
+    position: absolute; z-index: 6; right: 84px; bottom: 34px;
+    display: flex; gap: 22px;
+    font-family: var(--mono); font-size: 17px; letter-spacing: .24em; text-transform: uppercase;
+    color: rgba(243,234,216,.62);
+  }
+  .bottomline strong { font-weight: 400; color: rgba(243,234,216,.92); }
+  .grain {
+    position: absolute; inset: 0; z-index: 8; pointer-events: none; opacity: .08;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <symbol id="cover-bat" viewBox="0 0 100 44">
+      <path fill="#06030d" d="M50 14C47.5 14 45.5 15.6 44.4 18C39 12 31 8.6 21 8C23.5 12 26 15.5 28 19.5C22 19 16 20.5 11 24C15.5 26.5 19 29.5 21.5 33C17 34.5 13.5 37 11 40C18 39 24 38.5 29 39C33 36 37.5 34 42 33C43 35 44 36.5 45.5 37.5C48 35 50 31 50 27C50 31 52 35 54.5 37.5C56 36.5 57 35 58 33C62.5 34 67 36 71 39C76 38.5 82 39 89 40C86.5 37 83 34.5 78.5 33C81 29.5 84.5 26.5 89 24C84 20.5 78 19 72 19.5C74 15.5 76.5 12 79 8C69 8.6 61 12 55.6 18C54.5 15.6 52.5 14 50 14Z"/>
+      <path fill="#06030d" d="M46 14 L43.6 4.5 L49.4 12.2Z M54 14 L56.4 4.5 L50.6 12.2Z"/>
+    </symbol>
+    <symbol id="cover-jack" viewBox="0 0 200 200">
+      <defs>
+        <radialGradient id="jackBodyCover" cx="50%" cy="42%" r="64%">
+          <stop offset="0" stop-color="#ffb257"/>
+          <stop offset=".62" stop-color="#ff8b2d"/>
+          <stop offset="1" stop-color="#e05a18"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="100" cy="122" rx="58" ry="60" fill="url(#jackBodyCover)"/>
+      <ellipse cx="59" cy="122" rx="33" ry="52" fill="#f47a22"/>
+      <ellipse cx="141" cy="122" rx="33" ry="52" fill="#f47a22"/>
+      <ellipse cx="100" cy="122" rx="57" ry="59" fill="url(#jackBodyCover)"/>
+      <path d="M101 64c-1.6-11 2.4-19 12-24" fill="none" stroke="#3d2a13" stroke-width="9" stroke-linecap="round"/>
+      <path d="M101 62c6.6-10.8 16.4-15 29-13-3.2 10.6-11.6 17-24.6 19.4Z" fill="#2f3a18"/>
+      <g fill="#ffd47a">
+        <path d="m63 102 16-20 12 20Z"/>
+        <path d="m125 102 12-20 16 20Z"/>
+        <path d="m95 120 5-13 5 13Z"/>
+        <path d="M58 141c9-9 17-7 23 2 6-9 14-9 20 0 6-9 14-9 20 0 6-9 14-11 23-2-5 19-20 29-43 29s-38-10-43-29Z"/>
+      </g>
+      <ellipse cx="100" cy="106" rx="40" ry="30" fill="#ffb057" opacity=".22"/>
+    </symbol>
+  </svg>
+
+  <div class="cover">
+    <span class="stars"></span>
+    <span class="moon"></span>
+    <span class="haze"></span>
+    <img class="branch" src="../assets/img/halloween-branch.svg" alt="">
+    <span class="bat bat--a"><svg viewBox="0 0 100 44"><use href="#cover-bat"/></svg></span>
+    <span class="bat bat--b"><svg viewBox="0 0 100 44"><use href="#cover-bat"/></svg></span>
+    <span class="bat bat--c"><svg viewBox="0 0 100 44"><use href="#cover-bat"/></svg></span>
+    <span class="bat bat--d"><svg viewBox="0 0 100 44"><use href="#cover-bat"/></svg></span>
+    <span class="bat bat--e"><svg viewBox="0 0 100 44"><use href="#cover-bat"/></svg></span>
+    <img class="skyline" src="../assets/img/halloween-skyline.svg" alt="">
+    <span class="fog"></span>
+    <span class="pumpkin pumpkin--big"><svg viewBox="0 0 200 200"><use href="#cover-jack"/></svg></span>
+    <span class="pumpkin pumpkin--small"><svg viewBox="0 0 200 200"><use href="#cover-jack"/></svg></span>
+    <div class="topline"><span>Project Hamamatsu</span><span>Single · 2026</span></div>
+    <span class="rule"></span>
+    <div class="titles">
+      <p class="pre">Summer Avenue</p>
+      <p class="word">Halloween</p>
+      <span class="remix">Remix</span>
+    </div>
+    <div class="bottomline"><strong>RB–002</strong><span>3:32</span></div>
+    <span class="grain"></span>
+  </div>
+</body>
+</html>
