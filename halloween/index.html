@@ -76,7 +76,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sedgwick+Ave+Display&amp;display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/hamamatsu/assets/css/styles.css?v=layout-10">
-  <link rel="stylesheet" href="/hamamatsu/assets/css/halloween.css?v=10">
+  <link rel="stylesheet" href="/hamamatsu/assets/css/halloween.css?v=11">
 
   <script type="application/ld+json">
   {
@@ -280,10 +280,6 @@
 
       <div class="container hero-poster__inner hw-hero__inner">
         <div class="hero-poster__copy hw-copy">
-          <p class="hero-poster__kicker hw-kicker">
-            <span class="hero-poster__kicker-dot hw-kicker__dot" aria-hidden="true"></span>
-            <span data-i18n="halloween.kicker">PROJECT HAMAMATSU · SINGLE · 2026</span>
-          </p>
           <h1 class="hero-poster__title hw-title" id="hw-title">
             <span class="sr-only" lang="en">Summer Avenue (Halloween Remix)</span>
             <span class="hero-poster__jp hw-title__jp" lang="ja" aria-hidden="true">ハロウィーン</span>
@@ -297,10 +293,10 @@
         </div>
 
         <div class="hw-player" id="player" data-hw-player role="region" aria-labelledby="hw-player-title">
-          <div class="hw-deck" aria-hidden="true">
-            <span class="hw-deck__halo"></span>
-            <span class="hw-deck__shadow"></span>
-            <div class="hw-disc" data-hw-disc>
+          <button class="hw-deck" type="button" data-hw-toggle aria-label="Play the single" aria-pressed="false" data-i18n-attr="aria-label:halloween.playSingle">
+            <span class="hw-deck__halo" aria-hidden="true"></span>
+            <span class="hw-deck__shadow" aria-hidden="true"></span>
+            <span class="hw-disc" data-hw-disc aria-hidden="true">
               <span class="hw-disc__grooves"></span>
               <span class="hw-disc__label">
                 <span class="hw-disc__pumpkin"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><use href="#icon-pumpkin"/></svg></span>
@@ -309,8 +305,8 @@
                 <span class="hw-disc__side">SIDE A · 33⅓</span>
               </span>
               <span class="hw-disc__pin"></span>
-            </div>
-          </div>
+            </span>
+          </button>
 
           <div class="hw-readout">
             <div class="hw-readout__head">

@@ -544,6 +544,22 @@
   display: grid;
   place-items: center;
   flex: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hw-deck:focus-visible {
+  outline: 2px solid var(--hw-pumpkin);
+  outline-offset: 8px;
 }
 
 .hw-deck__halo {
