@@ -32,6 +32,15 @@
             ogImageAlt: 'A full moon over a dark city skyline with bats, a jack-o’-lantern and the words Summer Avenue, Halloween Remix.',
             albumTitle: 'Summer Avenue (Halloween Remix)',
             nowPlayingTitle: '▶ Summer Avenue (Halloween Remix) — Project Hamamatsu'
+          },
+          christmas: {
+            title: 'Stay With Me (Xmas Remix) — Project Hamamatsu',
+            description: 'Stay With Me, remixed for the snow. A one-off Christmas single from Project Hamamatsu, outside the album.',
+            ogTitle: 'Stay With Me (Xmas Remix) — Project Hamamatsu',
+            ogDescription: 'One winter night. A one-off Christmas remix of Stay With Me, outside the album.',
+            ogImageAlt: 'A cream Christmas card with a dark arched window, a pale crescent moon, a vinyl record hanging as an ornament, a lit Christmas tree and the words Stay With Me, Xmas Remix.',
+            albumTitle: 'Stay With Me (Xmas Remix)',
+            nowPlayingTitle: '▶ Stay With Me (Xmas Remix) — Project Hamamatsu'
           }
         },
         a11y: {
@@ -95,6 +104,47 @@
             lyricsShort: 'Lyrics'
           }
         },
+        christmas: {
+          brandAria: 'Project Hamamatsu — Stay With Me: Christmas Remix',
+          navPlayer: 'Player',
+          navSingle: 'The single',
+          backShort: 'Album',
+          backToAlbum: 'Back to Summer Avenue',
+          backToAlbumAria: 'Back to the Summer Avenue album',
+          albumLink: 'Summer Avenue',
+          kicker: 'PROJECT HAMAMATSU · SINGLE · 2026',
+          lede: 'Stay With Me, remixed for the snow. One track, outside the album — for the longest night of December.',
+          meta: '01 TRACK <span>·</span> 3:19 <span>·</span> RB–003',
+          playSingle: 'Play the single',
+          pauseSingle: 'Pause the single',
+          seek: 'Seek within Stay With Me (Xmas Remix)',
+          mute: 'Mute',
+          unmute: 'Unmute',
+          volume: 'Volume',
+          nowPlaying: 'Now playing: Stay With Me (Xmas Remix)',
+          toastEnded: 'The snow settles. Press play to hear it again.',
+          scrollToSingle: 'Scroll to the single',
+          edition: 'DIGITAL SINGLE · 2026',
+          merry: 'Merry Christmas',
+          single: {
+            kicker: 'THE SINGLE',
+            title: 'One winter night,<br>one track.',
+            lead: 'Stay With Me (Xmas Remix) is a one-off single from Project Hamamatsu, released outside the album — the album’s first song, wrapped in snow and city lights.',
+            body: 'The same words, the same longing. Only the season has changed.',
+            format: 'Format',
+            formatValue: 'Digital single',
+            released: 'Released',
+            runtime: 'Runtime',
+            catalogue: 'Catalogue',
+            from: 'From',
+            fromValue: 'Summer Avenue (RB–001)',
+            caption: 'RB–003 <span>/</span> 2026 <span>/</span> 01 TRACK',
+            coverAlt: 'Stay With Me (Xmas Remix) cover: a cream Christmas card with a dark arched window, a pale crescent moon, a vinyl record hanging as an ornament and a lit Christmas tree.',
+            album: 'Listen to the album',
+            lyrics: 'Read the lyrics',
+            lyricsShort: 'Lyrics'
+          }
+        },
         menu: {
           preferencesAria: 'Display preferences',
           video: 'Background video',
@@ -113,6 +163,7 @@
         hero: {
           cityPop: '’80s-style City Pop',
           halloween: 'Halloween',
+          christmas: 'Christmas',
           lede: 'The 2026 album from Project Hamamatsu — Japanese and English, in eleven tracks.',
           meta: '11 TRACKS <span>·</span> 46:05 <span>·</span> RB–001',
           portraitAlt: 'Portrait of the Project Hamamatsu character, chin raised, wearing a black Hamamatsu T-shirt.',
@@ -250,6 +301,15 @@
             ogImageAlt: '暗い街のシルエットの上に満月、コウモリ、ジャック・オー・ランタン、そして「Summer Avenue, Halloween Remix」の文字。',
             albumTitle: 'サマー・アベニュー（ハロウィーン・リミックス）',
             nowPlayingTitle: '▶ サマー・アベニュー（ハロウィーン・リミックス） — Project Hamamatsu'
+          },
+          christmas: {
+            title: 'もう少しそばにいて（クリスマス・リミックス） — Project Hamamatsu',
+            description: '雪のための『もう少しそばにいて』リミックス。Project Hamamatsuによる、アルバムには収録されないクリスマスのシングル。',
+            ogTitle: 'もう少しそばにいて（クリスマス・リミックス） — Project Hamamatsu',
+            ogDescription: '冬の一夜。アルバムの外に置かれた、『もう少しそばにいて』のクリスマス・リミックス。',
+            ogImageAlt: 'クリーム色のクリスマスカードに、暗いアーチ窓、淡い三日月、飾りとして吊るされたレコード、灯りのともるクリスマスツリー、そして「Stay With Me, Xmas Remix」の文字。',
+            albumTitle: 'もう少しそばにいて（クリスマス・リミックス）',
+            nowPlayingTitle: '▶ もう少しそばにいて（クリスマス・リミックス） — Project Hamamatsu'
           }
         },
         a11y: {
@@ -313,6 +373,47 @@
             lyricsShort: '歌詞'
           }
         },
+        christmas: {
+          brandAria: 'Project Hamamatsu — もう少しそばにいて（クリスマス・リミックス）',
+          navPlayer: 'プレイヤー',
+          navSingle: 'シングル',
+          backShort: 'アルバム',
+          backToAlbum: 'サマー・アベニューへ戻る',
+          backToAlbumAria: 'サマー・アベニューのアルバムへ戻る',
+          albumLink: 'サマー・アベニュー',
+          kicker: 'PROJECT HAMAMATSU · シングル · 2026',
+          lede: '雪のための『もう少しそばにいて』リミックス。アルバムには収録されない1曲を、12月のいちばん長い夜に。',
+          meta: '1曲 <span>·</span> 3:19 <span>·</span> RB–003',
+          playSingle: 'シングルを再生',
+          pauseSingle: '一時停止',
+          seek: '『もう少しそばにいて（クリスマス・リミックス）』内をシーク',
+          mute: 'ミュート',
+          unmute: 'ミュートを解除',
+          volume: '音量',
+          nowPlaying: '再生中：もう少しそばにいて（クリスマス・リミックス）',
+          toastEnded: '雪が静まる。もう一度聴くには再生を押してください。',
+          scrollToSingle: 'シングルへスクロール',
+          edition: 'デジタル・シングル · 2026',
+          merry: 'メリークリスマス',
+          single: {
+            kicker: 'シングル',
+            title: '冬の一夜、<br>一曲だけ。',
+            lead: '『もう少しそばにいて（クリスマス・リミックス）』は、アルバムには収録されないProject Hamamatsuの単発シングル。アルバムの一曲目を、雪と街の灯りで包んだ。',
+            body: '同じ言葉、同じ想い。変わったのは、季節だけ。',
+            format: 'フォーマット',
+            formatValue: 'デジタル・シングル',
+            released: 'リリース',
+            runtime: '収録時間',
+            catalogue: 'カタログ番号',
+            from: '収録元',
+            fromValue: 'サマー・アベニュー（RB–001）',
+            caption: 'RB–003 <span>/</span> 2026 <span>/</span> 1曲',
+            coverAlt: '『もう少しそばにいて（クリスマス・リミックス）』のカバー。クリーム色のクリスマスカードに、暗いアーチ窓、淡い三日月、飾りとして吊るされたレコード、灯りのともるクリスマスツリー。',
+            album: 'アルバムを聴く',
+            lyrics: '歌詞を読む',
+            lyricsShort: '歌詞'
+          }
+        },
         menu: {
           preferencesAria: '表示設定',
           video: '背景の映像',
@@ -331,6 +432,7 @@
         hero: {
           cityPop: '’80sスタイル・シティポップ',
           halloween: 'ハロウィーン',
+          christmas: 'クリスマス',
           lede: 'Project Hamamatsuの2026年アルバム。日本語と英語が、11曲の中で交わる。',
           meta: '11曲 <span>·</span> 46:05 <span>·</span> RB–001',
           portraitAlt: '顎を上げ、黒いHamamatsuのTシャツを着たProject Hamamatsuのキャラクターのポートレート。',

@@ -17,6 +17,14 @@
       "destination": "/halloween/index.html"
     },
     {
+      "source": "/hamamatsu/christmas",
+      "destination": "/christmas/index.html"
+    },
+    {
+      "source": "/hamamatsu/christmas/",
+      "destination": "/christmas/index.html"
+    },
+    {
       "source": "/hamamatsu/:path*",
       "destination": "/:path*"
     },
@@ -27,6 +35,14 @@
     {
       "source": "/halloween/",
       "destination": "/halloween/index.html"
+    },
+    {
+      "source": "/christmas",
+      "destination": "/christmas/index.html"
+    },
+    {
+      "source": "/christmas/",
+      "destination": "/christmas/index.html"
     }
   ]
 }

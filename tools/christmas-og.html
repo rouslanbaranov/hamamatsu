@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stay With Me (Xmas Remix) — social card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Great+Vibes&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6ecd9;
+    --cream: #fbf5e8;
+    --pine: #0b2b24;
+    --berry: #b3273f;
+    --gold: #c9963f;
+    --ink: #1b1a17;
+    --mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+    --display: "Archivo Black", "Arial Black", sans-serif;
+    --script: "Great Vibes", cursive;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(201,150,63,.2), transparent 55%),
+      radial-gradient(ellipse at 6% 26%, rgba(179,39,63,.14), transparent 44%),
+      radial-gradient(ellipse at 94% 72%, rgba(23,75,61,.5), transparent 54%),
+      radial-gradient(rgba(244,238,223,.13) 1px, transparent 1.3px),
+      linear-gradient(180deg, #061914 0%, #0b2b24 48%, #061914 100%);
+    background-size: auto, auto, auto, 89px 83px, auto;
+    font-family: "Space Grotesk", sans-serif;
+  }
+  .card {
+    position: absolute; inset: 26px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.55), transparent 50%),
+      linear-gradient(180deg, #f9f1e1 0%, var(--paper) 52%, #f1e4cd 100%);
+    border: 1px solid rgba(11,43,36,.34);
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    color: var(--ink);
+  }
+  .card::before { content: ""; position: absolute; inset: 10px; z-index: 1; border: 1px solid rgba(179,39,63,.3); pointer-events: none; }
+  .card::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; opacity: .045; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+  }
+  .content { position: relative; z-index: 3; height: 100%; }
+  .ribbon { position: absolute; top: 0; left: 0; right: 0; height: 9px; z-index: 5; background: linear-gradient(90deg, #8f1a30, var(--berry) 22%, #d24a5e 50%, var(--berry) 78%, #8f1a30); }
+  .bow { position: absolute; top: -7px; left: 50%; z-index: 8; width: 76px; transform: translateX(-50%); filter: drop-shadow(0 5px 8px rgba(60,12,20,.28)); }
+  .stamp { position: absolute; top: 22px; right: 28px; z-index: 7; display: flex; align-items: center; gap: 6px; padding: 5px 7px; background: var(--cream); border: 1px dashed rgba(179,39,63,.72); color: var(--berry); transform: rotate(4deg); }
+  .stamp b { font-family: var(--display); font-size: 18px; line-height: 1; }
+  .stamp small { font-family: var(--mono); font-size: 5.5px; line-height: 1.3; letter-spacing: .1em; }
+  .cover-wrap {
+    position: absolute; left: 42px; top: 72px; z-index: 4;
+    width: 466px; height: 466px; padding: 10px;
+    background: var(--cream); border: 1px solid rgba(11,43,36,.35);
+    box-shadow: 0 20px 44px rgba(0,0,0,.22);
+    transform: rotate(-1.6deg);
+  }
+  .cover-wrap::before { content: ""; position: absolute; inset: 4px; border: 1px dashed rgba(179,39,63,.42); pointer-events: none; }
+  .cover-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .postmark {
+    position: absolute; left: 448px; top: 44px; z-index: 6;
+    width: 76px; height: 76px; border-radius: 50%; border: 1.5px dashed rgba(179,39,63,.62);
+    background: rgba(246,236,217,.82); color: var(--berry); display: grid; place-items: center; text-align: center; transform: rotate(8deg);
+  }
+  .postmark b { display: block; font-family: var(--display); font-size: 18px; line-height: 1; }
+  .postmark small { display: block; font-family: var(--mono); font-size: 6px; letter-spacing: .12em; }
+  .copy { position: absolute; left: 568px; top: 78px; right: 38px; z-index: 4; }
+  .kicker { margin: 0 0 14px; font-family: var(--mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--pine); }
+  .jp { margin: 0; font-family: "Dela Gothic One", sans-serif; font-size: 40px; line-height: 1; color: var(--pine); }
+  .en { margin: 8px 0 0; font-family: var(--display); font-size: 61px; line-height: .9; letter-spacing: -.035em; text-transform: uppercase; color: var(--berry); }
+  .script { margin: 2px 0 0; font-family: var(--script); font-size: 62px; line-height: 1; color: var(--gold); transform: rotate(-3deg); transform-origin: left center; }
+  .lede { margin: 16px 0 0; max-width: 44ch; font-size: 16px; line-height: 1.5; color: rgba(27,26,23,.78); }
+  .meta { margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: rgba(27,26,23,.56); }
+  .meta strong { font-weight: 400; color: var(--berry); }
+  .greeting { position: absolute; left: 42px; bottom: 28px; z-index: 4; margin: 0; font-family: var(--script); font-size: 28px; line-height: 1; color: var(--gold); transform: rotate(-3deg); }
+  .url { position: absolute; right: 42px; bottom: 32px; z-index: 4; margin: 0; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(27,26,23,.48); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="ribbon"></span>
+    <svg class="bow" viewBox="0 0 120 76" aria-hidden="true">
+      <path d="M60 38C42 14 14 10 9 27c-5 18 20 27 51 17" fill="#b3273f"/>
+      <path d="M60 38c18-24 46-28 51-11 5 18-20 27-51 17" fill="#b3273f"/>
+      <path d="M54 42 30 70l12 2 18-27M66 42l24 28-12 2-18-27" fill="#b3273f"/>
+      <path d="M54 38c0 8 3 13 6 16 3-3 6-8 6-16-2-3-4-5-6-5s-4 2-6 5Z" fill="#c9963f"/>
+    </svg>
+    <span class="stamp"><b>25</b><small>DEC<br>RB–003</small></span>
+
+    <div class="content">
+      <div class="cover-wrap"><img src="../assets/img/cover-stay-with-me-xmas-800.jpg" alt=""></div>
+      <span class="postmark"><b>25</b><small>2026</small></span>
+
+      <div class="copy">
+        <p class="kicker">Project Hamamatsu · Single · 2026</p>
+        <p class="jp">クリスマス</p>
+        <p class="en">Stay With Me</p>
+        <p class="script">Xmas Remix</p>
+        <p class="lede">Remixed for the snow. One track, outside the album — for the longest night of December.</p>
+        <p class="meta"><strong>RB–003</strong><span>3:19</span><span>Digital single</span></p>
+      </div>
+
+      <p class="url">rbaranov.ch / hamamatsu / christmas</p>
+    </div>
+  </div>
+</body>
+</html>

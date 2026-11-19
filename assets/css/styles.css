@@ -934,6 +934,55 @@ body.is-playing .btn__icon .icon-pause { display: block; }
   }
 }
 
+/* The two campaign links stay together when the hero actions wrap */
+.hero-poster__campaigns {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+}
+
+/* Christmas campaign link in the album hero */
+.btn--christmas {
+  gap: 9px;
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn--christmas .btn__icon {
+  width: 16px;
+  height: 16px;
+  color: var(--blue);
+}
+
+.btn--christmas .btn__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn--christmas:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--cream);
+}
+
+.btn--christmas:hover .btn__icon {
+  color: var(--cream);
+}
+
+.btn--christmas-copy { display: none; }
+
+@media (max-width: 900px) {
+  .hero-poster__actions .btn--christmas { display: none; }
+
+  .btn--christmas-copy {
+    display: inline-flex;
+    margin-top: 14px;
+    margin-left: 8px;
+  }
+}
+
 /* Hero artwork */
 
 .hero__art {

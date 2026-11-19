@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stay With Me (Xmas Remix) — cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Dela+Gothic+One&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Great+Vibes&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6ecd9;
+    --cream: #fbf5e8;
+    --pine: #0b2b24;
+    --pine-deep: #061914;
+    --berry: #b3273f;
+    --gold: #c9963f;
+    --gold-light: #e7c27a;
+    --ink: #1b1a17;
+    --mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+    --display: "Archivo Black", "Arial Black", sans-serif;
+    --script: "Great Vibes", cursive;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1254px; height: 1254px; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% -8%, rgba(201,150,63,.2), transparent 54%),
+      radial-gradient(ellipse at 6% 26%, rgba(179,39,63,.14), transparent 44%),
+      radial-gradient(ellipse at 94% 72%, rgba(23,75,61,.5), transparent 54%),
+      radial-gradient(rgba(244,238,223,.13) 1px, transparent 1.3px),
+      linear-gradient(180deg, #061914 0%, #0b2b24 48%, #061914 100%);
+    background-size: auto, auto, auto, 89px 83px, auto;
+    font-family: "Space Grotesk", sans-serif;
+  }
+  .card {
+    position: absolute; inset: 30px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.55), transparent 46%),
+      linear-gradient(180deg, #f9f1e1 0%, var(--paper) 48%, #f1e4cd 100%);
+    border: 1px solid rgba(11,43,36,.34);
+    box-shadow: 0 40px 100px rgba(0,0,0,.5);
+    color: var(--ink);
+  }
+  .card::before {
+    content: ""; position: absolute; inset: 11px; z-index: 1;
+    border: 1px solid rgba(179,39,63,.3); pointer-events: none;
+  }
+  .card::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; opacity: .045; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+  }
+  .content { position: relative; z-index: 3; height: 100%; }
+  .ribbon {
+    position: absolute; top: 0; left: 0; right: 0; height: 10px; z-index: 5;
+    background: linear-gradient(90deg, #8f1a30, var(--berry) 22%, #d24a5e 50%, var(--berry) 78%, #8f1a30);
+    box-shadow: 0 1px 0 rgba(255,255,255,.25);
+  }
+  .bow { position: absolute; top: -6px; left: 50%; z-index: 8; width: 92px; transform: translateX(-50%); filter: drop-shadow(0 6px 10px rgba(60,12,20,.28)); }
+  .stamp {
+    position: absolute; top: 30px; right: 34px; z-index: 7;
+    display: flex; align-items: center; gap: 7px; padding: 7px 9px;
+    background: var(--cream); border: 1px dashed rgba(179,39,63,.72); color: var(--berry);
+    transform: rotate(4deg);
+  }
+  .stamp b { font-family: var(--display); font-size: 23px; line-height: 1; }
+  .stamp small { font-family: var(--mono); font-size: 6.5px; line-height: 1.3; letter-spacing: .1em; }
+  .head { position: relative; z-index: 3; text-align: center; padding-top: 58px; }
+  .kicker { margin: 0 0 12px; font-family: var(--mono); font-size: 9px; letter-spacing: .27em; text-transform: uppercase; color: var(--pine); }
+  .jp { margin: 0; font-family: "Dela Gothic One", sans-serif; font-size: 62px; line-height: 1; color: var(--pine); }
+  .en { margin: 8px 0 0; font-family: var(--display); font-size: 86px; line-height: .9; letter-spacing: -.035em; text-transform: uppercase; color: var(--berry); }
+  .script { margin: 0; font-family: var(--script); font-size: 84px; line-height: 1; color: var(--gold); transform: rotate(-3deg); }
+  .window {
+    position: relative; z-index: 3; width: 840px; margin: 26px auto 0; padding: 11px;
+    background: linear-gradient(180deg, #123a30 0%, var(--pine) 44%, #061914 100%);
+    border-radius: 48% 48% 10px 10px / 28% 28% 10px 10px;
+    box-shadow: 0 28px 64px rgba(0,0,0,.4), 0 0 0 1px rgba(201,150,63,.34);
+  }
+  .frame {
+    position: relative; overflow: hidden; aspect-ratio: 1.3 / 1;
+    background: #07171b; border: 2px solid var(--berry);
+    border-radius: 48% 48% 4px 4px / 28% 28% 4px 4px;
+  }
+  .sky {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 74% 18%, rgba(201,150,63,.28), transparent 42%),
+      radial-gradient(ellipse at 12% 78%, rgba(179,39,63,.2), transparent 48%),
+      radial-gradient(ellipse at 88% 88%, rgba(23,75,61,.36), transparent 52%),
+      linear-gradient(160deg, #0a2630 0%, #07171b 52%, #040d0c 100%);
+  }
+  .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(rgba(244,238,223,.75) 1px, transparent 1.2px),
+      radial-gradient(rgba(242,196,107,.62) 1.2px, transparent 1.5px);
+    background-size: 41px 43px, 117px 101px; background-position: 0 0, 21px 17px;
+    opacity: .48;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.7) 58%, transparent 90%);
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.7) 58%, transparent 90%);
+  }
+  .moonglow {
+    position: absolute; top: 4.5%; right: 4.5%; width: 19%; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,240,226,.22) 0%, rgba(160,190,180,.12) 42%, transparent 70%);
+    filter: blur(18px);
+  }
+  .moon {
+    position: absolute; top: 8%; right: 8%; width: 14%; aspect-ratio: 1; border-radius: 50%;
+    background:
+      radial-gradient(circle at 38% 32%, rgba(120,128,120,.18) 0 3.5%, transparent 4.2%),
+      radial-gradient(circle at 56% 48%, rgba(120,128,120,.14) 0 5%, transparent 5.8%),
+      radial-gradient(circle at 44% 64%, rgba(120,128,120,.12) 0 4%, transparent 4.8%),
+      radial-gradient(circle at 32% 52%, #fffef8 0%, #f4f0df 30%, #e2dcc6 58%, #cbc4aa 82%, #aea78f 100%);
+    -webkit-mask-image: radial-gradient(circle at 32% 32%, transparent 0 56%, #000 57%);
+    mask-image: radial-gradient(circle at 32% 32%, transparent 0 56%, #000 57%);
+    box-shadow: 0 0 40px rgba(240,238,220,.3), inset -14px -12px 46px rgba(80,80,70,.26);
+  }
+  .branch { position: absolute; top: -9%; right: -9%; width: 66%; filter: brightness(1.1) saturate(1.08) drop-shadow(0 18px 28px rgba(0,0,0,.4)); }
+  .cityglow {
+    position: absolute; left: -6%; right: -6%; bottom: 0; height: 46%;
+    background:
+      radial-gradient(ellipse at 68% 100%, rgba(242,196,107,.3) 0%, rgba(40,100,110,.2) 40%, transparent 72%),
+      radial-gradient(ellipse at 20% 100%, rgba(70,150,135,.18) 0%, transparent 58%),
+      linear-gradient(0deg, rgba(224,168,78,.14) 0%, transparent 58%);
+    filter: blur(14px);
+  }
+  .skyline { position: absolute; left: -4%; bottom: -8px; width: 108%; }
+  .fog { position: absolute; left: -8%; right: -8%; bottom: -4%; height: 30%; background: radial-gradient(ellipse at 50% 100%, rgba(120,190,175,.18) 0%, transparent 66%); filter: blur(20px); }
+  .flake { position: absolute; color: rgba(244,238,223,.86); }
+  .flake svg { display: block; width: 100%; height: auto; }
+  .f1 { top: 14%; left: 8%; width: 12px; opacity: .7; }
+  .f2 { top: 28%; left: 24%; width: 8px; opacity: .55; }
+  .f3 { top: 48%; left: 14%; width: 10px; opacity: .5; }
+  .f4 { top: 20%; left: 86%; width: 9px; opacity: .55; }
+  .f5 { top: 58%; left: 78%; width: 11px; opacity: .5; }
+  .f6 { top: 9%; left: 62%; width: 7px; opacity: .45; }
+  .lights { position: absolute; top: 0; left: 0; width: 100%; height: auto; opacity: .95; }
+  .bow2 { position: absolute; top: -4px; left: 50%; width: 86px; transform: translateX(-50%); filter: drop-shadow(0 5px 8px rgba(0,0,0,.28)); }
+  .ornament { position: absolute; top: 6%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
+  .ornament .ribbon2 { width: 8px; height: 50px; background: linear-gradient(180deg, #d24a5e 0%, var(--berry) 60%, #8f1a30 100%); }
+  .ornament .cap { width: 28px; height: 12px; margin-top: -4px; border-radius: 3px 3px 5px 5px; background: linear-gradient(180deg, var(--gold-light), var(--gold) 60%, #9d6e26); }
+  .disc {
+    position: relative; width: 262px; aspect-ratio: 1; border-radius: 50%;
+    display: grid; place-items: center;
+    background:
+      radial-gradient(circle at 30% 22%, rgba(255,255,255,.13) 0%, rgba(255,255,255,.02) 28%, transparent 44%),
+      repeating-radial-gradient(circle at 50% 50%, #05080a 0 1.6px, #111a1c 1.6px 2.6px, #070d0f 2.6px 4.6px);
+    box-shadow: inset 0 0 0 1px rgba(244,238,223,.08), inset 0 0 58px rgba(0,0,0,.7), 0 0 0 7px rgba(6,16,20,.45), 0 26px 50px rgba(0,0,0,.5);
+  }
+  .disc::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 1px solid rgba(201,150,63,.5); }
+  .grooves { position: absolute; inset: 4%; border-radius: 50%; background: repeating-radial-gradient(circle at 50% 50%, transparent 0 3px, rgba(244,238,223,.04) 3px 3.7px); }
+  .label {
+    position: relative; z-index: 2; width: 34%; aspect-ratio: 1; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6%; text-align: center;
+    background: radial-gradient(circle at 50% 32%, #d94a5f 0%, var(--berry) 52%, #6d1027 100%);
+    color: var(--cream); box-shadow: 0 0 0 1px rgba(6,16,20,.45), 0 0 30px rgba(179,39,63,.3);
+  }
+  .label .ic { width: 17%; color: var(--gold-light); }
+  .label .t { font-family: var(--display); font-size: 8px; line-height: 1.06; text-transform: uppercase; }
+  .label .s { margin-top: 2px; font-family: var(--mono); font-size: 5px; letter-spacing: .13em; text-transform: uppercase; opacity: .76; }
+  .label .side { margin-top: 5px; font-family: var(--mono); font-size: 4.2px; letter-spacing: .16em; opacity: .6; }
+  .pin { position: absolute; z-index: 3; top: 50%; left: 50%; width: 6px; height: 6px; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #8a9a8f, #132018 70%); transform: translate(-50%,-50%); }
+  .sill {
+    position: absolute; left: -1.6%; right: -1.6%; bottom: -15px; height: 24px;
+    border-top: 2px solid var(--berry); border-bottom: 1px solid rgba(11,43,36,.35);
+    background: linear-gradient(180deg, #f0e4cd 0%, #ddcaaa 100%);
+    box-shadow: 0 14px 26px rgba(0,0,0,.2);
+  }
+  .greeting {
+    position: absolute; left: 0; right: 0; bottom: 96px; z-index: 6; margin: 0;
+    text-align: center; font-family: var(--script); font-size: 50px; line-height: 1;
+    color: var(--gold); transform: rotate(-3deg);
+  }
+  .postmark {
+    position: absolute; right: 40px; bottom: 86px; z-index: 6;
+    width: 78px; height: 78px; border-radius: 50%; border: 1.5px dashed rgba(179,39,63,.62);
+    display: grid; place-items: center; text-align: center; color: var(--berry); transform: rotate(8deg);
+  }
+  .postmark b { display: block; font-family: var(--display); font-size: 19px; line-height: 1; }
+  .postmark small { display: block; font-family: var(--mono); font-size: 6.5px; letter-spacing: .12em; }
+  .bottomline {
+    position: absolute; left: 48px; right: 48px; bottom: 28px; z-index: 6;
+    display: flex; justify-content: space-between; gap: 20px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(27,26,23,.58);
+  }
+  .bottomline strong { font-weight: 400; color: var(--berry); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="ribbon"></span>
+    <svg class="bow" viewBox="0 0 120 76" aria-hidden="true">
+      <path d="M60 38C42 14 14 10 9 27c-5 18 20 27 51 17" fill="#b3273f"/>
+      <path d="M60 38c18-24 46-28 51-11 5 18-20 27-51 17" fill="#b3273f"/>
+      <path d="M54 42 30 70l12 2 18-27M66 42l24 28-12 2-18-27" fill="#b3273f"/>
+      <path d="M54 38c0 8 3 13 6 16 3-3 6-8 6-16-2-3-4-5-6-5s-4 2-6 5Z" fill="#c9963f"/>
+    </svg>
+    <span class="stamp"><b>25</b><small>DEC<br>RB–003</small></span>
+
+    <div class="content">
+      <div class="head">
+        <p class="kicker">Project Hamamatsu · Single · 2026</p>
+        <p class="jp">クリスマス</p>
+        <p class="en">Stay With Me</p>
+        <p class="script">Xmas Remix</p>
+      </div>
+
+      <div class="window">
+        <div class="frame">
+          <span class="sky"></span>
+          <span class="stars"></span>
+          <span class="moonglow"></span>
+          <span class="moon"></span>
+          <img class="branch" src="../assets/img/christmas-branch.svg" alt="">
+          <span class="flake f1"><svg viewBox="0 0 24 24"><use href="#cover-flake"/></svg></span>
+          <span class="flake f2"><svg viewBox="0 0 24 24"><use href="#cover-flake"/></svg></span>
+          <span class="flake f3"><svg viewBox="0 0 24 24"><use href="#cover-flake"/></svg></span>
+          <span class="flake f4"><svg viewBox="0 0 24 24"><use href="#cover-flake"/></svg></span>
+          <span class="flake f5"><svg viewBox="0 0 24 24"><use href="#cover-flake"/></svg></span>
+          <span class="flake f6"><svg viewBox="0 0 24 24"><use href="#cover-flake"/></svg></span>
+          <span class="cityglow"></span>
+          <img class="skyline" src="../assets/img/christmas-skyline.svg" alt="">
+          <span class="fog"></span>
+
+          <svg class="lights" viewBox="0 0 600 180" aria-hidden="true">
+            <path d="M8 12C92 150 508 150 592 12" fill="none" stroke="rgba(244,238,223,.42)" stroke-width="1.6"/>
+            <g fill="#f2c46b">
+              <circle cx="48" cy="62" r="5"/><circle cx="104" cy="94" r="5"/><circle cx="168" cy="116" r="5"/>
+              <circle cx="236" cy="128" r="5"/><circle cx="300" cy="131" r="5"/><circle cx="364" cy="128" r="5"/>
+              <circle cx="432" cy="116" r="5"/><circle cx="496" cy="94" r="5"/><circle cx="552" cy="62" r="5"/>
+            </g>
+            <g fill="#b3273f">
+              <circle cx="76" cy="78" r="4"/><circle cx="136" cy="106" r="4"/><circle cx="202" cy="123" r="4"/>
+              <circle cx="268" cy="131" r="4"/><circle cx="332" cy="131" r="4"/><circle cx="398" cy="123" r="4"/>
+              <circle cx="464" cy="106" r="4"/><circle cx="524" cy="78" r="4"/>
+            </g>
+          </svg>
+
+          <div class="ornament">
+            <span class="ribbon2"></span>
+            <div class="disc">
+              <span class="grooves"></span>
+              <span class="label">
+                <svg class="ic" viewBox="0 0 24 24"><use href="#cover-flake"/></svg>
+                <span class="t">Stay With Me</span>
+                <span class="s">Xmas Remix</span>
+                <span class="side">SIDE A · 33⅓</span>
+              </span>
+              <span class="pin"></span>
+            </div>
+            <span class="cap"></span>
+          </div>
+
+          <svg class="bow2" viewBox="0 0 100 62" aria-hidden="true">
+            <path d="M50 30C34 10 12 8 8 21c-4 14 16 22 42 14" fill="#b3273f"/>
+            <path d="M50 30c16-20 38-22 42-9 4 14-16 22-42 14" fill="#b3273f"/>
+            <path d="M45 33 26 56l9 2 15-22M55 33l19 23-9 2-15-22" fill="#b3273f"/>
+            <circle cx="50" cy="29" r="7" fill="#c9963f"/>
+          </svg>
+        </div>
+        <span class="sill"></span>
+      </div>
+
+      <p class="greeting">Merry Christmas</p>
+      <span class="postmark"><b>25</b><small>2026</small></span>
+      <p class="bottomline"><strong>RB–003</strong><span>3:19</span><span>Digital single</span></p>
+    </div>
+  </div>
+
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <symbol id="cover-flake" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M12 1.8v20.4M2.9 6.9l18.2 10.2M2.9 17.1 21.1 6.9"/>
+        <path d="M12 3.5 9.7 6M12 3.5 14.3 6M12 20.5 9.7 18M12 20.5l2.3-2.5M4.4 8.2l3.1.2M4.4 8.2l.9 3M19.6 15.8l-3.1-.2M19.6 15.8l-.9-3M4.4 15.8l3.1-.2M4.4 15.8l.9-3M19.6 8.2l-3.1.2M19.6 8.2l-.9 3"/>
+      </g>
+    </symbol>
+  </svg>
+</body>
+</html>
